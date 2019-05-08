@@ -23,10 +23,12 @@
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/jakub-onderka/php-console-highlighter" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/lcobucci/jwt" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/namshi/jose" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/nunomaduro/collision" />
@@ -74,13 +76,16 @@
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-iconv" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-php56" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-php72" />
+      <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-util" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/translation" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/tymon/jwt-auth" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/../api-ecommerce-v2/vendor/webmozart/assert" />
     </content>
