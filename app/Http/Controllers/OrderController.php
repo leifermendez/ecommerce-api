@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\payment_key;
-use App\shop;
+use App\orders;
+use App\platform_payment;
 use Illuminate\Http\Request;
 
-class ShopController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class ShopController extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = shop::orderBy('id', 'DESC')
+            $data = orders::orderBy('id', 'DESC')
                 ->paginate($limit);
 
             $response = array(
@@ -41,6 +41,7 @@ class ShopController extends Controller
 
         }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,8 +66,8 @@ class ShopController extends Controller
         }
         try {
 
-            $data = shop::insertGetId($fields);
-            $data = shop::find($data);
+            $data = orders::insertGetId($fields);
+            $data = orders::find($data);
 
             $response = array(
                 'status' => 'success',
@@ -95,7 +96,7 @@ class ShopController extends Controller
     {
         try {
 
-            $data = shop::find($id);
+            $data = orders::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -144,10 +145,10 @@ class ShopController extends Controller
                 };
             }
 
-            shop::where('id', $id)
+            orders::where('id', $id)
                 ->update($fields);
 
-            $data = shop::find($id);
+            $data = orders::find($id);
 
 
             $response = array(
@@ -183,7 +184,7 @@ class ShopController extends Controller
 
         try {
 
-            shop::where('id', $id)
+            orders::where('id', $id)
                 ->delete();
 
             $response = array(

@@ -25,6 +25,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('categories', 'CategoriesController');
     Route::resource('cities', 'CitiesController');
     Route::resource('products', 'ProductsController');
+    Route::resource('shop', 'ShopController');
+    Route::resource('order', 'OrderController');
+    Route::resource('purchase', 'PurchaseController');
     Route::resource('paymentPlatform', 'PaymentPlatformController');
     Route::resource('paymentSetting', 'PaymentSettingController');
 });

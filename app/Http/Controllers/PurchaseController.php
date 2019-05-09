@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\payment_key;
-use App\shop;
+use App\platform_payment;
+use App\purchase_order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class ShopController extends Controller
+
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +21,7 @@ class ShopController extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = shop::orderBy('id', 'DESC')
+            $data = purchase_order::orderBy('id', 'DESC')
                 ->paginate($limit);
 
             $response = array(
@@ -41,6 +43,7 @@ class ShopController extends Controller
 
         }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,12 +64,14 @@ class ShopController extends Controller
     {
         $fields = array();
         foreach ($request->all() as $key => $value) {
-            $fields[$key] = $value;
+            if ($key !== 'uuid') {
+                $fields[$key] = $value;
+            };
         }
         try {
-
-            $data = shop::insertGetId($fields);
-            $data = shop::find($data);
+            $fields['uuid'] = Str::random(40);
+            $data = purchase_order::insertGetId($fields);
+            $data = purchase_order::find($data);
 
             $response = array(
                 'status' => 'success',
@@ -95,7 +100,7 @@ class ShopController extends Controller
     {
         try {
 
-            $data = shop::find($id);
+            $data = purchase_order::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -144,10 +149,10 @@ class ShopController extends Controller
                 };
             }
 
-            shop::where('id', $id)
+            purchase_order::where('id', $id)
                 ->update($fields);
 
-            $data = shop::find($id);
+            $data = purchase_order::find($id);
 
 
             $response = array(
@@ -183,7 +188,7 @@ class ShopController extends Controller
 
         try {
 
-            shop::where('id', $id)
+            purchase_order::where('id', $id)
                 ->delete();
 
             $response = array(
