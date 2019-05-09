@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->enum('role', ['admin', 'user', 'seller', 'shop'])->default($value = 'user');
+            $table->enum('status', ['available', 'unavailable'])->default($value = 'available')
+                ->nullable(false);
             $table->string('avatar');
             $table->string('header');
             $table->rememberToken();

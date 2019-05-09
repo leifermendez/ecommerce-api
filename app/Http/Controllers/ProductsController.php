@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\categories;
+use App\products;
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class UserController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class UserController extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = User::orderBy('id', 'DESC')
+            $data = products::orderBy('id', 'DESC')
                 ->paginate($limit);
 
             $response = array(
@@ -40,7 +40,6 @@ class UserController extends Controller
             return response()->json($response, 500);
 
         }
-
     }
 
     /**
@@ -56,58 +55,47 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $fields = array();
+        foreach ($request->all() as $key => $value) {
+            $fields[$key] = $value;
+        }
         try {
-            $values = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'phone' => $request->phone,
-                'role' => $request->role,
-                'avatar' => $request->avatar,
-                'header' => $request->header,
-                'status' => $request->status
-            ];
 
-            $id = User::insertGetId($values);
-            $data = User::find($id);
-
-            $data->setAttribute('token', JWTAuth::fromUser($data));
+            $data = products::insertGetId($fields);
+            $data = products::find($data);
 
             $response = array(
                 'status' => 'success',
+                'msg' => 'Insertado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
-
-        } catch (\Exception $e) {
-
+        }catch(\Exception $e){
             $response = array(
                 'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
+                'code' => 5,
+                'error' =>$e->getMessage()
             );
-            return response()->json($response, 401);
+            return response()->json($response);
         }
-
     }
-
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
         try {
 
-            $data = User::find($id);
+            $data = products::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -131,7 +119,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -142,44 +130,25 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-
         try {
             $fields = array();
             foreach ($request->all() as $key => $value) {
-                if ($key !== 'id' && $key !== 'send_email_password' && $key !== 'send_email') {
-                    if ($key === 'password') {
-                        $fields[$key] = bcrypt($value);
-                    } else {
-                        $fields[$key] = $value;
-                    }
+                if ($key !== 'id') {
+                    $fields[$key] = $value;
                 };
             }
 
-
-            if (User::where('email', $fields['email'])
-                ->where('id', '!=', $id)
-                ->exists()) {
-                $response = array(
-                    'status' => 'fail',
-                    'msg' => 'Email en uso',
-                    'code' => 5
-                );
-                return response()->json($response);
-            }
-
-            User::where('users.id', $id)
+            products::where('id', $id)
                 ->update($fields);
 
-            $data = User::find($id);
-            if ($request->send_email_password) {
-//                $data->notify(new _changePass($data));
-            }
+            $data = products::find($id);
+
 
             $response = array(
                 'status' => 'success',
@@ -206,27 +175,25 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
+
         try {
 
-            User::where('users.id', $id)
-                ->update([
-                    'status' => 'unavailable'
-                ]);
-
-            $data = User::find($id);
+            products::where('id', $id)
+                ->delete();
 
             $response = array(
                 'status' => 'success',
-                'msg' => 'Actualizado',
-                'data' => $data,
+                'msg' => 'Eliminado',
                 'code' => 0
             );
             return response()->json($response);
+
+
         } catch (\Exception $e) {
 
             $response = array(

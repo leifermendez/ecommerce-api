@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->integer('user_id');
             $table->integer('category_id');
+            $table->string('zip_code',10);
             $table->timestamps();
         });
     }

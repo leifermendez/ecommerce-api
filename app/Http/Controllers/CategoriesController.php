@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use App\categories;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-class AuthController extends Controller
+class CategoriesController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = JWTAuth::parseToken()->authenticate();
+
+            $limit = ($request->limit) ? $request->limit : 15;
+
+            $data = categories::orderBy('id', 'DESC')
+                ->paginate($limit);
+
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -35,7 +38,7 @@ class AuthController extends Controller
                 'code' => 1
             );
 
-            return response()->json($response, 401);
+            return response()->json($response, 500);
 
         }
     }
@@ -47,7 +50,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        dd(111);
+        //
     }
 
     /**
@@ -58,32 +61,32 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
+        $fields = array();
+        foreach ($request->all() as $key => $value) {
+            $fields[$key] = $value;
+        }
         try {
-            $credentials = $request->only('email', 'password');
 
-            if ($token = JWTAuth::attempt($credentials)) {
+            $data = categories::insertGetId($fields);
+            $data = categories::find($data);
 
-                $data = User::where('email', $request->email)->first();
-                $data->setAttribute('token', $token);
-
-                $response = array(
-                    'status' => 'success',
-                    'data' => $data,
-                    'code' => 0
-                );
-                return response()->json($response);
-            }
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Insertado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
         } catch (\Exception $e) {
             $response = array(
                 'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
+                'code' => 5,
+                'error' => $e->getMessage()
             );
-            return response()->json($response, 401);
+            return response()->json($response);
         }
-
     }
+
 
     /**
      * Display the specified resource.
@@ -91,9 +94,29 @@ class AuthController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        try {
+
+            $data = categories::find($id);
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 
     /**
@@ -116,7 +139,41 @@ class AuthController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        try {
+            $fields = array();
+            foreach ($request->all() as $key => $value) {
+                if ($key !== 'id') {
+                    $fields[$key] = $value;
+                };
+            }
+
+            categories::where('id', $id)
+                ->update($fields);
+
+            $data = categories::find($id);
+
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Actualizado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 
     /**
@@ -125,50 +182,21 @@ class AuthController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id = null)
+    public function destroy($id)
     {
 
         try {
-            JWTAuth::invalidate(JWTAuth::getToken());
-            $response = array(
-                'status' => 'success',
-                'code' => 0
-            );
-            return response()->json($response);
-        } catch (\Exception $e) {
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-            return response()->json($response, 401);
-        }
 
-    }
-
-    public function register(Request $request)
-    {
-        try {
-            $values = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'phone' => $request->phone,
-                'avatar' => $request->avatar,
-                'header' => $request->header
-            ];
-
-            $id = User::insertGetId($values);
-            $data = User::find($id);
-
-            $data->setAttribute('token', JWTAuth::fromUser($data));
+            categories::where('id', $id)
+                ->delete();
 
             $response = array(
                 'status' => 'success',
-                'data' => $data,
+                'msg' => 'Eliminado',
                 'code' => 0
             );
             return response()->json($response);
+
 
         } catch (\Exception $e) {
 
@@ -177,8 +205,9 @@ class AuthController extends Controller
                 'msg' => $e->getMessage(),
                 'code' => 1
             );
-            return response()->json($response, 401);
-        }
 
+            return response()->json($response, 500);
+
+        }
     }
 }

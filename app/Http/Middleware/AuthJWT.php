@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class PanelWeb
+class AuthJWT
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,14 @@ class PanelWeb
      * @param  \Closure  $next
      * @return mixed
      */
+
     public function handle($request, Closure $next)
     {
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 403);
-            }else if($user->role !== 'admin'){
-                return response()->json(['user_not_permission'], 403);
+            }else if($user->status !== 'available'){
+                return response()->json(['user_unavailable'], 403);
             }
         } catch (TokenExpiredException $e) {
 

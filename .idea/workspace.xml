@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5da33560-fe8e-4055-82bd-0070cf02a259" name="Default Changelist" comment="" />
+    <list default="true" id="5da33560-fe8e-4055-82bd-0070cf02a259" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/FrontWeb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/FrontWeb.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/PanelWeb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/PanelWeb.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/jwt.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/jwt.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_05_08_122500_create_platform_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_05_08_122500_create_platform_payments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_05_08_123241_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_05_08_123241_create_products_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_05_08_123637_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_05_08_123637_create_categories_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,114 +27,66 @@
     <executablePath>composer</executablePath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/ShopTableSeeder.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+            <state relative-caret-position="68">
+              <caret line="181" selection-start-line="181" selection-end-line="207" selection-end-column="5" />
               <folding>
-                <element signature="e#7#25#0#PHP" expanded="true" />
+                <element signature="e#40#59#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/.env">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentPlatformController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/config/auth.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Middleware/FrontWeb.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="490">
+              <caret line="201" column="42" lean-forward="true" selection-start-line="201" selection-start-column="42" selection-end-line="201" selection-end-column="42" />
               <folding>
-                <element signature="e#39#51#0#PHP" expanded="true" />
+                <element signature="e#40#60#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/routes/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/AuthController.php">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_122500_create_platform_payments_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="62" column="52" selection-end-line="112" />
+            <state relative-caret-position="289">
+              <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentSettingController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="168" column="14" lean-forward="true" selection-start-line="168" selection-start-column="14" selection-end-line="168" selection-end-column="14" />
               <folding>
-                <element signature="e#39#73#0#PHP" expanded="true" />
+                <element signature="e#40#57#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/UserController.php">
+        <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
-              <folding>
-                <element signature="e#40#53#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="15" column="52" lean-forward="true" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/User.php">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_123241_create_products_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-              <folding>
-                <element signature="e#23#63#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Kernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="66" column="22" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="22" />
-              <folding>
-                <element signature="e#28#80#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/UsersTableSeeder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="47" />
-              <folding>
-                <element signature="e#7#34#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -136,37 +102,56 @@
       <find>phone</find>
       <find>numbe</find>
       <find>AuthController</find>
+      <find>role</find>
+      <find>me</find>
+      <find>dd</find>
+      <find>msj</find>
+      <find>ttl</find>
     </findStrings>
+    <replaceStrings>
+      <replace>msg</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/routes/web.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/resources/views/documentation.blade.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/.env" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/Providers/AppServiceProvider.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_120235_create_shops_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_121802_create_attacheds_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_121946_create_cities_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_122500_create_platform_payments_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_122632_create_payment_keys_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_123241_create_products_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_123637_create_categories_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/composer.json" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_134406_create_orders_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_134820_create_purchase_orders_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/DatabaseSeeder.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/factories/UserFactory.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/UsersTableSeeder.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2014_10_12_000000_create_users_table.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/ShopTableSeeder.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/config/auth.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Middleware/FrontWeb.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Kernel.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/routes/api.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/User.php" />
-        <option value="$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/AuthController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/documentation.blade.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_120235_create_shops_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_121802_create_attacheds_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_121946_create_cities_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_122632_create_payment_keys_table.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_134406_create_orders_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_134820_create_purchase_orders_table.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/database/factories/UserFactory.php" />
+        <option value="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/ShopTableSeeder.php" />
+        <option value="$PROJECT_DIR$/config/auth.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/AuthJWT.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/FrontWeb.php" />
+        <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/PanelWeb.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_123637_create_categories_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CitiesController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php" />
+        <option value="$PROJECT_DIR$/config/jwt.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_123241_create_products_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProductsController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PaymentSettingController.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PaymentPlatformController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_08_122500_create_platform_payments_table.php" />
       </list>
     </option>
   </component>
@@ -249,90 +234,90 @@
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
       <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/psy/psysh" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/dragonmantank/cron-expression" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/erusev/parsedown" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/dnoegel/php-xdg-base-dir" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/mockery/mockery" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/egulias/email-validator" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/fideloper/proxy" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/jakub-onderka/php-console-highlighter" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/jakub-onderka/php-console-color" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-iconv" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-php72" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/contracts" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/asm89/stack-cors" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/css-selector" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/barryvdh/laravel-cors" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/filp/whoops" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/php-token-stream" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/php-code-coverage" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpoption/phpoption" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/nunomaduro/collision" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/composer" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/nesbot/carbon" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/opis/closure" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/swiftmailer/swiftmailer" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/laravel/tinker" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/laravel/framework" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/beyondcode/laravel-dump-server" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/fzaninotto/faker" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-util" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/symfony/polyfill-php56" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/tymon/jwt-auth" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/namshi/jose" />
-      <path value="$PROJECT_DIR$/../api-ecommerce-v2/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -346,6 +331,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -374,20 +360,12 @@
             <path>
               <item name="api-ecommerce-v2" type="b2602c69:ProjectViewProjectNode" />
               <item name="api-ecommerce-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="api-ecommerce-v2" type="b2602c69:ProjectViewProjectNode" />
               <item name="api-ecommerce-v2" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="api-ecommerce-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="api-ecommerce-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="factories" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="api-ecommerce-v2" type="b2602c69:ProjectViewProjectNode" />
@@ -410,11 +388,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
@@ -439,12 +418,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557313426608</updated>
-      <workItem from="1557313428376" duration="12377000" />
+      <workItem from="1557313428376" duration="12746000" />
+      <workItem from="1557395464657" duration="12956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12377000" />
+    <option name="totallyTimeSpent" value="25702000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
@@ -452,9 +432,9 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.17857143" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.12953092" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.3066089" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -475,22 +455,33 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/UserController.php</url>
+          <line>61</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/resources/views/documentation.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/documentation.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
           <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Providers/AppServiceProvider.php">
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
@@ -500,108 +491,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_121802_create_attacheds_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_121802_create_attacheds_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_122500_create_platform_payments_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_121946_create_cities_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_121946_create_cities_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="11" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_122632_create_payment_keys_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_122632_create_payment_keys_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="20" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_123637_create_categories_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/package.json">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/composer.json">
+    <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/config/cors.php">
+    <entry file="file://$PROJECT_DIR$/config/cors.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_134406_create_orders_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_134406_create_orders_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_134820_create_purchase_orders_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_134820_create_purchase_orders_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_123241_create_products_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/UserFilmSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/DatabaseSeeder.php">
+    <entry file="file://$PROJECT_DIR$/database/seeds/UserFilmSeeder.php" />
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2014_10_12_000000_create_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="37" lean-forward="true" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/migrations/2019_05_08_120235_create_shops_table.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_120235_create_shops_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/factories/UserFactory.php">
+    <entry file="file://$PROJECT_DIR$/database/factories/UserFactory.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
@@ -611,64 +568,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/vendor/fzaninotto/faker/src/Faker/Generator.php">
+    <entry file="file://$PROJECT_DIR$/vendor/fzaninotto/faker/src/Faker/Generator.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="30" column="25" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/config/auth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/vendor/tymon/jwt-auth/src/Exceptions/TokenInvalidException.php">
+    <entry file="file://$PROJECT_DIR$/vendor/tymon/jwt-auth/src/Exceptions/TokenInvalidException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Kernel.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthControlller.php" />
+    <entry file="file://$PROJECT_DIR$/database/seeds/ShopTableSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="66" column="22" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="22" />
-          <folding>
-            <element signature="e#28#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/AuthControlller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Middleware/FrontWeb.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#39#51#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/ShopTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="527">
           <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
           <folding>
             <element signature="e#7#25#0#PHP" expanded="true" />
@@ -676,9 +593,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/database/seeds/UsersTableSeeder.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="221">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/UsersTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
           <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="47" />
           <folding>
             <element signature="e#7#34#0#PHP" expanded="true" />
@@ -686,40 +610,180 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/routes/api.php">
+    <entry file="file://$PROJECT_DIR$/config/auth.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="42" lean-forward="true" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
+        <state relative-caret-position="-515">
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/User.php">
+    <entry file="file://$PROJECT_DIR$/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state relative-caret-position="233">
+          <caret line="40" column="36" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="36" />
           <folding>
             <element signature="e#23#63#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/UserController.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+        <state relative-caret-position="374">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/FrontWeb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
-            <element signature="e#40#53#0#PHP" expanded="true" />
+            <element signature="e#39#51#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../api-ecommerce-v2/app/Http/Controllers/AuthController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="62" column="52" selection-end-line="112" />
+        <state relative-caret-position="442">
+          <caret line="71" column="17" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="17" />
           <folding>
-            <element signature="e#39#73#0#PHP" expanded="true" />
+            <element signature="e#28#80#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/AuthJWT.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="21" selection-start-line="21" selection-end-line="40" selection-end-column="5" />
+          <folding>
+            <element signature="e#39#51#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="58" />
+          <folding>
+            <element signature="e#40#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/PanelWeb.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+          <folding>
+            <element signature="e#39#51#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_123637_create_categories_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="149" selection-start-line="149" selection-end-line="203" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#53#0#PHP" expanded="true" />
+            <element signature="e#1297#2369#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CitiesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="42" />
+          <folding>
+            <element signature="e#40#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/jwt.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_123241_create_products_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CategoriesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="185" selection-start-line="185" selection-end-line="211" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="181" selection-start-line="181" selection-end-line="207" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="52" lean-forward="true" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentSettingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="168" column="14" lean-forward="true" selection-start-line="168" selection-start-column="14" selection-end-line="168" selection-end-column="14" />
+          <folding>
+            <element signature="e#40#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentPlatformController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="201" column="42" lean-forward="true" selection-start-line="201" selection-start-column="42" selection-end-line="201" selection-end-column="42" />
+          <folding>
+            <element signature="e#40#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_08_122500_create_platform_payments_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
         </state>
       </provider>
     </entry>

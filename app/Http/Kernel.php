@@ -5,6 +5,8 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\CheckLocation;
 use App\Http\Middleware\FrontWeb;
+use App\Http\Middleware\AuthJWT;
+use App\Http\Middleware\PanelWeb;
 
 class Kernel extends HttpKernel
 {
@@ -66,6 +68,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'CheckLocation' => CheckLocation::class,
         'FrontWeb' => FrontWeb::class,
+        'AuthJWT' => AuthJWT::class,
+        'PanelWeb' => PanelWeb::class,
     ];
 
     /**

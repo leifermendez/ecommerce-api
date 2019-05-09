@@ -18,7 +18,6 @@ class CreatePlatformPaymentsTable extends Migration
             $table->string('name',200);
             $table->string('label',200);
             $table->string('description',200);
-            $table->integer('payment_key');
             $table->string('image');
             $table->timestamps();
         });

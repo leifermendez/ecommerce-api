@@ -14,13 +14,18 @@ use Illuminate\Http\Request;
 */
 Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation']], function () {
     Route::group(['prefix' => 'auth'], function () {
-        Route::resource('login', 'AuthController');
-        Route::resource('register', 'UserController', ['only' => [
-            'store'
-        ]]);
+        Route::post('login', 'AuthController@store');
+        Route::post('register', 'AuthController@register');
     });
 });
 
-Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation', 'FrontWeb']], function () {
-    Route::resource('user', 'AuthController');
+
+Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']], function () {
+    Route::resource('user', 'UserController');
+    Route::resource('categories', 'CategoriesController');
+    Route::resource('cities', 'CitiesController');
+    Route::resource('products', 'ProductsController');
+    Route::resource('paymentPlatform', 'PaymentPlatformController');
+    Route::resource('paymentSetting', 'PaymentSettingController');
 });
+
