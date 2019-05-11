@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateHoursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('hours', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',200);
-            $table->string('short_description',200);
-            $table->longText('description');
-            $table->integer('user_id');
-            $table->integer('category_id');
-            $table->string('zip_code',10);
+            $table->integer('shop_id')->unique();
+            $table->longText('shedule_hours');
+            $table->string('exceptions');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('hours');
     }
 }

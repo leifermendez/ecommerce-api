@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\OpeningHours\OpeningHours;
 use App\payment_key;
 use App\shop;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DateTime;
 
 class ShopController extends Controller
 {
@@ -59,6 +62,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
+
         $fields = array();
         foreach ($request->all() as $key => $value) {
             $fields[$key] = $value;
@@ -94,8 +98,73 @@ class ShopController extends Controller
     public function show($id)
     {
         try {
+            $shedule = array();
+            $exceptions = array();
+            $data = shop::where('shops.id',$id)
+            ->join('hours','shops.id','=','hours.shop_id')
+            ->select('shops.*','hours.shedule_hours as hours_shedule_hours',
+            'hours.exceptions as hours_exceptions')
+            ->first();
 
-            $data = shop::find($id);
+            if($data){
+                $hours_shedule_hours= ($data->hours_shedule_hours && json_decode($data->hours_shedule_hours)) ? 
+                json_decode($data->hours_shedule_hours) : null;
+
+                $hours_exceptions= ($data->hours_exceptions && json_decode($data->hours_exceptions)) ? 
+                json_decode($data->hours_exceptions) : null;
+                
+                if($hours_shedule_hours && $hours_exceptions){
+                    $openingHours = OpeningHours::create([
+                        'monday'     => $hours_shedule_hours->monday,
+                        'tuesday'    => $hours_shedule_hours->tuesday,
+                        'wednesday'  =>  $hours_shedule_hours->wednesday,
+                        'thursday'   =>  $hours_shedule_hours->thursday,
+                        'friday'     =>  $hours_shedule_hours->friday,
+                        'saturday'   =>  $hours_shedule_hours->saturday,
+                        'sunday'     =>  $hours_shedule_hours->sunday,
+                        'exceptions' => $hours_exceptions
+                    ]);
+
+                    $shedule['forWeek'] = [
+                        'monday'     =>  [
+                            'isOpen' => $openingHours->isOpenOn('monday'),
+                            'hours' => $hours_shedule_hours->tuesday,
+                        ],
+                        'tuesday'    => [
+                            'isOpen' => $openingHours->isOpenOn('tuesday'),
+                            'hours' => $hours_shedule_hours->tuesday,
+                        ],
+                        'wednesday'  =>  [
+                            'isOpen' => $openingHours->isOpenOn('wednesday'),
+                            'hours' => $hours_shedule_hours->wednesday,
+                        ],
+                        'thursday'   =>  [
+                            'isOpen' => $openingHours->isOpenOn('thursday'),
+                            'hours' => $hours_shedule_hours->thursday,
+                        ],
+                        'friday'     =>  [
+                            'isOpen' => $openingHours->isOpenOn('friday'),
+                            'hours' => $hours_shedule_hours->friday,
+                        ],
+                        'saturday'   =>  [
+                            'isOpen' => $openingHours->isOpenOn('saturday'),
+                            'hours' => $hours_shedule_hours->saturday,
+                        ],
+                        'sunday'     =>  [
+                            'isOpen' => $openingHours->isOpenOn('sunday'),
+                            'hours' => $hours_shedule_hours->sunday,
+                        ]
+                    ];
+                   
+                    $shedule['todayOpen'] = $openingHours->isOpenAt(Carbon::now());
+                    $exceptions = $openingHours->exceptions();
+                }
+
+            };
+
+            $data->setAttribute('hours_shedule_hours',$shedule);
+            $data->setAttribute('hours_exceptions',$exceptions);
+            
             $response = array(
                 'status' => 'success',
                 'data' => $data,
