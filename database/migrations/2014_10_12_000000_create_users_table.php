@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
                 ->nullable(false);
             $table->string('avatar');
             $table->string('header');
+            $table->string('referer_code',100);
             $table->rememberToken();
             $table->timestamps();
         });

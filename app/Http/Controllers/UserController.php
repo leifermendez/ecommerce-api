@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -70,7 +71,8 @@ class UserController extends Controller
                 'role' => $request->role,
                 'avatar' => $request->avatar,
                 'header' => $request->header,
-                'status' => $request->status
+                'status' => $request->status,
+                'referer_code' => Str::random(15)
             ];
 
             $id = User::insertGetId($values);
