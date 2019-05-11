@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('user_id');
             $table->integer('category_id');
             $table->string('zip_code',10);
+            $table->enum('status', ['available', 'unavailable'])->default($value = 'available');
             $table->timestamps();
         });
     }

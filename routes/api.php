@@ -31,5 +31,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('paymentPlatform', 'PaymentPlatformController');
     Route::resource('paymentSetting', 'PaymentSettingController');
     Route::resource('shopHours', 'HoursController');
+    Route::resource('currencies', 'CurrenciesController');
 });
 
