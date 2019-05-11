@@ -77,8 +77,11 @@ class HoursController extends Controller
         try {
 
             $data = hours::find($id);
-            $data->shedule_hours = json_decode($data->shedule_hours);
-            $data->exceptions = json_decode($data->exceptions);
+            
+            if($data){
+                $data->shedule_hours = json_decode($data->shedule_hours);
+                $data->exceptions = json_decode($data->exceptions); 
+            }
 
             $response = array(
                 'status' => 'success',
