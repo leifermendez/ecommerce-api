@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
+use App\Notifications\NewUser;
 
 class UserController extends Controller
 {
@@ -62,6 +63,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
             $values = [
                 'name' => $request->name,
@@ -79,6 +81,8 @@ class UserController extends Controller
             $data = User::find($id);
 
             $data->setAttribute('token', JWTAuth::fromUser($data));
+            
+            $data->notify(new NewUser($data));
 
             $response = array(
                 'status' => 'success',
