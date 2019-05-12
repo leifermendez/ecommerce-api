@@ -37,5 +37,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('comments', 'CommentsController');
     Route::resource('questions', 'QuestionsController');
     Route::resource('faq', 'FaqController');
+    Route::resource('attributes', 'AttributesController');
+    Route::resource('categoryAttributes', 'CategoryAttributesController');
+    Route::resource('productVariation', 'ProductVariationController');
+    Route::resource('shippingAddress', 'ShippingAddressController');
 });
 
