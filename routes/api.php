@@ -41,5 +41,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('categoryAttributes', 'CategoryAttributesController');
     Route::resource('productVariation', 'ProductVariationController');
     Route::resource('shippingAddress', 'ShippingAddressController');
+    Route::resource('banners', 'BannersController');
 });
 

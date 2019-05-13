@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
                 'phone' => $faker->phoneNumber,
                 'avatar' => 'http://lorempixel.com/640/480/',
                 'header' => 'http://lorempixel.com/1200/680/',
+                'referer_code' => $faker->swiftBicNumber,
             ]);
         }
     }

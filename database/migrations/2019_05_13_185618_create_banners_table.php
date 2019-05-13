@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachedsTable extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateAttachedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attacheds', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 200);
-            $table->integer('users_id');
-            $table->string('small');
-            $table->string('medium');
-            $table->string('large');
-            $table->string('original');
+            $table->integer('attached_id');
+            $table->integer('shop_id')->nullable();
+            $table->string('title');
+            $table->string('description');
             $table->enum('media_type', ['video', 'image'])->default('image');
-            $table->string('video_url')->nullable();
+            $table->timestamp('start');
+            $table->timestamp('finish');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateAttachedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attacheds');
+        Schema::dropIfExists('banners');
     }
 }
