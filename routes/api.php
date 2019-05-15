@@ -47,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('/', 'AuthController@index');
+        Route::get('/', 'AuthController@index');
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
     });
