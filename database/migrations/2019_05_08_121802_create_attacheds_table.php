@@ -17,10 +17,9 @@ class CreateAttachedsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 200);
             $table->integer('users_id');
-            $table->string('small');
-            $table->string('medium');
-            $table->string('large');
-            $table->string('original');
+            $table->string('small')->nullable();
+            $table->string('medium')->nullable();
+            $table->string('large')->nullable();
             $table->enum('media_type', ['video', 'image'])->default('image');
             $table->string('video_url')->nullable();
             $table->timestamps();
