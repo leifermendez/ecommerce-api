@@ -43,6 +43,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('shippingAddress', 'ShippingAddressController');
     Route::resource('banners', 'BannersController');
     Route::resource('userPayment', 'UserPaymentController');
+    Route::resource('newsletter', 'NewsletterController');
+    Route::resource('productAttached', 'ProductAttachedController');
+    Route::resource('attached', 'AttachedController');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {

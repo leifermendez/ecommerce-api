@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name',200);
             $table->string('short_description',200);
             $table->enum('featured', ['premium', 'regular','not'])->default($value = 'not');
+            $table->enum('product_type', ['digital', 'physical'])->default($value = 'physical');
             $table->longText('description');
             $table->integer('user_id');
             $table->integer('category_id');

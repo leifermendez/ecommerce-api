@@ -22,6 +22,10 @@ class CreateVariationProductsTable extends Migration
             $table->string('label');
             $table->integer('attached_id')->nullable();
             $table->mediumText('observation')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('width')->nullable();
+            $table->string('height')->nullable();
+            $table->string('length')->nullable();
             $table->timestamps();
         });
     }
