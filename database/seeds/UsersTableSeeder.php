@@ -18,11 +18,12 @@ class UsersTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             DB::table('users')->insert([
                 'name' => $faker->name,
-                'email' => $faker->email,
+                'email' => ($i === 0) ? 'admin@admin.com' : $faker->email,
                 'password' => bcrypt('secret'),
                 'phone' => $faker->phoneNumber,
                 'avatar' => 'http://lorempixel.com/640/480/',
                 'header' => 'http://lorempixel.com/1200/680/',
+                'role' => ($i === 0) ? 'admin' :'user',
                 'referer_code' => $faker->swiftBicNumber,
             ]);
         }

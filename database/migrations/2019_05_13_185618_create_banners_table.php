@@ -20,8 +20,8 @@ class CreateBannersTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->enum('media_type', ['video', 'image'])->default('image');
-            $table->timestamp('start');
-            $table->timestamp('finish');
+            $table->timestamp('start')->nullable();
+            $table->timestamp('finish')->nullable();
             $table->string('url');
             $table->timestamps();
         });
