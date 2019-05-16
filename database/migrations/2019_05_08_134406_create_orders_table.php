@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('order_id',200);
+            $table->double('amount', 12, 2);
             $table->string('description',200);
             $table->string('observation',200);
             $table->enum('status', ['success', 'wait','cancel','fail']);

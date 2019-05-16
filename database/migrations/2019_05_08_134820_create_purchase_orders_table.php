@@ -16,8 +16,8 @@ class CreatePurchaseOrdersTable extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('uuid');
-            $table->float('amount');
-            $table->float('feed');
+            $table->double('amount', 12, 2);
+            $table->double('feed', 12, 2);
             $table->integer('user_id');
             $table->integer('shop_id');
             $table->integer('shipping_address_id');
