@@ -19,6 +19,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation']], function ()
     });
 });
 
+Route::get('example', 'ExternalCifController@searchCompany');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']], function () {
     Route::resource('user', 'UserController');
@@ -28,6 +29,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('shop', 'ShopController');
     Route::resource('order', 'OrderController');
     Route::resource('purchase', 'PurchaseController');
+    Route::resource('purchaseDetail', 'PurchaseDetailController');
     Route::resource('paymentPlatform', 'PaymentPlatformController');
     Route::resource('paymentSetting', 'PaymentSettingController');
     Route::resource('shopHours', 'HoursController');
@@ -46,6 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('newsletter', 'NewsletterController');
     Route::resource('productAttached', 'ProductAttachedController');
     Route::resource('attached', 'AttachedController');
+    Route::resource('validateCif', 'ExternalCifController');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
