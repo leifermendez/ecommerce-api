@@ -20,9 +20,28 @@ class PurchaseController extends Controller
         try {
 
             $limit = ($request->limit) ? $request->limit : 15;
+            $filters = ($request->filters) ? explode("?", $request->filters) : [];
 
-            $data = purchase_order::orderBy('id', 'DESC')
-                ->paginate($limit);
+            $data = purchase_order::orderBy('id','desc')
+            ->where(function ($query) use ($filters) {
+                foreach ($filters as $value) {
+                    $tmp = explode(",", $value);
+                    if(isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])){
+                        $subTmp = explode("|",$tmp[2]);
+                        if(count($subTmp)){
+                            foreach ($subTmp as $k) {
+                            $query->orWhere($tmp[0],$tmp[1],$k);
+                            }
+                        }else{
+                            $query->where($tmp[0],$tmp[1],$tmp[2]);
+                        }
+                    
+                    }
+                }
+            })
+            ->paginate($limit)
+            ->appends(request()->except('page'));
+        
 
             $response = array(
                 'status' => 'success',

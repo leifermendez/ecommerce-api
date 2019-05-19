@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "initialize": "php artisan key:generate && php artisan jwt:secret",
         "migrate": "php artisan migrate:refresh",
-        "seed": "php artisan db:seed --class=UsersTableSeeder && php artisan db:seed --class=ShopTableSeeder && php artisan db:seed --class=ProductsTableSeeder && php artisan db:seed --class=PurchaseTableSeeder && php artisan db:seed --class=OrderSeeder"
+        "seed": "php artisan db:seed --class=UsersTableSeeder && php artisan db:seed --class=ShopTableSeeder && php artisan db:seed --class=ProductsTableSeeder && php artisan db:seed --class=PurchaseTableSeeder && php artisan db:seed --class=OrderSeeder && php artisan db:seed --class=PurchaseDetailTableSeeder"
     },
     "devDependencies": {
         "axios": "^0.18",
