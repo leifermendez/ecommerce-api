@@ -48,8 +48,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('newsletter', 'NewsletterController');
     Route::resource('productAttached', 'ProductAttachedController');
     Route::resource('attached', 'AttachedController');
+
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');
+    Route::resource('delivery', 'ExternalDeliveryController');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
