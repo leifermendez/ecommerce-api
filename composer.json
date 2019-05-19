@@ -19,6 +19,7 @@
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.17",
         "spatie/opening-hours": "^2.2",
+        "twilio/sdk": "^5.32",
         "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {

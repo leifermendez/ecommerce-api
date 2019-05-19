@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('role', ['admin', 'user', 'seller', 'shop'])->default($value = 'user');
             $table->enum('status', ['available', 'unavailable'])->default($value = 'available')
                 ->nullable(false);
+            $table->boolean('confirmed')->default(0);
             $table->string('avatar');
             $table->string('header');
             $table->string('referer_code',100);

@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                 'email' => ($i === 0) ? 'admin@admin.com' : $faker->email,
                 'password' => bcrypt('secret'),
                 'phone' => $faker->phoneNumber,
+                'confirmed' => ($i<3) ? 0 : 1,
                 'avatar' => 'http://lorempixel.com/640/480/',
                 'header' => 'http://lorempixel.com/1200/680/',
                 'role' => ($i === 0) ? 'admin' :'user',

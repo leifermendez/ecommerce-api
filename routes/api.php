@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('productAttached', 'ProductAttachedController');
     Route::resource('attached', 'AttachedController');
     Route::resource('validateCif', 'ExternalCifController');
+    Route::resource('validatePhone', 'ExternalSmsController');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
