@@ -30,7 +30,7 @@ class initialize extends Command
                 if (!$keyPosition || !$endOfLinePosition || !$oldLine) {
                     $str .= "{$envKey}={$envValue}\n";
                 } else {
-                    $str = str_replace($oldLine, "{$envKey}={$envValue}", $str);
+                    //$str = str_replace($oldLine, "{$envKey}={$envValue}", $str);
                 }
 
             }
@@ -73,7 +73,10 @@ class initialize extends Command
             'ELINFORMAR_CLIENT_ID' => '',
             'ELINFORMAR_CLIENT_SECRET' => '',
             'TWILIO_SID' => '',
-            'TWILIO_TOKEN' => ''
+            'TWILIO_TOKEN' => '',
+            'TWILIO_FROM' => '',
+            'TRUUST_PK' => '',
+            'TRUUST_SK' => '',
         ];
         $this->setEnvironmentValue($values);
     }
