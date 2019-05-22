@@ -21,6 +21,7 @@ class CreateUserPaymentsTable extends Migration
                 'bank',
                 'paypal',
                 'mercadopago',
+                'stripe',
                 'other'
              ])->default('bank');
             $table->string('payment_email');

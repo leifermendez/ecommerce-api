@@ -53,6 +53,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');
     Route::resource('delivery', 'ExternalDeliveryController');
+    /**
+     * Esta ruta debe pensarse creo que lo mejor es hacer un compoenent stripe por el lado del front
+     * Success: http://localhost?scope=read_write&code={AUTHORIZATION_CODE}
+     * Denied: http://localhost?error=access_denied&error_description=The%20user%20denied%20your%20request
+
+     */
+    Route::resource('stripe_auth', 'ExternalStripeAuthController');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
