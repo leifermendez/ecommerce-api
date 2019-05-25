@@ -78,6 +78,11 @@ class initialize extends Command
             'TWILIO_FROM' => '',
             'TRUUST_PK' => '',
             'TRUUST_SK' => '',
+            'STRIPE_KEY' => '',
+            'STRIPE_SECRET' => '',
+            'STRIPE_WEBHOOK_SECRET' => '',
+            'STRIPE_WEBHOOK_TOLERANCE' => '',
+            'STRIPE_PLATFORM_ID' => ''
         ];
         $this->setEnvironmentValue($values);
 
