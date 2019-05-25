@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\categories;
-use App\products;
-use App\shop;
 
-class _FrontProducts extends Controller
+class _FrontCategories extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,26 +17,8 @@ class _FrontProducts extends Controller
         try {
 
             $limit = ($request->limit) ? $request->limit : 15;
-            $location = $request->_location;
-
-            $data = products::orderBy('products.id', 'DESC')
-                ->join('shops','products.shop_id','=','shops.id')
-                ->where('shops.zip_code',$location)
-                ->where(function ($query) use ($request) {
-                   if($request->featured){
-                        $query->where('products.featured', $request->featured);
-                   }
-                })
-                ->select('products.*','shops.name as shop_name','shops.address as shop_address',
-                'shops.slug as shop_slug')
+            $data = categories::orderBy('id', 'DESC')
                 ->paginate($limit);
-
-            $data->map(function ($item, $key) use($request)  {
-                
-                $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
-                $item->is_available = $isAvailable;
-                return $item;
-            });
 
             $response = array(
                 'status' => 'success',
@@ -87,27 +67,11 @@ class _FrontProducts extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
         try {
-            $location = $request->_location;
 
-            $data = products::orderBy('products.id', 'DESC')
-                ->join('shops','products.shop_id','=','shops.id')
-                ->where('shops.zip_code',$location)
-                ->where(function ($query) use ($request) {
-                   if($request->featured){
-                        $query->where('products.featured', $request->featured);
-                   }
-                })
-                ->select('products.*','shops.name as shop_name','shops.address as shop_address',
-                'shops.slug as shop_slug')
-                ->first();
-
-            if($data){
-                $isAvailable = (new UseInternalController)->_isAvailableProduct($id);
-                $data->setAttribute('is_available',$isAvailable);
-            }
+            $data = categories::find($id);
 
             $response = array(
                 'status' => 'success',

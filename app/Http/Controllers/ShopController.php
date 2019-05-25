@@ -161,9 +161,11 @@ class ShopController extends Controller
                 }
 
             };
-
-            $data->setAttribute('hours_shedule_hours',$shedule);
-            $data->setAttribute('hours_exceptions',$exceptions);
+        
+            if($data){
+                $data->setAttribute('hours_shedule_hours',$shedule);
+                $data->setAttribute('hours_exceptions',$exceptions);
+            }
             
             $response = array(
                 'status' => 'success',

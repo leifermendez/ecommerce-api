@@ -41,7 +41,12 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         ])
         ->middleware('CheckLocation');
 
-
+        Route::resource('/categories', '_FrontCategories')
+        ->only([
+            'index',
+            'show'
+        ]);
+        
     });
 
     /** 
