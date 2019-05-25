@@ -40,7 +40,6 @@ class ExternalDeliveryController extends Controller
                 'barcode' => 'required',
             ])->validate();
             
-
             $response = Curl::to(_api_."/public/v2/orders")
             ->withHeaders([
                 "Content-Type: application/json", 

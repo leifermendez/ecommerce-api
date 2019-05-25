@@ -12,15 +12,38 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation']], function () {
+
+/**
+ * Front API ------
+ */
+
+Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation','FrontWeb']], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
     });
+
+    Route::group(['prefix' => 'rest'], function () {
+        Route::resource('/zone-available', '_FrontZoneAvailable')
+        ->only([
+            'index'
+        ]);
+    });
+
+
+    Route::get('example', 'ExternalCifController@searchCompany');
 });
 
-Route::get('example', 'ExternalCifController@searchCompany');
 
+ /**
+  * Fin Front API ------
+  */
+
+
+
+/**
+ * Grupo ADMIN --------
+ */
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']], function () {
     Route::resource('user', 'UserController');
     Route::resource('categories', 'CategoriesController');
@@ -55,6 +78,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
     Route::resource('delivery', 'ExternalDeliveryController');
 });
 
+
 Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::get('/', 'AuthController@index');
@@ -62,3 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function 
         Route::post('register', 'AuthController@register');
     });
 });
+
+/**
+ * Fin Grupo ADMIN --------
+ */

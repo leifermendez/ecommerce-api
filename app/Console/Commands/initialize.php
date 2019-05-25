@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Artisan;
 
 class initialize extends Command
 {
@@ -79,5 +80,16 @@ class initialize extends Command
             'TRUUST_SK' => '',
         ];
         $this->setEnvironmentValue($values);
+
+        Artisan::call('key:generate');
+        Artisan::call('jwt:secret');
+        Artisan::call('migrate:refresh');
+        Artisan::call('db:seed --class=UsersTableSeeder');
+        Artisan::call('db:seed --class=ShopTableSeeder');
+        Artisan::call('db:seed --class=ProductsTableSeeder');
+        Artisan::call('db:seed --class=PurchaseTableSeeder');
+        Artisan::call('db:seed --class=OrderSeeder');
+        Artisan::call('db:seed --class=PurchaseDetailTableSeeder');
+        Artisan::call('db:seed --class=ZoneAvailableTableSeeder');
     }
 }
