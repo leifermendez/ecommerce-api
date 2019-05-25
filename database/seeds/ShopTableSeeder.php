@@ -21,7 +21,7 @@ class ShopTableSeeder extends Seeder
                 'name'=> $faker->company,
                 'address' => $faker->address,
                 'slug' => $faker->slug,
-                'zip_code' => $i,
+                'zip_code' => $faker->postcode,
                 'legal_id' => $faker->ean8,
                 'email_corporate' => $faker->companyEmail,
                 'image_cover' => $i,

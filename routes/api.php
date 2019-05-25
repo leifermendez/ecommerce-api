@@ -17,21 +17,48 @@ use Illuminate\Http\Request;
  * Front API ------
  */
 
-Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation','FrontWeb']], function () {
+Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
+
+    /** 
+     * Rutas libres
+     */
     Route::group(['prefix' => 'auth'], function () {
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
     });
 
     Route::group(['prefix' => 'rest'], function () {
+
         Route::resource('/zone-available', '_FrontZoneAvailable')
         ->only([
             'index'
         ]);
+
+        Route::resource('/products', '_FrontProducts')
+        ->only([
+            'index',
+            'show'
+        ])
+        ->middleware('CheckLocation');
+
+
     });
 
+    /** 
+     * FIN Rutas libres
+     */
+
+
+
+    /**
+     * Rutas protegidas
+     */
 
     Route::get('example', 'ExternalCifController@searchCompany');
+    /**
+     * Fin rutas protegidas
+     */
+  
 });
 
 
@@ -44,7 +71,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['CheckLocation','FrontWeb']], 
 /**
  * Grupo ADMIN --------
  */
-Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('user', 'UserController');
     Route::resource('categories', 'CategoriesController');
     Route::resource('cities', 'CitiesController');
@@ -86,7 +113,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation', 'PanelWeb']
 });
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['CheckLocation']], function () {
+Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::get('/', 'AuthController@index');
         Route::post('login', 'AuthController@store');

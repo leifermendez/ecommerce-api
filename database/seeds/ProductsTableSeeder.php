@@ -22,9 +22,8 @@ class ProductsTableSeeder extends Seeder
                 'featured' => ($i<3) ? 'premium' : 'regular',
                 'product_type' => ($i<5) ? 'digital':'physical',
                 'description' => $faker->sentence(20),
-                'user_id' => ($i<5) ? ($i+1) : 1,
+                'shop_id' => ($i<5) ? ($i+1) : 1,
                 'category_id' => ($i<3) ? ($i+1) : 1,
-                'zip_code' => $faker->postcode,
                 'status' => ($i<6) ? 'available':'unavailable',
             ]);
         }

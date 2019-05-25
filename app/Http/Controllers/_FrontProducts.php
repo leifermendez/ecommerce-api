@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\zone_available;
+use App\categories;
+use App\products;
+use App\shop;
 
-class _FrontZoneAvailable extends Controller
+class _FrontProducts extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +17,17 @@ class _FrontZoneAvailable extends Controller
     public function index(Request $request)
     {
         try {
-            $src = $request->src;
-            $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = zone_available::orderBy('id', 'DESC')
-                ->where(function ($query) use ($src) {
-                    $query->orWhere('name','like', '%'.$src.'%');
-                    $query->orWhere('zip_code','like', '%'.$src.'%');
-                })
+            $limit = ($request->limit) ? $request->limit : 15;
+            $location = $request->_location;
+
+            $data = products::orderBy('products.id', 'DESC')
+                ->join('shops','products.shop_id','=','shops.id')
+                ->where('shops.zip_code',$location)
+                ->select('products.*','shops.name as shop_name','shops.address as shop_address',
+                'shops.slug as shop_slug')
                 ->paginate($limit);
 
-            
             $response = array(
                 'status' => 'success',
                 'data' => $data,

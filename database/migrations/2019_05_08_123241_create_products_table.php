@@ -20,9 +20,8 @@ class CreateProductsTable extends Migration
             $table->enum('featured', ['premium', 'regular','not'])->default($value = 'not');
             $table->enum('product_type', ['digital', 'physical'])->default($value = 'physical');
             $table->longText('description');
-            $table->integer('user_id');
+            $table->integer('shop_id');
             $table->integer('category_id');
-            $table->string('zip_code',10);
             $table->enum('status', ['available', 'unavailable'])->default($value = 'available');
             $table->timestamps();
         });
