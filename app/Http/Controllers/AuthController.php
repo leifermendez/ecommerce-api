@@ -7,6 +7,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -51,7 +52,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-      
+       
     }
 
     /**
@@ -153,15 +154,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-
-            
+            $referer_code = Str::random(12);
             $values = [
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'phone' => $request->phone,
                 'avatar' => $request->avatar,
-                'header' => $request->header
+                'header' => $request->header,
+                'referer_code' => $referer_code
             ];
 
             $id = User::insertGetId($values);

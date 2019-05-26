@@ -7,7 +7,7 @@ use App\categories;
 use App\products;
 use App\shop;
 
-class _FrontProducts extends Controller
+class _FrontSeller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,50 +16,7 @@ class _FrontProducts extends Controller
      */
     public function index(Request $request)
     {
-        try {
 
-            $limit = ($request->limit) ? $request->limit : 15;
-            $location = $request->_location;
-
-            $data = products::orderBy('products.id', 'DESC')
-                ->join('shops','products.shop_id','=','shops.id')
-                ->where('shops.zip_code',$location)
-                ->where(function ($query) use ($request) {
-                   if($request->featured){
-                        $query->where('products.featured', $request->featured);
-                   }
-                })
-                ->select('products.*','shops.name as shop_name','shops.address as shop_address',
-                'shops.slug as shop_slug')
-                ->paginate($limit);
-
-            $data->map(function ($item, $key) use($request)  {
-                
-                $getVariations = (new UseInternalController)->_getVariations($item->id);
-                $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
-                $item->is_available = $isAvailable;
-                $item->variations = $getVariations;
-                return $item;
-            });
-
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
-
-        } catch (\Exception $e) {
-
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-
-            return response()->json($response, 500);
-
-        }
     }
 
     /**
@@ -92,11 +49,12 @@ class _FrontProducts extends Controller
     public function show(Request $request, $id)
     {
         try {
+
+            $limit = ($request->limit) ? $request->limit : 15;
             $location = $request->_location;
 
-            $data = products::orderBy('products.id', 'DESC')
+            $data = products::where('products.shop_id', $id)
                 ->join('shops','products.shop_id','=','shops.id')
-                ->where('shops.zip_code',$location)
                 ->where(function ($query) use ($request) {
                    if($request->featured){
                         $query->where('products.featured', $request->featured);
@@ -104,14 +62,14 @@ class _FrontProducts extends Controller
                 })
                 ->select('products.*','shops.name as shop_name','shops.address as shop_address',
                 'shops.slug as shop_slug')
-                ->first();
+                ->paginate($limit);
 
-            if($data){
-                $isAvailable = (new UseInternalController)->_isAvailableProduct($id);
-                $getVariations = (new UseInternalController)->_getVariations($id);
-                $data->setAttribute('is_available',$isAvailable);
-                $data->setAttribute('variations',$getVariations);
-            }
+            $data->map(function ($item, $key) use($request)  {
+                
+                $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
+                $item->is_available = $isAvailable;
+                return $item;
+            });
 
             $response = array(
                 'status' => 'success',

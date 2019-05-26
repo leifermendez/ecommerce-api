@@ -25,11 +25,17 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
+        Route::get('/', 'AuthController@index');
     });
 
     Route::group(['prefix' => 'rest'], function () {
 
         Route::resource('/zone-available', '_FrontZoneAvailable')
+        ->only([
+            'index'
+        ]);
+
+        Route::resource('/banners', '_FrontBanners')
         ->only([
             'index'
         ]);
@@ -41,12 +47,23 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         ])
         ->middleware('CheckLocation');
 
+        Route::resource('/user', '_FrontUser')
+        ->only([
+            'show'
+        ]);
+
+
+        Route::resource('/seller', '_FrontSeller')
+        ->only([
+            'show'
+        ]);
+
         Route::resource('/categories', '_FrontCategories')
         ->only([
             'index',
             'show'
         ]);
-        
+
     });
 
     /** 

@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use Spatie\OpeningHours\OpeningHours;
 use Carbon\Carbon;
 use App\products;
+use App\variation_product;
 use App\shop;
 
 class UseInternalController extends Controller
 {
-    public function _isAvailableProduct($id = null){
+    public function _isAvailableProduct($id = null)
+    {
         try{
             if(!$id){
                 throw new \Exception('id null');
@@ -70,6 +72,36 @@ class UseInternalController extends Controller
 
             };     
 
+        }catch(\Execption $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function _getVariations($id=null,$sort='ASC')
+    {
+        try{
+            $data = [];
+
+            if(!$id){
+                throw new \Exception('id null');
+            }
+
+            if(!products::where('id',$id)->exists()){
+                throw new \Exception('not found');
+            }
+
+            $data = variation_product::where('variation_products.product_id',$id)
+            ->join('attacheds','variation_products.attached_id','=','attacheds.id')
+            ->select('variation_products.*','attacheds.small as attacheds_small',
+            'attacheds.medium as attacheds_medium','attacheds.large as attacheds_large')
+            ->orderBy('variation_products.price_normal',$sort)
+            ->get();
+
+            return [
+                'length' => count($data),
+                'item' => $data
+            ];
+            
         }catch(\Execption $e){
             return $e->getMessage();
         }

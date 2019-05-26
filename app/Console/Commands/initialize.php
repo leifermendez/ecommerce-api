@@ -70,7 +70,7 @@ class initialize extends Command
     public function handle()
     {
         
-        if ($this->confirm('Quieres continuar?')) {
+        if ($this->confirm('¿Quieres continuar?')) {
             $force = $this->argument('force');
             
             $values = [
@@ -104,6 +104,11 @@ class initialize extends Command
             Artisan::call('db:seed --class=PurchaseDetailTableSeeder');
             Artisan::call('db:seed --class=ZoneAvailableTableSeeder');
             Artisan::call('db:seed --class=CategoriesTableSeeder');
+            Artisan::call('db:seed --class=BannersTableSeeder');
+            Artisan::call('db:seed --class=AttachedTableSeeder');
+            Artisan::call('db:seed --class=AttributesTableSeeder');
+            Artisan::call('db:seed --class=CategoryAttributesTableSeeder');
+            Artisan::call('db:seed --class=ProductVariableTableSeeder');
         }
 
     }
