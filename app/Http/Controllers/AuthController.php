@@ -51,7 +51,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        dd(111);
+      
     }
 
     /**
@@ -153,6 +153,8 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
+
+            
             $values = [
                 'name' => $request->name,
                 'email' => $request->email,
