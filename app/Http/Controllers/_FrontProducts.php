@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\categories;
 use App\products;
 use App\shop;
+use DB;
 
 class _FrontProducts extends Controller
 {
@@ -20,7 +21,8 @@ class _FrontProducts extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
             $location = $request->_location;
-
+            $categories = [];
+            $attributes = [];
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops','products.shop_id','=','shops.id')
                 ->where('shops.zip_code',$location)
@@ -42,9 +44,27 @@ class _FrontProducts extends Controller
                 return $item;
             });
 
+            $categories = products::orderBy('products.id', 'DESC')
+                ->join('shops','products.shop_id','=','shops.id')
+                ->join('categories','products.category_id','=','categories.id')
+                ->where('shops.zip_code',$location)
+                ->where(function ($query) use ($request) {
+                    if($request->featured){
+                            $query->where('products.featured', $request->featured);
+                    }
+                })
+                ->select('categories.id','categories.name',
+                DB::raw('count(categories.id) as number'))
+                ->groupBy('categories.id')
+                ->get();
+                
+
             $response = array(
                 'status' => 'success',
-                'data' => $data,
+                'data' => [
+                    'items' => $data,
+                    'categories' => $categories
+                ],
                 'code' => 0
             );
             return response()->json($response);
