@@ -20,19 +20,32 @@ class _FrontProducts extends Controller
         try {
 
             $limit = ($request->limit) ? $request->limit : 15;
+            $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $location = $request->_location;
             $categories = [];
             $attributes = [];
+
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops','products.shop_id','=','shops.id')
+                ->join('categories','products.category_id','=','categories.id')
                 ->where('shops.zip_code',$location)
-                ->where(function ($query) use ($request) {
-                   if($request->featured){
-                        $query->where('products.featured', $request->featured);
-                   }
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if(isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])){
+                            $subTmp = explode("|",$tmp[2]);
+                            if(count($subTmp)){
+                               foreach ($subTmp as $k) {
+                                $query->orWhere($tmp[0],$tmp[1],$k);
+                               }
+                            }else{
+                                $query->where($tmp[0],$tmp[1],$tmp[2]);
+                            }
+                        }
+                    }
                 })
                 ->select('products.*','shops.name as shop_name','shops.address as shop_address',
-                'shops.slug as shop_slug')
+                'shops.slug as shop_slug','categories.name as category_name')
                 ->paginate($limit);
 
             $data->map(function ($item, $key) use($request)  {
@@ -48,14 +61,50 @@ class _FrontProducts extends Controller
                 ->join('shops','products.shop_id','=','shops.id')
                 ->join('categories','products.category_id','=','categories.id')
                 ->where('shops.zip_code',$location)
-                ->where(function ($query) use ($request) {
-                    if($request->featured){
-                            $query->where('products.featured', $request->featured);
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if(isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])){
+                            $subTmp = explode("|",$tmp[2]);
+                            if(count($subTmp)){
+                               foreach ($subTmp as $k) {
+                                $query->orWhere($tmp[0],$tmp[1],$k);
+                               }
+                            }else{
+                                $query->where($tmp[0],$tmp[1],$tmp[2]);
+                            }
+                        }
                     }
                 })
                 ->select('categories.id','categories.name',
                 DB::raw('count(categories.id) as number'))
                 ->groupBy('categories.id')
+                ->get();
+
+            $attributes = products::orderBy('products.id', 'DESC')
+                ->join('shops','products.shop_id','=','shops.id')
+                ->join('categories','products.category_id','=','categories.id')
+                ->join('category_attributes','categories.id','=','category_attributes.category_id')
+                ->join('attributes','attributes.id','=','category_attributes.attributes_id')
+                ->where('shops.zip_code',$location)
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if(isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])){
+                            $subTmp = explode("|",$tmp[2]);
+                            if(count($subTmp)){
+                               foreach ($subTmp as $k) {
+                                $query->orWhere($tmp[0],$tmp[1],$k);
+                               }
+                            }else{
+                                $query->where($tmp[0],$tmp[1],$tmp[2]);
+                            }
+                        }
+                    }
+                })
+                ->select('attributes.id','attributes.name',
+                DB::raw('count(attributes.id) as number'))
+                ->groupBy('attributes.id')
                 ->get();
                 
 
@@ -63,7 +112,8 @@ class _FrontProducts extends Controller
                 'status' => 'success',
                 'data' => [
                     'items' => $data,
-                    'categories' => $categories
+                    'categories' => $categories,
+                    'attributes' => $attributes
                 ],
                 'code' => 0
             );
