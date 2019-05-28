@@ -16,7 +16,6 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->longText('value')->nullable();
             $table->enum('element_type', ['text', 'number','select','textarea','checkbox']);
             $table->boolean('required')->default(0);
             $table->timestamps();

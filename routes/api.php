@@ -117,6 +117,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('faq', 'FaqController');
     Route::resource('attributes', 'AttributesController');
     Route::resource('categoryAttributes', 'CategoryAttributesController');
+    Route::resource('productAttributes', 'ProductsAttributesController');
     Route::resource('productVariation', 'ProductVariationController');
     Route::resource('shippingAddress', 'ShippingAddressController');
     Route::resource('banners', 'BannersController');

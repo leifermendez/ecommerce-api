@@ -16,7 +16,6 @@ class AttributesTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             DB::table('attributes')->insert([
                 'name' => $faker->sentence(2),
-                'value' => ($i<5) ? NULL : '{"green":"Color veder","yellow":"color amarillo"}',
                 'element_type' =>  ($i<5) ? 'number' : 'select',
                 'required' => ($i<6) ? 1: 0
             ]);

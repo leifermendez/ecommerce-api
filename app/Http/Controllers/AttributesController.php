@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\attributes_globals;
 use Illuminate\Http\Request;
 use App\category_attributes;
+use App\attributes;
+
 
 class AttributesController extends Controller
 {
@@ -18,8 +21,14 @@ class AttributesController extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = category_attributes::orderBy('id', 'DESC')
+            $data = attributes::orderBy('id', 'DESC')
                 ->paginate($limit);
+
+            $data->map(function ($item, $key) use ($request) {
+                $item->values = attributes_globals::where('attributes_id', $item->id)
+                    ->get();
+                return $item;
+            });
 
             $response = array(
                 'status' => 'success',
@@ -54,18 +63,26 @@ class AttributesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $fields = array();
         foreach ($request->all() as $key => $value) {
-            $fields[$key] = $value;
+            if ($key !== 'values') {
+                $fields[$key] = $value;
+            };
         }
         try {
 
             $data = attributes::insertGetId($fields);
+            foreach ($request->values as $value) {
+                attributes_globals::insert([
+                    'attributes_id' => $data,
+                    'value' => $value
+                ]);
+            }
             $data = attributes::find($data);
 
             $response = array(
@@ -88,7 +105,7 @@ class AttributesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -96,6 +113,11 @@ class AttributesController extends Controller
         try {
 
             $data = attributes::find($id);
+            if ($data) {
+                $data->values = attributes_globals::where('attributes_id', $id)
+                    ->get();
+            }
+
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -119,7 +141,7 @@ class AttributesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -130,8 +152,8 @@ class AttributesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -139,13 +161,43 @@ class AttributesController extends Controller
         try {
             $fields = array();
             foreach ($request->all() as $key => $value) {
-                if ($key !== 'id') {
+                if ($key !== 'id' && $key !== 'values') {
                     $fields[$key] = $value;
                 };
             }
 
             attributes::where('id', $id)
                 ->update($fields);
+
+            foreach ($request->values as $key => $value) {
+                $getActionID = (new UseInternalController)->actionID($key);
+
+                switch ($getActionID['action']) {
+                    case 'insert':
+                        attributes_globals::insert([
+                            'attributes_id' => $id,
+                            'value' => $value
+                        ]);
+                        break;
+                    case 'delete':
+                        attributes_globals::where('id', $getActionID['id'])
+                            ->where('attributes_id', $id)
+                            ->delete();
+                        break;
+                    case 'update':
+
+                        if (attributes_globals::where('id', $getActionID['id'])
+                            ->where('attributes_id', $id)->exists()) {
+                            attributes_globals::where('id', $getActionID['id'])
+                                ->where('attributes_id', $id)
+                                ->update([
+                                    'value' => $value
+                                ]);
+                        }
+                        break;
+                }
+
+            }
 
             $data = attributes::find($id);
 
@@ -175,12 +227,14 @@ class AttributesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
+            attributes_globals::where('attributes_id', $id)
+                ->delete();
 
             attributes::where('id', $id)
                 ->delete();

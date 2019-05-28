@@ -14,10 +14,10 @@ class CategoryAttributesTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < 10; $i++) {
-            DB::table('category_attributes')->insert([
+           /* DB::table('category_attributes')->insert([
                 'category_id' => ($i<6) ? 1: $i+1,
                 'attributes_id' => ($i<6) ? 1: $i+1
-            ]);
+            ]);*/
         }
     }
 }
