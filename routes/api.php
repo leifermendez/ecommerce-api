@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
-    /** 
+    /**
      * Rutas libres
      */
     Route::group(['prefix' => 'auth'], function () {
@@ -31,67 +31,78 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     Route::group(['prefix' => 'rest'], function () {
 
         Route::resource('/zone-available', '_FrontZoneAvailable')
-        ->only([
-            'index'
-        ]);
+            ->only([
+                'index'
+            ]);
 
         Route::resource('/banners', '_FrontBanners')
-        ->only([
-            'index'
-        ]);
+            ->only([
+                'index'
+            ]);
 
         Route::resource('/products', '_FrontProducts')
-        ->only([
-            'index',
-            'show'
-        ])
-        ->middleware('CheckLocation');
+            ->only([
+                'index',
+                'show'
+            ])
+            ->middleware('CheckLocation');
+
+        Route::resource('/search', '_FrontSearch')
+            ->only([
+                'index'
+            ])
+            ->middleware('CheckLocation');
+
 
         Route::resource('/user', '_FrontUser')
-        ->only([
-            'show'
-        ]);
+            ->only([
+                'show'
+            ]);
 
         Route::resource('/seller', '_FrontSeller')
-        ->only([
-            'show'
-        ]);
+            ->only([
+                'show'
+            ]);
 
         Route::resource('/shop', '_FrontShop')
-        ->only([
-            'show'
-        ]);
+            ->only([
+                'show'
+            ]);
 
         Route::resource('/categories', '_FrontCategories')
-        ->only([
-            'index',
-            'show'
-        ]);
+            ->only([
+                'index',
+                'show'
+            ]);
 
     });
 
-    /** 
+    /**
      * FIN Rutas libres
      */
 
 
-
     /**
      * Rutas protegidas
+     *
      */
+    Route::group(['prefix' => 'rest', 'middleware' => ['AuthJWT']], function () {
+        Route::resource('/shopping-cart', '_FrontShoppingCart')
+            ->middleware('CheckLocation');
+    });
+
 
     Route::get('example', 'ExternalCifController@searchCompany');
     /**
      * Fin rutas protegidas
      */
-  
+
 });
 
 
- /**
-  * Fin Front API ------
-  */
-
+/**
+ * Fin Front API ------
+ */
 
 
 /**
@@ -134,7 +145,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
      * Esta ruta debe pensarse creo que lo mejor es hacer un compoenent stripe por el lado del front
      * Success: http://localhost?scope=read_write&code={AUTHORIZATION_CODE}
      * Denied: http://localhost?error=access_denied&error_description=The%20user%20denied%20your%20request
-
      */
     Route::resource('stripe_auth', 'ExternalStripeAuthController');
 });
