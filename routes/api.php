@@ -89,6 +89,18 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     Route::group(['prefix' => 'rest', 'middleware' => ['AuthJWT']], function () {
         Route::resource('/shopping-cart', '_FrontShoppingCart')
             ->middleware('CheckLocation');
+
+        Route::resource('/purchase', '_FrontPurchase')
+            ->only([
+                'index',
+                'show',
+                'destroy',
+                'store'
+            ])
+            ->middleware('CheckLocation');
+
+        Route::resource('/shipping', '_FrontShipping')
+            ->middleware('CheckLocation');
     });
 
 

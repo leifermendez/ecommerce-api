@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\platform_payment;
-use App\purchase_order;
+use App\shipping_address;
+use App\shopping_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-
-class PurchaseController extends Controller
+class _FrontShipping extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,29 +19,11 @@ class PurchaseController extends Controller
     {
         try {
 
-            $limit = ($request->limit) ? $request->limit : 15;
-            $filters = ($request->filters) ? explode("?", $request->filters) : [];
+            $user = JWTAuth::parseToken()->authenticate();
+            $data = shipping_address::orderBy('id', 'DESC')
+                ->where('user_id', $user->id)
+                ->get();
 
-            $data = purchase_order::orderBy('id','desc')
-            ->where(function ($query) use ($filters) {
-                foreach ($filters as $value) {
-                    $tmp = explode(",", $value);
-                    if(isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])){
-                        $subTmp = explode("|",$tmp[2]);
-                        if(count($subTmp)){
-                            foreach ($subTmp as $k) {
-                            $query->orWhere($tmp[0],$tmp[1],$k);
-                            }
-                        }else{
-                            $query->where($tmp[0],$tmp[1],$tmp[2]);
-                        }
-                    
-                    }
-                }
-            })
-            ->paginate($limit)
-            ->appends(request()->except('page'));
-        
 
             $response = array(
                 'status' => 'success',
@@ -76,24 +58,32 @@ class PurchaseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $request->request->remove('_location');
         $fields = array();
         foreach ($request->all() as $key => $value) {
-            if ($key !== 'uuid') {
+            if ($key !== 'uuid' && $key !== 'user_id') {
                 $fields[$key] = $value;
             };
         }
         try {
-            $fields['uuid'] = Str::random(40);
+            $request->validate([
+                'country' => 'required',
+                'state' => 'required',
+                'district' => 'required',
+                'address' => 'required',
+            ]);
 
+            $user = JWTAuth::parseToken()->authenticate();
 
+            $fields['user_id'] = $user->id;
 
-            $data = purchase_order::insertGetId($fields);
-            $data = purchase_order::find($data);
+            $data = shipping_address::insertGetId($fields);
+            $data = shipping_address::find($data);
 
             $response = array(
                 'status' => 'success',
@@ -115,38 +105,18 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        try {
-
-            $data = purchase_order::find($id);
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
-
-        } catch (\Exception $e) {
-
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-
-            return response()->json($response, 500);
-
-        }
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -157,24 +127,28 @@ class PurchaseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         try {
+            $request->request->remove('_location');
             $fields = array();
+            $user = JWTAuth::parseToken()->authenticate();
+
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id') {
                     $fields[$key] = $value;
                 };
             }
 
-            purchase_order::where('id', $id)
+            shipping_address::where('id', $id)
+                ->where('user_id', $user->id)
                 ->update($fields);
 
-            $data = purchase_order::find($id);
+            $data = shipping_address::find($id);
 
 
             $response = array(
@@ -202,15 +176,15 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-
         try {
-
-            purchase_order::where('id', $id)
+            $user = JWTAuth::parseToken()->authenticate();
+            shipping_address::where('id', $id)
+                ->where('user_id', $user->id)
                 ->delete();
 
             $response = array(

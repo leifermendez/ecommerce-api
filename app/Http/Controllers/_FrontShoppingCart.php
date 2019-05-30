@@ -25,7 +25,8 @@ class _FrontShoppingCart extends Controller
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
                 ->select('shopping_carts.id', 'products.name', 'variation_products.label',
                     'variation_products.price_normal',
-                    'variation_products.price_regular'
+                    'variation_products.price_regular',
+                    'shopping_carts.shop_id'
                 )
                 ->get();
 
@@ -150,6 +151,8 @@ class _FrontShoppingCart extends Controller
         try {
             $request->request->remove('_location');
             $fields = array();
+            $user = JWTAuth::parseToken()->authenticate();
+
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id') {
                     $fields[$key] = $value;
@@ -157,6 +160,7 @@ class _FrontShoppingCart extends Controller
             }
 
             shopping_cart::where('id', $id)
+                ->where('user_id', $user->id)
                 ->update($fields);
 
             $data = shopping_cart::find($id);
@@ -194,8 +198,9 @@ class _FrontShoppingCart extends Controller
     {
 
         try {
-
+            $user = JWTAuth::parseToken()->authenticate();
             shopping_cart::where('id', $id)
+                ->where('user_id', $user->id)
                 ->delete();
 
             $response = array(

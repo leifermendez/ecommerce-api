@@ -2,15 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\shopping_cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\OpeningHours\OpeningHours;
 use Carbon\Carbon;
 use App\products;
 use App\variation_product;
 use App\shop;
 
+
 class UseInternalController extends Controller
 {
+    public function _shoppingCart($usr = null)
+    {
+        try {
+            if (!$usr) {
+                throw new \Exception('str null');
+            }
+
+            $data = shopping_cart::orderBy('shopping_carts.id', 'DESC')
+                ->where('shopping_carts.user_id', $usr)
+                ->join('products', 'shopping_carts.product_id', '=', 'products.id')
+                ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
+                ->select('shopping_carts.id', 'products.name', 'variation_products.label',
+                    'variation_products.price_normal',
+                    'variation_products.price_regular',
+                    'shopping_carts.shop_id'
+                )
+                ->get();
+
+            $data_total = shopping_cart::orderBy('shopping_carts.id', 'DESC')
+                ->where('shopping_carts.user_id', $usr)
+                ->join('products', 'shopping_carts.product_id', '=', 'products.id')
+                ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
+                ->select(
+                    DB::raw('sum(variation_products.price_normal) as price_normal'),
+                    DB::raw('sum(variation_products.price_regular) as price_regular')
+                )
+                ->groupBy('products.id')
+                ->get();
+
+            return [
+                'list' => $data->toArray(),
+                'total' => $data_total->toArray()
+            ];
+
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function actionID($str = null)
     {
         try {
@@ -19,9 +62,9 @@ class UseInternalController extends Controller
             }
 
             $id = substr($str, strpos($str, "_") + 1);
-            $action = substr($str, 0,strpos($str, "_"));
+            $action = substr($str, 0, strpos($str, "_"));
 
-            return[
+            return [
                 'id' => $id,
                 'action' => $action
             ];
