@@ -36,7 +36,8 @@ class _FrontShoppingCart extends Controller
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
                 ->select(
                     DB::raw('sum(variation_products.price_normal) as price_normal'),
-                    DB::raw('sum(variation_products.price_regular) as price_regular')
+                    DB::raw('sum(variation_products.price_regular) as price_regular'),
+                    'shopping_carts.shop_id'
                 )
                 ->groupBy('products.id')
                 ->get();

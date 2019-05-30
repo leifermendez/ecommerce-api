@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\purchase_order;
+use App\shopping_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -100,6 +101,8 @@ class _FrontPurchase extends Controller
                     "shop_id" => $value['shop_id'],
                     "uuid" => $uuid,
                     "user_id" => $user->id,
+                    "amount_shipping" => 1,
+                    "feed" => 2,
                     "uuid_shipping" => 'sh_' . Str::random(12),
                     "amount" => (isset($lists[$value['shop_id']]['amount'])) ?
                         floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :
@@ -107,11 +110,16 @@ class _FrontPurchase extends Controller
                 ];
 
             };
+            if (count($lists)<1) {
+                throw new \Exception('shopping cart empty');
+            }
 
             foreach ($lists as $list) {
                 purchase_order::insert($list);
             };
 
+            shopping_cart::where('user_id',$user->id)
+            ->delete();
             $data = purchase_order::where('uuid', $uuid)
                 ->get();
 
