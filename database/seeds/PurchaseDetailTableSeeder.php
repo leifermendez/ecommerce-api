@@ -17,7 +17,7 @@ class PurchaseDetailTableSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('purchase_details')->insert([
-                'purchase_id' => ($i<3) ? ($i+1) : 1,
+                'purchase_uuid' => $faker->uuid,
                 'product_id' => ($i<3) ? ($i+1) : 1,
                 'product_qty' => $faker->numberBetween(1,5),
                 'product_label' => $faker->company,

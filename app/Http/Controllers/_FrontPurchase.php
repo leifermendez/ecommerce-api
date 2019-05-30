@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\purchase_order;
+use App\purchase_detail;
 use App\shopping_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -96,6 +97,15 @@ class _FrontPurchase extends Controller
             $uuid = Str::random(40);
 
             foreach ($shoppingCart['list'] as $value) {
+                purchase_detail::insert(
+                    [
+                        'purchase_uuid' => $uuid,
+                        'product_id' => $value['product_id'],
+                        'product_qty' => 1,
+                        'product_amount' => $value['price_normal'],
+                        'shop_id' => $value['shop_id']
+                    ]
+                );
 
                 $lists[$value['shop_id']] = [
                     "shop_id" => $value['shop_id'],
@@ -103,6 +113,7 @@ class _FrontPurchase extends Controller
                     "user_id" => $user->id,
                     "amount_shipping" => 1,
                     "feed" => 2,
+                    "status" => "wait",
                     "uuid_shipping" => 'sh_' . Str::random(12),
                     "amount" => (isset($lists[$value['shop_id']]['amount'])) ?
                         floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :

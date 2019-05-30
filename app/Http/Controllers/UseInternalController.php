@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\shopping_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\OpeningHours\OpeningHours;
 use Carbon\Carbon;
 use App\products;
 use App\variation_product;
+use App\purchase_order;
 use App\shop;
+use App\shopping_cart;
 
 
 class UseInternalController extends Controller
@@ -28,7 +29,8 @@ class UseInternalController extends Controller
                 ->select('shopping_carts.id', 'products.name', 'variation_products.label',
                     'variation_products.price_normal',
                     'variation_products.price_regular',
-                    'shopping_carts.shop_id'
+                    'shopping_carts.shop_id',
+                    'products.id as product_id'
                 )
                 ->get();
 
@@ -165,6 +167,33 @@ class UseInternalController extends Controller
                 'length' => count($data),
                 'item' => $data
             ];
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _totalPurchase($uuid = null)
+    {
+        try {
+            $data = [];
+
+            if (!$uuid) {
+                throw new \Exception('uuid null');
+            }
+
+            if (!purchase_order::where('uuid', $uuid)->exists()) {
+                throw new \Exception('not found');
+            }
+
+            $data = purchase_order::where('uuid',$uuid)
+            ->select(DB::raw('SUM(amount) as total_products'),
+            DB::raw('SUM(amount_shipping) as total_shipping'),
+            DB::raw('SUM(feed) as total_feed'),
+            DB::raw('SUM(amount + amount_shipping + feed) as total'))
+            ->first();
+
+            return $data->toArray();
 
         } catch (\Execption $e) {
             return $e->getMessage();

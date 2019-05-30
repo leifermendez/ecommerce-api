@@ -15,7 +15,7 @@ class CreatePurchaseDetailsTable extends Migration
     {
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('purchase_id');
+            $table->string('purchase_uuid');
             $table->integer('product_id');
             $table->integer('product_qty');
             $table->string('product_label');

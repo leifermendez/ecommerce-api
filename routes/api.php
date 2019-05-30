@@ -90,17 +90,16 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         Route::resource('/shopping-cart', '_FrontShoppingCart')
             ->middleware('CheckLocation');
 
-        Route::resource('/purchase', '_FrontPurchase')
-            ->only([
-                'index',
-                'show',
-                'destroy',
-                'store'
-            ])
-            ->middleware('CheckLocation');
+        Route::resource('/purchase', '_FrontPurchase');
 
-        Route::resource('/shipping', '_FrontShipping')
-            ->middleware('CheckLocation');
+        Route::resource('/shipping', '_FrontShipping');
+
+        Route::resource('/payment-user', '_FronUserPayment');
+
+        Route::resource('/payment', '_FrontPayment')
+        ->only([
+            'store'
+        ]);
     });
 
 

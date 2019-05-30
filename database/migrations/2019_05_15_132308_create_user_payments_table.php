@@ -29,6 +29,7 @@ class CreateUserPaymentsTable extends Migration
             $table->longText('observation')->nullable();
             $table->string('account_name');
             $table->string('account_lastname');
+            $table->boolean('primary')->default(0);
             $table->integer('attached_id')->nullable();
             $table->timestamps();
         });
