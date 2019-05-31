@@ -100,6 +100,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         ->only([
             'store'
         ]);
+
+        Route::resource('/delivery', '_FrontDelivery')
+        ->only([
+            'store'
+        ]);
     });
 
 

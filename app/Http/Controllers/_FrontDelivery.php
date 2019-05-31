@@ -8,7 +8,7 @@ use Validator;
 
 define("_api_","https://test.api.paack.co/api");
 
-class ExternalDeliveryController extends Controller
+class _FrontDelivery extends Controller
 {
     public function store(Request $request){
         try{
@@ -81,12 +81,11 @@ class ExternalDeliveryController extends Controller
 
             $response = json_decode($response);
 
-            dd($response);
-            if($response->status!==200){
-                throw new \Exception($response->content);
+            if($response->status!=='OK'){
+                throw new \Exception(json_encode($response->data));
             }
 
-            $data = json_decode($response->content);
+            $data = $response->data;
 
             $response = array(
                 'status' => 'success',
