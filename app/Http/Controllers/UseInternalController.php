@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\OpeningHours\OpeningHours;
@@ -15,6 +16,41 @@ use App\shopping_cart;
 
 class UseInternalController extends Controller
 {
+    public function _getSetting($key = null)
+    {
+        try {
+            if (!$key) {
+                throw new \Exception('key null');
+            }
+
+            $data = settings::where('meta', $key);
+
+            if (!$data->exists()) {
+                throw new \Exception('meta not found');
+            }
+
+            $data = $data->first();
+
+            return $data->value;
+
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _getSettings()
+    {
+        try {
+
+            $data = settings::all();
+            return $data->toArray();
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function _shoppingCart($usr = null)
     {
         try {
@@ -186,12 +222,12 @@ class UseInternalController extends Controller
                 throw new \Exception('not found');
             }
 
-            $data = purchase_order::where('uuid',$uuid)
-            ->select(DB::raw('SUM(amount) as total_products'),
-            DB::raw('SUM(amount_shipping) as total_shipping'),
-            DB::raw('SUM(feed) as total_feed'),
-            DB::raw('SUM(amount + amount_shipping + feed) as total'))
-            ->first();
+            $data = purchase_order::where('uuid', $uuid)
+                ->select(DB::raw('SUM(amount) as total_products'),
+                    DB::raw('SUM(amount_shipping) as total_shipping'),
+                    DB::raw('SUM(feed) as total_feed'),
+                    DB::raw('SUM(amount + amount_shipping + feed) as total'))
+                ->first();
 
             return $data->toArray();
 

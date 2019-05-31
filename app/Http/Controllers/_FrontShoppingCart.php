@@ -40,7 +40,7 @@ class _FrontShoppingCart extends Controller
                     DB::raw('sum(variation_products.price_regular) as price_regular'),
                     'shopping_carts.shop_id'
                 )
-                ->groupBy('products.id')
+                ->groupBy('shopping_carts.shop_id')
                 ->get();
 
             $response = array(
@@ -97,6 +97,13 @@ class _FrontShoppingCart extends Controller
             $user = JWTAuth::parseToken()->authenticate();
             $fields['user_id'] = $user->id;
             shopping_cart::insertGetId($fields);
+            $count_items = shopping_cart::where('user_id', $user->id)
+                ->count();
+
+            if ($count_items > 50) {
+                throw new \Exception('limit items on shopping cart');
+            }
+
             $data = shopping_cart::where('user_id', $user->id)
                 ->get();
 
