@@ -120,7 +120,9 @@ class UseInternalController extends Controller
                 throw new \Exception('id null');
             }
 
-            if (!products::where('id', $id)->exists()) {
+            if (!products::where('id', $id)
+                ->where('status','available')
+                ->exists()) {
                 throw new \Exception('not found');
             }
 
@@ -230,6 +232,26 @@ class UseInternalController extends Controller
                 ->first();
 
             return $data->toArray();
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _purchaseStatus($uuid=null)
+    {
+        try{
+
+            if (!$uuid) {
+                throw new \Exception('uuid null');
+            }
+
+            $data = purchase_order::where('uuid',$uuid)
+                ->get();
+
+            return [
+                'purchase' => $data->toArray()
+            ];
 
         } catch (\Execption $e) {
             return $e->getMessage();

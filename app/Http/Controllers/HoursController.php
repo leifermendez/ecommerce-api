@@ -123,7 +123,32 @@ class HoursController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $fields = array(
+                'shedule_hours' => json_encode($request->shedule_hours),
+                'exceptions' => json_encode($request->exceptions)
+            );
+    
+
+            $data = hours::where('id',$id)
+            ->update($fields);
+            $data = hours::find($id);
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Insertado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+        } catch (\Exception $e) {
+            $response = array(
+                'status' => 'fail',
+                'code' => 5,
+                'error' => $e->getMessage()
+            );
+            return response()->json($response);
+        }
     }
 
     /**

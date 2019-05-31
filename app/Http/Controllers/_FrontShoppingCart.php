@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\shopping_cart;
+use App\products;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use DB;
@@ -95,6 +96,12 @@ class _FrontShoppingCart extends Controller
         }
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            $isAvailable = (new UseInternalController)->_isAvailableProduct($fields['product_id']);
+      
+            if(!$isAvailable['isAvailable']){
+                throw new \Exception('not available');
+            }
+
             $fields['user_id'] = $user->id;
             shopping_cart::insertGetId($fields);
             $count_items = shopping_cart::where('user_id', $user->id)
