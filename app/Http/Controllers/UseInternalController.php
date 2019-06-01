@@ -120,10 +120,14 @@ class UseInternalController extends Controller
                 throw new \Exception('id null');
             }
 
-            if (!products::where('id', $id)
-                ->where('status','available')
-                ->exists()) {
-                throw new \Exception('not found');
+            if(!products::where('id', $id)
+            ->where('status','available')
+            ->exists()){
+                return [
+                    'isAvailable' => false,
+                    'nextOpen' => false,
+                    'nextClose' => false,
+                ];
             }
 
             $product = products::find($id);

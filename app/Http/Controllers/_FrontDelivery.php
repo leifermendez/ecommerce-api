@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 use App\shop;
 use App\shipping_address;
+use App\delivery_order;
 
 define("_api_","https://test.api.paack.co/api");
 
@@ -64,35 +66,75 @@ class _FrontDelivery extends Controller
 
     }
 
+    public function index(Request $request)
+    {
+        try {
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $limit = ($request->limit) ? $request->limit : 15;
+
+            $data = shop::orderBy('id', 'DESC')
+                ->where('user_id',$user->id)
+                ->paginate($limit);
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
+    }
+
+    public function show(Request $request,$id)
+    {
+        try {
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $data = shop::where('id', $id)
+                ->where('user_id',$user->id)
+                ->first();
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
+    }
+
     public function store(Request $request){
         try{
             
             $validator = Validator::make($request->all(), [
-                'retailer_order_number' => 'required',
-                'sale_number' => 'required',
-                'description' => 'required',
-                'pickup_address_name' => 'required',
-                'pickup_address_email' => 'required',
-                'pickup_address_phone' => 'required',
-                'pickup_address_address' => 'required',
-                'pickup_address_postal_code' => 'required',
-                'pickup_address_country' => 'required',
-                'pickup_address_city' => 'required',
-                'pickup_address_instructions' => 'required',
-                'delivery_address_name' => 'required',
-                'delivery_address_email' => 'required',
-                'delivery_address_phone' => 'required',
-                'delivery_address_address' => 'required',
-                'delivery_address_postal_code' => 'required',
-                'delivery_address_country' => 'required',
-                'delivery_address_city' => 'required',
-                'delivery_address_instructions' => 'required',
-                'weight' => 'required',
-                'width' => 'required',
-                'height' => 'required',
-                'length' => 'required',
-                'barcode' => 'required',
+                'retailer_order_number' => 'required'
+   
             ])->validate();
+
+            $user = JWTAuth::parseToken()->authenticate();
 
             $delivery_list = [];
             $delivery_errors = [];
@@ -140,10 +182,10 @@ class _FrontDelivery extends Controller
                     'delivery_address_email' => $data_delivery->users_email,
                     'delivery_address_phone' => $data_delivery->users_phone,
                     'delivery_address_address' => $data_delivery->address,
-                    'delivery_address_postal_code' => $data_delivery->zip_close,
+                    'delivery_address_postal_code' => $data_delivery->zip_code,
                     'delivery_address_country' => $data_delivery->country,
                     'delivery_address_city' => $data_delivery->district,
-                    'delivery_address_instructions' => $data_delivery->pickup_instructions,
+                    'delivery_address_instructions' => $data_delivery->instructions,
                     'weight' => '1234',//<---- pensar
                     'width' => '60',//<---- pensar
                     'height' => '50',//<---- pensar
@@ -151,10 +193,16 @@ class _FrontDelivery extends Controller
                     'barcode' =>''//<---- pensar
                 ];
 
-              
-
                 if($value['status'] ==='success'){
                     $send = $this->_send($fields);
+                    $delivery_value = [
+                        'deliver_uuid' => $value['uuid_shipping'],
+                        'purchase_uuid' => $value['uuid'],
+                        'retailer_order_number' => $send->paack_order_number,
+                        'tracking_url' => $send->tracking_url,
+                        'user_id' => $user->id
+                    ];
+                    delivery_order::insertGetId($delivery_value);
                     $delivery_list[] = $send;
                 }else{
                     $delivery_errors[] = $value;

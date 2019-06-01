@@ -111,9 +111,10 @@ class _FrontPurchase extends Controller
                     "shop_id" => $value['shop_id'],
                     "uuid" => $uuid,
                     "user_id" => $user->id,
-                    "amount_shipping" => 1,
-                    "feed" => 2,
+                    "amount_shipping" => 1,//<------- precio del envio debe obtener
+                    "feed" => 2,//<------ esto debe calculares
                     "status" => "wait",
+                    "shipping_address_id" => 1, //<----- direccion del comprador donde se entrega el producto
                     "uuid_shipping" => 'sh_' . Str::random(12),
                     "amount" => (isset($lists[$value['shop_id']]['amount'])) ?
                         floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :
