@@ -95,13 +95,20 @@ class _FrontDelivery extends Controller
             ])->validate();
 
             $delivery_list = [];
+            $delivery_errors = [];
 
             $data_uuid = (new UseInternalController)
                 ->_purchaseStatus($request->retailer_order_number);
 
             foreach ($data_uuid['purchase'] as $value) {
            
-                $data_shop = shop::find($value['shop_id']);
+                $data_pickup = shop::where('shops.id',$value['shop_id'])
+                ->join('shipping_pickup_addresses','shops.id','=','shipping_pickup_addresses.shop_id')
+                ->select('shops.*','shipping_pickup_addresses.country as pickup_country',
+                'shipping_pickup_addresses.district as pickup_city',
+                'shipping_pickup_addresses.instructions as pickup_instructions')
+                ->first();
+
                 $data_delivery = shipping_address::where('shipping_addresses.id',$value['shipping_address_id'])
                 ->join('users','users.id','=','shipping_addresses.user_id')
                 ->select('shipping_addresses.*',
@@ -113,7 +120,7 @@ class _FrontDelivery extends Controller
                     throw new \Exception('error shipping address not found '.$value['uuid_shipping']);
                 }
 
-                if(!$data_shop){
+                if(!$data_pickup){
                     throw new \Exception('error shop not found '.$value['shop_id']);
                 }
 
@@ -121,22 +128,22 @@ class _FrontDelivery extends Controller
                     'retailer_order_number' => $value['uuid_shipping'],
                     'sale_number' => $request->retailer_order_number,
                     'description' => '',
-                    'pickup_address_name' => $data_shop->name,
-                    'pickup_address_email' => $data_shop->email_corporate,
-                    'pickup_address_phone' => $data_shop->phone_fixed,
-                    'pickup_address_address' => $data_shop->address,
-                    'pickup_address_postal_code' => $data_shop->zip_code,
-                    'pickup_address_country' => 'es',//<------ esto debe ir en la base de datos
-                    'pickup_address_city' => 'madrid',//<------ esto debe ir en la base de datos
-                    'pickup_address_instructions' => 'preguntar por tony',//<------ esto debe ir en la base de datos
+                    'pickup_address_name' => $data_pickup->name,
+                    'pickup_address_email' => $data_pickup->email_corporate,
+                    'pickup_address_phone' => $data_pickup->phone_fixed,
+                    'pickup_address_address' => $data_pickup->address,
+                    'pickup_address_postal_code' => $data_pickup->zip_code,
+                    'pickup_address_country' => $data_pickup->pickup_country,
+                    'pickup_address_city' => $data_pickup->pickup_city,
+                    'pickup_address_instructions' => $data_pickup->pickup_instructions,
                     'delivery_address_name' => $data_delivery->users_name,
                     'delivery_address_email' => $data_delivery->users_email,
                     'delivery_address_phone' => $data_delivery->users_phone,
                     'delivery_address_address' => $data_delivery->address,
-                    'delivery_address_postal_code' => $data_delivery->address,//<---- zip code debe esta en la tabla shipping_addresses
+                    'delivery_address_postal_code' => $data_delivery->zip_close,
                     'delivery_address_country' => $data_delivery->country,
                     'delivery_address_city' => $data_delivery->district,
-                    'delivery_address_instructions' => '',//<---- pensar
+                    'delivery_address_instructions' => $data_delivery->pickup_instructions,
                     'weight' => '1234',//<---- pensar
                     'width' => '60',//<---- pensar
                     'height' => '50',//<---- pensar
@@ -148,15 +155,19 @@ class _FrontDelivery extends Controller
 
                 if($value['status'] ==='success'){
                     $send = $this->_send($fields);
-                    //aqui tengo que revisar porque no llega nada
                     $delivery_list[] = $send;
+                }else{
+                    $delivery_errors[] = $value;
                 }
-            }//debemos verificar que tenga
+            }
       
             
             $response = array(
                 'status' => 'success',
-                'data' => $delivery_list,
+                'data' => [
+                    'delivery' => $delivery_list,
+                    'errors' => $delivery_errors
+                ],
                 'code' => 0
             );
             return response()->json($response);

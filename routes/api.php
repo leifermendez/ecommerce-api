@@ -75,6 +75,13 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'show'
             ]);
 
+        Route::resource('/check-cif', '_FrontCif')
+            ->only([
+                'show'
+            ]);
+
+        Route::get('example', 'ExternalCifController@searchCompany');
+
     });
 
     /**
@@ -108,7 +115,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     });
 
 
-    Route::get('example', 'ExternalCifController@searchCompany');
+
     /**
      * Fin rutas protegidas
      */
