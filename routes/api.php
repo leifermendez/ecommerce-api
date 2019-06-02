@@ -103,6 +103,14 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/payment-user', '_FronUserPayment');
 
+        Route::resource('/comments', '_FrontComments')
+        ->only([
+            'store',
+            'index',
+            'show'
+        ]);
+
+
         Route::resource('/payment', '_FrontPayment')
         ->only([
             'store'

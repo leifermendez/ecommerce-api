@@ -111,6 +111,7 @@ class initialize extends Command
             Artisan::call('db:seed --class=ProductVariableTableSeeder');
             Artisan::call('db:seed --class=ShippinShopTableSeeder');
             Artisan::call('db:seed --class=ShippingUserTableSeeder');
+            Artisan::call('db:seed --class=CommentsTableSeeder');
             //Artisan::call('db:seed --class=SettingTableSeeder');
             //Artisan::call('db:seed --class=ShippingUserTableSeeder');
         }
