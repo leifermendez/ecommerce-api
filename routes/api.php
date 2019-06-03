@@ -22,11 +22,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     /**
      * Rutas libres
      */
-    Route::group(['prefix' => 'auth'], function () {
-        Route::post('login', 'AuthController@store');
-        Route::post('register', 'AuthController@register');
-        Route::get('/', 'AuthController@index');
-    });
+    Route::resource('/auth', '_FrontAuth');
 
     Route::group(['prefix' => 'rest'], function () {
 
