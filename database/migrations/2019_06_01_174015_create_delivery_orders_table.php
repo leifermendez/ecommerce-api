@@ -16,8 +16,8 @@ class CreateDeliveryOrdersTable extends Migration
         Schema::create('delivery_orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('deliver_uuid')->unique();
-            $table->string('purchase_uuid')->unique();
-            $table->string('retailer_order_number')->unique();
+            $table->string('purchase_uuid');
+            $table->string('retailer_order_number');
             $table->integer('user_id');
             $table->string('tracking_url');
             $table->enum('status', ['draft', 'in_progress','completed','cancel'])->default('draft');

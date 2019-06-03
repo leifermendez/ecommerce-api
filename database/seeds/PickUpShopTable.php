@@ -4,8 +4,7 @@ use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
-class ShippinShopTableSeeder extends Seeder
+class PickUpShopTable extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +15,15 @@ class ShippinShopTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             DB::table('shipping_pickup_addresses')->insert([
-                'shop_id' => $i+1,
+                'shop_id' => $i,
                 'country' => ($i<3) ? 'ES' :  $faker->countryCode,
                 'state' => $faker->state,
                 'district' => $faker->city,
                 'address' => $faker->streetAddress,
                 'zip_code' => '28039',
-                'instructions' => 'preguntar por el encargado de bodega'
+                'instructions' => 'Tocar el timbre 3 veces'
             ]);
         }
     }

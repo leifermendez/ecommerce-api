@@ -98,9 +98,6 @@ class _FrontPayment extends Controller
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            $feed_percentage = (new UseInternalController)->_getSetting('feed_percentage');
-            $feed_amount = (new UseInternalController)->_getSetting('feed_amount');
-            $feed_limit_price = (new UseInternalController)->_getSetting('feed_limit_price');
 
             $request->validate([
                 'source' => 'required',
@@ -126,27 +123,20 @@ class _FrontPayment extends Controller
                     ->select('user_payments.*')
                     ->first();
 
+                $data_feed = (new UseInternalController)->_getFeedAmount($purchase->product_amount);
+
                 if ($user_payment && ($user_payment->payment_option === 'stripe')) {
-                    $amount_detail = ($purchase->product_amount);
-
-                    if ($amount_detail >= $feed_limit_price) {
-                        $percentage_feed = $amount_detail * $feed_percentage;
-                        $amount_detail = ($amount_detail - $percentage_feed);
-                    } else {
-                        $amount_detail = ($amount_detail - $feed_amount);
-                    }
-
                     $description = "Producto ID: $purchase->product_id, Etiqueta: $purchase->product_label";
-                    $this->_transfer($request->purchase_uuid,
-                        $amount_detail, $user_payment->iban, $description);
-
+                    $description .= "Order: $request->purchase_uuid, Feed: " . $data_feed['application_feed_amount'];
+                    $r = $this->_transfer($request->purchase_uuid,
+                        $data_feed['amount_without_feed'], $user_payment->iban, $description);
+                    if ($r) {
+                        purchase_order::where('uuid', $request->purchase_uuid)
+                            ->where('user_id', $user->id)
+                            ->update(['status' => 'success']);
+                    }
                 }
             };
-
-
-//            $data_purchase = purchase_order::where('uuid', $request->purchase_uuid)
-//                ->where('user_id', $user->id)
-//                ->update(['status' => 'success']);
 
 
             $response = array(

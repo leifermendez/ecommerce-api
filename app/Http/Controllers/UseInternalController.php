@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\purchase_detail;
 use App\settings;
+use App\user_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\OpeningHours\OpeningHours;
@@ -93,6 +95,35 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _detailPurchase($uuid = null)
+    {
+        try {
+            if (!$uuid) {
+                throw new \Exception('uuid null');
+            }
+
+            $data = purchase_order::where('purchase_orders.uuid', $uuid)
+                ->select(DB::raw('SUM(amount + amount_shipping + feed) as total'),
+                    DB::raw('SUM(feed) as feed_total'),
+                    DB::raw('SUM(amount_shipping) as shipping_total'),
+                    DB::raw('SUM(amount) as amount_total')
+                )
+                ->get();
+
+            $data_detail = purchase_detail::where('purchase_uuid', $uuid)
+                ->get();
+
+            return [
+                'list' => $data->toArray(),
+                'detail' => $data_detail->toArray()
+            ];
+
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function actionID($str = null)
     {
         try {
@@ -120,9 +151,9 @@ class UseInternalController extends Controller
                 throw new \Exception('id null');
             }
 
-            if(!products::where('id', $id)
-            ->where('status','available')
-            ->exists()){
+            if (!products::where('id', $id)
+                ->where('status', 'available')
+                ->exists()) {
                 return [
                     'isAvailable' => false,
                     'nextOpen' => false,
@@ -242,20 +273,84 @@ class UseInternalController extends Controller
         }
     }
 
-    public function _purchaseStatus($uuid=null)
+    public function _getFeedAmount($amount = 0)
     {
-        try{
+        try {
+            if ($amount < 1) {
+                throw new \Exception('invalid amount');
+            }
+            $total = $amount;
+
+            $feed_percentage = $this->_getSetting('feed_percentage');
+            $feed_amount = $this->_getSetting('feed_amount');
+            $feed_limit_price = $this->_getSetting('feed_limit_price');
+
+            if ($amount >= $feed_limit_price) {
+                $percentage_feed = $amount * $feed_percentage;
+                $amount = ($amount - $percentage_feed);
+                $application_feed = $percentage_feed;
+
+                return [
+                    'amount_with_feed' => round($total, 2),
+                    'amount_without_feed' => round($amount), 2,
+                    'application_feed_amount' => round($application_feed, 2)
+                ];
+
+            } else {
+                $amount = ($amount - $feed_amount);
+                $application_feed = $feed_amount;
+
+                return [
+                    'amount_with_feed' => round($total, 2),
+                    'amount_without_feed' => round($amount, 2),
+                    'application_feed_amount' => round($application_feed, 2)
+                ];
+            }
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _purchaseStatus($uuid = null)
+    {
+        try {
 
             if (!$uuid) {
                 throw new \Exception('uuid null');
             }
 
-            $data = purchase_order::where('uuid',$uuid)
+            $data = purchase_order::where('uuid', $uuid)
                 ->get();
 
             return [
                 'purchase' => $data->toArray()
             ];
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _checkBank($shop = null)
+    {
+        try {
+            if (!$shop) {
+                throw new \Exception('shop null');
+            }
+
+            $data = shop::where('shops.id', $shop)
+                ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
+                ->where('user_payments.primary', 1);
+
+            if (!$data->exists()) {
+                throw new \Exception('(' . $shop . ') shop payment not found');
+            }
+
+            $data = $data->first();
+
+            return $data->toArray();
+
 
         } catch (\Execption $e) {
             return $e->getMessage();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\purchase_order;
 use App\purchase_detail;
+use App\shipping_address;
 use App\shopping_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -107,22 +108,34 @@ class _FrontPurchase extends Controller
                     ]
                 );
 
+                $deliver_address = shipping_address::where('user_id', $user->id)
+                    ->first();
+
+                if (!$deliver_address) {
+                    throw new \Exception('user shopping address empty');
+                }
+
+                $total_amount = (isset($lists[$value['shop_id']]['amount'])) ?
+                    floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :
+                    floatval($value['price_normal']);
+
+                $feed_percentage = (new UseInternalController)->_getFeedAmount($total_amount);
+
                 $lists[$value['shop_id']] = [
                     "shop_id" => $value['shop_id'],
                     "uuid" => $uuid,
                     "user_id" => $user->id,
-                    "amount_shipping" => 1,//<------- precio del envio debe obtener
-                    "feed" => 2,//<------ esto debe calculares
+                    "amount_shipping" => 7,//<------- precio del envio debe obtener
+                    "feed" => $feed_percentage['application_feed_amount'],
                     "status" => "wait",
-                    "shipping_address_id" => 1, //<----- direccion del comprador donde se entrega el producto
+                    "shipping_address_id" => $deliver_address->id,
                     "uuid_shipping" => 'sh_' . Str::random(12),
-                    "amount" => (isset($lists[$value['shop_id']]['amount'])) ?
-                        floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :
-                        floatval($value['price_normal'])
+                    "amount" => $total_amount
                 ];
 
+
             };
-            if (count($lists)<1) {
+            if (count($lists) < 1) {
                 throw new \Exception('shopping cart empty');
             }
 
@@ -130,8 +143,8 @@ class _FrontPurchase extends Controller
                 purchase_order::insert($list);
             };
 
-            shopping_cart::where('user_id',$user->id)
-            ->delete();
+            shopping_cart::where('user_id', $user->id)
+                ->delete();
             $data = purchase_order::where('uuid', $uuid)
                 ->get();
 

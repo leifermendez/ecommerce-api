@@ -102,6 +102,8 @@ class _FrontShoppingCart extends Controller
                 throw new \Exception('not available');
             }
 
+            (new UseInternalController)->_checkBank($fields['shop_id']);
+
             $fields['user_id'] = $user->id;
             shopping_cart::insertGetId($fields);
             $count_items = shopping_cart::where('user_id', $user->id)
