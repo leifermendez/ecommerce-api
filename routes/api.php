@@ -100,24 +100,26 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         Route::resource('/payment-user', '_FronUserPayment');
 
         Route::resource('/comments', '_FrontComments')
-        ->only([
-            'store',
-            'index',
-            'show'
-        ]);
-
+            ->only([
+                'store',
+                'index',
+                'show'
+            ]);
 
         Route::resource('/payment', '_FrontPayment')
-        ->only([
-            'store'
-        ]);
+            ->only([
+                'store'
+            ]);
 
         Route::resource('/delivery', '_FrontDelivery')
-        ->only([
-            'store'
-        ]);
-    });
+            ->only([
+                'store'
+            ]);
 
+        Route::resource('/media', '_FrontAttached');
+
+//        Route::resource('/media', '_FrontAttachedProducts');
+    });
 
 
     /**

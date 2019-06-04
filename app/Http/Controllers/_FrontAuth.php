@@ -155,7 +155,7 @@ class _FrontAuth extends Controller
                         'code' => 5
                     );
                     return response()->json($response);
-                } else if (strlen($password) < 8) {
+                } else if (strlen($password) < 6) {
                     $response = array(
                         'status' => 'fail',
                         'msj' => 'Contraseña debe tener minimo 8 caracteres',
