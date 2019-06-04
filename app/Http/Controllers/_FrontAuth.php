@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use Hashids\Hashids;
 
 define("FACEBOOK_ID", "493119484360306");
 
@@ -175,9 +176,17 @@ class _FrontAuth extends Controller
                 return response()->json(['error' => 'could_not_create_token'], $codeResponse);
             }
 
+//            $hashNew = new Hashids('_ref', 10);
             $data = User::where('email', $email)->first();
             $data->setAttribute('token', JWTAuth::fromUser($data));
-            $data->setAttribute('refcode', $hashNew->encode($data->id));
+//            $data->setAttribute('refcode', $hashNew->encode($data->id));
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
 
 
         } catch (\Exception $e) {
