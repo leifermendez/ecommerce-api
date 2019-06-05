@@ -67,6 +67,8 @@ class UseInternalController extends Controller
                 ->select('shopping_carts.id', 'products.name', 'variation_products.label',
                     'variation_products.price_normal',
                     'variation_products.price_regular',
+                    'variation_products.id as variation_product_id',
+                    'variation_products.delivery as variation_delivery',
                     'shopping_carts.shop_id',
                     'products.id as product_id'
                 )

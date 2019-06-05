@@ -6,6 +6,7 @@ use App\purchase_order;
 use App\purchase_detail;
 use App\shipping_address;
 use App\shopping_cart;
+use App\variation_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -94,7 +95,7 @@ class _FrontPurchase extends Controller
             $user = JWTAuth::parseToken()->authenticate();
 
             $shoppingCart = (new UseInternalController)->_shoppingCart($user->id);
-
+            $priceDelivery = (new UseInternalController)->_getSetting('delivery_feed_min');
             $uuid = Str::random(40);
 
             foreach ($shoppingCart['list'] as $value) {
@@ -120,12 +121,15 @@ class _FrontPurchase extends Controller
                     floatval($value['price_normal']);
 
                 $feed_percentage = (new UseInternalController)->_getFeedAmount($total_amount);
+                $isFree = variation_product::where('id', $value['variation_product_id'])
+                    ->where('delivery', 1)
+                    ->exists();
 
                 $lists[$value['shop_id']] = [
                     "shop_id" => $value['shop_id'],
                     "uuid" => $uuid,
                     "user_id" => $user->id,
-                    "amount_shipping" => 7,//<------- precio del envio debe obtener
+                    "amount_shipping" => ($isFree) ? 0 : $priceDelivery,
                     "feed" => $feed_percentage['application_feed_amount'],
                     "status" => "wait",
                     "shipping_address_id" => $deliver_address->id,

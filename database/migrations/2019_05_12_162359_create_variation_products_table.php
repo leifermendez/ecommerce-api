@@ -26,6 +26,7 @@ class CreateVariationProductsTable extends Migration
             $table->string('width')->nullable();
             $table->string('height')->nullable();
             $table->string('length')->nullable();
+            $table->boolean('delivery')->default(0);
             $table->timestamps();
         });
     }
