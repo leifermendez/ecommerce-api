@@ -232,9 +232,7 @@ class UseInternalController extends Controller
                 ->take(15)
                 ->get();
 
-            return [
-                'item' => $data
-            ];
+            return $data;
 
         } catch (\Execption $e) {
             return $e->getMessage();
