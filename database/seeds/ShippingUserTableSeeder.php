@@ -17,7 +17,7 @@ class ShippingUserTableSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             DB::table('shipping_addresses')->insert([
-                'user_id' => ($i<3) ? 1 : $i+1,
+                'user_id' => $i,
                 'country' => ($i<3) ? 'ES' :  $faker->countryCode,
                 'state' => $faker->state,
                 'district' => $faker->city,
