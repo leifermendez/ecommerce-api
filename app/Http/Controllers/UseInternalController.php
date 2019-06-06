@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\attached_products;
 use App\purchase_detail;
 use App\settings;
 use App\user_payment;
@@ -212,6 +213,28 @@ class UseInternalController extends Controller
                 ];
 
             };
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _getImages($id)
+    {
+        try {
+            if (!$id) {
+                throw new \Exception('id null');
+            }
+
+            $data = attached_products::where('attached_products.product_id', $id)
+                ->join('attacheds', 'attached_products.attached_id', '=', 'attacheds.id')
+                ->select('attacheds.*', 'attached_products.product_id as product_id')
+                ->take(15)
+                ->get();
+
+            return [
+                'item' => $data
+            ];
 
         } catch (\Execption $e) {
             return $e->getMessage();

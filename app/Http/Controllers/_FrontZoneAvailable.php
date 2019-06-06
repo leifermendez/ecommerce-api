@@ -15,17 +15,24 @@ class _FrontZoneAvailable extends Controller
     public function index(Request $request)
     {
         try {
-            $src = $request->src;
+
             $limit = ($request->limit) ? $request->limit : 15;
 
             $data = zone_available::orderBy('id', 'DESC')
-                ->where(function ($query) use ($src) {
-                    $query->orWhere('name','like', '%'.$src.'%');
-                    $query->orWhere('zip_code','like', '%'.$src.'%');
+                ->where(function ($query) use ($request) {
+                    if ((substr("$request->src", 0, 1)) !== '*') {
+//                        $query->orWhere('name', '=', $request->src);
+                        $query->orWhere('zip_code', '=', $request->src);
+                    } else {
+                        $src = str_replace('*', '', $request->src);
+                        $query->orWhere('name', 'like', '%' . $src . '%');
+                        $query->orWhere('zip_code', 'like', '%' . $src . '%');
+                    }
+
                 })
                 ->paginate($limit);
 
-            
+
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -59,7 +66,7 @@ class _FrontZoneAvailable extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,7 +77,7 @@ class _FrontZoneAvailable extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,7 +88,7 @@ class _FrontZoneAvailable extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +99,8 @@ class _FrontZoneAvailable extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +111,7 @@ class _FrontZoneAvailable extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
