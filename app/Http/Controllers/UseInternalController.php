@@ -207,13 +207,14 @@ class UseInternalController extends Controller
                     $next_close = $openingHours->nextClose(Carbon::now());
                     $next_close = Carbon::parse($next_close)->toArray();
                     $shedule = $openingHours->isOpenAt(Carbon::now());
+                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
                 }
 
                 return [
                     'isAvailable' => $shedule,
                     'nextOpen' => $next_available,
                     'nextClose' => $next_close,
-                    'now' => $now
+                    'now' => $diff->toArray()
                 ];
 
             };
