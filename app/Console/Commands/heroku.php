@@ -38,8 +38,7 @@ class heroku extends Command
     public function handle()
     {
         if ($this->confirm('¿Quieres continuar en Heroku?')) {
-            $force = $this->argument('force');
-
+           
             Artisan::call('migrate:refresh');
             Artisan::call('db:seed --class=UsersTableSeeder');
             Artisan::call('db:seed --class=ShopTableSeeder');
