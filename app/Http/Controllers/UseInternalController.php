@@ -165,7 +165,7 @@ class UseInternalController extends Controller
                 ];
             }
 
-            $now = Carbon::now()->toArray();
+            $now = Carbon::now();
 
             $product = products::find($id);
             $shedule = array();
@@ -203,11 +203,12 @@ class UseInternalController extends Controller
                         'exceptions' => $hours_exceptions
                     ]);
                     $next_available = $openingHours->nextOpen(Carbon::now());
+                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
                     $next_available = Carbon::parse($next_available)->toArray();
                     $next_close = $openingHours->nextClose(Carbon::now());
                     $next_close = Carbon::parse($next_close)->toArray();
                     $shedule = $openingHours->isOpenAt(Carbon::now());
-                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
+              
                 }
 
                 return [
