@@ -165,6 +165,8 @@ class UseInternalController extends Controller
                 ];
             }
 
+            $now = Carbon::now()->toArray();
+
             $product = products::find($id);
             $shedule = array();
             $exceptions = array();
@@ -211,6 +213,7 @@ class UseInternalController extends Controller
                     'isAvailable' => $shedule,
                     'nextOpen' => $next_available,
                     'nextClose' => $next_close,
+                    'now' => $now
                 ];
 
             };
@@ -254,8 +257,13 @@ class UseInternalController extends Controller
 
             $data = comments::where('shop_id',$id)
             ->sum('score');
+            $count = comments::where('shop_id',$id)
+            ->count();
 
-            return $data;
+            return [
+                'score' => $data,
+                'count' => $count
+            ];
 
         } catch (\Execption $e) {
             return $e->getMessage();
