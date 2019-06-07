@@ -215,7 +215,7 @@ class UseInternalController extends Controller
                     'isAvailable' => $shedule,
                     'nextOpen' => $next_available,
                     'nextClose' => $next_close,
-                    'now' => $diff
+                    'minutes' => $diff
                 ];
 
             };
