@@ -53,9 +53,11 @@ class _FrontProducts extends Controller
                 $getVariations = (new UseInternalController)->_getVariations($item->id);
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $gallery = (new UseInternalController)->_getImages($item->id);
+                $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
                 $item->is_available = $isAvailable;
                 $item->variations = $getVariations;
                 $item->gallery = $gallery;
+                $item->score_shop = $scoreShop;
                 return $item;
             });
 

@@ -14,6 +14,7 @@ use App\products;
 use App\variation_product;
 use App\purchase_order;
 use App\shop;
+use App\comments;
 use App\shopping_cart;
 
 
@@ -231,6 +232,28 @@ class UseInternalController extends Controller
                 ->select('attacheds.*', 'attached_products.product_id as product_id')
                 ->take(15)
                 ->get();
+
+            return $data;
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function _getComments()
+    {
+
+    }
+
+    public function _getScoreShop($id = null)
+    {
+        try{
+            if (!$id) {
+                throw new \Exception('id null');
+            }
+
+            $data = comments::where('shop_id',$id)
+            ->sum('score');
 
             return $data;
 
