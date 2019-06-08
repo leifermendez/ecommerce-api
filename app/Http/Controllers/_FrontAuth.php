@@ -104,7 +104,6 @@ class _FrontAuth extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required',
                 'email' => 'required'
             ]);
 
