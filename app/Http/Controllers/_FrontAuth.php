@@ -44,6 +44,7 @@ class _FrontAuth extends Controller
         User::create($fields);
 
         $dataUser = User::where('email', $data['email'])->first();
+        $dataUser->setAttribute('token', JWTAuth::fromUser($dataUser));
         return $dataUser;
     }
 
