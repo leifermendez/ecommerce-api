@@ -56,7 +56,7 @@ class _FrontAuth extends Controller
                 'msj' => 'Nombre Vacio',
                 'code' => 5
             );
-            return response()->json($response, 403);
+            return response()->json($response, 400);
         }
         $random = Str::random(10);
         $fields = [
