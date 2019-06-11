@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -270,7 +269,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
     <option name="y" value="60" />
     <option name="width" value="1400" />
@@ -381,7 +380,7 @@
       <workItem from="1559807050128" duration="4964000" />
       <workItem from="1560156802679" duration="605000" />
       <workItem from="1560164927191" duration="647000" />
-      <workItem from="1560236892023" duration="935000" />
+      <workItem from="1560236892023" duration="1201000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -401,7 +400,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94016000" />
+    <option name="totallyTimeSpent" value="94282000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -414,7 +413,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
