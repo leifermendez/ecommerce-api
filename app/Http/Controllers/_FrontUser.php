@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\shopping_cart;
 use Illuminate\Http\Request;
 use App\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontUser extends Controller
 {
@@ -30,7 +32,7 @@ class _FrontUser extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,18 +43,18 @@ class _FrontUser extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        try{
+        try {
 
-            $data = User::where('id',$id)
-            ->select('name',
-            'status','confirmed','avatar','header','referer_code')
-            ->first();
-    
+            $data = User::where('id', $id)
+                ->select('name',
+                    'status', 'confirmed', 'avatar', 'header', 'referer_code')
+                ->first();
+
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -60,7 +62,7 @@ class _FrontUser extends Controller
             );
             return response()->json($response);
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             $response = array(
                 'status' => 'fail',
@@ -75,7 +77,7 @@ class _FrontUser extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -86,19 +88,58 @@ class _FrontUser extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->request->remove('_location');
+            $fields = array();
+            $user = JWTAuth::parseToken()->authenticate();
+
+            foreach ($request->all() as $key => $value) {
+                if ($key !== 'id' && $key !== 'role' && $key !== 'referer_code'
+                    && $key !== 'status' && $key !== 'confirmed' &&
+                    $key !== 'created_at' && $key !== 'updated_at' &&
+                    $key !== 'remember_token') {
+                    $fields[$key] = $value;
+                };
+            }
+
+            User::where('id', $user->id)
+                ->update($fields);
+
+            $data = User::find($user->id);
+
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Actualizado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
