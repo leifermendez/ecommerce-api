@@ -44,11 +44,24 @@ class _FrontShoppingCart extends Controller
                 ->groupBy('shopping_carts.shop_id')
                 ->get();
 
+            $data_shop = shopping_cart::orderBy('shopping_carts.id', 'DESC')
+                ->where('shopping_carts.user_id', $user->id)
+                ->join('products', 'shopping_carts.product_id', '=', 'products.id')
+                ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
+                ->select(
+                    DB::raw('sum(variation_products.price_normal) as price_normal'),
+                    DB::raw('sum(variation_products.price_regular) as price_regular'),
+                    'shopping_carts.shop_id'
+                )
+                ->groupBy('shopping_carts.user_id')
+                ->first();
+
             $response = array(
                 'status' => 'success',
                 'data' => [
                     'list' => $data,
-                    'total' => $data_total
+                    'total' => $data_total,
+                    'total_shop' => $data_shop
                 ],
                 'code' => 0
             );
