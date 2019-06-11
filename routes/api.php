@@ -76,6 +76,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'show'
             ]);
 
+        Route::resource('/stripe-auth', 'ExternalStripeAuthController')
+            ->only([
+                'index'
+            ]);
+
         Route::get('example', 'ExternalCifController@searchCompany');
 
     });
