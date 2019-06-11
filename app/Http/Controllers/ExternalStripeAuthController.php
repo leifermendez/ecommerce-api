@@ -24,11 +24,12 @@ class ExternalStripeAuthController extends Controller
     public function index()
     {
         try {
+            //$priceDelivery = (new UseInternalController)->_getSetting('delivery_feed_min');
             $api = 'https://connect.stripe.com/oauth/authorize';
             $platform_id = env('STRIPE_PLATFORM_ID');
             $data = $api . '?response_type=code&client_id=';
             $data .= $platform_id . '&scope=read_write';
-            $data .= '&redirect_uri=http://localhost';
+            $data .= '&redirect_uri=http://localhost:4200';
 
             $response = array(
                 'status' => 'success',
