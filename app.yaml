@@ -8,11 +8,8 @@ env_variables:
   SESSION_DRIVER: cookie
   DB_DATABASE: ecommerce
   DB_USERNAME: root
-  DB_PASSWORD:
-
-  REDIS_HOST: 127.0.0.1
-  REDIS_PASSWORD: null
-  REDIS_PORT: 6379
+  DB_PASSWORD: Gnieg8VSIpzH
+  DB_SOCKET: "/cloudsql/ecommerce-apatxee-v2:europe-west6:ecommerce-basic"
 
   MAIL_DRIVER: smtp
   MAIL_HOST: smtp.mailtrap.io
