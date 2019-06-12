@@ -24,7 +24,7 @@ class _FrontAttached extends Controller
             $limit = ($request->limit) ? $request->limit : 15;
 
             $data = attached::orderBy('id', 'DESC')
-                ->where('users_id',$user_current->id)
+                ->where('users_id', $user_current->id)
                 ->paginate($limit);
 
             $response = array(
@@ -98,7 +98,7 @@ class _FrontAttached extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk('local')->put($name_bulk, $file);
+                Storage::disk()->put($name_bulk, $file);
                 $url_path = Storage::url($name_bulk);
 
                 $data = attached::insertGetId(
@@ -129,8 +129,8 @@ class _FrontAttached extends Controller
 
                 foreach ($sizes as $key => $value) {
                     $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.png';
-                    Storage::disk('local')->put($name_bulk, $value);
-                    $responseSize[$key] = Storage::url($name_bulk);
+                    Storage::disk()->put($name_bulk, $value);
+                    $responseSize[$key] = Storage::disk()->url($name_bulk);
 
                 }
 
@@ -233,11 +233,11 @@ class _FrontAttached extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk('local')->put($name_bulk, $file);
+                Storage::disk()->put($name_bulk, $file);
                 $url_path = Storage::url($name_bulk);
 
                 $data = attached::where('id', $id)
-                    ->where('users_id',$user_current->id)
+                    ->where('users_id', $user_current->id)
                     ->update(
                         [
                             'name' => $imageName . '.png',
@@ -265,7 +265,7 @@ class _FrontAttached extends Controller
 
                 foreach ($sizes as $key => $value) {
                     $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.png';
-                    Storage::disk('local')->put($name_bulk, $value);
+                    Storage::disk()->put($name_bulk, $value);
                     $responseSize[$key] = Storage::url($name_bulk);
 
                 }
