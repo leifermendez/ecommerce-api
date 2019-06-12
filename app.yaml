@@ -36,4 +36,4 @@ env_variables:
   FILESYSTEM_DRIVER: gcs
   GOOGLE_CLOUD_PROJECT_ID: ecommerce-apatxee-v2
   GOOGLE_CLOUD_STORAGE_BUCKET: ecommerce-apatxee-v2.appspot.com
-  GOOGLE_CLOUD_KEY_FILE": ecommerce-apatxee-v2-2588124b1aab.json
+  GOOGLE_CLOUD_KEY_FILE: ecommerce-apatxee-v2-2588124b1aab.json
