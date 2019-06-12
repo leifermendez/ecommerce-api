@@ -96,25 +96,6 @@ class initialize extends Command
             }
 
             Artisan::call('migrate:refresh');
-            Artisan::call('db:seed --class=UsersTableSeeder');
-            Artisan::call('db:seed --class=ShopTableSeeder');
-            Artisan::call('db:seed --class=ProductsTableSeeder');
-            Artisan::call('db:seed --class=PurchaseTableSeeder');
-            Artisan::call('db:seed --class=OrderSeeder');
-            Artisan::call('db:seed --class=PurchaseDetailTableSeeder');
-            Artisan::call('db:seed --class=ZoneAvailableTableSeeder');
-            Artisan::call('db:seed --class=CategoriesTableSeeder');
-            Artisan::call('db:seed --class=BannersTableSeeder');
-            Artisan::call('db:seed --class=AttachedTableSeeder');
-            Artisan::call('db:seed --class=AttributesTableSeeder');
-            Artisan::call('db:seed --class=CategoryAttributesTableSeeder');
-            Artisan::call('db:seed --class=ProductVariableTableSeeder');
-            Artisan::call('db:seed --class=UserPaymentSettingTable');
-            //Artisan::call('db:seed --class=ShippinShopTableSeeder');
-            //Artisan::call('db:seed --class=CommentsTableSeeder');
-            Artisan::call('db:seed --class=SettingTableSeeder');
-            Artisan::call('db:seed --class=ShippingUserTableSeeder');
-            Artisan::call('db:seed --class=AttechedProdcutsTableSeeder');
         }
 
     }
