@@ -49,12 +49,6 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
             ])
             ->middleware('CheckLocation');
 
-
-        Route::resource('/user', '_FrontUser')
-            ->only([
-                'show'
-            ]);
-
         Route::resource('/seller', '_FrontSeller')
             ->only([
                 'show'
@@ -118,6 +112,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/user', '_FrontUser')
             ->only([
+                'show',
                 'update'
             ]);
 

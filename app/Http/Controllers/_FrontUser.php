@@ -9,6 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontUser extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -49,10 +50,15 @@ class _FrontUser extends Controller
     public function show($id)
     {
         try {
+            $user = JWTAuth::parseToken()->authenticate();
 
+            $query = array('name', 'status', 'confirmed', 'avatar', 'header', 'referer_code');
+            if ($user->id == $id) {
+                $query[] = 'email';
+                $query[] = 'phone';
+            }
             $data = User::where('id', $id)
-                ->select('name',
-                    'status', 'confirmed', 'avatar', 'header', 'referer_code')
+                ->select($query)
                 ->first();
 
             $response = array(
