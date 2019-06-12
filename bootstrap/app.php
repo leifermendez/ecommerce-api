@@ -41,6 +41,20 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+# [START] Set the storage path to the environment variable APP_STORAGE
+/*
+|--------------------------------------------------------------------------
+| Set Storage Path
+|--------------------------------------------------------------------------
+|
+| This script allows us to override the default storage location used by
+| the  application.  You may set the APP_STORAGE environment variable
+| in your .env file,  if not set the default location will be used
+|
+*/
+$app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
+# [END]
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
