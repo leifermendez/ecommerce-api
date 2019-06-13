@@ -108,9 +108,35 @@ class _FrontShipping extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        try {
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $data = shipping_address::orderBy('id', 'DESC')
+                ->where('user_id', $user->id)
+                ->where('id', $id)
+                ->first();
+
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 
     /**

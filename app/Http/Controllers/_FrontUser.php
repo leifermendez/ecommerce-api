@@ -56,6 +56,7 @@ class _FrontUser extends Controller
             if ($user->id == $id) {
                 $query[] = 'email';
                 $query[] = 'phone';
+                $query[] = 'role';
             }
             $data = User::where('id', $id)
                 ->select($query)

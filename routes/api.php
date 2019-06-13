@@ -116,6 +116,12 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'update'
             ]);
 
+        Route::resource('/validatePhone', '_FrontValidatePhone')
+            ->only([
+                'store',
+                'update'
+            ]);
+
         Route::resource('/delivery', '_FrontDelivery')
             ->only([
                 'store'
