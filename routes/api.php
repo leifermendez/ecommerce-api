@@ -54,10 +54,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'show'
             ]);
 
-        Route::resource('/shop', '_FrontShop')
-            ->only([
-                'show'
-            ]);
+        Route::resource('/shop', '_FrontShop');
 
         Route::resource('/categories', '_FrontCategories')
             ->only([
