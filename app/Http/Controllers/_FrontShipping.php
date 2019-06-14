@@ -18,11 +18,11 @@ class _FrontShipping extends Controller
     public function index(Request $request)
     {
         try {
-
+            $limit = ($request->limit) ? $request->limit : 15;
             $user = JWTAuth::parseToken()->authenticate();
             $data = shipping_address::orderBy('id', 'DESC')
                 ->where('user_id', $user->id)
-                ->get();
+                ->paginate($limit);
 
 
             $response = array(
