@@ -16,6 +16,10 @@ use App\purchase_order;
 use App\shop;
 use App\comments;
 use App\shopping_cart;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class UseInternalController extends Controller
@@ -208,14 +212,14 @@ class UseInternalController extends Controller
                     $next_close = $openingHours->nextClose(Carbon::now());
                     $next_close = Carbon::parse($next_close)->toArray();
                     $shedule = $openingHours->isOpenAt(Carbon::now());
-              
+
                 }
 
                 return [
                     'isAvailable' => $shedule,
                     'nextOpen' => $next_available,
                     'nextClose' => $next_close,
-                    'minutes' => ($diff === 0) ? ($diff+1) : $diff
+                    'minutes' => ($diff === 0) ? ($diff + 1) : $diff
                 ];
 
             };
@@ -252,15 +256,15 @@ class UseInternalController extends Controller
 
     public function _getScoreShop($id = null)
     {
-        try{
+        try {
             if (!$id) {
                 throw new \Exception('id null');
             }
 
-            $data = comments::where('shop_id',$id)
-            ->sum('score');
-            $count = comments::where('shop_id',$id)
-            ->count();
+            $data = comments::where('shop_id', $id)
+                ->sum('score');
+            $count = comments::where('shop_id', $id)
+                ->count();
 
             return [
                 'score' => $data,
@@ -411,5 +415,26 @@ class UseInternalController extends Controller
         } catch (\Execption $e) {
             return $e->getMessage();
         }
+    }
+
+    public function _isLogged()
+    {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return false;
+            } else if ($user->status !== 'available') {
+                return false;
+            }
+        } catch (TokenExpiredException $e) {
+
+            return false;
+        } catch (TokenInvalidException $e) {
+            return false;
+        } catch (JWTException $e) {
+
+            return false;
+        }
+
+        return $user;
     }
 }

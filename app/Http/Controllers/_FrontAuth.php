@@ -38,6 +38,7 @@ class _FrontAuth extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'username' => $data['email'],
+            'referer_code' => $data['referer_code'],
             'avatar' => ($data['avatar']) ? $data['avatar'] : 'https://s3.us-east-2.amazonaws.com/media-mochileros/upload/square_mochilero.png',
         ];
 
@@ -60,12 +61,14 @@ class _FrontAuth extends Controller
             return response()->json($response, 400);
         }
         $random = Str::random(10);
+        $random_ref_code = Str::random(8);
         $fields = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => ($data['password']) ? $data['password'] : $random,
             'username' => $data['email'],
-            'avatar' => $data['avatar']
+            'avatar' => $data['avatar'],
+            'referer_code' => $random_ref_code
         ];
 
         $data = $this->registerNewUser($fields);

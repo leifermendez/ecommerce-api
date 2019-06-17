@@ -22,8 +22,8 @@ class AuthController extends Controller
         try {
             $data = JWTAuth::parseToken()->authenticate();
             $token = JWTAuth::getToken()->get();
-            if($data){
-                $data->setAttribute('token',$token);
+            if ($data) {
+                $data->setAttribute('token', $token);
             }
             $response = array(
                 'status' => 'success',
@@ -52,7 +52,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**

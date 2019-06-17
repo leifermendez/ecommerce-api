@@ -21,7 +21,7 @@ class _FrontShop extends Controller
             $limit = ($request->limit) ? $request->limit : 15;
 
             $data = shop::orderBy('id', 'DESC')
-                ->where('users_id',$user->id)
+                ->where('users_id', $user->id)
                 ->paginate($limit);
 
             $response = array(
@@ -102,18 +102,30 @@ class _FrontShop extends Controller
      */
     public function show($id)
     {
+
         try {
-            $user = JWTAuth::parseToken()->authenticate();
-            $data = Shop::where('shops.id', $id)
-                ->where('shops.users_id', $user->id)
-                ->select('name',
+            $isLogged = (new UseInternalController)->_isLogged();
+
+            $data = Shop::where('shops.id', $id);
+            if ($isLogged) {
+                $data->select('name',
+                    'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
+                    'email_corporate', 'phone_mobil', 'phone_fixed',
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = image_header limit 1) as image_header')
+                )->where('shops.users_id', $isLogged->id)
+                    ->first();
+            } else {
+                $data->select('name',
                     'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
                     DB::raw('(SELECT attacheds.medium FROM attacheds 
-                WHERE attacheds.id = image_cover limit 1) as image_cover'),
+                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
                     DB::raw('(SELECT attacheds.medium FROM attacheds 
-            WHERE attacheds.id = image_header limit 1) as image_header')
-                )
-                ->first();
+                    WHERE attacheds.id = image_header limit 1) as image_header')
+                )->first();
+            };
 
             $response = array(
                 'status' => 'success',
@@ -154,7 +166,39 @@ class _FrontShop extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            $request->request->remove('_location');
+            $fields = array();
+            foreach ($request->all() as $key => $value) {
+                if ($key !== 'id' && $key !== 'users_id') {
+                    $fields[$key] = $value;
+                };
+            }
+            $fields['users_id'] = $user->id;
+            Shop::where('id', $id)
+                ->where('users_id',$user->id)
+                ->update($fields);
+
+            $data = Shop::find($id);
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+        }
     }
 
     /**

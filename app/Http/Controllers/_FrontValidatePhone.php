@@ -83,7 +83,6 @@ class _FrontValidatePhone extends Controller
                 $response = array(
                     'status' => 'success',
                     'msg' => 'Insertado',
-                    'data' => $data,
                     'code' => 0
                 );
                 return response()->json($response);
