@@ -106,25 +106,26 @@ class _FrontShop extends Controller
         try {
             $isLogged = (new UseInternalController)->_isLogged();
 
-            $data = Shop::where('shops.id', $id);
             if ($isLogged) {
-                $data->select('name',
-                    'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                    'email_corporate', 'phone_mobil', 'phone_fixed',
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                $data = Shop::where('shops.id', $id)
+                    ->select('name',
+                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
+                        'email_corporate', 'phone_mobil', 'phone_fixed',
+                        DB::raw('(SELECT attacheds.medium FROM attacheds 
                     WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                        DB::raw('(SELECT attacheds.medium FROM attacheds 
                     WHERE attacheds.id = image_header limit 1) as image_header')
-                )->where('shops.users_id', $isLogged->id)
+                    )->where('shops.users_id', $isLogged->id)
                     ->first();
             } else {
-                $data->select('name',
-                    'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                $data = Shop::where('shops.id', $id)
+                    ->select('name',
+                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
+                        DB::raw('(SELECT attacheds.medium FROM attacheds 
                     WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                        DB::raw('(SELECT attacheds.medium FROM attacheds 
                     WHERE attacheds.id = image_header limit 1) as image_header')
-                )->first();
+                    )->first();
             };
 
             $response = array(
@@ -177,7 +178,7 @@ class _FrontShop extends Controller
             }
             $fields['users_id'] = $user->id;
             Shop::where('id', $id)
-                ->where('users_id',$user->id)
+                ->where('users_id', $user->id)
                 ->update($fields);
 
             $data = Shop::find($id);
