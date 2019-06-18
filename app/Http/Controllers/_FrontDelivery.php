@@ -102,8 +102,9 @@ class _FrontDelivery extends Controller
         try {
 
             $user = JWTAuth::parseToken()->authenticate();
-            $data = shop::where('id', $id)
+            $data = delivery_order::where('id', $id)
                 ->where('user_id', $user->id)
+                ->orWhere('id',$id)
                 ->first();
 
             $response = array(

@@ -179,7 +179,9 @@ class _FrontPurchase extends Controller
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            $data = purchase_order::where('user_id', $user->id)
+            $data = purchase_order::where('purchase_orders.user_id', $user->id)
+                ->join('shops','purchase_orders.shop_id','=','shops.id')
+                ->select('purchase_orders.*','shops.name as shops_name')
                 ->where('id', $id)
                 ->first();
 

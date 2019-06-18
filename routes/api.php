@@ -121,7 +121,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/delivery', '_FrontDelivery')
             ->only([
-                'store'
+                'store',
+                'show'
             ]);
 
         Route::resource('/media', '_FrontAttached');
