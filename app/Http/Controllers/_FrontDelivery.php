@@ -102,9 +102,14 @@ class _FrontDelivery extends Controller
         try {
 
             $user = JWTAuth::parseToken()->authenticate();
-            $data = delivery_order::where('id', $id)
-                ->where('user_id', $user->id)
-                ->orWhere('id',$id)
+            $data = delivery_order::where('user_id', $user->id)
+                ->where(function ($query) use ($request, $id) {
+                    if ($request->for) {
+                        $query->where('deliver_uuid', $id);
+                    } else {
+                        $query->where('id', $id);
+                    }
+                })
                 ->first();
 
             $response = array(
@@ -206,7 +211,7 @@ class _FrontDelivery extends Controller
                     delivery_order::insertGetId($delivery_value);
                     $delivery_list[] = $send;
                 } else {
-                    $value['error_msg'] = 'status '.$value['status'];
+                    $value['error_msg'] = 'status ' . $value['status'];
                     $delivery_errors[] = $value;
                 }
             }

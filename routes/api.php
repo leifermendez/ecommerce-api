@@ -69,7 +69,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/stripe-auth', 'ExternalStripeAuthController')
             ->only([
-                'index'
+                'index',
+                'store'
             ]);
 
         Route::get('example', 'ExternalCifController@searchCompany');
@@ -90,6 +91,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
             ->middleware('CheckLocation');
 
         Route::resource('/purchase', '_FrontPurchase');
+
+        Route::resource('/sales', '_FrontSales');
 
         Route::resource('/shipping', '_FrontShipping');
 

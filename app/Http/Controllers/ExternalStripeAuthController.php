@@ -68,53 +68,30 @@ class ExternalStripeAuthController extends Controller
     public function store(Request $request)
     {
 
-        //  curl -X POST https://connect.stripe.com/oauth/token \
-        //-d client_secret=YOUR_SECRET_KEY \
-        //-d code=ac_F79cwmtschAcSAkKzJcDh11wRX25qk0N \
-        //-d grant_type=authorization_code
         try {
-            $stripe = new Stripe();
-//            $user_current = JWTAuth::parseToken()->authenticate();
-//            $stripe_sk = env('STRIPE_SECRET');
-//
-//            Validator::make($request->all(), [
-//                'code' => 'required'
-//            ])->validate();
-//
-//            $response = Curl::to(_api_ . "/oauth/token")
-//                ->withData([
-//                    'client_secret' => $stripe_sk,
-//                    'code' => $request->code,
-//                    'grant_type' => 'authorization_code'
-//                ])
-//                ->returnResponseObject()
-//                ->post();
-//
-//            if ($response->status !== 200) {
-//                throw new \Exception($response->content);
-//            }
-//
-//            $data = json_decode($response->content);
+            $client_secret = env('STRIPE_SECRET', '');
+            $request->validate([
+                'code' => 'required',
+            ]);
 
-            /**
-             *
-             *
-             */
-            $stripe = $stripe->account()->details();
-            dd($stripe);
+            $response = Curl::to(_api_.'/oauth/token')
+                ->withContentType('application/x-www-form-urlencoded')
+                ->withHeader('Accept: application/json')
+                ->withData( array(
+                    'client_secret' => $client_secret,
+                    'code' => $request->code,
+                    'grant_type' => 'authorization_code'
+                ) )
+                ->returnResponseObject()
+                ->post();
+            if($response->status!==200){
+                throw new \Exception($response->content);
+            }
 
-            $values = [
-                'user_id' => $user_current->id,
-                'payment_option' => 'stripe',
-                'payment_email' => ''
-            ];
-
-            user_payment::insertGetId()
-                ->insert();
 
             $response = array(
                 'status' => 'success',
-                'data' => $data,
+                'data' => json_decode($response->content),
                 'code' => 0
             );
             return response()->json($response);
@@ -128,7 +105,6 @@ class ExternalStripeAuthController extends Controller
 
             return response()->json($response, 500);
         }
-
 
     }
 

@@ -168,9 +168,9 @@ class _FrontProducts extends Controller
         try {
             $location = $request->_location;
 
-            $data = products::orderBy('products.id', 'DESC')
-                ->join('shops', 'products.shop_id', '=', 'shops.id')
+            $data = products::join('shops', 'products.shop_id', '=', 'shops.id')
                 ->where('shops.zip_code', $location)
+                ->where('products.id', $id)
                 ->where(function ($query) use ($request) {
                     if ($request->featured) {
                         $query->where('products.featured', $request->featured);
