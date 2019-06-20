@@ -106,6 +106,14 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'update'
             ]);
 
+        Route::resource('/products', '_FrontProducts')
+            ->only([
+                'store',
+                'update',
+                'destroy'
+            ]);
+
+        Route::resource('/products-variations', '_FrontProductVariations');
 
         Route::resource('/comments', '_FrontComments')
             ->only([
