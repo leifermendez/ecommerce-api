@@ -27,7 +27,6 @@ class _FrontProducts extends Controller
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->where('shops.zip_code', $location)
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
@@ -45,7 +44,7 @@ class _FrontProducts extends Controller
                     }
                 })
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
-                    'shops.slug as shop_slug', 'categories.name as category_name')
+                    'shops.slug as shop_slug')
                 ->paginate($limit);
 
             $data->map(function ($item, $key) use ($request) {
@@ -61,63 +60,62 @@ class _FrontProducts extends Controller
                 return $item;
             });
 
-            $categories = products::orderBy('products.id', 'DESC')
-                ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->join('categories', 'products.category_id', '=', 'categories.id')
-                ->where('shops.zip_code', $location)
-                ->where(function ($query) use ($filters) {
-                    foreach ($filters as $value) {
-                        $tmp = explode(",", $value);
-                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
-                            $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)) {
-                                foreach ($subTmp as $k) {
-                                    $query->orWhere($tmp[0], $tmp[1], $k);
-                                }
-                            } else {
-                                $query->where($tmp[0], $tmp[1], $tmp[2]);
-                            }
-                        }
-                    }
-                })
-                ->select('categories.id', 'categories.name',
-                    DB::raw('count(categories.id) as number'))
-                ->groupBy('categories.id')
-                ->get();
+//            $categories = products::orderBy('products.id', 'DESC')
+//                ->join('shops', 'products.shop_id', '=', 'shops.id')
+//                ->where('shops.zip_code', $location)
+//                ->where(function ($query) use ($filters) {
+//                    foreach ($filters as $value) {
+//                        $tmp = explode(",", $value);
+//                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+//                            $subTmp = explode("|", $tmp[2]);
+//                            if (count($subTmp)) {
+//                                foreach ($subTmp as $k) {
+//                                    $query->orWhere($tmp[0], $tmp[1], $k);
+//                                }
+//                            } else {
+//                                $query->where($tmp[0], $tmp[1], $tmp[2]);
+//                            }
+//                        }
+//                    }
+//                })
+//                ->select('categories.id', 'categories.name',
+//                    DB::raw('count(categories.id) as number'))
+//                ->groupBy('categories.id')
+//                ->get();
 
-            $attributes = products::orderBy('products.id', 'DESC')
-                ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->join('categories', 'products.category_id', '=', 'categories.id')
-                ->join('category_attributes', 'categories.id', '=', 'category_attributes.category_id')
-                ->join('attributes', 'attributes.id', '=', 'category_attributes.attributes_id')
-                ->where('shops.zip_code', $location)
-                ->where(function ($query) use ($filters) {
-                    foreach ($filters as $value) {
-                        $tmp = explode(",", $value);
-                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
-                            $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)) {
-                                foreach ($subTmp as $k) {
-                                    $query->orWhere($tmp[0], $tmp[1], $k);
-                                }
-                            } else {
-                                $query->where($tmp[0], $tmp[1], $tmp[2]);
-                            }
-                        }
-                    }
-                })
-                ->select('attributes.id', 'attributes.name',
-                    DB::raw('count(attributes.id) as number'))
-                ->groupBy('attributes.id')
-                ->get();
+//            $attributes = products::orderBy('products.id', 'DESC')
+//                ->join('shops', 'products.shop_id', '=', 'shops.id')
+//                ->join('categories', 'products.category_id', '=', 'categories.id')
+//                ->join('category_attributes', 'categories.id', '=', 'category_attributes.category_id')
+//                ->join('attributes', 'attributes.id', '=', 'category_attributes.attributes_id')
+//                ->where('shops.zip_code', $location)
+//                ->where(function ($query) use ($filters) {
+//                    foreach ($filters as $value) {
+//                        $tmp = explode(",", $value);
+//                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+//                            $subTmp = explode("|", $tmp[2]);
+//                            if (count($subTmp)) {
+//                                foreach ($subTmp as $k) {
+//                                    $query->orWhere($tmp[0], $tmp[1], $k);
+//                                }
+//                            } else {
+//                                $query->where($tmp[0], $tmp[1], $tmp[2]);
+//                            }
+//                        }
+//                    }
+//                })
+//                ->select('attributes.id', 'attributes.name',
+//                    DB::raw('count(attributes.id) as number'))
+//                ->groupBy('attributes.id')
+//                ->get();
 
 
             $response = array(
                 'status' => 'success',
                 'data' => [
                     'items' => $data,
-                    'categories' => $categories,
-                    'attributes' => $attributes
+//                    'categories' => $categories,
+//                    'attributes' => $attributes
                 ],
                 'code' => 0
             );
