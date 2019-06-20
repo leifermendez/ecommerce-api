@@ -154,7 +154,30 @@ class _FrontProducts extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = array();
+        foreach ($request->all() as $key => $value) {
+            $fields[$key] = $value;
+        }
+        try {
+
+            $data = products::insertGetId($fields);
+            $data = products::find($data);
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Insertado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+        } catch (\Exception $e) {
+            $response = array(
+                'status' => 'fail',
+                'code' => 5,
+                'error' => $e->getMessage()
+            );
+            return response()->json($response);
+        }
     }
 
     /**
