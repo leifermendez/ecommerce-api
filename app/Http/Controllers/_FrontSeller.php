@@ -67,7 +67,9 @@ class _FrontSeller extends Controller
             $data->map(function ($item, $key) use($request)  {
                 
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
+                $getVariations = (new UseInternalController)->_getVariations($item->id);
                 $item->is_available = $isAvailable;
+                $item->variations = $getVariations;
                 return $item;
             });
 

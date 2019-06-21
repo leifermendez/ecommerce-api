@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\products;
 use App\shop;
 use Illuminate\Http\Request;
 use App\variation_product;
@@ -83,9 +84,9 @@ class _FrontProductVariations extends Controller
         }
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            $isMy = shop::where('variation_products.product_id',$fields['product_id'])
+            $isMy = products::where('products.id',$fields['product_id'])
+                ->join('shops','shops.id','=','products.shop_id')
                 ->where('shops.users_id',$user->id)
-                ->join('shops','shops.id','=','variation_products.product_id')
                 ->exists();
 
             if (!$isMy) {
