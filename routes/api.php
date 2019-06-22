@@ -69,7 +69,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/stripe-auth', 'ExternalStripeAuthController')
             ->only([
-                'index'
+                'index',
+                'store'
             ]);
 
         Route::get('example', 'ExternalCifController@searchCompany');
@@ -91,9 +92,28 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/purchase', '_FrontPurchase');
 
+        Route::resource('/sales', '_FrontSales');
+
         Route::resource('/shipping', '_FrontShipping');
 
         Route::resource('/payment-user', '_FronUserPayment');
+
+        Route::resource('/product-category', '_FrontProductsCategories')
+            ->only([
+                'store',
+                'index',
+                'show',
+                'update'
+            ]);
+
+        Route::resource('/products', '_FrontProducts')
+            ->only([
+                'store',
+                'update',
+                'destroy'
+            ]);
+
+        Route::resource('/products-variations', '_FrontProductVariations');
 
         Route::resource('/comments', '_FrontComments')
             ->only([
@@ -121,7 +141,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/delivery', '_FrontDelivery')
             ->only([
-                'store'
+                'store',
+                'show'
             ]);
 
         Route::resource('/media', '_FrontAttached');
@@ -167,6 +188,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('categoryAttributes', 'CategoryAttributesController');
     Route::resource('productAttributes', 'ProductsAttributesController');
     Route::resource('productVariation', 'ProductVariationController');
+    Route::resource('productCategories', 'ProductsCategories');
     Route::resource('shippingAddress', 'ShippingAddressController');
     Route::resource('banners', 'BannersController');
     Route::resource('userPayment', 'UserPaymentController');

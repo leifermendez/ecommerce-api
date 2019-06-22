@@ -33,12 +33,14 @@ class _FrontAuth extends Controller
 
     public function registerNewUser($data = array())
     {
+
         $fields = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'username' => $data['email'],
-            'avatar' => ($data['avatar']) ? $data['avatar'] : 'https://s3.us-east-2.amazonaws.com/media-mochileros/upload/square_mochilero.png',
+            'referer_code' => $data['referer_code'],
+            'avatar' => $data['avatar']
         ];
 
         User::create($fields);
@@ -60,12 +62,14 @@ class _FrontAuth extends Controller
             return response()->json($response, 400);
         }
         $random = Str::random(10);
+        $random_ref_code = Str::random(8);
         $fields = [
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => ($data['password']) ? $data['password'] : $random,
             'username' => $data['email'],
-            'avatar' => $data['avatar']
+            'avatar' => $data['avatar'],
+            'referer_code' => $random_ref_code
         ];
 
         $data = $this->registerNewUser($fields);
@@ -113,13 +117,16 @@ class _FrontAuth extends Controller
             $token = $request->token;
             $avatar = $request->avatar;
             $password = $request->password;
+            $random_ref_code = Str::random(8);
 
             if (!User::where('email', $request->email)->exists()) {
                 $response = $this->create(array(
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => $request->password,
-                    'avatar' => $request->avatar
+                    'avatar' => ($request->avatar) ? $request->avatar :
+                        'https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/public/upload/products/small_GCPKzfLJ0jjvWPQLAAotooV9sMDQsQLL3qO.png',
+                    'referer_code' => $random_ref_code
                 ));
                 return $response;
             }

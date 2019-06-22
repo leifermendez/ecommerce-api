@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\banners;
+use App\product_categories;
+use App\products;
 use Illuminate\Http\Request;
-use App\shop;
-use DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class _FrontShop extends Controller
+class _FrontProductsCategories extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,10 @@ class _FrontShop extends Controller
     public function index(Request $request)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = shop::orderBy('id', 'DESC')
-                ->where('users_id', $user->id)
+            $data = product_categories::orderBy('id', 'DESC')
                 ->paginate($limit);
 
             $response = array(
@@ -62,37 +62,50 @@ class _FrontShop extends Controller
      */
     public function store(Request $request)
     {
+        $user = JWTAuth::parseToken()->authenticate();
+        $fields = array();
+        foreach ($request->all() as $key => $value) {
+            $fields[$key] = $value;
+        }
         try {
-            $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
-            $fields = array();
-            foreach ($request->all() as $key => $value) {
-                if ($key !== 'id' && $key !== 'users_id') {
-                    $fields[$key] = $value;
-                };
+            $data = array();
+            $isMy = products::where('products.id', $fields['product_id'])
+                ->where('shops.users_id', $user->id)
+                ->join('shops', 'products.shop_id', '=', 'shops.id')
+                ->exists();
+            if (!$isMy) {
+                throw new \Exception('not permission for shop ');
             }
-            $fields['users_id'] = $user->id;
-            $id = Shop::insertGetId($fields);
-            $data = Shop::find($id);
+
+            if (gettype($fields['category_id']) === 'array') {
+                foreach ($fields['category_id'] as $a) {
+                    $b['product_id'] = $fields['product_id'];
+                    $b['category_id'] = $a;
+                    $data[]=product_categories::insertGetId($b);
+                }
+            } else {
+                $data = product_categories::insertGetId($fields);
+                $data = product_categories::find($data);
+            }
+
 
             $response = array(
                 'status' => 'success',
+                'msg' => 'Insertado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
-
         } catch (\Exception $e) {
-
             $response = array(
                 'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
+                'code' => 5,
+                'error' => $e->getMessage()
             );
-
-            return response()->json($response, 500);
+            return response()->json($response);
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -100,34 +113,11 @@ class _FrontShop extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-
         try {
-            $isLogged = (new UseInternalController)->_isLogged();
 
-            if ($isLogged) {
-                $data = Shop::where('shops.id', $id)
-                    ->select('name',
-                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                        'email_corporate', 'phone_mobil', 'phone_fixed',
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
-                    )->where('shops.users_id', $isLogged->id)
-                    ->first();
-            } else {
-                $data = Shop::where('shops.id', $id)
-                    ->select('name',
-                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
-                    )->first();
-            };
-
+            $data = product_categories::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -144,6 +134,7 @@ class _FrontShop extends Controller
             );
 
             return response()->json($response, 500);
+
         }
     }
 
@@ -167,28 +158,38 @@ class _FrontShop extends Controller
      */
     public function update(Request $request, $id)
     {
+
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
             $fields = array();
             foreach ($request->all() as $key => $value) {
-                if ($key !== 'id' && $key !== 'users_id') {
+                if ($key !== 'id') {
                     $fields[$key] = $value;
                 };
             }
-            $fields['users_id'] = $user->id;
-            Shop::where('id', $id)
-                ->where('users_id', $user->id)
+
+            $isMy = products::where('products.id', $fields['product_id'])
+                ->where('shops.shops', $user->id)
+                ->join('shops', 'products.shop_id', '=', 'shops.id')
+                ->exists();
+            if (!$isMy) {
+                throw new \Exception('not permission for shop ');
+            }
+
+            product_categories::where('id', $id)
                 ->update($fields);
 
-            $data = Shop::find($id);
+            $data = product_categories::find($id);
+
 
             $response = array(
                 'status' => 'success',
+                'msg' => 'Actualizado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
+
 
         } catch (\Exception $e) {
 
@@ -199,6 +200,7 @@ class _FrontShop extends Controller
             );
 
             return response()->json($response, 500);
+
         }
     }
 
@@ -210,6 +212,7 @@ class _FrontShop extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
 }

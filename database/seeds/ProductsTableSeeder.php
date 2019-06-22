@@ -23,7 +23,6 @@ class ProductsTableSeeder extends Seeder
                 'product_type' => ($i<5) ? 'digital':'physical',
                 'description' => $faker->sentence(20),
                 'shop_id' => ($i<5) ? ($i+1) : 1,
-                'category_id' => ($i<3) ? ($i+1) : 1,
                 'status' => ($i<6) ? 'available':'unavailable',
             ]);
         }

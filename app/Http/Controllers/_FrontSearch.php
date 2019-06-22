@@ -23,11 +23,10 @@ class _FrontSearch extends Controller
 
             $data_products = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->where('shops.zip_code', $location)
                 ->where('products.name', 'LIKE', "%{$src}%")
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
-                    'shops.slug as shop_slug', 'categories.name as category_name')
+                    'shops.slug as shop_slug')
                 ->take($limit)
                 ->get();
 
@@ -42,12 +41,11 @@ class _FrontSearch extends Controller
 
             $data_shops = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->where('shops.zip_code', $location)
                 ->where('shops.name', 'LIKE', "%{$src}%")
                 ->orWhere('shops.meta_key', 'LIKE', "%{$src}%")
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
-                    'shops.slug as shop_slug', 'categories.name as category_name')
+                    'shops.slug as shop_slug')
                 ->take($limit)
                 ->get();
 

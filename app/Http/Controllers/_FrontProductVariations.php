@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\products;
 use App\shop;
-use DB;
+use Illuminate\Http\Request;
+use App\variation_product;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class _FrontShop extends Controller
+class _FrontProductVariations extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,25 @@ class _FrontShop extends Controller
     public function index(Request $request)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+            $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = shop::orderBy('id', 'DESC')
-                ->where('users_id', $user->id)
+            $data = variation_product::orderBy('id', 'DESC')
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+                            $subTmp = explode("|", $tmp[2]);
+                            if (count($subTmp)) {
+                                foreach ($subTmp as $k) {
+                                    $query->orWhere($tmp[0], $tmp[1], $k);
+                                }
+                            } else {
+                                $query->where($tmp[0], $tmp[1], $tmp[2]);
+                            }
+                        }
+                    }
+                })
                 ->paginate($limit);
 
             $response = array(
@@ -57,77 +72,58 @@ class _FrontShop extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+
+        $fields = array();
+        foreach ($request->all() as $key => $value) {
+            $fields[$key] = $value;
+        }
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
-            $fields = array();
-            foreach ($request->all() as $key => $value) {
-                if ($key !== 'id' && $key !== 'users_id') {
-                    $fields[$key] = $value;
-                };
+            $isMy = products::where('products.id',$fields['product_id'])
+                ->join('shops','shops.id','=','products.shop_id')
+                ->where('shops.users_id',$user->id)
+                ->exists();
+
+            if (!$isMy) {
+                throw new \Exception('not permissions');
             }
-            $fields['users_id'] = $user->id;
-            $id = Shop::insertGetId($fields);
-            $data = Shop::find($id);
+
+            $data = variation_product::insertGetId($fields);
+            $data = variation_product::find($data);
 
             $response = array(
                 'status' => 'success',
+                'msg' => 'Insertado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
-
         } catch (\Exception $e) {
-
             $response = array(
                 'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
+                'code' => 5,
+                'error' => $e->getMessage()
             );
-
-            return response()->json($response, 500);
+            return response()->json($response);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
         try {
-            $isLogged = (new UseInternalController)->_isLogged();
 
-            if ($isLogged) {
-                $data = Shop::where('shops.id', $id)
-                    ->select('name',
-                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                        'email_corporate', 'phone_mobil', 'phone_fixed',
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
-                    )->where('shops.users_id', $isLogged->id)
-                    ->first();
-            } else {
-                $data = Shop::where('shops.id', $id)
-                    ->select('name',
-                        'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
-                        DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
-                    )->first();
-            };
-
+            $data = variation_product::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -144,13 +140,14 @@ class _FrontShop extends Controller
             );
 
             return response()->json($response, 500);
+
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -161,34 +158,44 @@ class _FrontShop extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
             $fields = array();
             foreach ($request->all() as $key => $value) {
-                if ($key !== 'id' && $key !== 'users_id') {
+                if ($key !== 'id') {
                     $fields[$key] = $value;
                 };
             }
-            $fields['users_id'] = $user->id;
-            Shop::where('id', $id)
-                ->where('users_id', $user->id)
+
+            $user = JWTAuth::parseToken()->authenticate();
+            $isMy = shop::where('variation_products.product_id',$fields['product_id'])
+                ->where('shops.users_id',$user->id)
+                ->join('shops','shops.id','=','variation_products.product_id')
+                ->exists();
+
+            if (!$isMy) {
+                throw new \Exception('not permissions');
+            }
+
+            variation_product::where('id', $id)
                 ->update($fields);
 
-            $data = Shop::find($id);
+            $data = variation_product::find($id);
+
 
             $response = array(
                 'status' => 'success',
+                'msg' => 'Actualizado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
+
 
         } catch (\Exception $e) {
 
@@ -199,17 +206,41 @@ class _FrontShop extends Controller
             );
 
             return response()->json($response, 500);
+
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            variation_product::where('id', $id)
+                ->delete();
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Eliminado',
+                'code' => 0
+            );
+            return response()->json($response);
+
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 }
