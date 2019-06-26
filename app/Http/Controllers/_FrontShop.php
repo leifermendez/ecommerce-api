@@ -17,11 +17,40 @@ class _FrontShop extends Controller
     public function index(Request $request)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
             $limit = ($request->limit) ? $request->limit : 15;
+            $filters = ($request->filters) ? explode("?", $request->filters) : [];
 
-            $data = shop::orderBy('id', 'DESC')
-                ->where('users_id', $user->id)
+            $data = shop::orderBy('shops.id', 'DESC')
+                ->select(
+                    'shops.*',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large')
+                )
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+                            $subTmp = explode("|", $tmp[2]);
+                            if (count($subTmp)) {
+                                foreach ($subTmp as $k) {
+                                    $query->orWhere($tmp[0], $tmp[1], $k);
+                                }
+                            } else {
+                                $query->where($tmp[0], $tmp[1], $tmp[2]);
+                            }
+                        }
+                    }
+                })
                 ->paginate($limit);
 
             $response = array(
@@ -111,20 +140,36 @@ class _FrontShop extends Controller
                     ->select('name',
                         'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
                         'email_corporate', 'phone_mobil', 'phone_fixed',
+                        DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
+                        DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
                         DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
                         DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
+                        DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
+                        DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large')
                     )->where('shops.users_id', $isLogged->id)
                     ->first();
             } else {
                 $data = Shop::where('shops.id', $id)
                     ->select('name',
                         'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
+                        DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
+                        DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
                         DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_cover limit 1) as image_cover'),
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
                         DB::raw('(SELECT attacheds.medium FROM attacheds 
-                    WHERE attacheds.id = image_header limit 1) as image_header')
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
+                        DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
+                        DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large')
                     )->first();
             };
 

@@ -80,9 +80,13 @@ class _FrontSeller extends Controller
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $getVariations = (new UseInternalController)->_getVariations($item->id);
                 $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->id);
+                $gallery = (new UseInternalController)->_getImages($item->id);
+                $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
+                $item->gallery = $gallery;
                 $item->is_available = $isAvailable;
                 $item->variations = $getVariations;
                 $item->cover_image = $getCoverImageProduct;
+                $item->score_shop = $scoreShop;
                 return $item;
             });
 

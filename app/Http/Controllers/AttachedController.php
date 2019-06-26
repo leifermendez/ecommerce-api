@@ -97,7 +97,7 @@ class AttachedController extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk('local')->put($name_bulk, $file);
+                Storage::disk()->put($name_bulk, $file);
                 $url_path = Storage::url($name_bulk);
 
                 $data = attached::insertGetId(
@@ -128,8 +128,8 @@ class AttachedController extends Controller
 
                 foreach ($sizes as $key => $value) {
                     $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.png';
-                    Storage::disk('local')->put($name_bulk, $value);
-                    $responseSize[$key] = Storage::url($name_bulk);
+                    Storage::disk()->put($name_bulk, $value);
+                    $responseSize[$key] = Storage::disk()->url($name_bulk);
 
                 }
 
@@ -145,6 +145,7 @@ class AttachedController extends Controller
                 );
                 $data = attached::find($data);
             }
+
 
 
             $status = array(
