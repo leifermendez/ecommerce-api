@@ -297,6 +297,14 @@ class UseInternalController extends Controller
                 ->orderBy('variation_products.price_normal', $sort)
                 ->get();
 
+            $data->map(function ($item, $key) use ($id) {
+
+                $getMediaVariatons = product_attached::where('variation_product_id',$id)
+                    ->get();
+                $item->gallery = $getMediaVariatons;
+                return $item;
+            });
+
             return [
                 'length' => count($data),
                 'item' => $data
