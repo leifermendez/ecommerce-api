@@ -24,13 +24,21 @@ class _FrontShoppingCart extends Controller
                 ->where('shopping_carts.user_id', $user->id)
                 ->join('products', 'shopping_carts.product_id', '=', 'products.id')
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
+                ->join('shops', 'shops.id', '=', 'shopping_carts.shop_id')
                 ->select('shopping_carts.id', 'products.name', 'variation_products.label',
                     'variation_products.price_normal',
                     'variation_products.price_regular',
                     'shopping_carts.shop_id',
+                    'shops.name as shop_name',
                     'products.id as product_id'
                 )
                 ->get();
+
+            $data->map(function ($item, $key) use ($request) {
+                $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->product_id);
+                $item->cover_image = $getCoverImageProduct;
+                return $item;
+            });
 
             $data_total = shopping_cart::orderBy('shopping_carts.id', 'DESC')
                 ->where('shopping_carts.user_id', $user->id)
@@ -50,8 +58,7 @@ class _FrontShoppingCart extends Controller
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
                 ->select(
                     DB::raw('sum(variation_products.price_normal) as price_normal'),
-                    DB::raw('sum(variation_products.price_regular) as price_regular'),
-                    'shopping_carts.shop_id'
+                    DB::raw('sum(variation_products.price_regular) as price_regular')
                 )
                 ->groupBy('shopping_carts.user_id')
                 ->first();
