@@ -7,6 +7,7 @@ use App\categories;
 use App\products;
 use App\shop;
 use DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontProducts extends Controller
 {
@@ -204,8 +205,12 @@ class _FrontProducts extends Controller
             if ($data) {
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($id);
                 $getVariations = (new UseInternalController)->_getVariations($id);
+                $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($id);
+                $gallery = (new UseInternalController)->_getImages($id);
                 $data->setAttribute('is_available', $isAvailable);
                 $data->setAttribute('variations', $getVariations);
+                $data->setAttribute('cover_image', $getCoverImageProduct);
+                $data->setAttribute('gallery', $gallery);
             }
 
             $response = array(
@@ -248,7 +253,37 @@ class _FrontProducts extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $fields = array();
+            foreach ($request->all() as $key => $value) {
+                $fields[$key] = $value;
+            }
+
+            $isMy = (new UseInternalController)->_isMyProduct($id);;
+
+            if (!$isMy) {
+                throw new \Exception('not permissions');
+            }
+
+            products::where('id', $id)
+                ->update($fields);
+            $data = products::find($id);
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Editado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+        } catch (\Exception $e) {
+            $response = array(
+                'status' => 'fail',
+                'code' => 5,
+                'error' => $e->getMessage()
+            );
+            return response()->json($response);
+        }
     }
 
     /**
@@ -259,6 +294,7 @@ class _FrontProducts extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
     }
 }

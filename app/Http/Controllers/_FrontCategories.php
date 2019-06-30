@@ -17,7 +17,10 @@ class _FrontCategories extends Controller
         try {
 
             $limit = ($request->limit) ? $request->limit : 15;
-            $data = categories::orderBy('id', 'DESC')
+            $data = categories::orderBy('categories.id', 'DESC')
+                ->join('attacheds','categories.image','=','attacheds.id')
+                ->select('categories.*','attacheds.small as image_small',
+                    'attacheds.medium as image_medium','attacheds.large as image_large')
                 ->paginate($limit);
 
             $response = array(

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\attached_products;
+use App\product_attached;
 use App\purchase_detail;
 use App\settings;
 use App\user_payment;
@@ -236,9 +237,9 @@ class UseInternalController extends Controller
                 throw new \Exception('id null');
             }
 
-            $data = attached_products::where('attached_products.product_id', $id)
-                ->join('attacheds', 'attached_products.attached_id', '=', 'attacheds.id')
-                ->select('attacheds.*', 'attached_products.product_id as product_id')
+            $data = product_attached::where('product_attacheds.product_id', $id)
+                ->join('attacheds', 'product_attacheds.attached_id', '=', 'attacheds.id')
+                ->select('attacheds.*', 'product_attacheds.product_id as product_id')
                 ->take(15)
                 ->get();
 
@@ -295,6 +296,14 @@ class UseInternalController extends Controller
                     'attacheds.medium as attacheds_medium', 'attacheds.large as attacheds_large')
                 ->orderBy('variation_products.price_normal', $sort)
                 ->get();
+
+            $data->map(function ($item, $key) use ($id) {
+
+                $getMediaVariatons = product_attached::where('variation_product_id',$id)
+                    ->get();
+                $item->gallery = $getMediaVariatons;
+                return $item;
+            });
 
             return [
                 'length' => count($data),
@@ -436,5 +445,33 @@ class UseInternalController extends Controller
         }
 
         return $user;
+    }
+
+    public function _isMyProduct($id = null)
+    {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            $isMy = products::where('products.id', $id)
+                ->join('shops', 'shops.id', '=', 'products.shop_id')
+                ->where('shops.users_id', $user->id)
+                ->exists();
+            return $isMy;
+        } catch (\Execption $e) {
+            return false;
+        }
+    }
+
+    public function _getCoverImageProduct($id = null)
+    {
+        try {
+            $data = product_attached::where('product_attacheds.product_id', $id)
+                ->whereNull('product_attacheds.variation_product_id')
+                ->join('attacheds','product_attacheds.attached_id','=','attacheds.id')
+                ->select('attacheds.*')
+                ->first();
+            return $data;
+        } catch (\Execption $e) {
+            return false;
+        }
     }
 }

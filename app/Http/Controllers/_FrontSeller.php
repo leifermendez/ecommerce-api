@@ -51,25 +51,42 @@ class _FrontSeller extends Controller
         try {
 
             $limit = ($request->limit) ? $request->limit : 15;
-            $location = $request->_location;
+            $filters = ($request->filters) ? explode("?", $request->filters) : [];
 
             $data = products::where('products.shop_id', $id)
                 ->join('shops','products.shop_id','=','shops.id')
-                ->where(function ($query) use ($request) {
-                   if($request->featured){
-                        $query->where('products.featured', $request->featured);
-                   }
+                ->where(function ($query) use ($filters) {
+                    foreach ($filters as $value) {
+                        $tmp = explode(",", $value);
+                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+                            $subTmp = explode("|", $tmp[2]);
+                            if (count($subTmp)) {
+                                foreach ($subTmp as $k) {
+                                    $query->orWhere($tmp[0], $tmp[1], $k);
+                                }
+                            } else {
+                                $query->where($tmp[0], $tmp[1], $tmp[2]);
+                            }
+                        }
+                    }
                 })
+                ->orderBy('products.id','DESC')
                 ->select('products.*','shops.name as shop_name','shops.address as shop_address',
                 'shops.slug as shop_slug')
                 ->paginate($limit);
 
             $data->map(function ($item, $key) use($request)  {
-                
+
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $getVariations = (new UseInternalController)->_getVariations($item->id);
+                $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->id);
+                $gallery = (new UseInternalController)->_getImages($item->id);
+                $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
+                $item->gallery = $gallery;
                 $item->is_available = $isAvailable;
                 $item->variations = $getVariations;
+                $item->cover_image = $getCoverImageProduct;
+                $item->score_shop = $scoreShop;
                 return $item;
             });
 

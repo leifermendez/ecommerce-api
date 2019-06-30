@@ -24,6 +24,7 @@ class _FrontSearch extends Controller
             $data_products = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
                 ->where('shops.zip_code', $location)
+                ->where('products.status', 'available')
                 ->where('products.name', 'LIKE', "%{$src}%")
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
                     'shops.slug as shop_slug')
