@@ -199,7 +199,19 @@ class _FrontProducts extends Controller
                     }
                 })
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
-                    'shops.slug as shop_slug')
+                    'shops.slug as shop_slug',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large'))
                 ->first();
 
             if ($data) {

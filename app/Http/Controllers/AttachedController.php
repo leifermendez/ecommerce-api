@@ -68,7 +68,7 @@ class AttachedController extends Controller
             $user_current = JWTAuth::parseToken()->authenticate();
             $file = $request->file('attached');
             $type_file = $request->type_file;
-
+            $format = 'jpg';
             $imageName = Str::random(35);
             $data = null;
 
@@ -113,21 +113,26 @@ class AttachedController extends Controller
             } else {
 
                 $sizes = array(
-                    'small' => Image::make($file)->resize(200, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
-                    'medium' => Image::make($file)->resize(600, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
-                    'large' => Image::make($file)->resize(1200, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
+                    'small' => Image::make($file)
+                        ->encode($format,100)
+                        ->resize(200, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
+                    'medium' => Image::make($file)
+                        ->encode($format,100)
+                        ->resize(600, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
+                    'large' => Image::make($file)
+                        ->encode($format,100)
+                        ->resize(1600, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
                     /*'original' => Image::make($file)->stream()->__toString()*/
                 );
 
-
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.png';
+                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.'.$format;
                     Storage::disk()->put($name_bulk, $value);
                     $responseSize[$key] = Storage::disk()->url($name_bulk);
 
