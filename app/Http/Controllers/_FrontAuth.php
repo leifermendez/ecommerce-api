@@ -139,7 +139,7 @@ class _FrontAuth extends Controller
                         'msj' => 'Token invalid',
                         'code' => 5
                     );
-                    return response()->json($response);
+                    return response()->json($response, 400);
                 }
 
                 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
@@ -161,7 +161,7 @@ class _FrontAuth extends Controller
                         'msj' => 'Contraseña vacia',
                         'code' => 5
                     );
-                    return response()->json($response);
+                    return response()->json($response, 400);
                 } else if (strlen($password) < 6) {
                     $response = array(
                         'status' => 'fail',

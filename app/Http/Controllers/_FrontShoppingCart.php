@@ -36,6 +36,8 @@ class _FrontShoppingCart extends Controller
 
             $data->map(function ($item, $key) use ($request) {
                 $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->product_id);
+                $getFeedAmount = (new UseInternalController)->_getFeedAmount($item->price_normal);
+                $item->feed_amount = $getFeedAmount;
                 $item->cover_image = $getCoverImageProduct;
                 return $item;
             });
@@ -116,9 +118,10 @@ class _FrontShoppingCart extends Controller
         }
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            (new UseInternalController)->_isAvailableUser($user->id);
             $isAvailable = (new UseInternalController)->_isAvailableProduct($fields['product_id']);
-      
-            if(!$isAvailable['isAvailable']){
+
+            if (!$isAvailable['isAvailable']) {
                 throw new \Exception('not available');
             }
 
@@ -126,7 +129,9 @@ class _FrontShoppingCart extends Controller
 
             $fields['user_id'] = $user->id;
             shopping_cart::insertGetId($fields);
-            $count_items = shopping_cart::where('user_id', $user->id)
+
+            $count_items = shopping_cart::disableCache()
+                ->where('user_id', $user->id)
                 ->count();
 
             if ($count_items > 50) {
@@ -149,7 +154,7 @@ class _FrontShoppingCart extends Controller
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response);
+            return response()->json($response, 400);
         }
     }
 
@@ -199,7 +204,8 @@ class _FrontShoppingCart extends Controller
 
             shopping_cart::where('id', $id)
                 ->where('user_id', $user->id)
-                ->update($fields);
+                ->update($fields)
+                ->disableCache();
 
             $data = shopping_cart::find($id);
 
@@ -239,6 +245,7 @@ class _FrontShoppingCart extends Controller
             $user = JWTAuth::parseToken()->authenticate();
             shopping_cart::where('id', $id)
                 ->where('user_id', $user->id)
+                ->disableCache()
                 ->delete();
 
             $response = array(

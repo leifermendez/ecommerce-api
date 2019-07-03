@@ -85,7 +85,7 @@ class ShopController extends Controller
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response);
+            return response()->json($response, 400);
         }
     }
 

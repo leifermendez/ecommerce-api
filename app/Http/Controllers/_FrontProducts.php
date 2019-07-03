@@ -50,7 +50,7 @@ class _FrontProducts extends Controller
 
             $data->map(function ($item, $key) use ($request) {
 
-                $getVariations = (new UseInternalController)->_getVariations($item->id);
+                $getVariations = (new UseInternalController)->_getVariations($item->id, 'ASC', 2);
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $gallery = (new UseInternalController)->_getImages($item->id);
                 $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
@@ -159,7 +159,8 @@ class _FrontProducts extends Controller
         }
         try {
 
-            $data = products::insertGetId($fields);
+            $data = products::insertGetId($fields)
+                ->disableCache();
             $data = products::find($data);
 
             $response = array(
@@ -278,6 +279,7 @@ class _FrontProducts extends Controller
             }
 
             products::where('id', $id)
+                ->disableCache()
                 ->update($fields);
             $data = products::find($id);
 

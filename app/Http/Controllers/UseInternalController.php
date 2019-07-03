@@ -21,6 +21,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\User;
 
 
 class UseInternalController extends Controller
@@ -153,6 +154,32 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _isAvailableUser($id = null)
+    {
+        try {
+            if (!$id) {
+                throw new \Exception('id null');
+            }
+
+            if (!User::where('id', $id)
+                ->where('status', 'available')
+                ->exists()) {
+                throw new \Exception('user not found');
+            }
+
+            $data = User::where('id',$id)->first();
+
+            if (!$data->confirmed) {
+                throw new \Exception('user not confirmed');
+            }
+
+            return ['data' => $data];
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function _isAvailableProduct($id = null)
     {
         try {
@@ -277,7 +304,7 @@ class UseInternalController extends Controller
         }
     }
 
-    public function _getVariations($id = null, $sort = 'ASC')
+    public function _getVariations($id = null, $sort = 'ASC', $limit = null)
     {
         try {
             $data = [];
@@ -294,12 +321,13 @@ class UseInternalController extends Controller
                 ->join('attacheds', 'variation_products.attached_id', '=', 'attacheds.id')
                 ->select('variation_products.*', 'attacheds.small as attacheds_small',
                     'attacheds.medium as attacheds_medium', 'attacheds.large as attacheds_large')
-                ->orderBy('variation_products.price_normal', $sort)
-                ->get();
+                ->orderBy('variation_products.price_normal', $sort);
+
+            $data = ($limit) ? $data->take($limit)->get() : $data->get();
 
             $data->map(function ($item, $key) use ($id) {
 
-                $getMediaVariatons = product_attached::where('variation_product_id',$id)
+                $getMediaVariatons = product_attached::where('variation_product_id', $id)
                     ->get();
                 $item->gallery = $getMediaVariatons;
                 return $item;
@@ -466,7 +494,7 @@ class UseInternalController extends Controller
         try {
             $data = product_attached::where('product_attacheds.product_id', $id)
                 ->whereNull('product_attacheds.variation_product_id')
-                ->join('attacheds','product_attacheds.attached_id','=','attacheds.id')
+                ->join('attacheds', 'product_attacheds.attached_id', '=', 'attacheds.id')
                 ->select('attacheds.*')
                 ->first();
             return $data;

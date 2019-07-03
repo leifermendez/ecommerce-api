@@ -144,7 +144,8 @@ class _FrontPayment extends Controller
                 'data' => [
                     'id' => $charge->id,
                     'amount' => $charge->amount,
-                    'purchase' => $totalPurchase
+                    'purchase' => $totalPurchase,
+                    'uuid' => $request->purchase_uuid
                 ],
                 'code' => 0
             );
