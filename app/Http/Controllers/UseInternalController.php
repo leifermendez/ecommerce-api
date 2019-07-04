@@ -167,7 +167,7 @@ class UseInternalController extends Controller
                 throw new \Exception('user not found');
             }
 
-            $data = User::where('id',$id)->first();
+            $data = User::where('id', $id)->first();
 
             if (!$data->confirmed) {
                 throw new \Exception('user not confirmed');
@@ -501,5 +501,14 @@ class UseInternalController extends Controller
         } catch (\Execption $e) {
             return false;
         }
+    }
+
+    public function _sumList($list = array(), $key = null)
+    {
+        $total = 0;
+        foreach ($list as $l) {
+            $total += $l['feed_amount']['application_feed_amount'];
+        }
+        return $total;
     }
 }

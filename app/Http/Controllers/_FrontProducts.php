@@ -7,6 +7,7 @@ use App\categories;
 use App\products;
 use App\shop;
 use DB;
+use Illuminate\Support\Facades\Artisan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontProducts extends Controller
@@ -28,7 +29,10 @@ class _FrontProducts extends Controller
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
+                ->join('users', 'users.id', '=', 'shops.users_id')
                 ->where('shops.zip_code', $location)
+                ->where('users.confirmed', '1')
+                ->where('users.status', 'available')
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
@@ -159,10 +163,9 @@ class _FrontProducts extends Controller
         }
         try {
 
-            $data = products::insertGetId($fields)
-                ->disableCache();
+            $data = products::insertGetId($fields);
             $data = products::find($data);
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -279,9 +282,9 @@ class _FrontProducts extends Controller
             }
 
             products::where('id', $id)
-                ->disableCache()
                 ->update($fields);
             $data = products::find($id);
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',

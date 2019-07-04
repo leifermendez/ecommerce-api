@@ -104,7 +104,9 @@ class _FrontPurchase extends Controller
             $user = JWTAuth::parseToken()->authenticate();
 
             $shoppingCart = (new UseInternalController)->_shoppingCart($user->id);
-            $priceDelivery = (new UseInternalController)->_getSetting('delivery_feed_min');
+            $_shipping_price = (new UseInternalController)->_getSetting('delivery_feed_min');
+            $_shipping_tax = (new UseInternalController)->_getSetting('delivery_feed_tax');
+            $priceDelivery = floatval(($_shipping_price * $_shipping_tax) + $_shipping_price);
             $uuid = Str::random(40);
 
             foreach ($shoppingCart['list'] as $value) {
@@ -156,8 +158,8 @@ class _FrontPurchase extends Controller
                 purchase_order::insert($list);
             };
 
-            shopping_cart::where('user_id', $user->id)
-                ->delete();
+//            shopping_cart::where('user_id', $user->id)
+//                ->delete();
             $data = purchase_order::where('uuid', $uuid)
                 ->get();
 

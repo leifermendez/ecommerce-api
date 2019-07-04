@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\shopping_cart;
 use Illuminate\Http\Request;
 use App\purchase_order;
 use App\purchase_detail;
@@ -111,7 +112,6 @@ class _FrontPayment extends Controller
             }
 
             $totalPurchase = (new UseInternalController)->_totalPurchase($request->purchase_uuid);
-
             $charge = $this->_charge($request->purchase_uuid, $totalPurchase['total'], $request->source);
             $detail_purchase = purchase_detail::where('purchase_uuid', $request->purchase_uuid)->get();
 
@@ -138,6 +138,8 @@ class _FrontPayment extends Controller
                 }
             };
 
+            shopping_cart::where('user_id', $user->id)
+                ->delete();
 
             $response = array(
                 'status' => 'success',

@@ -7,5 +7,5 @@ use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class shopping_cart extends Model
 {
-    use Cachable;
+
 }

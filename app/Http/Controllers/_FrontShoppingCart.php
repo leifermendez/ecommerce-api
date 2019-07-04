@@ -34,6 +34,10 @@ class _FrontShoppingCart extends Controller
                 )
                 ->get();
 
+            $_shipping = (new UseInternalController)->_getSetting('delivery_feed_min');
+            $_shipping_tax = (new UseInternalController)->_getSetting('delivery_feed_tax');
+            $_total_shipping = floatval($_shipping + ($_shipping * $_shipping_tax));
+
             $data->map(function ($item, $key) use ($request) {
                 $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->product_id);
                 $getFeedAmount = (new UseInternalController)->_getFeedAmount($item->price_normal);
@@ -46,13 +50,19 @@ class _FrontShoppingCart extends Controller
                 ->where('shopping_carts.user_id', $user->id)
                 ->join('products', 'shopping_carts.product_id', '=', 'products.id')
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
+                ->join('shops','shopping_carts.shop_id','=','shops.id')
                 ->select(
                     DB::raw('sum(variation_products.price_normal) as price_normal'),
                     DB::raw('sum(variation_products.price_regular) as price_regular'),
-                    'shopping_carts.shop_id'
+                    'shopping_carts.shop_id','shops.name as shops_name'
                 )
                 ->groupBy('shopping_carts.shop_id')
                 ->get();
+
+            $data_total->map(function($item) use ($_total_shipping){
+                $item->total_shipping =  $_total_shipping;
+                return $item;
+            });
 
             $data_shop = shopping_cart::orderBy('shopping_carts.id', 'DESC')
                 ->where('shopping_carts.user_id', $user->id)
@@ -65,12 +75,19 @@ class _FrontShoppingCart extends Controller
                 ->groupBy('shopping_carts.user_id')
                 ->first();
 
+
+            $total_shipping = ($data_total) ? count($data_total) * $_total_shipping : 0;
+            //_getSetting('feed_percentage');
+            $total_feed = (new UseInternalController)->_sumList($data, 'application_feed_amount');
+
             $response = array(
                 'status' => 'success',
                 'data' => [
                     'list' => $data,
                     'total' => $data_total,
-                    'total_shop' => $data_shop
+                    'total_shop' => $data_shop,
+                    'total_shipping' => $total_shipping,
+                    'total_feed' => $total_feed
                 ],
                 'code' => 0
             );
@@ -130,8 +147,7 @@ class _FrontShoppingCart extends Controller
             $fields['user_id'] = $user->id;
             shopping_cart::insertGetId($fields);
 
-            $count_items = shopping_cart::disableCache()
-                ->where('user_id', $user->id)
+            $count_items = shopping_cart::where('user_id', $user->id)
                 ->count();
 
             if ($count_items > 50) {
@@ -204,8 +220,7 @@ class _FrontShoppingCart extends Controller
 
             shopping_cart::where('id', $id)
                 ->where('user_id', $user->id)
-                ->update($fields)
-                ->disableCache();
+                ->update($fields);
 
             $data = shopping_cart::find($id);
 
@@ -245,7 +260,6 @@ class _FrontShoppingCart extends Controller
             $user = JWTAuth::parseToken()->authenticate();
             shopping_cart::where('id', $id)
                 ->where('user_id', $user->id)
-                ->disableCache()
                 ->delete();
 
             $response = array(

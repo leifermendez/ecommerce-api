@@ -21,6 +21,7 @@
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.17",
+        "nunomaduro/collision": "^3.0",
         "spatie/opening-hours": "^2.2",
         "superbalist/laravel-google-cloud-storage": "^2.2",
         "twilio/sdk": "^5.32",
@@ -29,7 +30,6 @@
     "require-dev": {
         "filp/whoops": "^2.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^7.5"
     },
     "config": {
