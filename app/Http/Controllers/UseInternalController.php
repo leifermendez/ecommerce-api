@@ -198,7 +198,7 @@ class UseInternalController extends Controller
             }
 
             $now = Carbon::now();
-
+            $next_available = null;
             $product = products::find($id);
             $shedule = array();
             $exceptions = array();
