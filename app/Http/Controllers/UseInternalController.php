@@ -489,6 +489,20 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _isMyShop($id = null)
+    {
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+            $isMy = shop::where('shops.id', $id)
+                ->join('users', 'users.id', '=', 'shops.users_id')
+                ->where('users.id', $user->id)
+                ->exists();
+            return $isMy;
+        } catch (\Execption $e) {
+            return false;
+        }
+    }
+
     public function _getCoverImageProduct($id = null)
     {
         try {

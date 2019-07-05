@@ -120,6 +120,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'destroy'
             ]);
 
+        Route::resource('/schedules', '_FrontShopSchedules');
+
         Route::resource('/products-variations', '_FrontProductVariations');
 
         Route::resource('/comments', '_FrontComments')

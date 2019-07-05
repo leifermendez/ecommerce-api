@@ -275,7 +275,7 @@ class _FrontProducts extends Controller
                 $fields[$key] = $value;
             }
 
-            $isMy = (new UseInternalController)->_isMyProduct($id);;
+            $isMy = (new UseInternalController)->_isMyProduct($id);
 
             if (!$isMy) {
                 throw new \Exception('not permissions');
