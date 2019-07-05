@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\shop;
 use DB;
@@ -225,6 +226,8 @@ class _FrontShop extends Controller
             Shop::where('id', $id)
                 ->where('users_id', $user->id)
                 ->update($fields);
+            User::where('id', $user->id)
+                ->update(['role' => 'shop']);
 
             $data = Shop::find($id);
 

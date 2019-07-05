@@ -7,6 +7,7 @@ use App\categories;
 use App\products;
 use App\shop;
 use DB;
+use Illuminate\Support\Facades\Artisan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontProducts extends Controller
@@ -28,7 +29,10 @@ class _FrontProducts extends Controller
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
+                ->join('users', 'users.id', '=', 'shops.users_id')
                 ->where('shops.zip_code', $location)
+                ->where('users.confirmed', '1')
+                ->where('users.status', 'available')
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
@@ -50,7 +54,7 @@ class _FrontProducts extends Controller
 
             $data->map(function ($item, $key) use ($request) {
 
-                $getVariations = (new UseInternalController)->_getVariations($item->id);
+                $getVariations = (new UseInternalController)->_getVariations($item->id, 'ASC', 2);
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $gallery = (new UseInternalController)->_getImages($item->id);
                 $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
@@ -161,7 +165,7 @@ class _FrontProducts extends Controller
 
             $data = products::insertGetId($fields);
             $data = products::find($data);
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -199,7 +203,19 @@ class _FrontProducts extends Controller
                     }
                 })
                 ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
-                    'shops.slug as shop_slug')
+                    'shops.slug as shop_slug',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large'))
                 ->first();
 
             if ($data) {
@@ -259,7 +275,7 @@ class _FrontProducts extends Controller
                 $fields[$key] = $value;
             }
 
-            $isMy = (new UseInternalController)->_isMyProduct($id);;
+            $isMy = (new UseInternalController)->_isMyProduct($id);
 
             if (!$isMy) {
                 throw new \Exception('not permissions');
@@ -268,6 +284,7 @@ class _FrontProducts extends Controller
             products::where('id', $id)
                 ->update($fields);
             $data = products::find($id);
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',

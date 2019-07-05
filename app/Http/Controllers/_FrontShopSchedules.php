@@ -2,44 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\payment_key;
-use App\platform_payment;
+use App\hours;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-class PaymentPlatformController extends Controller
+class _FrontShopSchedules extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        try {
-
-            $limit = ($request->limit) ? $request->limit : 15;
-
-            $data = platform_payment::orderBy('id', 'DESC')
-                ->paginate($limit);
-
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
-
-        } catch (\Exception $e) {
-
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-
-            return response()->json($response, 500);
-
-        }
+        //
     }
 
     /**
@@ -60,14 +36,27 @@ class PaymentPlatformController extends Controller
      */
     public function store(Request $request)
     {
-        $fields = array();
-        foreach ($request->all() as $key => $value) {
-            $fields[$key] = $value;
-        }
         try {
+            $request->validate([
+                'shop_id' => 'required',
+                'shedule_hours' => 'required'
+            ]);
 
-            $data = platform_payment::insertGetId($fields);
-            $data = platform_payment::find($data);
+            $isMy = (new UseInternalController)->_isMyShop($request->shop_id);
+
+            if (!$isMy) {
+                throw new \Exception('not owner shop');
+            }
+
+            $fields = array(
+                'shop_id' => $request->shop_id,
+                'shedule_hours' => json_encode($request->shedule_hours),
+                'exceptions' => json_encode($request->exceptions)
+            );
+
+
+            $data = hours::insertGetId($fields);
+            $data = hours::find($data);
 
             $response = array(
                 'status' => 'success',
@@ -82,7 +71,7 @@ class PaymentPlatformController extends Controller
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response, 400);
+            return response()->json($response);
         }
     }
 
@@ -96,7 +85,13 @@ class PaymentPlatformController extends Controller
     {
         try {
 
-            $data = platform_payment::find($id);
+            $data = hours::find($id);
+
+            if ($data) {
+                $data->shedule_hours = json_decode($data->shedule_hours);
+                $data->exceptions = json_decode($data->exceptions);
+            }
+
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -138,38 +133,41 @@ class PaymentPlatformController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $fields = array();
-            foreach ($request->all() as $key => $value) {
-                if ($key !== 'id') {
-                    $fields[$key] = $value;
-                };
+            $request->validate([
+                'shop_id' => 'required',
+                'shedule_hours' => 'required'
+            ]);
+
+            $isMy = (new UseInternalController)->_isMyShop($request->shop_id);
+
+            if (!$isMy) {
+                throw new \Exception('not owner shop');
             }
 
-            platform_payment::where('id', $id)
+            $fields = array(
+                'shedule_hours' => json_encode($request->shedule_hours),
+                'exceptions' => json_encode($request->exceptions)
+            );
+
+
+            $data = hours::where('id', $id)
                 ->update($fields);
-
-            $data = platform_payment::find($id);
-
+            $data = hours::find($id);
 
             $response = array(
                 'status' => 'success',
-                'msg' => 'Actualizado',
+                'msg' => 'Insertado',
                 'data' => $data,
                 'code' => 0
             );
             return response()->json($response);
-
-
         } catch (\Exception $e) {
-
             $response = array(
                 'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
+                'code' => 5,
+                'error' => $e->getMessage()
             );
-
-            return response()->json($response, 500);
-
+            return response()->json($response);
         }
     }
 
@@ -181,30 +179,6 @@ class PaymentPlatformController extends Controller
      */
     public function destroy($id)
     {
-
-        try {
-
-            platform_payment::where('id', $id)
-                ->delete();
-
-            $response = array(
-                'status' => 'success',
-                'msg' => 'Eliminado',
-                'code' => 0
-            );
-            return response()->json($response);
-
-
-        } catch (\Exception $e) {
-
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-
-            return response()->json($response, 500);
-
-        }
+        //
     }
 }

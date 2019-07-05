@@ -176,7 +176,7 @@ class UserController extends Controller
                     'msg' => 'Email en uso',
                     'code' => 5
                 );
-                return response()->json($response);
+                return response()->json($response, 400);
             }
 
             User::where('users.id', $id)

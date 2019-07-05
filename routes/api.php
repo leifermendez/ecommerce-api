@@ -22,6 +22,13 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     /**
      * Rutas libres
      */
+    Route::get('clear-cache', function () {
+
+        /* php artisan migrate */
+        \Artisan::call("modelCache:clear", ['--model' => 'App\products']);
+        dd("Done");
+    });
+
     Route::resource('/auth', '_FrontAuth');
 
     Route::group(['prefix' => 'rest'], function () {
@@ -112,6 +119,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'update',
                 'destroy'
             ]);
+
+        Route::resource('/schedules', '_FrontShopSchedules');
 
         Route::resource('/products-variations', '_FrontProductVariations');
 
