@@ -199,6 +199,8 @@ class UseInternalController extends Controller
 
             $now = Carbon::now();
             $next_available = null;
+            $next_close = null;
+            $diff = 0;
             $product = products::find($id);
             $shedule = array();
             $exceptions = array();
@@ -223,15 +225,15 @@ class UseInternalController extends Controller
                 $hours_exceptions = ($data->hours_exceptions && json_decode($data->hours_exceptions)) ?
                     json_decode($data->hours_exceptions) : null;
 
-                if ($hours_shedule_hours && $hours_exceptions) {
+                if ($hours_shedule_hours) {
                     $openingHours = OpeningHours::create([
-                        'monday' => $hours_shedule_hours->monday,
-                        'tuesday' => $hours_shedule_hours->tuesday,
-                        'wednesday' => $hours_shedule_hours->wednesday,
-                        'thursday' => $hours_shedule_hours->thursday,
-                        'friday' => $hours_shedule_hours->friday,
-                        'saturday' => $hours_shedule_hours->saturday,
-                        'sunday' => $hours_shedule_hours->sunday,
+                        'monday' => (isset($hours_shedule_hours->monday )) ? $hours_shedule_hours->monday : [],
+                        'tuesday' => (isset($hours_shedule_hours->tuesday )) ? $hours_shedule_hours->tuesday : [],
+                        'wednesday' => (isset($hours_shedule_hours->wednesday )) ? $hours_shedule_hours->wednesday : [],
+                        'thursday' => (isset($hours_shedule_hours->thursday )) ? $hours_shedule_hours->thursday : [],
+                        'friday' => (isset($hours_shedule_hours->friday )) ? $hours_shedule_hours->friday : [],
+                        'saturday' => (isset($hours_shedule_hours->saturday )) ? $hours_shedule_hours->saturday : [],
+                        'sunday' => (isset($hours_shedule_hours->sunday )) ? $hours_shedule_hours->sunday : [],
                         'exceptions' => $hours_exceptions
                     ]);
                     $next_available = $openingHours->nextOpen(Carbon::now());
