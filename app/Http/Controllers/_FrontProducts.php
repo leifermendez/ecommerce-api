@@ -165,7 +165,6 @@ class _FrontProducts extends Controller
 
             $data = products::insertGetId($fields);
             $data = products::find($data);
-            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',

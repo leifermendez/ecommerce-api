@@ -95,6 +95,7 @@ class _FrontProductVariations extends Controller
 
             $data = variation_product::insertGetId($fields);
             $data = variation_product::find($data);
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',
@@ -187,7 +188,7 @@ class _FrontProductVariations extends Controller
 
             $data = variation_product::find($id);
 
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Actualizado',
@@ -222,7 +223,7 @@ class _FrontProductVariations extends Controller
 
             variation_product::where('id', $id)
                 ->delete();
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Eliminado',
