@@ -140,7 +140,7 @@ class _FrontShop extends Controller
                 $data = Shop::where('shops.id', $id)
                     ->select('name',
                         'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                        'email_corporate', 'phone_mobil', 'phone_fixed',
+                        'email_corporate', 'phone_mobil', 'phone_fixed', 'zip_code',
                         DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
                         DB::raw('(SELECT attacheds.small FROM attacheds 

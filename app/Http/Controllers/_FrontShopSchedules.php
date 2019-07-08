@@ -85,7 +85,7 @@ class _FrontShopSchedules extends Controller
     {
         try {
 
-            $data = hours::find($id);
+            $data = hours::where('shop_id',$id)->first();
 
             if ($data) {
                 $data->shedule_hours = json_decode($data->shedule_hours);
@@ -150,13 +150,13 @@ class _FrontShopSchedules extends Controller
             );
 
 
-            $data = hours::where('id', $id)
+            $data = hours::where('shop_id', $id)
                 ->update($fields);
-            $data = hours::find($id);
+            $data = hours::where('shop_id',$id)->first();
 
             $response = array(
                 'status' => 'success',
-                'msg' => 'Insertado',
+                'msg' => 'Editado',
                 'data' => $data,
                 'code' => 0
             );
