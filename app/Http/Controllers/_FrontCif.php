@@ -1,43 +1,46 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Ixudra\Curl\Facades\Curl;
 
 use Illuminate\Http\Request;
 
 
-define("_api_","https://developers.einforma.com/api/v1");
+define("_api_", "https://developers.einforma.com/api/v1");
 
 class _FrontCif extends Controller
 {
-    function OAuth(){
+    function OAuth()
+    {
         try {
             $client_id = env('ELINFORMAR_CLIENT_ID', '');
             $client_secret = env('ELINFORMAR_CLIENT_SECRET', '');
-    
-            $response = Curl::to(_api_.'/oauth/token')
-            ->withContentType('application/x-www-form-urlencoded')
-            ->withHeader('Accept: application/json')
-            ->withData( array( 
-                'client_id' => $client_id,
-                'client_secret' => $client_secret,
-                'grant_type' => 'client_credentials',
-                'scope' => 'buscar:consultar:empresas'
-                 ) )
-            ->returnResponseObject()
-            ->post();
 
-            if($response->status!==200){
+            $response = Curl::to(_api_ . '/oauth/token')
+                ->withContentType('application/x-www-form-urlencoded')
+                ->withHeader('Accept: application/json')
+                ->withData(array(
+                    'client_id' => $client_id,
+                    'client_secret' => $client_secret,
+                    'grant_type' => 'client_credentials',
+                    'scope' => 'buscar:consultar:empresas'
+                ))
+                ->returnResponseObject()
+                ->post();
+
+            if ($response->status !== 200) {
                 throw new \Exception($response->content);
             }
 
             return json_decode($response->content);
-            
+
         } catch (\Exception $e) {
             return false;
         }
 
-    } 
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +64,7 @@ class _FrontCif extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -72,44 +75,44 @@ class _FrontCif extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        try{
-      
-            if(!$id){
+        try {
+
+            if (!$id) {
                 throw new \Exception("ID not valido");
             }
+            $data = [];
             $auth = $this->OAuth();
-            if(!$auth){
-                throw new \Exception('not auth');
-            }
-          
-       
-                $response = Curl::to(_api_."/companies/$id/test")
-                ->withHeader('Accept: application/json')
-                ->withHeader('Authorization: Bearer '.$auth->access_token )
-                ->returnResponseObject()
-                ->get();
+            if (!$auth) {
+                //throw new \Exception('not auth provider');
+            } else {
 
-                if($response->status!==200){
+                $response = Curl::to(_api_ . "/companies/$id/test")
+                    ->withHeader('Accept: application/json')
+                    ->withHeader('Authorization: Bearer ' . $auth->access_token)
+                    ->returnResponseObject()
+                    ->get();
+
+                if ($response->status !== 200) {
                     throw new \Exception($response->content);
                 }
 
-                $data = json_decode($response->content);
+                $data = ($response) ? json_decode($response->content) : null;
+            }
 
-                $response = array(
-                    'status' => 'success',
-                    'data' => $data,
-                    'code' => 0
-                );
-                return response()->json($response);
-                
-        
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
 
-        }catch (\Exception $e) {
+
+        } catch (\Exception $e) {
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
@@ -123,7 +126,7 @@ class _FrontCif extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -134,8 +137,8 @@ class _FrontCif extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -146,7 +149,7 @@ class _FrontCif extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

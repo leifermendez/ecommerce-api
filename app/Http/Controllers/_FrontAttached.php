@@ -17,6 +17,30 @@ class _FrontAttached extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function _internalUpload($url = null)
+    {
+
+
+        $random = Str::random(40);
+        $name_bulk = 'upload/profile_' . $random . '.png';
+
+        $value = Image::make(file_get_contents($url))->resize(200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->stream()->__toString();
+        Storage::disk()->put($name_bulk, $value, 'public');
+//        Storage::disk('s3')->put($name_bulk, $value, 'public');
+//        $public_url = Storage::disk('s3')->url($name_bulk);
+        $public_url = Storage::url($name_bulk);
+
+        return [
+            'status' => 'success',
+            'data' => $public_url
+        ];
+
+    }
+
+
     public function index(Request $request)
     {
         try {
@@ -115,17 +139,17 @@ class _FrontAttached extends Controller
 
                 $sizes = array(
                     'small' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(200, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'medium' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'large' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(1600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
@@ -133,7 +157,7 @@ class _FrontAttached extends Controller
                 );
 
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.'.$format;
+                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
                     Storage::disk()->put($name_bulk, $value);
                     $responseSize[$key] = Storage::disk()->url($name_bulk);
 

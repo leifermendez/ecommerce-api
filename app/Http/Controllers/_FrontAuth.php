@@ -149,7 +149,7 @@ class _FrontAuth extends Controller
                 }
 
                 if (filter_var($avatar, FILTER_VALIDATE_URL)) {
-                    $new_avatar = (new _mediaController)->_internalUpload($avatar);
+                    $new_avatar = (new _FrontAttached)->_internalUpload($avatar);
 
                     if ($new_avatar['status'] === 'success') {
                         User::where('email', $email)->update([
