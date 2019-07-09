@@ -9,7 +9,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Validator;
 
 
-define("_api_", "https://connect.stripe.com");
+define("_api_connect_", "https://connect.stripe.com");
+define("_api_", "https://api.stripe.com");
 
 class ExternalStripeAuthController extends Controller
 {
@@ -19,17 +20,43 @@ class ExternalStripeAuthController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        //$stripe = Stripe::make('your-stripe-api-key', 'your-stripe-api-version');
+    //$stripe = Stripe::make('your-stripe-api-key', 'your-stripe-api-version');
+
+    function _countriesAvailables($account = null)
+    {
+        try {
+            $account = json_decode($account,true);
+            if (!$account) {
+                throw new \Exception("Null account");
+            }
+
+            $client_secret = env('STRIPE_SECRET', '');
+            $response = Curl::to(_api_.'/v1/accounts/'.$account['stripe_user_id'])
+                ->withOption('USERPWD', "$client_secret:")
+                ->withHeader('Accept: application/json')
+                ->returnResponseObject()
+                ->get();
+
+            $response = json_decode($response->content);
+
+            $countries = (new UseInternalController)->_getSetting('countries_available');
+            $countries = explode(',', $countries);
+            $res = array_search($response->country, $countries);
+            return $res;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
 
     public function index()
     {
         try {
-            //$priceDelivery = (new UseInternalController)->_getSetting('delivery_feed_min');
+            $redirect = (new UseInternalController)->_getSetting('stripe_auth_redirect');
             $api = 'https://connect.stripe.com/oauth/authorize';
             $platform_id = env('STRIPE_PLATFORM_ID');
             $data = $api . '?response_type=code&client_id=';
             $data .= $platform_id . '&scope=read_write';
-            $data .= '&redirect_uri=http://localhost:4200';
+            $data .= '&redirect_uri=' . $redirect;
 
             $response = array(
                 'status' => 'success',
@@ -74,20 +101,25 @@ class ExternalStripeAuthController extends Controller
                 'code' => 'required',
             ]);
 
-            $response = Curl::to(_api_.'/oauth/token')
+            $response = Curl::to(_api_connect_ . '/oauth/token')
                 ->withContentType('application/x-www-form-urlencoded')
                 ->withHeader('Accept: application/json')
-                ->withData( array(
+                ->withData(array(
                     'client_secret' => $client_secret,
                     'code' => $request->code,
                     'grant_type' => 'authorization_code'
-                ) )
+                ))
                 ->returnResponseObject()
                 ->post();
-            if($response->status!==200){
+
+            $check= $this->_countriesAvailables($response->content);
+
+            if (!$check) {
+                throw new \Exception("Country not available");
+            }
+            if ($response->status !== 200) {
                 throw new \Exception($response->content);
             }
-
 
             $response = array(
                 'status' => 'success',

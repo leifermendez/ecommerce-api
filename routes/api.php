@@ -26,6 +26,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         /* php artisan migrate */
         \Artisan::call("modelCache:clear", ['--model' => 'App\products']);
+        \Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
         dd("Done");
     });
 

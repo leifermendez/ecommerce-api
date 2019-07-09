@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -87,6 +88,7 @@ class _FrontAuth extends Controller
     public function index() // -Refrescar Token
     {
         $token = JWTAuth::getToken();
+        $exp = env('JWT_TTL', 1440);
         if (!$token) {
             throw new BadRequestHtttpException('Token not provided');
         }
@@ -98,7 +100,10 @@ class _FrontAuth extends Controller
 
         $response = array(
             'status' => 'success',
-            'data' => $token,
+            'data' => [
+                'token' => $token,
+                'exp' => $exp
+            ],
             'code' => 0
         );
 
@@ -108,6 +113,7 @@ class _FrontAuth extends Controller
     public function store(Request $request)
     {
         try {
+            $exp = env('JWT_TTL', 1440);
             $request->validate([
                 'email' => 'required'
             ]);
@@ -186,6 +192,7 @@ class _FrontAuth extends Controller
 //            $hashNew = new Hashids('_ref', 10);
             $data = User::where('email', $email)->first();
             $data->setAttribute('token', JWTAuth::fromUser($data));
+            $data->setAttribute('exp', $exp);
 //            $data->setAttribute('refcode', $hashNew->encode($data->id));
 
             $response = array(

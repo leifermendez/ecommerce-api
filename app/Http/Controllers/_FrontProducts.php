@@ -162,9 +162,10 @@ class _FrontProducts extends Controller
             $fields[$key] = $value;
         }
         try {
-
+            (new UseInternalController)->_checkBank($fields['shop_id']);
             $data = products::insertGetId($fields);
             $data = products::find($data);
+
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
@@ -179,7 +180,7 @@ class _FrontProducts extends Controller
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response);
+            return response()->json($response,500);
         }
     }
 

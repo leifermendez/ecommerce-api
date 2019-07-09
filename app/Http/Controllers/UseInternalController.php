@@ -498,7 +498,7 @@ class UseInternalController extends Controller
             $isMy = shop::where('shops.id', $id)
                 ->join('users', 'users.id', '=', 'shops.users_id')
                 ->where('users.id', $user->id)
-                ->exists();
+                ->first();
             return $isMy;
         } catch (\Execption $e) {
             return false;
