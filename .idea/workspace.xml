@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAuth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontCif.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontCif.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +33,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCif.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="136">
               <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
             </state>
           </provider>
@@ -403,7 +401,7 @@
       <workItem from="1562222085960" duration="10510000" />
       <workItem from="1562308595371" duration="1958000" />
       <workItem from="1562568235301" duration="3555000" />
-      <workItem from="1562653942608" duration="15587000" />
+      <workItem from="1562653942608" duration="16173000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -475,11 +473,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562673211762</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ByPass Auth">
+      <created>1562678022042</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562678022042</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="239234000" />
+    <option name="totallyTimeSpent" value="239820000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -526,7 +531,8 @@
     <MESSAGE value="Fix" />
     <MESSAGE value="            Fix" />
     <MESSAGE value="Verificacion stripe por pais" />
-    <option name="LAST_COMMIT_MESSAGE" value="Verificacion stripe por pais" />
+    <MESSAGE value="ByPass Auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="ByPass Auth" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -987,7 +993,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCif.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="136">
           <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
         </state>
       </provider>
