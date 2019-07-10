@@ -24,13 +24,25 @@ class _FrontProducts extends Controller
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $location = $request->_location;
+            $km = (new UseInternalController)->_getSetting('search_range_km');
             $categories = [];
             $attributes = [];
+            $measureShop = [];
+            $measureShop = (new UseInternalController)->_measureShop(
+                $request->header('LAT'),
+                $request->header('LNG'),
+                $km,
+                '<',
+                'distance_in_km,shop_id');
+
+
+            $measureShop = array_column($measureShop, 'shop_id');
+
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
                 ->join('users', 'users.id', '=', 'shops.users_id')
-                ->where('shops.zip_code', $location)
+                ->whereIn('shops.id', $measureShop)
                 ->where('users.confirmed', '1')
                 ->where('users.status', 'available')
                 ->where(function ($query) use ($filters) {
@@ -162,11 +174,13 @@ class _FrontProducts extends Controller
             $fields[$key] = $value;
         }
         try {
+            DB::beginTransaction();
             (new UseInternalController)->_checkBank($fields['shop_id']);
             $data = products::insertGetId($fields);
             $data = products::find($data);
 
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -175,12 +189,13 @@ class _FrontProducts extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response,500);
+            return response()->json($response, 500);
         }
     }
 
@@ -193,10 +208,7 @@ class _FrontProducts extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $location = $request->_location;
-
             $data = products::join('shops', 'products.shop_id', '=', 'shops.id')
-                ->where('shops.zip_code', $location)
                 ->where('products.id', $id)
                 ->where(function ($query) use ($request) {
                     if ($request->featured) {
@@ -223,10 +235,12 @@ class _FrontProducts extends Controller
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($id);
                 $getVariations = (new UseInternalController)->_getVariations($id);
                 $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($id);
+                $getCategories = (new UseInternalController)->_getCategories($id);
                 $gallery = (new UseInternalController)->_getImages($id);
                 $data->setAttribute('is_available', $isAvailable);
                 $data->setAttribute('variations', $getVariations);
                 $data->setAttribute('cover_image', $getCoverImageProduct);
+                $data->setAttribute('categories', $getCategories);
                 $data->setAttribute('gallery', $gallery);
             }
 

@@ -7,6 +7,8 @@ use App\shop;
 use Illuminate\Http\Request;
 use App\variation_product;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Artisan;
+use DB;
 
 class _FrontProductVariations extends Controller
 {
@@ -83,6 +85,7 @@ class _FrontProductVariations extends Controller
             $fields[$key] = $value;
         }
         try {
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $isMy = products::where('products.id',$fields['product_id'])
                 ->join('shops','shops.id','=','products.shop_id')
@@ -96,7 +99,7 @@ class _FrontProductVariations extends Controller
             $data = variation_product::insertGetId($fields);
             $data = variation_product::find($data);
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
-
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -105,6 +108,7 @@ class _FrontProductVariations extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,

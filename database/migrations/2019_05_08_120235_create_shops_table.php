@@ -29,6 +29,8 @@ class CreateShopsTable extends Migration
             $table->string('meta_key',200);
             $table->string('terms_conditions')->nullable($value = true);
             $table->string('polity_privacy')->nullable($value = true);
+            $table->string('lat');
+            $table->string('lng');
             $table->enum('status', ['available', 'unavailable'])->default($value = 'available');
             $table->timestamps();
         });

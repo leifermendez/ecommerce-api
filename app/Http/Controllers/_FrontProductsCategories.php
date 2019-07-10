@@ -7,6 +7,7 @@ use App\product_categories;
 use App\products;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\DB;
 
 class _FrontProductsCategories extends Controller
 {
@@ -68,6 +69,7 @@ class _FrontProductsCategories extends Controller
             $fields[$key] = $value;
         }
         try {
+            DB::beginTransaction();
             $data = array();
             $isMy = products::where('products.id', $fields['product_id'])
                 ->where('shops.users_id', $user->id)
@@ -76,19 +78,20 @@ class _FrontProductsCategories extends Controller
             if (!$isMy) {
                 throw new \Exception('not permission for shop ');
             }
-
+            product_categories::where('product_id', $fields['product_id'])
+                ->delete();
             if (gettype($fields['category_id']) === 'array') {
                 foreach ($fields['category_id'] as $a) {
                     $b['product_id'] = $fields['product_id'];
                     $b['category_id'] = $a;
-                    $data[]=product_categories::insertGetId($b);
+                    $data[] = product_categories::insertGetId($b);
                 }
             } else {
                 $data = product_categories::insertGetId($fields);
                 $data = product_categories::find($data);
             }
 
-
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -97,6 +100,7 @@ class _FrontProductsCategories extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,
@@ -160,6 +164,8 @@ class _FrontProductsCategories extends Controller
     {
 
         try {
+            $data = array();
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $fields = array();
             foreach ($request->all() as $key => $value) {
@@ -176,11 +182,21 @@ class _FrontProductsCategories extends Controller
                 throw new \Exception('not permission for shop ');
             }
 
-            product_categories::where('id', $id)
-                ->update($fields);
+            product_categories::where('product_id', $fields['product_id'])
+                ->delete();
 
-            $data = product_categories::find($id);
+            if (gettype($fields['category_id']) === 'array') {
+                foreach ($fields['category_id'] as $a) {
+                    $b['product_id'] = $fields['product_id'];
+                    $b['category_id'] = $a;
+                    $data[] = product_categories::insertGetId($b);
+                }
+            } else {
+                $data = product_categories::insertGetId($fields);
+                $data = product_categories::find($data);
+            }
 
+            DB::commit();
 
             $response = array(
                 'status' => 'success',
@@ -192,7 +208,7 @@ class _FrontProductsCategories extends Controller
 
 
         } catch (\Exception $e) {
-
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),

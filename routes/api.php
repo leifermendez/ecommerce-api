@@ -27,6 +27,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         /* php artisan migrate */
         \Artisan::call("modelCache:clear", ['--model' => 'App\products']);
         \Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
+        \Artisan::call("modelCache:clear", ['--model' => 'App\variation_product']);
         dd("Done");
     });
 
@@ -95,6 +96,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
      *
      */
     Route::group(['prefix' => 'rest', 'middleware' => ['AuthJWT']], function () {
+
         Route::resource('/shopping-cart', '_FrontShoppingCart')
             ->middleware('CheckLocation');
 
@@ -106,13 +108,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/payment-user', '_FronUserPayment');
 
-        Route::resource('/product-category', '_FrontProductsCategories')
-            ->only([
-                'store',
-                'index',
-                'show',
-                'update'
-            ]);
+        Route::resource('/product-category', '_FrontProductsCategories');
 
         Route::resource('/products', '_FrontProducts')
             ->only([

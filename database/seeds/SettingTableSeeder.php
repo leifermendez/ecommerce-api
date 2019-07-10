@@ -21,8 +21,9 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'feed_limit_price', 'value' => '100'),
             array('meta' => 'delivery_feed_min', 'value' => '6.50'),
             array('meta' => 'delivery_feed_tax', 'value' => '0.21'),
-            array('meta' => 'countries_available', 'value' => 'ES,US'),
-            array('meta' => 'stripe_auth_redirect', 'value' => 'http://localhost:4200')
+            array('meta' => 'countries_available', 'value' => 'ES,'),
+            array('meta' => 'stripe_auth_redirect', 'value' => 'http://localhost:4200'),
+            array('meta' => 'search_range_km', 'value' => '10')
         ));
     }
 }

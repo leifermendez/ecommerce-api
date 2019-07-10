@@ -102,7 +102,8 @@ class _FrontShop extends Controller
                 };
             }
             $fields['users_id'] = $user->id;
-            $fields['role'] = 'shop';
+            User::where('id', $user->id)
+                ->update(['role' => 'shop']);
             $id = Shop::insertGetId($fields);
             $data = Shop::find($id);
 

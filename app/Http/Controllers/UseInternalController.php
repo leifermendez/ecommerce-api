@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\attached_products;
 use App\product_attached;
+use App\product_categories;
 use App\purchase_detail;
 use App\settings;
 use App\user_payment;
@@ -227,13 +228,13 @@ class UseInternalController extends Controller
 
                 if ($hours_shedule_hours) {
                     $openingHours = OpeningHours::create([
-                        'monday' => (isset($hours_shedule_hours->monday )) ? $hours_shedule_hours->monday : [],
-                        'tuesday' => (isset($hours_shedule_hours->tuesday )) ? $hours_shedule_hours->tuesday : [],
-                        'wednesday' => (isset($hours_shedule_hours->wednesday )) ? $hours_shedule_hours->wednesday : [],
-                        'thursday' => (isset($hours_shedule_hours->thursday )) ? $hours_shedule_hours->thursday : [],
-                        'friday' => (isset($hours_shedule_hours->friday )) ? $hours_shedule_hours->friday : [],
-                        'saturday' => (isset($hours_shedule_hours->saturday )) ? $hours_shedule_hours->saturday : [],
-                        'sunday' => (isset($hours_shedule_hours->sunday )) ? $hours_shedule_hours->sunday : [],
+                        'monday' => (isset($hours_shedule_hours->monday)) ? $hours_shedule_hours->monday : [],
+                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ? $hours_shedule_hours->tuesday : [],
+                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ? $hours_shedule_hours->wednesday : [],
+                        'thursday' => (isset($hours_shedule_hours->thursday)) ? $hours_shedule_hours->thursday : [],
+                        'friday' => (isset($hours_shedule_hours->friday)) ? $hours_shedule_hours->friday : [],
+                        'saturday' => (isset($hours_shedule_hours->saturday)) ? $hours_shedule_hours->saturday : [],
+                        'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
                         'exceptions' => $hours_exceptions
                     ]);
                     $next_available = $openingHours->nextOpen(Carbon::now());
@@ -477,6 +478,39 @@ class UseInternalController extends Controller
         return $user;
     }
 
+    public function _measureShop(
+        $lat = null, $lng = null,
+        $km = 10, $operation = '<', $select = 'distance_in_km')
+    {
+
+        try {
+            if (!$lat) {
+                return [];
+            }
+
+            if (!$lng) {
+                return [];
+            }
+
+            $data = DB::select(
+                DB::raw('SELECT ' . $select . ' FROM(
+                SELECT a.`name` as name_shop, a.id AS shop_id,
+                111.111 *
+                DEGREES(ACOS(LEAST(COS(RADIANS(a.lat))
+                * COS(RADIANS(' . $lat . '))
+                * COS(RADIANS(a.lng - ' . $lng . '))
+                + SIN(RADIANS(a.lat))
+                * SIN(RADIANS(' . $lat . ')), 1.0))) AS distance_in_km
+                FROM shops as a) as b WHERE b.distance_in_km ' . $operation . ' ' . $km)
+            );
+            return $data;
+        } catch (\Execption $e) {
+            return [];
+        }
+
+
+    }
+
     public function _isMyProduct($id = null)
     {
         try {
@@ -516,6 +550,22 @@ class UseInternalController extends Controller
             return $data;
         } catch (\Execption $e) {
             return false;
+        }
+    }
+
+    public function _getCategories($id=null)
+    {
+        try {
+            if (!$id) {
+                throw new \Exception('id product null');
+            }
+            $data = product_categories::where('product_categories.product_id',$id)
+                ->join('categories','product_categories.category_id','=','categories.id')
+                ->select('categories.*')
+                ->get();
+            return $data;
+        } catch (\Execption $e) {
+            return $e->getMessage();
         }
     }
 
