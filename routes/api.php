@@ -24,11 +24,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
      */
     Route::get('clear-cache', function () {
 
-        /* php artisan migrate */
-        \Artisan::call("modelCache:clear", ['--model' => 'App\products']);
-        \Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
-        \Artisan::call("modelCache:clear", ['--model' => 'App\variation_product']);
-        dd("Done");
+
     });
 
     Route::resource('/auth', '_FrontAuth');
@@ -82,6 +78,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'store'
             ]);
 
+
         Route::get('example', 'ExternalCifController@searchCompany');
 
     });
@@ -102,7 +99,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/purchase', '_FrontPurchase');
 
-        Route::resource('/sales', '_FrontSales');
+        Route::resource('/sales', '_FrontSmediaales');
 
         Route::resource('/shipping', '_FrontShipping');
 
@@ -149,6 +146,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
             ->only([
                 'store',
                 'show'
+            ]);
+
+        Route::resource('/clear-cache', '_FrontCache')
+            ->only([
+                'store'
             ]);
 
         Route::resource('/media', '_FrontAttached');

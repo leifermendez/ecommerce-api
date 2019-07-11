@@ -94,6 +94,7 @@ class _FrontAttached extends Controller
             $file = $request->file('attached');
             $type_file = $request->type_file;
             $format = 'jpg';
+            $id = $request->id;
             $imageName = Str::random(35);
             $data = null;
 
@@ -125,16 +126,28 @@ class _FrontAttached extends Controller
                 Storage::disk()->put($name_bulk, $file);
                 $url_path = Storage::url($name_bulk);
 
-                $data = attached::insertGetId(
-                    [
-                        'name' => $imageName . '.png',
-                        'users_id' => $user_current->id,
-                        'video_url' => $url_path,
-                        'media_type' => $type_file
-                    ]
-                );
+                if ($id) {
+                    attached::where('id', $id)
+                        ->update([
+                            'name' => $imageName . '.' . $format,
+                            'users_id' => $user_current->id,
+                            'video_url' => $url_path,
+                            'media_type' => $type_file
+                        ]);
 
-                $data = attached::find($data);
+                    $data = attached::find($id);
+                } else {
+                    $data = attached::insertGetId(
+                        [
+                            'name' => $imageName . '.' . $format,
+                            'users_id' => $user_current->id,
+                            'video_url' => $url_path,
+                            'media_type' => $type_file
+                        ]
+                    );
+
+                    $data = attached::find($data);
+                }
             } else {
 
                 $sizes = array(
@@ -163,17 +176,35 @@ class _FrontAttached extends Controller
 
                 }
 
-                $data = attached::insertGetId(
-                    [
-                        'name' => $imageName . '.png',
-                        'users_id' => $user_current->id,
-                        'large' => $responseSize['large'],
-                        'medium' => $responseSize['medium'],
-                        'small' => $responseSize['small'],
-                        'media_type' => $type_file
-                    ]
-                );
-                $data = attached::find($data);
+                if ($id) {
+                    attached::where('id', $id)
+                        ->update(
+                            [
+                                'name' => $imageName . '.png',
+                                'users_id' => $user_current->id,
+                                'large' => $responseSize['large'],
+                                'medium' => $responseSize['medium'],
+                                'small' => $responseSize['small'],
+                                'media_type' => $type_file
+                            ]
+                        );
+
+                    $data = attached::find($id);
+                } else {
+                    $data = attached::insertGetId(
+                        [
+                            'name' => $imageName . '.png',
+                            'users_id' => $user_current->id,
+                            'large' => $responseSize['large'],
+                            'medium' => $responseSize['medium'],
+                            'small' => $responseSize['small'],
+                            'media_type' => $type_file
+                        ]
+                    );
+                    $data = attached::find($data);
+                }
+
+
             }
 
 
@@ -233,17 +264,17 @@ class _FrontAttached extends Controller
             $user_current = JWTAuth::parseToken()->authenticate();
             $file = $request->file('attached');
             $type_file = $request->type_file;
-
+            $format = 'jpg';
             $imageName = Str::random(35);
             $data = null;
 
             if ($type_file === 'video') {
-
+                $file_validate = array('video' => $file);
                 $rules = array(
                     'attached' => 'mimes:mp4,3gb,avi|max:100000'
                 );
             } else {
-
+                $file_validate = array('image' => $file);
                 $rules = array(
                     'attached' => 'mimes:jpeg,bmp,png|max:20000'
                 );
@@ -265,41 +296,44 @@ class _FrontAttached extends Controller
                 Storage::disk()->put($name_bulk, $file);
                 $url_path = Storage::url($name_bulk);
 
-                $data = attached::where('id', $id)
-                    ->where('users_id', $user_current->id)
-                    ->update(
-                        [
-                            'name' => $imageName . '.png',
-                            'video_url' => $url_path,
-                            'media_type' => $type_file
-                        ]
-                    );
+                attached::where('id', $id)
+                    ->update([
+                        'name' => $imageName . '.' . $format,
+                        'users_id' => $user_current->id,
+                        'video_url' => $url_path,
+                        'media_type' => $type_file
+                    ]);
 
-                $data = attached::find($data);
+                $data = attached::find($id);
             } else {
 
                 $sizes = array(
-                    'small' => Image::make($file)->resize(200, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
-                    'medium' => Image::make($file)->resize(600, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
-                    'large' => Image::make($file)->resize(1200, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->stream()->__toString(),
+                    'small' => Image::make($file)
+                        ->encode($format, 100)
+                        ->resize(200, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
+                    'medium' => Image::make($file)
+                        ->encode($format, 100)
+                        ->resize(600, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
+                    'large' => Image::make($file)
+                        ->encode($format, 100)
+                        ->resize(1600, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->stream()->__toString(),
                     /*'original' => Image::make($file)->stream()->__toString()*/
                 );
 
-
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.png';
+                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
                     Storage::disk()->put($name_bulk, $value);
-                    $responseSize[$key] = Storage::url($name_bulk);
+                    $responseSize[$key] = Storage::disk()->url($name_bulk);
 
                 }
 
-                $data = attached::where('id', $id)
+                attached::where('id', $id)
                     ->update(
                         [
                             'name' => $imageName . '.png',
@@ -310,7 +344,8 @@ class _FrontAttached extends Controller
                             'media_type' => $type_file
                         ]
                     );
-                $data = attached::find($data);
+
+                $data = attached::find($id);
             }
 
 
