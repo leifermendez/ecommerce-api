@@ -24,7 +24,8 @@ class _FrontBanners extends Controller
                 ->where('banners.start','<=',$now->toDateTimeString())
                 ->where('banners.finish','>=',$now->toDateTimeString())
                 ->select('banners.*','attacheds.small as attached_small',
-                'attacheds.medium as attached_medium','attacheds.large as attached_large')
+                'attacheds.medium as attached_medium','attacheds.large as attached_large',
+                    'attacheds.video_url')
                 ->paginate($limit);
 
             $response = array(
@@ -110,6 +111,6 @@ class _FrontBanners extends Controller
      */
     public function destroy($id)
     {
-        //
+        //-
     }
 }

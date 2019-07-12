@@ -98,7 +98,15 @@ class AttachedController extends Controller
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
                 Storage::disk()->put($name_bulk, $file);
+                $a = Storage::disk()->files($name_bulk);
+                if (!(count($a))) {
+                    throw new \Exception('not files array');
+                }
+
+                $file_inside = explode('/', $a[0]);
+                $file_inside=end($file_inside);
                 $url_path = Storage::url($name_bulk);
+                $url_path .= '/'.$file_inside;
 
                 $data = attached::insertGetId(
                     [
@@ -114,17 +122,17 @@ class AttachedController extends Controller
 
                 $sizes = array(
                     'small' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(200, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'medium' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'large' => Image::make($file)
-                        ->encode($format,100)
+                        ->encode($format, 100)
                         ->resize(1600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
@@ -132,7 +140,7 @@ class AttachedController extends Controller
                 );
 
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.'.$format;
+                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
                     Storage::disk()->put($name_bulk, $value);
                     $responseSize[$key] = Storage::disk()->url($name_bulk);
 
@@ -150,7 +158,6 @@ class AttachedController extends Controller
                 );
                 $data = attached::find($data);
             }
-
 
 
             $status = array(
@@ -258,11 +265,18 @@ class AttachedController extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk('local')->put($name_bulk, $file);
-                $url_path = Storage::url($name_bulk);
+                Storage::disk()->put($name_bulk, $file);
+                $a = Storage::disk()->files($name_bulk);
+                if (!(count($a))) {
+                    throw new \Exception('not files array');
+                }
 
-                $data = attached::where('id',$id)
-                    ->update(
+                $file_inside = explode('/', $a[0]);
+                $file_inside=end($file_inside);
+                $url_path = Storage::url($name_bulk);
+                $url_path .= '/'.$file_inside;
+
+                $data = attached::insertGetId(
                     [
                         'name' => $imageName . '.png',
                         'users_id' => $user_current->id,
@@ -295,17 +309,17 @@ class AttachedController extends Controller
 
                 }
 
-                $data = attached::where('id',$id)
+                $data = attached::where('id', $id)
                     ->update(
-                    [
-                        'name' => $imageName . '.png',
-                        'users_id' => $user_current->id,
-                        'large' => $responseSize['large'],
-                        'medium' => $responseSize['medium'],
-                        'small' => $responseSize['small'],
-                        'media_type' => $type_file
-                    ]
-                );
+                        [
+                            'name' => $imageName . '.png',
+                            'users_id' => $user_current->id,
+                            'large' => $responseSize['large'],
+                            'medium' => $responseSize['medium'],
+                            'small' => $responseSize['small'],
+                            'media_type' => $type_file
+                        ]
+                    );
                 $data = attached::find($data);
             }
 

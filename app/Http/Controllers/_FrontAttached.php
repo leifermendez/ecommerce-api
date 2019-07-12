@@ -124,30 +124,26 @@ class _FrontAttached extends Controller
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
                 Storage::disk()->put($name_bulk, $file);
-                $url_path = Storage::url($name_bulk);
-
-                if ($id) {
-                    attached::where('id', $id)
-                        ->update([
-                            'name' => $imageName . '.' . $format,
-                            'users_id' => $user_current->id,
-                            'video_url' => $url_path,
-                            'media_type' => $type_file
-                        ]);
-
-                    $data = attached::find($id);
-                } else {
-                    $data = attached::insertGetId(
-                        [
-                            'name' => $imageName . '.' . $format,
-                            'users_id' => $user_current->id,
-                            'video_url' => $url_path,
-                            'media_type' => $type_file
-                        ]
-                    );
-
-                    $data = attached::find($data);
+                $a = Storage::disk()->files($name_bulk);
+                if (!(count($a))) {
+                    throw new \Exception('not files array');
                 }
+
+                $file_inside = explode('/', $a[0]);
+                $file_inside = end($file_inside);
+                $url_path = Storage::url($name_bulk);
+                $url_path .= '/' . $file_inside;
+
+                $data = attached::insertGetId(
+                    [
+                        'name' => $imageName . '.png',
+                        'users_id' => $user_current->id,
+                        'video_url' => $url_path,
+                        'media_type' => $type_file
+                    ]
+                );
+
+                $data = attached::find($data);
             } else {
 
                 $sizes = array(
@@ -294,17 +290,26 @@ class _FrontAttached extends Controller
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
                 Storage::disk()->put($name_bulk, $file);
-                $url_path = Storage::url($name_bulk);
+                $a = Storage::disk()->files($name_bulk);
+                if (!(count($a))) {
+                    throw new \Exception('not files array');
+                }
 
-                attached::where('id', $id)
-                    ->update([
-                        'name' => $imageName . '.' . $format,
+                $file_inside = explode('/', $a[0]);
+                $file_inside = end($file_inside);
+                $url_path = Storage::url($name_bulk);
+                $url_path .= '/' . $file_inside;
+
+                $data = attached::insertGetId(
+                    [
+                        'name' => $imageName . '.png',
                         'users_id' => $user_current->id,
                         'video_url' => $url_path,
                         'media_type' => $type_file
-                    ]);
+                    ]
+                );
 
-                $data = attached::find($id);
+                $data = attached::find($data);
             } else {
 
                 $sizes = array(
@@ -377,6 +382,28 @@ class _FrontAttached extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $user_current = JWTAuth::parseToken()->authenticate();
+            attached::where('id', $id)
+                ->where('users_id', $user_current->id)
+                ->delete();
+
+            $status = array(
+                'status' => 'success',
+                'code' => 0
+            );
+            return response()->json($status);
+
+
+        } catch (\Exception $e) {
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 }

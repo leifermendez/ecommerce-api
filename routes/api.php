@@ -99,7 +99,7 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/purchase', '_FrontPurchase');
 
-        Route::resource('/sales', '_FrontSmediaales');
+        Route::resource('/sales', '_FrontSales');
 
         Route::resource('/shipping', '_FrontShipping');
 
