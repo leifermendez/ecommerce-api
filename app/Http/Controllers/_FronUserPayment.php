@@ -77,7 +77,7 @@ class _FronUserPayment extends Controller
                 'account_lastname' => 'required'
             ]);
             $fields['user_id'] = $user->id;
-            if(!user_payment::where('user_id',$user->id)->get()){
+            if(!user_payment::where('user_id',$user->id)->exists()){
                 $fields['primary'] = 1;
             }
             $data = user_payment::insertGetId($fields);

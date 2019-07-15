@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\shop;
 use DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Artisan;
 
 class _FrontShop extends Controller
 {
@@ -93,6 +94,7 @@ class _FrontShop extends Controller
     public function store(Request $request)
     {
         try {
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $request->request->remove('_location');
             $fields = array();
@@ -107,6 +109,8 @@ class _FrontShop extends Controller
             $id = Shop::insertGetId($fields);
             $data = Shop::find($id);
 
+            Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -115,7 +119,7 @@ class _FrontShop extends Controller
             return response()->json($response);
 
         } catch (\Exception $e) {
-
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
@@ -211,6 +215,7 @@ class _FrontShop extends Controller
     public function update(Request $request, $id)
     {
         try {
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $request->request->remove('_location');
             $fields = array();
@@ -227,7 +232,8 @@ class _FrontShop extends Controller
                 ->update(['role' => 'shop']);
 
             $data = Shop::find($id);
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -236,7 +242,7 @@ class _FrontShop extends Controller
             return response()->json($response);
 
         } catch (\Exception $e) {
-
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),

@@ -171,7 +171,7 @@ class UseInternalController extends Controller
             $data = User::where('id', $id)->first();
 
             if (!$data->confirmed) {
-                throw new \Exception('user not confirmed');
+                throw new \Exception('user_not_confirmed');
             }
 
             return ['data' => $data];
@@ -321,9 +321,15 @@ class UseInternalController extends Controller
             }
 
             $data = variation_product::where('variation_products.product_id', $id)
-                ->join('attacheds', 'variation_products.attached_id', '=', 'attacheds.id')
-                ->select('variation_products.*', 'attacheds.small as attacheds_small',
-                    'attacheds.medium as attacheds_medium', 'attacheds.large as attacheds_large')
+                ->where('variation_products.status','available')
+                ->select('variation_products.*',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
+                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large')
+                    )
                 ->orderBy('variation_products.price_normal', $sort);
 
             $data = ($limit) ? $data->take($limit)->get() : $data->get();
@@ -439,12 +445,13 @@ class UseInternalController extends Controller
                 throw new \Exception('shop null');
             }
 
-            $data = shop::where('shops.id', $shop)
+            $data = shop::disableCache()
+                ->where('shops.id', $shop)
                 ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
                 ->where('user_payments.primary', 1);
 
             if (!$data->exists()) {
-                throw new \Exception('(' . $shop . ') shop payment not found');
+                throw new \Exception('shop payment not found');
             }
 
             $data = $data->first();
@@ -553,14 +560,14 @@ class UseInternalController extends Controller
         }
     }
 
-    public function _getCategories($id=null)
+    public function _getCategories($id = null)
     {
         try {
             if (!$id) {
                 throw new \Exception('id product null');
             }
-            $data = product_categories::where('product_categories.product_id',$id)
-                ->join('categories','product_categories.category_id','=','categories.id')
+            $data = product_categories::where('product_categories.product_id', $id)
+                ->join('categories', 'product_categories.category_id', '=', 'categories.id')
                 ->select('categories.*')
                 ->get();
             return $data;

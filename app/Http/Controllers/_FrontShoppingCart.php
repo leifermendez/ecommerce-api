@@ -127,7 +127,6 @@ class _FrontShoppingCart extends Controller
         $fields = array();
         $request->request->remove('_location');
 
-
         foreach ($request->all() as $key => $value) {
             if ($key !== 'user_id') {
                 $fields[$key] = $value;
@@ -136,10 +135,14 @@ class _FrontShoppingCart extends Controller
         try {
             $user = JWTAuth::parseToken()->authenticate();
             (new UseInternalController)->_isAvailableUser($user->id);
+            $isMyProduct = (new UseInternalController)->_isMyProduct($fields['product_id']);
+            if ($isMyProduct) {
+                throw new \Exception('not_allowed_is_my_product');
+            }
             $isAvailable = (new UseInternalController)->_isAvailableProduct($fields['product_id']);
 
             if (!$isAvailable['isAvailable']) {
-                throw new \Exception('not available');
+                throw new \Exception('not_available');
             }
 
             (new UseInternalController)->_checkBank($fields['shop_id']);

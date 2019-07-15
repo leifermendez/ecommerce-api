@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\hours;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class _FrontShopSchedules extends Controller
@@ -57,6 +58,7 @@ class _FrontShopSchedules extends Controller
 
             $data = hours::insertGetId($fields);
             $data = hours::find($data);
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',
@@ -85,7 +87,7 @@ class _FrontShopSchedules extends Controller
     {
         try {
 
-            $data = hours::where('shop_id',$id)->first();
+            $data = hours::where('shop_id', $id)->first();
 
             if ($data) {
                 $data->shedule_hours = json_decode($data->shedule_hours);
@@ -150,9 +152,10 @@ class _FrontShopSchedules extends Controller
             );
 
 
-            $data = hours::where('shop_id', $id)
+            hours::where('shop_id', $id)
                 ->update($fields);
-            $data = hours::where('shop_id',$id)->first();
+            $data = hours::where('shop_id', $id)->first();
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',

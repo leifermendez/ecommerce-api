@@ -86,18 +86,23 @@ class _FrontProductVariations extends Controller
         }
         try {
             DB::beginTransaction();
-            $user = JWTAuth::parseToken()->authenticate();
-            $isMy = products::where('products.id',$fields['product_id'])
-                ->join('shops','shops.id','=','products.shop_id')
-                ->where('shops.users_id',$user->id)
-                ->exists();
-
+            $isMy = (new UseInternalController)->_isMyProduct($fields['product_id']);
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
 
             $data = variation_product::insertGetId($fields);
-            $data = variation_product::find($data);
+//            $data = variation_product::find($data);
+            $data = variation_product::where('id',$data)
+                ->select('variation_products.*',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small')
+                )
+                ->first();
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             DB::commit();
             $response = array(
@@ -170,6 +175,7 @@ class _FrontProductVariations extends Controller
     public function update(Request $request, $id)
     {
         try {
+            DB::beginTransaction();
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id') {
@@ -177,12 +183,7 @@ class _FrontProductVariations extends Controller
                 };
             }
 
-            $user = JWTAuth::parseToken()->authenticate();
-            $isMy = shop::where('variation_products.product_id',$fields['product_id'])
-                ->where('shops.users_id',$user->id)
-                ->join('shops','shops.id','=','variation_products.product_id')
-                ->exists();
-
+            $isMy = (new UseInternalController)->_isMyProduct($fields['product_id']);
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
@@ -191,8 +192,20 @@ class _FrontProductVariations extends Controller
                 ->update($fields);
 
             $data = variation_product::find($id);
+            $data = variation_product::where('id',$id)
+                ->select('variation_products.*',
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small')
+                )
+                ->first();
+
 
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Actualizado',
@@ -203,7 +216,7 @@ class _FrontProductVariations extends Controller
 
 
         } catch (\Exception $e) {
-
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),

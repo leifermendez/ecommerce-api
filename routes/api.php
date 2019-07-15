@@ -22,10 +22,6 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
     /**
      * Rutas libres
      */
-    Route::get('clear-cache', function () {
-
-
-    });
 
     Route::resource('/auth', '_FrontAuth');
 

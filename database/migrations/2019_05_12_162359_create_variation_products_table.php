@@ -27,6 +27,7 @@ class CreateVariationProductsTable extends Migration
             $table->string('height')->nullable();
             $table->string('length')->nullable();
             $table->boolean('delivery')->default(0);
+            $table->enum('status', ['available', 'unavailable','delete'])->default($value = 'available');
             $table->timestamps();
         });
     }
