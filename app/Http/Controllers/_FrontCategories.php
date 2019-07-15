@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\categories;
+use DB;
 
 class _FrontCategories extends Controller
 {
@@ -20,7 +21,10 @@ class _FrontCategories extends Controller
             $data = categories::orderBy('categories.id', 'DESC')
                 ->join('attacheds','categories.image','=','attacheds.id')
                 ->select('categories.*','attacheds.small as image_small',
-                    'attacheds.medium as image_medium','attacheds.large as image_large')
+                'categories.child as categories_child',
+                    'attacheds.medium as image_medium','attacheds.large as image_large',
+                    DB::raw('(SELECT c2.name FROM categories as c2
+                    WHERE c2.id = categories_child limit 1) as parent'))
                 ->paginate($limit);
 
             $response = array(
