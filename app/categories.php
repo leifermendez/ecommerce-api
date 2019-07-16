@@ -7,5 +7,4 @@ use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 
 class categories extends Model
 {
-    use Cachable;
 }

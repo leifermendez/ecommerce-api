@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\banners;
-use App\product_categories;
-use App\products;
+use App\blogs;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Facades\DB;
 
-class _FrontProductsCategories extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +19,7 @@ class _FrontProductsCategories extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
 
-            $data = product_categories::orderBy('id', 'DESC')
+            $data = blogs::orderBy('id', 'DESC')
                 ->paginate($limit);
 
             $response = array(
@@ -63,35 +60,16 @@ class _FrontProductsCategories extends Controller
      */
     public function store(Request $request)
     {
-        $user = JWTAuth::parseToken()->authenticate();
         $fields = array();
         foreach ($request->all() as $key => $value) {
             $fields[$key] = $value;
         }
         try {
-            DB::beginTransaction();
-            $data = array();
-            $isMy = products::where('products.id', $fields['product_id'])
-                ->where('shops.users_id', $user->id)
-                ->join('shops', 'products.shop_id', '=', 'shops.id')
-                ->exists();
-            if (!$isMy) {
-                throw new \Exception('not permission for shop ');
-            }
-            product_categories::where('product_id', $fields['product_id'])
-                ->delete();
-            if (gettype($fields['category_id']) === 'array') {
-                foreach ($fields['category_id'] as $a) {
-                    $b['product_id'] = $fields['product_id'];
-                    $b['category_id'] = $a;
-                    $data[] = product_categories::insertGetId($b);
-                }
-            } else {
-                $data = product_categories::insertGetId($fields);
-                $data = product_categories::find($data);
-            }
+            $user = JWTAuth::parseToken()->authenticate();
+            $fields['users_id'] = $user->id;
+            $data = blogs::insertGetId($fields);
+            $data = blogs::find($data);
 
-            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -100,13 +78,12 @@ class _FrontProductsCategories extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
-            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,
                 'error' => $e->getMessage()
             );
-            return response()->json($response);
+            return response()->json($response, 400);
         }
     }
 
@@ -121,7 +98,7 @@ class _FrontProductsCategories extends Controller
     {
         try {
 
-            $data = product_categories::find($id);
+            $data = blogs::find($id);
             $response = array(
                 'status' => 'success',
                 'data' => $data,
@@ -164,37 +141,20 @@ class _FrontProductsCategories extends Controller
     {
 
         try {
-            $data = array();
-            DB::beginTransaction();
-
             $fields = array();
+            $user = JWTAuth::parseToken()->authenticate();
+            $fields['users_id'] = $user->id;
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id') {
                     $fields[$key] = $value;
                 };
             }
 
-            $isMy = (new UseInternalController)->_isMyProduct($fields['product_id']);
+            blogs::where('id', $id)
+                ->update($fields);
 
-            if (!$isMy) {
-                throw new \Exception('not permissions');
-            }
+            $data = blogs::find($id);
 
-            product_categories::where('product_id', $fields['product_id'])
-                ->delete();
-
-            if (gettype($fields['category_id']) === 'array') {
-                foreach ($fields['category_id'] as $a) {
-                    $b['product_id'] = $fields['product_id'];
-                    $b['category_id'] = $a;
-                    $data[] = product_categories::insertGetId($b);
-                }
-            } else {
-                $data = product_categories::insertGetId($fields);
-                $data = product_categories::find($data);
-            }
-
-            DB::commit();
 
             $response = array(
                 'status' => 'success',
@@ -206,7 +166,7 @@ class _FrontProductsCategories extends Controller
 
 
         } catch (\Exception $e) {
-            DB::rollBack();
+
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
@@ -227,6 +187,29 @@ class _FrontProductsCategories extends Controller
     public function destroy($id)
     {
 
+        try {
 
+            blogs::where('id', $id)
+                ->delete();
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Eliminado',
+                'code' => 0
+            );
+            return response()->json($response);
+
+
+        } catch (\Exception $e) {
+
+            $response = array(
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            );
+
+            return response()->json($response, 500);
+
+        }
     }
 }

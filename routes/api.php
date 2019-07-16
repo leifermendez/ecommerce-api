@@ -74,6 +74,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'store'
             ]);
 
+        Route::resource('/blog', '_FrontBlog')
+            ->only([
+                'show',
+                'index'
+            ]);
 
         Route::get('example', 'ExternalCifController@searchCompany');
 
@@ -200,6 +205,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('productAttached', 'ProductAttachedController');
     Route::resource('attached', 'AttachedController');
     Route::resource('zoneAvailable', 'ZoneAvailableController');
+    Route::resource('blog', 'BlogController');
 
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');

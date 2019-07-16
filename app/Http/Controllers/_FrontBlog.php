@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\banners;
+use App\blogs;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\categories;
-use DB;
 
-class _FrontCategories extends Controller
+class _FrontBlog extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +20,8 @@ class _FrontCategories extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-            $data = categories::orderBy('categories.order', 'ASC')
-                ->join('attacheds','categories.image','=','attacheds.id')
-                ->select('categories.*','attacheds.small as image_small',
-                'categories.child as categories_child',
-                    'attacheds.medium as image_medium','attacheds.large as image_large',
-                    DB::raw('(SELECT c2.name FROM categories as c2
-                    WHERE c2.id = categories_child limit 1) as parent'))
+
+            $data = blogs::orderBy('id', 'DESC')
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
@@ -48,6 +44,7 @@ class _FrontCategories extends Controller
                 'data' => $data,
                 'code' => 0
             );
+
             return response()->json($response);
 
         } catch (\Exception $e) {
@@ -76,7 +73,7 @@ class _FrontCategories extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -87,14 +84,14 @@ class _FrontCategories extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         try {
 
-            $data = categories::find($id);
+            $data = blogs::find($id);
 
             $response = array(
                 'status' => 'success',
@@ -119,7 +116,7 @@ class _FrontCategories extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -130,8 +127,8 @@ class _FrontCategories extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -142,7 +139,7 @@ class _FrontCategories extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
