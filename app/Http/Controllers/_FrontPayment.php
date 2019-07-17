@@ -99,7 +99,7 @@ class _FrontPayment extends Controller
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-
+            $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
             $request->validate([
                 'source' => 'required',
                 'purchase_uuid' => 'required'
@@ -116,10 +116,9 @@ class _FrontPayment extends Controller
             $detail_purchase = purchase_detail::where('purchase_uuid', $request->purchase_uuid)->get();
 
             foreach ($detail_purchase as $purchase) {
-                $user_payment = shop::where('shops.id', $purchase->shop_id)
-                    ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
-                    ->orderBy('user_payments.updated_at', 'DESC')
-                    ->where('user_payments.primary', 1)
+                $user_payment = user_payment::where('user_payments.primary', 1)
+                    ->join('shops','user_payments.user_id','=','shops.users_id')
+                    ->where('shops.id',$purchase->shop_id)
                     ->select('user_payments.*')
                     ->first();
 
@@ -128,8 +127,10 @@ class _FrontPayment extends Controller
                 if ($user_payment && ($user_payment->payment_option === 'stripe')) {
                     $description = "Producto ID: $purchase->product_id, Etiqueta: $purchase->product_label";
                     $description .= "Order: $request->purchase_uuid, Feed: " . $data_feed['application_feed_amount'];
+                    $amount_supplier = ($discount_to_supplier == 1) ?
+                        $data_feed['amount_without_feed'] : $data_feed['amount_with_feed'];
                     $r = $this->_transfer($request->purchase_uuid,
-                        $data_feed['amount_without_feed'], $user_payment->iban, $description);
+                        $amount_supplier, $user_payment->iban, $description);
                     if ($r) {
                         purchase_order::where('uuid', $request->purchase_uuid)
                             ->where('user_id', $user->id)

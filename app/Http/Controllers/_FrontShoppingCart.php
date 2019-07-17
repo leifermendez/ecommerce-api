@@ -79,7 +79,8 @@ class _FrontShoppingCart extends Controller
             $total_shipping = ($data_total) ? count($data_total) * $_total_shipping : 0;
             //_getSetting('feed_percentage');
             $total_feed = (new UseInternalController)->_sumList($data, 'application_feed_amount');
-
+            $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
+            $total_feed = ($discount_to_supplier == 1) ? $total_feed : 0;
             $response = array(
                 'status' => 'success',
                 'data' => [

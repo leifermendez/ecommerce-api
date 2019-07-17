@@ -321,7 +321,7 @@ class UseInternalController extends Controller
             }
 
             $data = variation_product::where('variation_products.product_id', $id)
-                ->where('variation_products.status','available')
+                ->where('variation_products.status', 'available')
                 ->select('variation_products.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
@@ -329,7 +329,7 @@ class UseInternalController extends Controller
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
                     DB::raw('(SELECT attacheds.large FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large')
-                    )
+                )
                 ->orderBy('variation_products.price_normal', $sort);
 
             $data = ($limit) ? $data->take($limit)->get() : $data->get();
@@ -355,6 +355,7 @@ class UseInternalController extends Controller
     public function _totalPurchase($uuid = null)
     {
         try {
+            $discount_to_supplier = $this->_getSetting('discount_to_supplier');
             $data = [];
 
             if (!$uuid) {
@@ -364,12 +365,12 @@ class UseInternalController extends Controller
             if (!purchase_order::where('uuid', $uuid)->exists()) {
                 throw new \Exception('not found');
             }
-
+            $sql = ($discount_to_supplier == 1) ? 'amount + amount_shipping ' : 'amount + amount_shipping + feed';
             $data = purchase_order::where('uuid', $uuid)
                 ->select(DB::raw('SUM(amount) as total_products'),
                     DB::raw('SUM(amount_shipping) as total_shipping'),
                     DB::raw('SUM(feed) as total_feed'),
-                    DB::raw('SUM(amount + amount_shipping + feed) as total'))
+                    DB::raw('SUM(' . $sql . ') as total'))
                 ->first();
 
             return $data->toArray();
