@@ -57,6 +57,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
         Route::resource('/shop', '_FrontShop');
 
+        Route::resource('/newsletter', '_FrontNewsletter')
+            ->only([
+                'store'
+            ]);
+
         Route::resource('/categories', '_FrontCategories')
             ->only([
                 'index',
