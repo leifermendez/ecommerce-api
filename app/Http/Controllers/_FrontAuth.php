@@ -41,7 +41,8 @@ class _FrontAuth extends Controller
             'password' => bcrypt($data['password']),
             'username' => $data['email'],
             'referer_code' => $data['referer_code'],
-            'avatar' => $data['avatar']
+            'avatar' => $data['avatar'],
+            'role' => $data['role']
         ];
 
         User::create($fields);
@@ -70,6 +71,7 @@ class _FrontAuth extends Controller
             'password' => ($data['password']) ? $data['password'] : $random,
             'username' => $data['email'],
             'avatar' => $data['avatar'],
+            'role' => $data['role'],
             'referer_code' => $random_ref_code
         ];
 
@@ -123,6 +125,7 @@ class _FrontAuth extends Controller
             $token = $request->token;
             $avatar = $request->avatar;
             $password = $request->password;
+            $role = $request->role;
             $random_ref_code = Str::random(8);
 
             if (!User::where('email', $request->email)->exists()) {
@@ -130,6 +133,7 @@ class _FrontAuth extends Controller
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => $request->password,
+                    'role' => ($role) ? 'shop' : 'user',
                     'avatar' => ($request->avatar) ? $request->avatar :
                         'https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/public/upload/products/small_GCPKzfLJ0jjvWPQLAAotooV9sMDQsQLL3qO.png',
                     'referer_code' => $random_ref_code

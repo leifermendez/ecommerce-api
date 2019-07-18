@@ -11,7 +11,7 @@ use App\variation_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use Illuminate\Support\Facades\DB;
 class _FrontSales extends Controller
 {
     /**
@@ -77,6 +77,7 @@ class _FrontSales extends Controller
 
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -191,10 +192,17 @@ class _FrontSales extends Controller
             $my_shops = shop::where('users_id', $user->id)
                 ->pluck('id')->toArray();
 
+
             $data = purchase_order::whereIn('purchase_orders.shop_id', $my_shops)
                 ->join('shops', 'purchase_orders.shop_id', '=', 'shops.id')
                 ->select('purchase_orders.*', 'shops.name as shops_name')
-                ->where('purchase_orders.id', $id)
+                ->where(function($query) use ($id){
+                    if(strlen($id)>10){
+                        $query->where('purchase_orders.uuid', $id);
+                    }else{
+                        $query->where('purchase_orders.id', $id);
+                    }
+                })
                 ->first();
 
             $response = array(
