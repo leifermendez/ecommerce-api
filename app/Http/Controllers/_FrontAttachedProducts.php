@@ -6,6 +6,7 @@ use App\product_attached;
 use App\products;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Artisan;
 
 class _FrontAttachedProducts extends Controller
 {
@@ -96,6 +97,7 @@ class _FrontAttachedProducts extends Controller
 
             $data = product_attached::insertGetId($fields);
             $data = product_attached::find($data);
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
                 'status' => 'success',
@@ -165,7 +167,7 @@ class _FrontAttachedProducts extends Controller
             $data = product_attached::where('id', $id)
                 ->update($fields);
             $data = product_attached::find($data);
-
+            Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
                 'msg' => 'Editado',

@@ -193,9 +193,14 @@ class _FrontPurchase extends Controller
             $data = purchase_order::where('purchase_orders.user_id', $user->id)
                 ->join('shops', 'purchase_orders.shop_id', '=', 'shops.id')
                 ->select('purchase_orders.*', 'shops.name as shops_name')
-                ->where('purchase_orders.id', $id)
+                ->where(function($query) use ($id){
+                    if(strlen($id)>10){
+                        $query->where('purchase_orders.uuid', $id);
+                    }else{
+                        $query->where('purchase_orders.id', $id);
+                    }
+                })
                 ->first();
-
             $response = array(
                 'status' => 'success',
                 'data' => $data,
