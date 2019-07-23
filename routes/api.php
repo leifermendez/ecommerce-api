@@ -40,9 +40,13 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         Route::resource('/products', '_FrontProducts')
             ->only([
                 'index',
-                'show'
             ])
             ->middleware('CheckLocation');
+
+        Route::resource('/products', '_FrontProducts')
+            ->only([
+                'show'
+            ]);
 
         Route::resource('/search', '_FrontSearch')
             ->only([
