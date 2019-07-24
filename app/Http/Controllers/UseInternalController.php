@@ -27,6 +27,8 @@ use App\User;
 
 class UseInternalController extends Controller
 {
+    protected  $_orm;
+
     public function _getSetting($key = null)
     {
         try {
@@ -584,5 +586,11 @@ class UseInternalController extends Controller
             $total += $l['feed_amount']['application_feed_amount'];
         }
         return $total;
+    }
+
+    public function _getAttribute($orm)
+    {
+        $this->_orm = $orm;
+        return $this->_orm;
     }
 }

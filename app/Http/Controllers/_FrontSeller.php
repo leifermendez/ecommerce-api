@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\categories;
 use App\products;
 use App\shop;
+use Illuminate\Support\Facades\DB;
 
 class _FrontSeller extends Controller
 {
@@ -32,7 +33,7 @@ class _FrontSeller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +44,7 @@ class _FrontSeller extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
@@ -52,30 +53,65 @@ class _FrontSeller extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
+            $attributes = [];
+            $tmp_list = [];
+            $sql = [
+                '_sql',
+                '_sql_category',
+                '_sql_attr'
+            ];
 
-            $data = products::where('products.shop_id', $id)
-                ->join('shops','products.shop_id','=','shops.id')
-                ->where(function ($query) use ($filters) {
-                    foreach ($filters as $value) {
-                        $tmp = explode(",", $value);
-                        if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
-                            $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)) {
-                                foreach ($subTmp as $k) {
-                                    $query->orWhere($tmp[0], $tmp[1], $k);
+            foreach ($sql as $value => $key) {
+                $sql[$key] = products::where('products.shop_id', $id)
+                    ->join('shops', 'products.shop_id', '=', 'shops.id')
+                    ->where(function ($query) use ($filters) {
+                        foreach ($filters as $value) {
+                            $tmp = explode(",", $value);
+                            if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+                                $subTmp = explode("|", $tmp[2]);
+                                if (count($subTmp)) {
+                                    foreach ($subTmp as $k) {
+                                        $query->orWhere($tmp[0], $tmp[1], $k);
+                                    }
+                                } else {
+                                    $query->where($tmp[0], $tmp[1], $tmp[2]);
                                 }
-                            } else {
-                                $query->where($tmp[0], $tmp[1], $tmp[2]);
                             }
                         }
-                    }
-                })
-                ->orderBy('products.id','DESC')
-                ->select('products.*','shops.name as shop_name','shops.address as shop_address',
-                'shops.slug as shop_slug')
+                    })->orderBy('products.id', 'DESC');
+            }
+
+            $data = $sql['_sql']
+                ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
+                    'shops.slug as shop_slug')
                 ->paginate($limit);
 
-            $data->map(function ($item, $key) use($request)  {
+            $product_attr = $sql['_sql_attr']->disableCache()
+                ->join('product_attributes', 'products.id', '=', 'product_attributes.product_id')
+                ->join('attributes', 'product_attributes.attributes_id', '=', 'attributes.id')
+                ->select('attributes.id as attr_id', 'attributes.name', 'product_attributes.value')
+                ->get()
+                ->toArray();
+
+            foreach ($product_attr as $key => $value) {
+                $tmp_list[$value['name']][] = $value;
+                $array = array_map('json_encode', $tmp_list[$value['name']]);
+                $array = array_unique($array);
+                $array = array_map('json_decode', $array);
+                $tmp_list[$value['name']] = $array;
+            }
+
+            $categories = $sql['_sql_category']->disableCache()
+                ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+                ->join('categories', 'product_categories.category_id', '=', 'categories.id')
+                ->select('categories.name', 'categories.id')
+                ->groupBy('categories.name', 'categories.id')
+                ->get();
+
+            $attributes['product_attr'] = $tmp_list;
+            $attributes['categories'] = $categories;
+
+            $data->map(function ($item, $key) use ($request) {
 
                 $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
                 $getVariations = (new UseInternalController)->_getVariations($item->id);
@@ -90,11 +126,24 @@ class _FrontSeller extends Controller
                 return $item;
             });
 
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
+            if ($request->all_filters) {
+                $response = array(
+                    'status' => 'success',
+                    'data' => [
+                        'list' => $data,
+                        'filter' => $attributes
+                    ],
+                    'code' => 0
+                );
+            } else {
+                $response = array(
+                    'status' => 'success',
+                    'data' => $data,
+                    'code' => 0
+                );
+            }
+
+
             return response()->json($response);
 
         } catch (\Exception $e) {
@@ -113,7 +162,7 @@ class _FrontSeller extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -124,8 +173,8 @@ class _FrontSeller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -136,7 +185,7 @@ class _FrontSeller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
