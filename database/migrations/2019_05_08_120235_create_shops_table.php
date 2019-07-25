@@ -31,6 +31,7 @@ class CreateShopsTable extends Migration
             $table->string('polity_privacy')->nullable($value = true);
             $table->string('lat');
             $table->string('lng');
+            $table->string('referer');
             $table->enum('status', ['available', 'unavailable'])->default($value = 'available');
             $table->timestamps();
         });
