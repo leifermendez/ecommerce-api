@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttachedProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttachedProducts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontBlog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontBlog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSales.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSales.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSeller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSeller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +19,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="383">
               <caret line="37" column="57" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -53,7 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Artisan</find>
       <find>attac</find>
       <find>user not confirmed</find>
       <find>not available</find>
@@ -83,6 +82,7 @@
       <find>attributes</find>
       <find>$data_attributes</find>
       <find>$attributes</find>
+      <find>map(functio</find>
     </findStrings>
     <replaceStrings>
       <replace>product_attached:</replace>
@@ -140,7 +140,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_05_12_162359_create_variation_products_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" />
         <option value="$PROJECT_DIR$/app/categories.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontProductsCategories.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BlogController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_16_122004_create_blogs_table.php" />
@@ -157,6 +156,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSeller.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php" />
       </list>
     </option>
   </component>
@@ -423,7 +423,7 @@
       <workItem from="1563864044555" duration="32000" />
       <workItem from="1563865427465" duration="2425000" />
       <workItem from="1563950415817" duration="15247000" />
-      <workItem from="1564037500073" duration="7726000" />
+      <workItem from="1564037500073" duration="9831000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -523,11 +523,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563366017705</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Filtros">
+      <created>1564054973559</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1564054973559</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323360000" />
+    <option name="totallyTimeSpent" value="325465000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -577,7 +584,8 @@
     <MESSAGE value="Busqueda por LAT LNG" />
     <MESSAGE value="Ajustes" />
     <MESSAGE value="Comision" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comision" />
+    <MESSAGE value="Filtros" />
+    <option name="LAST_COMMIT_MESSAGE" value="Filtros" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -716,16 +724,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="94" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
-          <folding>
-            <element signature="e#252#1364#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1060,6 +1058,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
           <caret line="37" column="57" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCategories.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="54" column="50" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
         </state>
       </provider>
     </entry>
