@@ -27,7 +27,7 @@ class _FrontAttachedProducts extends Controller
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                             $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)) {
+                            if (count($subTmp)>1) {
                                 foreach ($subTmp as $k) {
                                     $query->orWhere($tmp[0], $tmp[1], $k);
                                 }

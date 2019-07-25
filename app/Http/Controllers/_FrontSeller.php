@@ -53,7 +53,9 @@ class _FrontSeller extends Controller
 
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-            $attributes = [];
+            $attributes_filter = ($request->attributes_filter) ? explode("?", $request->attributes_filter) : [];
+            $data_attributes = [];
+
             $tmp_list = [];
             $sql = [
                 '_sql',
@@ -64,12 +66,13 @@ class _FrontSeller extends Controller
             foreach ($sql as $value => $key) {
                 $sql[$key] = products::where('products.shop_id', $id)
                     ->join('shops', 'products.shop_id', '=', 'shops.id')
+                    ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->where(function ($query) use ($filters) {
                         foreach ($filters as $value) {
                             $tmp = explode(",", $value);
                             if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                                 $subTmp = explode("|", $tmp[2]);
-                                if (count($subTmp)) {
+                                if (count($subTmp) > 1) {
                                     foreach ($subTmp as $k) {
                                         $query->orWhere($tmp[0], $tmp[1], $k);
                                     }
@@ -78,11 +81,34 @@ class _FrontSeller extends Controller
                                 }
                             }
                         }
-                    })->orderBy('products.id', 'DESC');
+                    })
+                    ->orderBy('products.id', 'DESC')
+                    ->orderBy('products.featured', 'ASC');
+
+                if ($request->attributes_filter) {
+                    $sql[$key] = $sql[$key]
+                        ->join('product_attributes as att', 'products.id', '=', 'att.product_id')
+                        ->where(function ($query) use ($attributes_filter) {
+                            foreach ($attributes_filter as $value) {
+                                $tmp = explode(",", $value);
+                                if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
+                                    $subTmp = explode("|", $tmp[2]);
+                                    if (count($subTmp) > 1) {
+                                        foreach ($subTmp as $k) {
+                                            $query->orWhere($tmp[0], $tmp[1], $k);
+                                        }
+                                    } else {
+                                        $query->where($tmp[0], $tmp[1], $tmp[2]);
+                                    }
+                                }
+                            }
+                        });
+                }
             }
 
             $data = $sql['_sql']
-                ->select('products.*', 'shops.name as shop_name', 'shops.address as shop_address',
+                ->select('products.*', 'product_categories.category_id as category', 'shops.name as shop_name',
+                    'shops.address as shop_address',
                     'shops.slug as shop_slug')
                 ->paginate($limit);
 
@@ -102,14 +128,13 @@ class _FrontSeller extends Controller
             }
 
             $categories = $sql['_sql_category']->disableCache()
-                ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                 ->join('categories', 'product_categories.category_id', '=', 'categories.id')
                 ->select('categories.name', 'categories.id')
                 ->groupBy('categories.name', 'categories.id')
                 ->get();
 
-            $attributes['product_attr'] = $tmp_list;
-            $attributes['categories'] = $categories;
+            $data_attributes['product_attr'] = $tmp_list;
+            $data_attributes['categories'] = $categories;
 
             $data->map(function ($item, $key) use ($request) {
 
@@ -131,7 +156,7 @@ class _FrontSeller extends Controller
                     'status' => 'success',
                     'data' => [
                         'list' => $data,
-                        'filter' => $attributes
+                        'filter' => $data_attributes
                     ],
                     'code' => 0
                 );
