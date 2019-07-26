@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\product_categories;
 use Illuminate\Http\Request;
 use App\categories;
 use DB;
@@ -20,13 +21,21 @@ class _FrontCategories extends Controller
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $data_group = [];
-            $data = categories::orderBy('categories.order', 'ASC')
+            $data = categories::orderBy('categories.name', 'ASC')
                 ->join('attacheds', 'categories.image', '=', 'attacheds.id')
                 ->select('categories.*', 'attacheds.small as image_small',
                     'categories.child as categories_child',
                     'attacheds.medium as image_medium', 'attacheds.large as image_large',
                     DB::raw('(SELECT c2.name FROM categories as c2
-                    WHERE c2.id = categories_child limit 1) as parent'))
+                    WHERE c2.id = categories_child limit 1) as parent'),
+                    DB::raw('(SELECT c2.image FROM categories as c2
+                    WHERE c2.id = categories_child limit 1) as parent_attached'),
+                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    WHERE attacheds.id = parent_attached limit 1) as parent_image'),
+                    DB::raw('(SELECT COUNT(products.id) FROM product_categories INNER JOIN products ON
+                    products.id = product_categories.product_id
+                    WHERE product_categories.category_id = categories.id AND products.status = "available") as number_items')
+                )
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
@@ -52,6 +61,7 @@ class _FrontCategories extends Controller
                     ->toArray();
                 foreach ($data as $datum) {
                     if ($datum['child']) {
+//                        $datum['count']= product_categories::where('category_id',$datum['id'])->count();
                         $data_group[$datum['parent']][] = $datum;
                     }
 
