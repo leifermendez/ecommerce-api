@@ -27,7 +27,7 @@ use App\User;
 
 class UseInternalController extends Controller
 {
-    protected  $_orm;
+    protected $_orm;
 
     public function _getSetting($key = null)
     {
@@ -108,7 +108,7 @@ class UseInternalController extends Controller
         }
     }
 
-    public function _detailPurchase($uuid = null)
+    public function _detailPurchase($uuid = null, $num = null)
     {
         try {
             if (!$uuid) {
@@ -124,6 +124,7 @@ class UseInternalController extends Controller
                 ->get();
 
             $data_detail = purchase_detail::where('purchase_uuid', $uuid)
+                ->take($num)
                 ->get();
 
             return [

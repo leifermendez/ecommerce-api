@@ -35,7 +35,7 @@ class _FrontPurchase extends Controller
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                             $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)>1) {
+                            if (count($subTmp) > 1) {
                                 foreach ($subTmp as $k) {
                                     $query->orWhere($tmp[0], $tmp[1], $k);
                                 }
@@ -57,6 +57,10 @@ class _FrontPurchase extends Controller
                 ->paginate($limit)
                 ->appends(request()->except('page'));
 
+            $data->map(function ($item, $key) {
+                $item->list = (new UseInternalController)->_detailPurchase($item->uuid,3);
+                return $item;
+            });
 
             $response = array(
                 'status' => 'success',
@@ -116,7 +120,8 @@ class _FrontPurchase extends Controller
                         'product_id' => $value['product_id'],
                         'product_qty' => 1,
                         'product_amount' => $value['price_normal'],
-                        'shop_id' => $value['shop_id']
+                        'shop_id' => $value['shop_id'],
+                        'product_label' => $value['name']
                     ]
                 );
 
@@ -193,10 +198,10 @@ class _FrontPurchase extends Controller
             $data = purchase_order::where('purchase_orders.user_id', $user->id)
                 ->join('shops', 'purchase_orders.shop_id', '=', 'shops.id')
                 ->select('purchase_orders.*', 'shops.name as shops_name')
-                ->where(function($query) use ($id){
-                    if(strlen($id)>10){
+                ->where(function ($query) use ($id) {
+                    if (strlen($id) > 10) {
                         $query->where('purchase_orders.uuid', $id);
-                    }else{
+                    } else {
                         $query->where('purchase_orders.id', $id);
                     }
                 })
