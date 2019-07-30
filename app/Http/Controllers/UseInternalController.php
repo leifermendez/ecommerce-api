@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\attached_products;
+use App\hours;
 use App\product_attached;
 use App\product_categories;
 use App\purchase_detail;
@@ -442,29 +443,66 @@ class UseInternalController extends Controller
         }
     }
 
-    public function _checkBank($shop = null)
+    public function _checkBank($shop = null, $exception = true)
     {
-        try {
-            if (!$shop) {
-                throw new \Exception('shop null');
-            }
+        if ($exception) {
+            try {
+                if (!$shop) {
+                    throw new \Exception('shop null');
+                }
 
+                $data = shop::disableCache()
+                    ->where('shops.id', $shop)
+                    ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
+                    ->where('user_payments.primary', 1);
+
+                if (!$data->exists()) {
+                    throw new \Exception('shop payment not found');
+                }
+
+                $data = $data->first();
+
+                return $data->toArray();
+
+
+            } catch (\Execption $e) {
+                return $e->getMessage();
+            }
+        } else {
             $data = shop::disableCache()
                 ->where('shops.id', $shop)
                 ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
                 ->where('user_payments.primary', 1);
 
-            if (!$data->exists()) {
-                throw new \Exception('shop payment not found');
+            return $data->exists();
+        }
+    }
+
+    public function _checkSchedule($shop = null, $exception = true)
+    {
+        if($exception){
+            try {
+                if (!$shop) {
+                    throw new \Exception('shop null');
+                }
+
+                $data = hours::where('shop_id', $shop);
+
+                if (!$data->exists()) {
+                    throw new \Exception('shop payment not found');
+                }
+
+                $data = $data->first();
+
+                return $data->toArray();
+
+
+            } catch (\Execption $e) {
+                return $e->getMessage();
             }
-
-            $data = $data->first();
-
-            return $data->toArray();
-
-
-        } catch (\Execption $e) {
-            return $e->getMessage();
+        }else{
+            $data = hours::where('shop_id', $shop)->exists();
+            return $data;
         }
     }
 

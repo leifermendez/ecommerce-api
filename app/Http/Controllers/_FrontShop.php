@@ -43,7 +43,7 @@ class _FrontShop extends Controller
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                             $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)>1) {
+                            if (count($subTmp) > 1) {
                                 foreach ($subTmp as $k) {
                                     $query->orWhere($tmp[0], $tmp[1], $k);
                                 }
@@ -174,6 +174,11 @@ class _FrontShop extends Controller
                     ->select($select)
                     ->first();
             }
+
+            $data = $data->setAttribute('prevent_check', [
+                'bank' =>  (new UseInternalController)->_checkBank($id),
+                'schedule' => (new UseInternalController)->_checkSchedule($id),
+            ]);
 
             $response = array(
                 'status' => 'success',

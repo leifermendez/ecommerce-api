@@ -89,6 +89,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
                 'index'
             ]);
 
+        Route::resource('/prevent-check', '_FrontPreventCheck')
+            ->only([
+                'show'
+            ]);
+
         Route::get('example', 'ExternalCifController@searchCompany');
 
     });
