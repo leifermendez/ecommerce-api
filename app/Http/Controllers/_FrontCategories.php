@@ -23,14 +23,14 @@ class _FrontCategories extends Controller
             $data_group = [];
             $data = categories::orderBy('categories.name', 'ASC')
                 ->join('attacheds', 'categories.image', '=', 'attacheds.id')
-                ->select('categories.*', 'attacheds.small as image_small',
+                ->select('categories.*', 'attacheds.medium as image_small',
                     'categories.child as categories_child',
                     'attacheds.medium as image_medium', 'attacheds.large as image_large',
                     DB::raw('(SELECT c2.name FROM categories as c2
                     WHERE c2.id = categories_child limit 1) as parent'),
                     DB::raw('(SELECT c2.image FROM categories as c2
                     WHERE c2.id = categories_child limit 1) as parent_attached'),
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds 
                     WHERE attacheds.id = parent_attached limit 1) as parent_image'),
                     DB::raw('(SELECT COUNT(products.id) FROM product_categories INNER JOIN products ON
                     products.id = product_categories.product_id

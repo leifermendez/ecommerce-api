@@ -25,13 +25,13 @@ class ExternalStripeAuthController extends Controller
     function _countriesAvailables($account = null)
     {
         try {
-            $account = json_decode($account,true);
+            $account = json_decode($account, true);
             if (!$account) {
                 throw new \Exception("Null account");
             }
 
             $client_secret = env('STRIPE_SECRET', '');
-            $response = Curl::to(_api_.'/v1/accounts/'.$account['stripe_user_id'])
+            $response = Curl::to(_api_ . '/v1/accounts/' . $account['stripe_user_id'])
                 ->withOption('USERPWD', "$client_secret:")
                 ->withHeader('Accept: application/json')
                 ->returnResponseObject()
@@ -42,7 +42,11 @@ class ExternalStripeAuthController extends Controller
             $countries = (new UseInternalController)->_getSetting('countries_available');
             $countries = explode(',', $countries);
             $res = array_search($response->country, $countries);
-            return $res;
+            $all = [
+                'countries' => $res,
+                'extra' => $response
+            ];
+            return $all;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -112,18 +116,20 @@ class ExternalStripeAuthController extends Controller
                 ->returnResponseObject()
                 ->post();
 
-            $check= $this->_countriesAvailables($response->content);
+            $check = $this->_countriesAvailables($response->content);
 
-            if ($check === false) {
-                throw new \Exception("Country_not_available ".json_encode($check));
+            if ($check['countries'] === false) {
+                throw new \Exception("Country_not_available " . json_encode($check));
             }
             if ($response->status !== 200) {
                 throw new \Exception($response->content);
             }
+            $data = json_decode($response->content, true);
+            $data['extra_data'] = $check['extra'];
 
             $response = array(
                 'status' => 'success',
-                'data' => json_decode($response->content),
+                'data' => $data,
                 'code' => 0
             );
             return response()->json($response);

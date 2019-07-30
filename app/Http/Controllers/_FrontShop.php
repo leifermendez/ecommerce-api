@@ -21,8 +21,19 @@ class _FrontShop extends Controller
         try {
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
+            $km = (new UseInternalController)->_getSetting('search_range_km');
+            $measureShop = (new UseInternalController)->_measureShop(
+                $request->header('LAT'),
+                $request->header('LNG'),
+                $km,
+                '<',
+                'distance_in_km,shop_id');
+
+
+            $measureShop = array_column($measureShop, 'shop_id');
 
             $data = shop::orderBy('shops.id', 'DESC')
+                ->whereIn('shops.id',$measureShop)
                 ->select(
                     'shops.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
@@ -176,8 +187,8 @@ class _FrontShop extends Controller
             }
 
             $data = $data->setAttribute('prevent_check', [
-                'bank' =>  (new UseInternalController)->_checkBank($id),
-                'schedule' => (new UseInternalController)->_checkSchedule($id),
+                'bank' => (new UseInternalController)->_checkBank($id, false),
+                'schedule' => (new UseInternalController)->_checkSchedule($id, false),
             ]);
 
             $response = array(
