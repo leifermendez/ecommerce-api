@@ -6,6 +6,7 @@ use App\products;
 use App\shop;
 use Illuminate\Http\Request;
 use App\variation_product;
+use App\product_attributes;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Artisan;
 use DB;
@@ -82,7 +83,9 @@ class _FrontProductVariations extends Controller
 
         $fields = array();
         foreach ($request->all() as $key => $value) {
-            $fields[$key] = $value;
+            if ($key !== 'attributes_values') {
+                $fields[$key] = $value;
+            };
         }
         try {
             DB::beginTransaction();
@@ -90,8 +93,25 @@ class _FrontProductVariations extends Controller
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
-
             $data = variation_product::insertGetId($fields);
+            if(count($request->attributes_values)>0){
+                $tmp_attr = [];
+                foreach ($request->attributes_values as $key => $value) {
+                    $k = explode("_", $key);
+                    $tmp_attr[] = [
+                        'product_id' => $fields['product_id'],
+                        'attributes_id' => $k[1],
+                        'variation_products_id' => $data,
+                        'value' => $value,
+                    ];
+                };
+                product_attributes::where('product_id',$fields['product_id'])
+                ->where('variation_products_id',$data)
+                ->delete();
+                product_attributes::insert($tmp_attr);
+            }
+
+          
 //            $data = variation_product::find($data);
             $data = variation_product::where('id',$data)
                 ->select('variation_products.*',
@@ -103,6 +123,7 @@ class _FrontProductVariations extends Controller
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small')
                 )
                 ->first();
+
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             DB::commit();
             $response = array(

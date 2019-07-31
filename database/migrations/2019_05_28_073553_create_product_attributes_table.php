@@ -16,6 +16,7 @@ class CreateProductAttributesTable extends Migration
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('product_id');
+            $table->integer('variation_products_id');
             $table->integer('attributes_id');
             $table->string('value');
             $table->timestamps();
