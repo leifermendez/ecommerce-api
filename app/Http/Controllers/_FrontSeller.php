@@ -66,8 +66,12 @@ class _FrontSeller extends Controller
             foreach ($sql as $value => $key) {
                 $sql[$key] = products::where('products.shop_id', $id)
                     ->join('shops', 'products.shop_id', '=', 'shops.id')
+                    ->join('users', 'users.id', '=', 'shops.users_id')
                     ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->where('products.status','available')
+                    ->where('users.confirmed', '1')
+                    ->where('users.status', 'available')
+                    ->where('shops.status', 'available')
                     ->where(function ($query) use ($filters) {
                         foreach ($filters as $value) {
                             $tmp = explode(",", $value);

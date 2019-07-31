@@ -45,6 +45,7 @@ class _FrontProducts extends Controller
                 ->whereIn('shops.id', $measureShop)
                 ->where('users.confirmed', '1')
                 ->where('users.status', 'available')
+                ->where('shops.status', 'available')
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
