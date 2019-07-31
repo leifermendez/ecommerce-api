@@ -9,6 +9,7 @@ use App\purchase_detail;
 use App\user_payment;
 use App\shop;
 use Ixudra\Curl\Facades\Curl;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 define("_api_", "https://api.stripe.com");
@@ -98,6 +99,7 @@ class _FrontPayment extends Controller
     public function store(Request $request)
     {
         try {
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
             $request->validate([
@@ -141,7 +143,7 @@ class _FrontPayment extends Controller
 
             shopping_cart::where('user_id', $user->id)
                 ->delete();
-
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'data' => [
@@ -156,6 +158,7 @@ class _FrontPayment extends Controller
 
 
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
