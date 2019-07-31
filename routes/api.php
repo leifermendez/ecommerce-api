@@ -171,6 +171,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
         Route::resource('/media', '_FrontAttached');
 
         Route::resource('/product-media', '_FrontAttachedProducts');
+
+        Route::resource('/attributes-category', '_FrontAttributesCategories');
     });
 
 

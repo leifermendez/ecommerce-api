@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_UserPurchase;
+use App\Notifications\_UserVerified;
 use App\purchase_order;
 use App\purchase_detail;
 use App\shipping_address;
@@ -11,7 +13,7 @@ use App\variation_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class _FrontPurchase extends Controller
 {
@@ -58,7 +60,7 @@ class _FrontPurchase extends Controller
                 ->appends(request()->except('page'));
 
             $data->map(function ($item, $key) {
-                $item->list = (new UseInternalController)->_detailPurchase($item->uuid,3);
+                $item->list = (new UseInternalController)->_detailPurchase($item->uuid, 3);
                 return $item;
             });
 
@@ -105,6 +107,7 @@ class _FrontPurchase extends Controller
         $request->request->remove('_location');
 
         try {
+            DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
 
             $shoppingCart = (new UseInternalController)->_shoppingCart($user->id);
@@ -165,9 +168,12 @@ class _FrontPurchase extends Controller
 
 //            shopping_cart::where('user_id', $user->id)
 //                ->delete();
+
+            $user->notify(new _UserPurchase($user));
             $data = purchase_order::where('uuid', $uuid)
                 ->get();
 
+            DB::commit();
             $response = array(
                 'status' => 'success',
                 'msg' => 'Insertado',
@@ -176,6 +182,7 @@ class _FrontPurchase extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,

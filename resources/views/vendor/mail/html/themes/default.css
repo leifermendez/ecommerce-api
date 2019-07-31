@@ -44,7 +44,7 @@ a img {
 h1 {
     color: #3d4852;
     font-size: 19px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 0;
     text-align: left;
 }
@@ -52,7 +52,7 @@ h1 {
 h2 {
     color: #3d4852;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 0;
     text-align: left;
 }
@@ -60,7 +60,7 @@ h2 {
 h3 {
     color: #3d4852;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 0;
     text-align: left;
 }
@@ -107,6 +107,7 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
+    background-color: #f9f9f9;
 }
 
 .header a {

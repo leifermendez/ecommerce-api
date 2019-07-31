@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_PayOrder;
+use App\Notifications\_UserPurchase;
 use App\shopping_cart;
 use Illuminate\Http\Request;
 use App\purchase_order;
@@ -119,8 +121,8 @@ class _FrontPayment extends Controller
 
             foreach ($detail_purchase as $purchase) {
                 $user_payment = user_payment::where('user_payments.primary', 1)
-                    ->join('shops','user_payments.user_id','=','shops.users_id')
-                    ->where('shops.id',$purchase->shop_id)
+                    ->join('shops', 'user_payments.user_id', '=', 'shops.users_id')
+                    ->where('shops.id', $purchase->shop_id)
                     ->select('user_payments.*')
                     ->first();
 
@@ -143,6 +145,8 @@ class _FrontPayment extends Controller
 
             shopping_cart::where('user_id', $user->id)
                 ->delete();
+
+            $user->notify(new _PayOrder($user));
             DB::commit();
             $response = array(
                 'status' => 'success',

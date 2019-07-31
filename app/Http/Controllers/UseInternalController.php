@@ -326,7 +326,10 @@ class UseInternalController extends Controller
 
             $data = variation_product::where('variation_products.product_id', $id)
                 ->where('variation_products.status', 'available')
+                ->join('product_categories','product_categories.product_id','=','variation_products.product_id')
+                ->join('categories','categories.id','=','product_categories.category_id')
                 ->select('variation_products.*',
+                    'categories.id as categories_id',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
                     DB::raw('(SELECT attacheds.medium FROM attacheds 

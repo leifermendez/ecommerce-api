@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_UserVerified;
 use App\phone_codes_validate;
 use App\User;
 use Illuminate\Http\Request;
@@ -145,9 +146,11 @@ class _FrontValidatePhone extends Controller
             if ($data) {
                 phone_codes_validate::where('id', $data->id)
                     ->update(['status' => 'unavailable']);
-
                 User::where('id', $user->id)
                     ->update(['confirmed' => 1]);
+                $data = User::find($user->id);
+
+                $data->notify(new _UserVerified($data));
 
                 $response = array(
                     'status' => 'success',

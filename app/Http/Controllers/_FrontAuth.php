@@ -9,6 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 use Hashids\Hashids;
+use App\Notifications\_UserWelcome;
 
 define("FACEBOOK_ID", "493119484360306");
 
@@ -76,6 +77,7 @@ class _FrontAuth extends Controller
         ];
 
         $data = $this->registerNewUser($fields);
+        $data->notify(new _UserWelcome($data));
 
         $response = array(
             'status' => 'success',
