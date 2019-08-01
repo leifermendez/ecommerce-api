@@ -22,6 +22,7 @@
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.17",
         "nunomaduro/collision": "^3.0",
+        "s-ichikawa/laravel-sendgrid-driver": "^2.0",
         "spatie/opening-hours": "^2.2",
         "superbalist/laravel-google-cloud-storage": "^2.2",
         "twilio/sdk": "^5.32",

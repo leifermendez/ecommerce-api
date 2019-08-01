@@ -11,12 +11,15 @@ env_variables:
   DB_PASSWORD: Gnieg8VSIpzH
   DB_SOCKET: "/cloudsql/ecommerce-apatxee-v2:europe-west6:ecommerce-basic"
 
-  MAIL_DRIVER: smtp
-  MAIL_HOST: smtp.mailtrap.io
-  MAIL_PORT: 2525
-  MAIL_USERNAME: e026217f7741dc
-  MAIL_PASSWORD: 77230e0f68397c
-  MAIL_ENCRYPTION: null
+  MAIL_DRIVER: sendgrid
+  MAIL_HOST: smtp.sendgrid.net
+  MAIL_PORT: 587
+  MAIL_USERNAME: apatxee
+  MAIL_PASSWORD: siB80R8U1hh9LD
+  MAIL_ENCRYPTION: tls
+  SENDGRID_API_KEY: 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
+  MAIL_FROM_ADDRESS: no-reply@apatxee.com
+  MAIL_FROM_NAME: Apatxee.com
 
   JWT_SECRET: SEannlkXhUFJHWuVwvBHrj9SSs6zLqhPpNJGwaxt1EQR6OcsZgo9L5Qg4HGtUlKt
   PAACK_KEY: 88e316053355e5017c5df6372c310b287a4693e5
