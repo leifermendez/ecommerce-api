@@ -72,7 +72,14 @@ class _FrontSeller extends Controller
                     ->where('users.confirmed', '1')
                     ->where('users.status', 'available')
                     ->where('shops.status', 'available')
-                    ->where(function ($query) use ($filters) {
+                    ->where(function ($query) use ($filters, $request) {
+                        if($request->with_variations){
+                            $query->whereExists(function ($query) {
+                                    $query->select(DB::raw(1))
+                                    ->from('variation_products')
+                                    ->whereRaw('variation_products.product_id = products.id');
+                            });
+                        }
                         foreach ($filters as $value) {
                             $tmp = explode(",", $value);
                             if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {

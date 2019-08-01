@@ -35,9 +35,7 @@ class _FrontProducts extends Controller
                 '<',
                 'distance_in_km,shop_id');
 
-
             $measureShop = array_column($measureShop, 'shop_id');
-
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
@@ -46,7 +44,14 @@ class _FrontProducts extends Controller
                 ->where('users.confirmed', '1')
                 ->where('users.status', 'available')
                 ->where('shops.status', 'available')
-                ->where(function ($query) use ($filters) {
+                ->where(function ($query) use ($filters, $request) {
+                    if($request->with_variations){
+                        $query->whereExists(function ($query) {
+                                $query->select(DB::raw(1))
+                                ->from('variation_products')
+                                ->whereRaw('variation_products.product_id = products.id');
+                        });
+                    }
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {

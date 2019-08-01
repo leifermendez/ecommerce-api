@@ -76,7 +76,7 @@ class _FrontValidatePhone extends Controller
                     $request->phone,
                     [
                         'from' => $from,
-                        'body' => 'Apatxee. Tu código es ' . $code,
+                        'body' => 'Apatxee.com código: ' . $code,
                     ]
                 );
 
