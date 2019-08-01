@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\categories;
 use App\category_attributes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class _FrontAttributesCategories extends Controller
 {
@@ -24,7 +25,10 @@ class _FrontAttributesCategories extends Controller
                 ->join('categories', 'categories.id', '=', 'category_attributes.category_id')
                 ->join('attributes', 'category_attributes.attributes_id', '=', 'attributes.id')
                 ->select('category_attributes.*', 'categories.name as category_name',
-                    'attributes.name as attributes_name', 'attributes.element_type as attributes_element_type')
+                    'attributes.name as attributes_name', 'attributes.element_type as attributes_element_type',
+                    DB::raw('(SELECT attributes_globals.value FROM attributes_globals 
+                    WHERE attributes_globals.attributes_id = attributes.id limit 1) as values_attributes')
+                )
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);

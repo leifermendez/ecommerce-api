@@ -23,14 +23,15 @@ class _FrontProductVariations extends Controller
         try {
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $limit = ($request->limit) ? $request->limit : 15;
-
-            $data = variation_product::orderBy('id', 'DESC')
+            DB::statement('SET SESSION group_concat_max_len = 2000000');
+            $data = variation_product::orderBy('variation_products.id', 'DESC')
+                ->join('product_categories', 'variation_products.product_id', '=', 'product_categories.product_id')
                 ->where(function ($query) use ($filters) {
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                             $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)>1) {
+                            if (count($subTmp) > 1) {
                                 foreach ($subTmp as $k) {
                                     $query->orWhere($tmp[0], $tmp[1], $k);
                                 }
@@ -40,7 +41,26 @@ class _FrontProductVariations extends Controller
                         }
                     }
                 })
+                ->select('variation_products.*',
+                    'product_categories.category_id as category_id',
+                    DB::raw("(SELECT group_concat(
+                      JSON_OBJECT(
+                        'id', id,
+                        'product_id', variation_products.product_id,
+                        'attributes_id', attributes_id,
+                        'value', value
+                      ) SEPARATOR '|'
+                    ) 
+                    as _name FROM product_attributes WHERE variation_products_id = variation_products.id
+                    AND variation_products.product_id = variation_products.product_id 
+                    GROUP BY variation_products_id) as attributes_values")
+                )
                 ->paginate($limit);
+
+            $data->map(function ($i, $k) {
+                $i->attributes_values = explode('|',$i->attributes_values);
+                return $i;
+            });
 
             $response = array(
                 'status' => 'success',
@@ -75,7 +95,7 @@ class _FrontProductVariations extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -83,7 +103,9 @@ class _FrontProductVariations extends Controller
 
         $fields = array();
         foreach ($request->all() as $key => $value) {
-            if ($key !== 'attributes_values') {
+            if ($key !== 'attributes_values_tmp'
+                && $key !== 'attributes_values'
+                && $key !== 'categories_id' && $key !== 'category_id') {
                 $fields[$key] = $value;
             };
         }
@@ -94,9 +116,9 @@ class _FrontProductVariations extends Controller
                 throw new \Exception('not permissions');
             }
             $data = variation_product::insertGetId($fields);
-            if(count($request->attributes_values)>0){
+            if (count($request->attributes_values_tmp) > 0) {
                 $tmp_attr = [];
-                foreach ($request->attributes_values as $key => $value) {
+                foreach ($request->attributes_values_tmp as $key => $value) {
                     $k = explode("_", $key);
                     $tmp_attr[] = [
                         'product_id' => $fields['product_id'],
@@ -105,15 +127,15 @@ class _FrontProductVariations extends Controller
                         'value' => $value,
                     ];
                 };
-                product_attributes::where('product_id',$fields['product_id'])
-                ->where('variation_products_id',$data)
-                ->delete();
+                product_attributes::where('product_id', $fields['product_id'])
+                    ->where('variation_products_id', $data)
+                    ->delete();
                 product_attributes::insert($tmp_attr);
             }
 
-          
+
 //            $data = variation_product::find($data);
-            $data = variation_product::where('id',$data)
+            $data = variation_product::where('id', $data)
                 ->select('variation_products.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
@@ -147,7 +169,7 @@ class _FrontProductVariations extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -178,7 +200,7 @@ class _FrontProductVariations extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -189,8 +211,8 @@ class _FrontProductVariations extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -199,7 +221,9 @@ class _FrontProductVariations extends Controller
             DB::beginTransaction();
             $fields = array();
             foreach ($request->all() as $key => $value) {
-                if ($key !== 'id') {
+                if ($key !== 'id' && $key !== 'attributes_values_tmp'
+                    && $key !== 'attributes_values'
+                    && $key !== 'categories_id' && $key !== 'category_id') {
                     $fields[$key] = $value;
                 };
             }
@@ -208,12 +232,26 @@ class _FrontProductVariations extends Controller
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
-
+            if (count($request->attributes_values_tmp) > 0) {
+                $tmp_attr = [];
+                foreach ($request->attributes_values_tmp as $key => $value) {
+                    $k = explode("_", $key);
+                    $tmp_attr[] = [
+                        'product_id' => $fields['product_id'],
+                        'attributes_id' => $k[1],
+                        'variation_products_id' => $id,
+                        'value' => $value,
+                    ];
+                };
+                product_attributes::where('product_id', $fields['product_id'])
+                    ->where('variation_products_id', $id)
+                    ->delete();
+                product_attributes::insert($tmp_attr);
+            }
             variation_product::where('id', $id)
                 ->update($fields);
 
-            $data = variation_product::find($id);
-            $data = variation_product::where('id',$id)
+            $data = variation_product::where('id', $id)
                 ->select('variation_products.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
@@ -252,7 +290,7 @@ class _FrontProductVariations extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

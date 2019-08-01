@@ -34,6 +34,7 @@ class _FrontShop extends Controller
 
             $data = shop::orderBy('shops.id', 'DESC')
                 ->whereIn('shops.id',$measureShop)
+                ->where('shops.status','available')
                 ->select(
                     'shops.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
