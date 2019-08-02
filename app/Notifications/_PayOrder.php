@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,15 +11,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 class _PayOrder extends Notification
 {
     use Queueable;
-
+    private $pay;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $pay)
     {
-        //
+        $this->pay = $pay;
     }
 
     /**
@@ -41,9 +42,8 @@ class _PayOrder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject("¡Pago exitoso!")
+            ->markdown('vendor.notifications.pay', ['pay' => $this->pay]);
     }
 
     /**

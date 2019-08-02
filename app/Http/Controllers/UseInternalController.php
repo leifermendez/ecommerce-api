@@ -264,6 +264,67 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _v2_isAvailableProduct($schedule = null, $exceptions = null)
+    {
+        try {
+
+            $now = Carbon::now();
+            $next_available = null;
+            $next_close = null;
+            $diff = 0;
+            $shedule = array();
+            $exceptions = array();
+
+            if (!$schedule) {
+                return [
+                    'isAvailable' => false,
+                    'nextOpen' => false,
+                    'nextClose' => false,
+                ];
+            }
+
+
+            if ($schedule) {
+                $hours_shedule_hours = ($schedule && json_decode($schedule)) ?
+                    json_decode($schedule) : null;
+
+                $hours_exceptions = ($exceptions && json_decode($exceptions)) ?
+                    json_decode($exceptions) : null;
+
+                if ($hours_shedule_hours) {
+                    $openingHours = OpeningHours::create([
+                        'monday' => (isset($hours_shedule_hours->monday)) ? $hours_shedule_hours->monday : [],
+                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ? $hours_shedule_hours->tuesday : [],
+                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ? $hours_shedule_hours->wednesday : [],
+                        'thursday' => (isset($hours_shedule_hours->thursday)) ? $hours_shedule_hours->thursday : [],
+                        'friday' => (isset($hours_shedule_hours->friday)) ? $hours_shedule_hours->friday : [],
+                        'saturday' => (isset($hours_shedule_hours->saturday)) ? $hours_shedule_hours->saturday : [],
+                        'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
+                        'exceptions' => $hours_exceptions
+                    ]);
+                    $next_available = $openingHours->nextOpen(Carbon::now());
+                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
+                    $next_available = Carbon::parse($next_available)->toArray();
+                    $next_close = $openingHours->nextClose(Carbon::now());
+                    $next_close = Carbon::parse($next_close)->toArray();
+                    $shedule = $openingHours->isOpenAt(Carbon::now());
+
+                }
+
+                return [
+                    'isAvailable' => $shedule,
+                    'nextOpen' => $next_available,
+                    'nextClose' => $next_close,
+                    'minutes' => ($diff === 0) ? ($diff + 1) : $diff
+                ];
+
+            };
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function _getImages($id)
     {
         try {
@@ -311,6 +372,22 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _parseVariation($string = null)
+    {
+
+        if ($string) {
+            $tmp_explode = explode('|', $string);
+            $tmp = [];
+            foreach ($tmp_explode as $value) {
+                if (json_decode($value, true)) {
+                    $tmp[] = json_decode($value, true);
+                }
+            }
+
+            return $tmp;
+        }
+    }
+
     public function _getVariations($id = null, $sort = 'ASC', $limit = null)
     {
         try {
@@ -326,8 +403,8 @@ class UseInternalController extends Controller
 
             $data = variation_product::where('variation_products.product_id', $id)
                 ->where('variation_products.status', 'available')
-                ->join('product_categories','product_categories.product_id','=','variation_products.product_id')
-                ->join('categories','categories.id','=','product_categories.category_id')
+                ->join('product_categories', 'product_categories.product_id', '=', 'variation_products.product_id')
+                ->join('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->select('variation_products.*',
                     'categories.id as categories_id',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
@@ -483,7 +560,7 @@ class UseInternalController extends Controller
 
     public function _checkSchedule($shop = null, $exception = true)
     {
-        if($exception){
+        if ($exception) {
             try {
                 if (!$shop) {
                     throw new \Exception('shop null');
@@ -503,7 +580,7 @@ class UseInternalController extends Controller
             } catch (\Execption $e) {
                 return $e->getMessage();
             }
-        }else{
+        } else {
             $data = hours::where('shop_id', $shop)->exists();
             return $data;
         }

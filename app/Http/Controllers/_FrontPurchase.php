@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_NewPurchaseSmsUser;
 use App\Notifications\_UserPurchase;
 use App\Notifications\_UserVerified;
 use App\purchase_order;
@@ -169,10 +170,21 @@ class _FrontPurchase extends Controller
 //            shopping_cart::where('user_id', $user->id)
 //                ->delete();
 
-            $user->notify(new _UserPurchase($user));
+
             $data = purchase_order::where('uuid', $uuid)
                 ->get();
 
+            $data_list = purchase_detail::where('purchase_details.purchase_uuid', $uuid)
+                ->join('products','purchase_details.product_id','=','products.id')
+                ->select('purchase_details.*','products.name as products_name')
+                ->get();
+
+            $user->setAttribute(
+                'list',$data_list
+            );
+
+            $user->notify(new _UserPurchase($user));
+            $user->notify(new _NewPurchaseSmsUser($user));
             DB::commit();
             $response = array(
                 'status' => 'success',

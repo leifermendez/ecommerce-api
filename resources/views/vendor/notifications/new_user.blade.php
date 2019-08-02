@@ -1,7 +1,7 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => config('app.url')])
+        @component('mail::header', ['url' => 'https://apatxee.com/'])
             <img src="https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/assets/logo-mail-apatxee.png"
                  height="40px" alt="">
         @endcomponent
@@ -24,8 +24,8 @@
             el dinero a muchos pequeños comercios.</p>
         <div>
             <div>
-                @component('mail::button', ['url' => 'https://mochileros.com.mx'])
-                    ¿Cuál será tu próxima aventura?
+                @component('mail::button', ['url' => 'https://apatxee.com/'])
+                    ¿Ver ofertas!
                 @endcomponent
             </div>
         </div>

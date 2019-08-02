@@ -44,7 +44,6 @@ class _UserWelcome extends Notification
     {
         return (new MailMessage)
             ->subject("Bienvenido a bordo")
-            ->cc('ventas.mochileros@gmail.com')
             ->markdown('vendor.notifications.new_user', ['user' => $this->user]);
 
     }

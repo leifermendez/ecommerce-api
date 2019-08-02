@@ -146,6 +146,7 @@ class _FrontPayment extends Controller
             shopping_cart::where('user_id', $user->id)
                 ->delete();
 
+            $user->setAttribute('purchase_uuid', $request->purchase_uuid);
             $user->notify(new _PayOrder($user));
             DB::commit();
             $response = array(

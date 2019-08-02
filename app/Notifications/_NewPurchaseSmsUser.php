@@ -2,25 +2,23 @@
 
 namespace App\Notifications;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class _UserPurchase extends Notification
+class _NewPurchaseSmsUser extends Notification
 {
     use Queueable;
-    private $purchase;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $purchase)
+    public function __construct()
     {
-        $this->purchase = $purchase;
+        //
     }
 
     /**
@@ -43,8 +41,9 @@ class _UserPurchase extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("¡Compra realizada!")
-            ->markdown('vendor.notifications.purchases', ['purchase' => $this->purchase]);
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

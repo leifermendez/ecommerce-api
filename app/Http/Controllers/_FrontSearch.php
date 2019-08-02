@@ -21,6 +21,16 @@ class _FrontSearch extends Controller
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $attributes_filter = ($request->attributes_filter) ? explode("?", $request->attributes_filter) : [];
             $location = $request->_location;
+            $measureShop = [];
+            $km = (new UseInternalController)->_getSetting('search_range_km');
+            $measureShop = (new UseInternalController)->_measureShop(
+                $request->header('LAT'),
+                $request->header('LNG'),
+                $km,
+                '<',
+                'distance_in_km,shop_id');
+
+            $measureShop = array_column($measureShop, 'shop_id');
             $src = $request->src;
             $data_attributes = [];
             $tmp_list = [];
@@ -29,12 +39,13 @@ class _FrontSearch extends Controller
                 '_sql_category',
                 '_sql_attr'
             ];
-
+            DB::statement('SET SESSION group_concat_max_len = 2000000');
             foreach ($sql as $value => $key) {
                 $sql[$key] = products::orderBy('products.id', 'DESC')
                     ->join('shops', 'products.shop_id', '=', 'shops.id')
                     ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
-                    ->where('shops.zip_code', $location)
+                    ->join('hours', 'shops.id', '=', 'hours.shop_id')
+                    ->whereIn('shops.id', $measureShop)
                     ->where('products.status', 'available')
                     ->where('products.name', 'LIKE', "%{$src}%")
                     ->where(function ($query) use ($filters) {
@@ -76,24 +87,76 @@ class _FrontSearch extends Controller
                 }
             };
 
-            $data_products = $sql['_sql']
+            $data_products = $sql['_sql']->disableCache()
                 ->select('products.*', 'product_categories.category_id as category', 'shops.name as shop_name',
                     'shops.address as shop_address',
-                    'shops.slug as shop_slug');
+                    'hours.shedule_hours as hours_shedule_hours',
+                    'hours.exceptions as hours_exceptions',
+                    'shops.slug as shop_slug',
+                    'shops.name as shop_name',
+                    'shops.id as shop_id',
+                    DB::raw('(
+                    SELECT SUM(score) AS TotalItemsOrdered FROM comments WHERE shop_id = shops.id
+                    ) as score_shop'),
+                    DB::raw('(
+                    SELECT COUNT(*) AS TotalItemsOrdered FROM comments WHERE shop_id = 1) as score_count'),
+                    DB::raw('(
+                        SELECT attacheds.medium  
+                        FROM product_attacheds 
+                        INNER JOIN attacheds ON attacheds.id = product_attacheds.attached_id
+                        WHERE product_id = products.id ORDER BY product_attacheds.id ASC LIMIT 1
+                    ) as product_image'
+                    ),
+                    DB::raw("(
+                      SELECT 
+                        group_concat(
+                          JSON_OBJECT(
+                            'price_normal', price_normal,
+                            'price_regular', price_regular,
+                            'quantity', quantity,
+                            'label', label,
+                            'attached_id', attached_id,
+                            'observation', observation,
+                            'delivery', delivery,
+                            'status', status
+                          ) SEPARATOR '|'
+                        ) as _variations
+                         FROM variation_products WHERE product_id = products.id
+                       ) as variations"),
+                    DB::raw("(
+                     SELECT 
+                        group_concat(
+                          JSON_OBJECT(
+                            'medium', attacheds.medium,
+                            'attached_id', attached_id
+                          ) SEPARATOR '|'
+                        ) as gallery
+                        FROM product_attacheds 
+                        INNER JOIN attacheds ON
+                        attacheds.id = product_attacheds.attached_id
+                        WHERE product_id = products.id  AND  variation_product_id is null) as gallery")
+                );
+
             $data_products = (!$request->pagination) ?
                 $data_products->take($limit)->get() : $data_products->paginate($limit);
 
+
             $data_products->map(function ($item, $key) use ($request) {
-                $isAvailable = (new UseInternalController)->_isAvailableProduct($item->id);
-                $getVariations = (new UseInternalController)->_getVariations($item->id);
-                $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($item->id);
-                $gallery = (new UseInternalController)->_getImages($item->id);
-                $scoreShop = (new UseInternalController)->_getScoreShop($item->shop_id);
-                $item->gallery = $gallery;
+                $isAvailable = (new UseInternalController)
+                    ->_v2_isAvailableProduct($item->hours_shedule_hours, $item->hours_exceptions);
                 $item->is_available = $isAvailable;
-                $item->variations = $getVariations;
-                $item->cover_image = $getCoverImageProduct;
-                $item->score_shop = $scoreShop;
+                $item->variations = (new UseInternalController)
+                    ->_parseVariation($item->variations);
+                $item->gallery = (new UseInternalController)
+                    ->_parseVariation($item->gallery);
+
+
+//                $gallery = (new UseInternalController)->_getImages($item->id);
+
+//                $item->gallery = $gallery;
+
+
+
                 return $item;
             });
 
