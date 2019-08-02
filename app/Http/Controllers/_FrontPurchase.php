@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_NewPurchaseSmsShop;
 use App\Notifications\_NewPurchaseSmsUser;
 use App\Notifications\_UserPurchase;
 use App\Notifications\_UserVerified;
@@ -182,9 +183,12 @@ class _FrontPurchase extends Controller
             $user->setAttribute(
                 'list',$data_list
             );
+            $user->setAttribute(
+                'uuid',$uuid
+            );
 
             $user->notify(new _UserPurchase($user));
-            $user->notify(new _NewPurchaseSmsUser($user));
+
             DB::commit();
             $response = array(
                 'status' => 'success',

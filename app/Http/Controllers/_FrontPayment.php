@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\_NewPurchaseSmsShop;
+use App\Notifications\_NewPurchaseSmsUser;
 use App\Notifications\_PayOrder;
 use App\Notifications\_UserPurchase;
 use App\shopping_cart;
@@ -122,8 +124,9 @@ class _FrontPayment extends Controller
             foreach ($detail_purchase as $purchase) {
                 $user_payment = user_payment::where('user_payments.primary', 1)
                     ->join('shops', 'user_payments.user_id', '=', 'shops.users_id')
+                    ->join('users', 'user_payments.user_id', '=', 'users.id')
                     ->where('shops.id', $purchase->shop_id)
-                    ->select('user_payments.*')
+                    ->select('user_payments.*', 'users.phone as phone_number')
                     ->first();
 
                 $data_feed = (new UseInternalController)->_getFeedAmount($purchase->product_amount);
@@ -139,6 +142,8 @@ class _FrontPayment extends Controller
                         purchase_order::where('uuid', $request->purchase_uuid)
                             ->where('user_id', $user->id)
                             ->update(['status' => 'success']);
+                        $user_payment->setAttribute('uuid', $request->purchase_uuid);
+                        $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
                     }
                 }
             };
@@ -146,8 +151,9 @@ class _FrontPayment extends Controller
             shopping_cart::where('user_id', $user->id)
                 ->delete();
 
-            $user->setAttribute('purchase_uuid', $request->purchase_uuid);
+            $user->setAttribute('uuid', $request->purchase_uuid);
             $user->notify(new _PayOrder($user));
+            $user->notify(new _NewPurchaseSmsUser($user));
             DB::commit();
             $response = array(
                 'status' => 'success',

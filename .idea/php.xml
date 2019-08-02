@@ -115,6 +115,8 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/genealabs/laravel-pivot-events" />
       <path value="$PROJECT_DIR$/vendor/genealabs/laravel-model-caching" />
+      <path value="$PROJECT_DIR$/vendor/s-ichikawa/laravel-sendgrid-driver" />
+      <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/twilio" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
