@@ -21,20 +21,10 @@ class _FrontShop extends Controller
         try {
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-            $km = (new UseInternalController)->_getSetting('search_range_km');
-            $measureShop = (new UseInternalController)->_measureShop(
-                $request->header('LAT'),
-                $request->header('LNG'),
-                $km,
-                '<',
-                'distance_in_km,shop_id');
 
-
-            $measureShop = array_column($measureShop, 'shop_id');
 
             $data = shop::orderBy('shops.id', 'DESC')
-                ->whereIn('shops.id',$measureShop)
-                ->where('shops.status','available')
+                ->where('shops.status', 'available')
                 ->select(
                     'shops.*',
                     DB::raw('(SELECT attacheds.small FROM attacheds 
@@ -50,7 +40,19 @@ class _FrontShop extends Controller
                     DB::raw('(SELECT attacheds.large FROM attacheds 
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_large')
                 )
-                ->where(function ($query) use ($filters) {
+                ->where(function ($query) use ($filters, $request) {
+                    if (!$request->outside) {
+                        $km = (new UseInternalController)->_getSetting('search_range_km');
+                        $measureShop = (new UseInternalController)->_measureShop(
+                            $request->header('LAT'),
+                            $request->header('LNG'),
+                            $km,
+                            '<',
+                            'distance_in_km,shop_id');
+
+                        $measureShop = array_column($measureShop, 'shop_id');
+                        $query->whereIn('shops.id',$measureShop);
+                    }
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
