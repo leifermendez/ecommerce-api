@@ -87,7 +87,7 @@ class _FrontSearch extends Controller
                 }
             };
 
-            $data_products = $sql['_sql']->disableCache()
+            $data_products = $sql['_sql']
                 ->select('products.*', 'product_categories.category_id as category', 'shops.name as shop_name',
                     'shops.address as shop_address',
                     'hours.shedule_hours as hours_shedule_hours',
@@ -160,7 +160,7 @@ class _FrontSearch extends Controller
                 return $item;
             });
 
-            $product_attr = $sql['_sql_attr']->disableCache()
+            $product_attr = $sql['_sql_attr']
                 ->join('product_attributes', 'products.id', '=', 'product_attributes.product_id')
                 ->join('attributes', 'product_attributes.attributes_id', '=', 'attributes.id')
                 ->select('attributes.id as attr_id', 'attributes.name', 'product_attributes.value')
@@ -175,7 +175,7 @@ class _FrontSearch extends Controller
                 $tmp_list[$value['name']] = $array;
             }
 
-            $categories = $sql['_sql_category']->disableCache()
+            $categories = $sql['_sql_category']
                 ->join('categories', 'product_categories.category_id', '=', 'categories.id')
                 ->select('categories.name', 'categories.id')
                 ->groupBy('categories.name', 'categories.id')

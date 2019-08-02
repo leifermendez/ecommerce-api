@@ -8,7 +8,7 @@
     @endslot
 
     <div>
-        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a la apatxee!</h1>
+        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a apatxee!</h1>
         <br>
         <h2>¡Hola! {{$user->name}}</h2>
         <p>Ayudamos al pequeño comercio a competir con las grandes superficies con un transporte del producto con
