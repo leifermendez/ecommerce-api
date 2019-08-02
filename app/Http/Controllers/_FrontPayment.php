@@ -143,7 +143,7 @@ class _FrontPayment extends Controller
                             ->where('user_id', $user->id)
                             ->update(['status' => 'success']);
                         $user_payment->setAttribute('uuid', $request->purchase_uuid);
-                        $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
+                        //$user_payment->notify(new _NewPurchaseSmsShop($user_payment));
                     }
                 }
             };
@@ -153,8 +153,16 @@ class _FrontPayment extends Controller
 
             $user->setAttribute('uuid', $request->purchase_uuid);
             $user->notify(new _PayOrder($user));
-            $user->notify(new _NewPurchaseSmsUser($user));
+            //$user->notify(new _NewPurchaseSmsUser($user));
+
             DB::commit();
+
+            /*Proceso de ENVIO*/
+            $auto_delivery = (new UseInternalController)->_getSetting('auto_delivery');
+            if($auto_delivery == 1){
+                (new _FrontDelivery)->_internalSend($request->purchase_uuid);
+            }
+            /*Fin proceso de ENVIO*/
             $response = array(
                 'status' => 'success',
                 'data' => [

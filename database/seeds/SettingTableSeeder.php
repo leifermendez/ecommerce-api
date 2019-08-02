@@ -24,7 +24,8 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'countries_available', 'value' => 'ES,'),
             array('meta' => 'stripe_auth_redirect', 'value' => 'http://localhost:4200'),
             array('meta' => 'search_range_km', 'value' => '10'),
-            array('meta' => 'discount_to_supplier', 'value' => '1')
+            array('meta' => 'discount_to_supplier', 'value' => '1'),
+            array('meta' => 'auto_delivery', 'value' => '1')
         ));
     }
 }

@@ -10,7 +10,7 @@ use App\shop;
 use App\shipping_address;
 use App\delivery_order;
 
-define("_api_", "https://test.api.paack.co/api");
+define("_api_delivery_", "https://test.api.paack.co/api");
 
 class _FrontDelivery extends Controller
 {
@@ -18,7 +18,7 @@ class _FrontDelivery extends Controller
     public function _send($data = array())
     {
         $paack_key = env('PAACK_KEY', '');
-        $response = Curl::to(_api_ . "/public/v2/orders")
+        $response = Curl::to(_api_delivery_ . "/public/v2/orders")
             ->withHeaders([
                 "X-Authentication: $paack_key"
             ])
@@ -64,6 +64,106 @@ class _FrontDelivery extends Controller
         $data = $response->data;
         return $data;
 
+    }
+
+    public function _internalSend($uuid = null)
+    {
+        try {
+
+            if (!$uuid) {
+                throw new \Exception('uuid null');
+            }
+
+            $user = JWTAuth::parseToken()->authenticate();
+
+            $delivery_list = [];
+            $delivery_errors = [];
+
+            $data_uuid = (new UseInternalController)
+                ->_purchaseStatus($uuid);
+
+            foreach ($data_uuid['purchase'] as $value) {
+
+                $data_pickup = shop::where('shops.id', $value['shop_id'])
+                    ->disableCache()
+                    ->join('shipping_pickup_addresses', 'shops.id', '=', 'shipping_pickup_addresses.shop_id')
+                    ->select('shops.*', 'shipping_pickup_addresses.country as pickup_country',
+                        'shipping_pickup_addresses.district as pickup_city',
+                        'shipping_pickup_addresses.instructions as pickup_instructions')
+                    ->first();
+
+                $data_delivery = shipping_address::where('shipping_addresses.id', $value['shipping_address_id'])
+                    ->join('users', 'users.id', '=', 'shipping_addresses.user_id')
+                    ->select('shipping_addresses.*',
+                        'users.name as users_name', 'users.email as users_email', 'users.phone as users_phone')
+                    ->first();
+
+                if (!$data_delivery) {
+                    throw new \Exception('error delivery address not found ' . $value['uuid_shipping']);
+                }
+
+                if (!$data_pickup) {
+                    throw new \Exception('error shop pickup address not found ' . $value['shop_id']);
+                }
+
+                $fields = [
+                    'retailer_order_number' => $value['uuid_shipping'],
+                    'sale_number' => $uuid,
+                    'description' => '',
+                    'pickup_address_name' => $data_pickup->name,
+                    'pickup_address_email' => $data_pickup->email_corporate,
+                    'pickup_address_phone' => $data_pickup->phone_fixed,
+                    'pickup_address_address' => $data_pickup->address,
+                    'pickup_address_postal_code' => $data_pickup->zip_code,
+                    'pickup_address_country' => $data_pickup->pickup_country,
+                    'pickup_address_city' => $data_pickup->pickup_city,
+                    'pickup_address_instructions' => $data_pickup->pickup_instructions,
+                    'delivery_address_name' => $data_delivery->users_name,
+                    'delivery_address_email' => $data_delivery->users_email,
+                    'delivery_address_phone' => $data_delivery->users_phone,
+                    'delivery_address_address' => $data_delivery->address,
+                    'delivery_address_postal_code' => $data_delivery->zip_code,
+                    'delivery_address_country' => $data_delivery->country,
+                    'delivery_address_city' => $data_delivery->district,
+                    'delivery_address_instructions' => $data_delivery->instructions,
+                    'weight' => '10',//<---- pensar
+                    'width' => '10',//<---- pensar
+                    'height' => '10',//<---- pensar
+                    'length' => '10',//<---- pensar
+                    'barcode' => ''//<---- pensar
+                ];
+
+                if ($value['status'] === 'success') {
+                    $send = $this->_send($fields);
+                    $delivery_value = [
+                        'deliver_uuid' => $value['uuid_shipping'],
+                        'purchase_uuid' => $value['uuid'],
+                        'retailer_order_number' => $send->paack_order_number,
+                        'tracking_url' => $send->tracking_url,
+                        'user_id' => $user->id
+                    ];
+                    delivery_order::insertGetId($delivery_value);
+                    $delivery_list[] = $send;
+                } else {
+                    $value['error_msg'] = 'status ' . $value['status'];
+                    $delivery_errors[] = $value;
+                }
+            }
+
+
+            $response = array(
+                'status' => 'success',
+                'data' => [
+                    'delivery' => $delivery_list,
+                    'errors' => $delivery_errors
+                ],
+                'code' => 0
+            );
+            return $response;
+
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function index(Request $request)
@@ -152,6 +252,7 @@ class _FrontDelivery extends Controller
             foreach ($data_uuid['purchase'] as $value) {
 
                 $data_pickup = shop::where('shops.id', $value['shop_id'])
+                    ->disableCache()
                     ->join('shipping_pickup_addresses', 'shops.id', '=', 'shipping_pickup_addresses.shop_id')
                     ->select('shops.*', 'shipping_pickup_addresses.country as pickup_country',
                         'shipping_pickup_addresses.district as pickup_city',
