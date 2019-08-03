@@ -333,7 +333,7 @@ class UseInternalController extends Controller
             if (!$product_id) {
                 throw new \Exception('id null');
             }
-
+            $exists = false;
             $data = product_attached::where('product_attacheds.product_id', $product_id)
                 ->join('attacheds', 'product_attacheds.attached_id', '=', 'attacheds.id')
                 ->join('labels_products', 'labels_products.attacheds_id', '=', 'attacheds.id')
@@ -347,8 +347,16 @@ class UseInternalController extends Controller
                 $tmp = implode(',',$tmp);
                $encrypted_label = Crypt::encryptString($tmp);
             }
+            if(strlen($tmp)){
+                $string_label = str_replace(",", "%' OR products.label LIKE '%", $tmp);
+                $exists = products::whereRaw("(products.label LIKE '%$string_label%')")
+                ->exists();
+            }
 
-            return $encrypted_label;
+            return [
+                'exists' => $exists,
+                'label' => $encrypted_label
+            ];
 
         } catch (\Execption $e) {
             return $e->getMessage();

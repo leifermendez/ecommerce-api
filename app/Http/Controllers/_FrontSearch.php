@@ -48,17 +48,16 @@ class _FrontSearch extends Controller
                     ->join('hours', 'shops.id', '=', 'hours.shop_id')
                     ->where('products.status', 'available')
                     ->where(function ($query) use ($filters, $request, $src) {
-                        if(!$request->header('_check_session_label')){
-                            $query->where('products.name', 'LIKE', "%{$src}%");
+                        if($request->header('_check_session_label')
+                        && ($request->header('_check_session_label_exists') === 'true')){
+                            $_label =$request->header('_check_session_label');
+                            $decrypted = Crypt::decryptString($_label);
+                            $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
+                            $query
+                            ->whereRaw("(products.label LIKE '%$decrypted%')");
+                       
                         }else{
-                            if($request->header('_check_session_label')){
-                                $_label =$request->header('_check_session_label');
-                                $decrypted = Crypt::decryptString($_label);
-                                $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
-                    
-                                $query
-                                ->whereRaw("(products.label LIKE '%$decrypted%' OR products.label IS NULL)");
-                            };
+                            $query->where('products.name', 'LIKE', "%{$src}%");
                         }
                         foreach ($filters as $value) {
                             $tmp = explode(",", $value);
@@ -73,10 +72,7 @@ class _FrontSearch extends Controller
                                 }
                             }
                         }
-                    });
-                    $sql[$key] = ($request->header('_check_session_label')) ? 
-                    $sql[$key]->orderBy('products.label', 'DESC') :
-                    $sql[$key]->orderBy('products.id', 'DESC');
+                    })->orderBy('products.id', 'DESC');
 
 
                 if ($request->attributes_filter) {

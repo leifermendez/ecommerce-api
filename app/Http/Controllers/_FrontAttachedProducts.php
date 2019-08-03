@@ -100,7 +100,7 @@ class _FrontAttachedProducts extends Controller
 
             if($labels){
                 products::where('id',$fields['product_id'])
-                ->update(['label' => $labels]);
+                ->update(['label' => $labels['label']]);
             }
           
             $data = product_attached::insertGetId($fields);
@@ -177,7 +177,7 @@ class _FrontAttachedProducts extends Controller
             $labels = (new UseInternalController)->_getLabels($fields['product_id']);
             if($labels){
                 products::where('id',$fields['product_id'])
-                ->update(['label' => $labels]);
+                ->update(['label' => $labels['label']]);
             }
             $data = product_attached::where('id', $id)
                 ->update($fields);
