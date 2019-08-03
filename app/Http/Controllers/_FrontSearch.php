@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use DB;
 
 class _FrontSearch extends Controller
@@ -41,14 +42,24 @@ class _FrontSearch extends Controller
             ];
             DB::statement('SET SESSION group_concat_max_len = 2000000');
             foreach ($sql as $value => $key) {
-                $sql[$key] = products::orderBy('products.id', 'DESC')
+                $sql[$key] = products::whereIn('shops.id', $measureShop)
                     ->join('shops', 'products.shop_id', '=', 'shops.id')
                     ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->join('hours', 'shops.id', '=', 'hours.shop_id')
-                    ->whereIn('shops.id', $measureShop)
                     ->where('products.status', 'available')
-                    ->where('products.name', 'LIKE', "%{$src}%")
-                    ->where(function ($query) use ($filters) {
+                    ->where(function ($query) use ($filters, $request, $src) {
+                        if(!$request->header('_check_session_label')){
+                            $query->where('products.name', 'LIKE', "%{$src}%");
+                        }else{
+                            if($request->header('_check_session_label')){
+                                $_label =$request->header('_check_session_label');
+                                $decrypted = Crypt::decryptString($_label);
+                                $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
+                    
+                                $query
+                                ->whereRaw("(products.label LIKE '%$decrypted%' OR products.label IS NULL)");
+                            };
+                        }
                         foreach ($filters as $value) {
                             $tmp = explode(",", $value);
                             if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
@@ -62,9 +73,11 @@ class _FrontSearch extends Controller
                                 }
                             }
                         }
-                    })
-                    ->orderBy('products.featured', 'ASC')
-                    ->orderBy('products.id', 'DESC');
+                    });
+                    $sql[$key] = ($request->header('_check_session_label')) ? 
+                    $sql[$key]->orderBy('products.label', 'DESC') :
+                    $sql[$key]->orderBy('products.id', 'DESC');
+
 
                 if ($request->attributes_filter) {
                     $sql[$key] = $sql[$key]

@@ -14,6 +14,7 @@
         "fzaninotto/faker": "^1.8",
         "genealabs/laravel-model-caching": "*",
         "gladcodes/keygen": "^1.1",
+        "google/cloud-vision": "^0.22.5",
         "hashids/hashids": "^3.0",
         "intervention/image": "^2.4",
         "ixudra/curl": "^6.16",

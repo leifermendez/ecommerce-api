@@ -11,6 +11,7 @@ use App\settings;
 use App\user_payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\OpeningHours\OpeningHours;
 use Carbon\Carbon;
 use App\products;
@@ -323,6 +324,35 @@ class UseInternalController extends Controller
         } catch (\Execption $e) {
             return $e->getMessage();
         }
+    }
+
+    public function _getLabels($product_id = null)
+    {
+        try {
+            $tmp = [];
+            if (!$product_id) {
+                throw new \Exception('id null');
+            }
+
+            $data = product_attached::where('product_attacheds.product_id', $product_id)
+                ->join('attacheds', 'product_attacheds.attached_id', '=', 'attacheds.id')
+                ->join('labels_products', 'labels_products.attacheds_id', '=', 'attacheds.id')
+                ->select('labels_products.labels')
+                ->get();
+            
+            if($data){
+                foreach ($data as $key => $value) {
+                    $tmp[] = $value->labels;
+                }
+                $tmp = implode(',',$tmp);
+               $encrypted_label = Crypt::encryptString($tmp);
+            }
+
+            return $encrypted_label;
+
+        } catch (\Execption $e) {
+            return $e->getMessage();
+        }  
     }
 
     public function _getImages($id)

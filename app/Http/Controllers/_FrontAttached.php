@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\attached;
+use App\labels_product;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Google\Cloud\Core\ServiceBuilder;
 
 define("_api_google_vision","https://vision.googleapis.com/v1");
 
@@ -23,49 +25,31 @@ class _FrontAttached extends Controller
 
     public function _getLabel($image = null)
     {
+
         try{
-            
-            $google_key = env('GOOGLE_API_VISION_KEY', '');
-            $response = Curl::to(_api_google_vision."/images:annotate?key=".$google_key)
-            ->withData([
-                'requests' => [
-                    'image' => [
-                        'source' => [
-                            'imageUri' => 'https://ae01.alicdn.com/kf/HTB1TbxmPFXXXXXSXVXXq6xXFXXX6/5XL-6XL-talla-grande-2018-Primavera-Verano-vestido-talla-grande-blanco-negro-rayas-Vestidos-talla-grande.jpg'
-                        ]
-                    ],
-                    'features' => [
-                        'type' => 'LABEL_DETECTION',
-                        'maxResults' => 10
-                    ]
-                ]
-            ])
-            ->post();
-            //1880805
-
-
-            $response = json_decode($response);
-            return $response;
-            if($response->status!==200){
-                throw new \Exception($response->content);
+            if (!$image) {
+                throw new \Exception('image null');
             }
 
-            $data = json_decode($response->content);
+            $cloud = new ServiceBuilder([
+                'keyFilePath' => base_path('ecommerce-apatxee-v2-2588124b1aab.json'),
+                'projectId' => 'ecommerce-apatxee-v2'
+            ]);
 
-   
-
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
-
-
+            $vision = $cloud->vision();
+            
+            $image = $vision->image(file_get_contents($image), 
+            ['LABEL_DETECTION']);
+            $results = $vision->annotate($image);
+            $list = [];
+            foreach ($results->labels() as $value) {
+                $list[] = $value->info()['description'];
+            }
+            return $list;
 
         }catch (\Exception $e) {
 
-            return false;
+            return $e->getMessage();
 
         }
     }
@@ -145,6 +129,7 @@ class _FrontAttached extends Controller
             $user_current = JWTAuth::parseToken()->authenticate();
             $file = $request->file('attached');
             $type_file = $request->type_file;
+            $labels = '';
             $format = 'jpg';
             $id = $request->id;
             $imageName = Str::random(35);
@@ -197,7 +182,14 @@ class _FrontAttached extends Controller
 
                 $data = attached::find($data);
             } else {
-
+                $google_ai_ = (new UseInternalController)->_getSetting('google_vision');
+                if($google_ai_ == 1){
+                    $get_label = $this->_getLabel($file);
+                    if(count($get_label)){
+                        $labels = implode(",", $get_label);
+                    }
+                }
+        
                 $sizes = array(
                     'small' => Image::make($file)
                         ->encode($format, 100)
@@ -237,7 +229,13 @@ class _FrontAttached extends Controller
                             ]
                         );
 
+                        labels_product::where('attacheds_id',$id)
+                        ->update([
+                            'attacheds_id' => $data,
+                            'labels' => $labels
+                        ]);
                     $data = attached::find($id);
+
                 } else {
                     $data = attached::insertGetId(
                         [
@@ -249,14 +247,17 @@ class _FrontAttached extends Controller
                             'media_type' => $type_file
                         ]
                     );
+
+                    labels_product::insert([
+                        'attacheds_id' => $data,
+                        'labels' => $labels
+                    ]);
+                    
                     $data = attached::find($data);
                 }
 
 
             }
-
-            $a=$this->_getLabel($data);
-            dd($a);
 
             $status = array(
                 'status' => 'success',

@@ -7,6 +7,7 @@ use App\products;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Artisan;
+use DB;
 
 class _FrontAttachedProducts extends Controller
 {
@@ -79,6 +80,7 @@ class _FrontAttachedProducts extends Controller
     {
 
         try {
+            DB::beginTransaction();
             $request->validate([
                 'attached_id' => 'required',
                 'product_id' => 'required'
@@ -94,9 +96,16 @@ class _FrontAttachedProducts extends Controller
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
+            $labels = (new UseInternalController)->_getLabels($fields['product_id']);
 
+            if($labels){
+                products::where('id',$fields['product_id'])
+                ->update(['label' => $labels]);
+            }
+          
             $data = product_attached::insertGetId($fields);
             $data = product_attached::find($data);
+            DB::commit();
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
 
             $response = array(
@@ -107,6 +116,7 @@ class _FrontAttachedProducts extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,
@@ -149,6 +159,7 @@ class _FrontAttachedProducts extends Controller
     {
 
         try {
+            DB::beginTransaction();
             $request->validate([
                 'attached_id' => 'required',
                 'product_id' => 'required'
@@ -163,10 +174,15 @@ class _FrontAttachedProducts extends Controller
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
-
+            $labels = (new UseInternalController)->_getLabels($fields['product_id']);
+            if($labels){
+                products::where('id',$fields['product_id'])
+                ->update(['label' => $labels]);
+            }
             $data = product_attached::where('id', $id)
                 ->update($fields);
             $data = product_attached::find($data);
+            DB::commit();
             Artisan::call("modelCache:clear", ['--model' => 'App\products']);
             $response = array(
                 'status' => 'success',
@@ -176,6 +192,7 @@ class _FrontAttachedProducts extends Controller
             );
             return response()->json($response);
         } catch (\Exception $e) {
+            DB::rollBack();
             $response = array(
                 'status' => 'fail',
                 'code' => 5,

@@ -26,7 +26,8 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'search_range_km', 'value' => '10'),
             array('meta' => 'discount_to_supplier', 'value' => '1'),
             array('meta' => 'auto_delivery', 'value' => '1'),
-            array('meta' => 'auto_sms', 'value' => '1')
+            array('meta' => 'auto_sms', 'value' => '1'),
+            array('meta' => 'google_vision', 'value' => '1')
         ));
     }
 }

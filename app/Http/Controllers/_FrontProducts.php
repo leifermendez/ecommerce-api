@@ -243,11 +243,13 @@ class _FrontProducts extends Controller
                 $getCoverImageProduct = (new UseInternalController)->_getCoverImageProduct($id);
                 $getCategories = (new UseInternalController)->_getCategories($id);
                 $gallery = (new UseInternalController)->_getImages($id);
+                $labels = (new UseInternalController)->_getLabels($id);
                 $data->setAttribute('is_available', $isAvailable);
                 $data->setAttribute('variations', $getVariations);
                 $data->setAttribute('cover_image', $getCoverImageProduct);
                 $data->setAttribute('categories', $getCategories);
                 $data->setAttribute('gallery', $gallery);
+                $data->setAttribute('labels', $labels);
             }
 
             $response = array(

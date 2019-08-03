@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->enum('product_type', ['digital', 'physical'])->default($value = 'physical');
             $table->longText('description');
             $table->integer('shop_id');
+            $table->longText('label');
             $table->enum('status', ['available', 'unavailable','delete'])->default($value = 'available');
             $table->timestamps();
         });
