@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\attached;
+use Ixudra\Curl\Facades\Curl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Tymon\JWTAuth\Facades\JWTAuth;
+
+define("_api_google_vision","https://vision.googleapis.com/v1");
 
 class _FrontAttached extends Controller
 {
@@ -17,6 +20,55 @@ class _FrontAttached extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function _getLabel($image = null)
+    {
+        try{
+            
+            $google_key = env('GOOGLE_API_VISION_KEY', '');
+            $response = Curl::to(_api_google_vision."/images:annotate?key=".$google_key)
+            ->withData([
+                'requests' => [
+                    'image' => [
+                        'source' => [
+                            'imageUri' => 'https://ae01.alicdn.com/kf/HTB1TbxmPFXXXXXSXVXXq6xXFXXX6/5XL-6XL-talla-grande-2018-Primavera-Verano-vestido-talla-grande-blanco-negro-rayas-Vestidos-talla-grande.jpg'
+                        ]
+                    ],
+                    'features' => [
+                        'type' => 'LABEL_DETECTION',
+                        'maxResults' => 10
+                    ]
+                ]
+            ])
+            ->post();
+            //1880805
+
+
+            $response = json_decode($response);
+            return $response;
+            if($response->status!==200){
+                throw new \Exception($response->content);
+            }
+
+            $data = json_decode($response->content);
+
+   
+
+            $response = array(
+                'status' => 'success',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+
+
+
+        }catch (\Exception $e) {
+
+            return false;
+
+        }
+    }
 
     public function _internalUpload($url = null)
     {
@@ -203,6 +255,8 @@ class _FrontAttached extends Controller
 
             }
 
+            $a=$this->_getLabel($data);
+            dd($a);
 
             $status = array(
                 'status' => 'success',

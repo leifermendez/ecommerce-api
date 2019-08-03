@@ -81,7 +81,6 @@ class ExternalDeliveryController extends Controller
 
             $response = json_decode($response);
 
-            dd($response);
             if($response->status!==200){
                 throw new \Exception($response->content);
             }
