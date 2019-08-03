@@ -27,6 +27,11 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
 
     Route::group(['prefix' => 'rest'], function () {
 
+        Route::resource('/suggestions', '_FrontSuggestion')
+        ->only([
+            'index'
+        ]);
+
         Route::resource('/zone-available', '_FrontZoneAvailable')
             ->only([
                 'index'
