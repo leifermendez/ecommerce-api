@@ -48,9 +48,9 @@ class _FrontSearch extends Controller
                     ->join('hours', 'shops.id', '=', 'hours.shop_id')
                     ->where('products.status', 'available')
                     ->where(function ($query) use ($filters, $request, $src) {
-                        if($request->header('_check_session_label')
-                        && ($request->header('_check_session_label_exists') === 'true')){
-                            $_label =$request->header('_check_session_label');
+                        if($request->input('_check_session_label')
+                        && ($request->input('_check_session_label_exists') === 'true')){
+                            $_label =$request->input('_check_session_label');
                             $decrypted = Crypt::decryptString($_label);
                             $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
                             $query

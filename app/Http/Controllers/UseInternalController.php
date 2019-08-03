@@ -355,7 +355,8 @@ class UseInternalController extends Controller
 
             return [
                 'exists' => $exists,
-                'label' => $encrypted_label
+                'label' => $encrypted_label,
+                'string' => $tmp
             ];
 
         } catch (\Execption $e) {
