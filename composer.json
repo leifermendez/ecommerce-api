@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.8",
         "genealabs/laravel-model-caching": "*",
+        "geoip2/geoip2": "~2.1",
         "gladcodes/keygen": "^1.1",
         "google/cloud-vision": "^0.22.5",
         "hashids/hashids": "^3.0",
@@ -27,6 +28,7 @@
         "s-ichikawa/laravel-sendgrid-driver": "^2.0",
         "spatie/opening-hours": "^2.2",
         "superbalist/laravel-google-cloud-storage": "^2.2",
+        "torann/geoip": "^1.0",
         "twilio/sdk": "^5.32",
         "tymon/jwt-auth": "1.0.*"
     },

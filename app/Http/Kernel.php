@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckLocation;
 use App\Http\Middleware\FrontWeb;
 use App\Http\Middleware\AuthJWT;
 use App\Http\Middleware\PanelWeb;
+use App\Http\Middleware\CookiesSuggestions;
 
 class Kernel extends HttpKernel
 {
@@ -74,6 +75,7 @@ class Kernel extends HttpKernel
         'FrontWeb' => FrontWeb::class,
         'AuthJWT' => AuthJWT::class,
         'PanelWeb' => PanelWeb::class,
+        'CookiesSuggestions' => CookiesSuggestions::class,
     ];
 
     /**

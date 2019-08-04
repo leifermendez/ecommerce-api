@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
  * Front API ------
  */
 
-Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb']], function () {
+Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions']], function () {
 
     /**
      * Rutas libres
