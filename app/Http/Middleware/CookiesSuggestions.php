@@ -39,7 +39,7 @@ class CookiesSuggestions
 
     public function handle($request, Closure $next)
     {
-        $_cookies = ($request->header('_check_session_label')) ? $request->header('_check_session_label') : $request['_cookies_ref_products'];  
+        $_cookies = ($request->header('COOKIES-REF')) ? $request->header('COOKIES-REF') : false;  
         $src = ($request->src) ? $request->src : null;
         $ip = geoip()->getClientIP();
         $g = geoip()->getLocation($ip);
