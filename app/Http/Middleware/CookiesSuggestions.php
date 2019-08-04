@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use \Torann\GeoIP\GeoIP;
 use App\cookies_red;
+use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -45,18 +46,20 @@ class CookiesSuggestions
         $g = geoip()->getLocation($ip);
         $g=$g->toArray();
         $user = $this->_getUser();
-        dd($_cookies);
-        
+                
         if($_cookies){
-            $values = [
-                'users_id' => ($user) ? $user->id : null,
-                'labels' => $_cookies,
-                'src' => $src,
-                'ip' => $ip,
-                'browser' => '',
-                'country' => $g['iso_code']
-             ];
-            cookies_red::insert($values);
+            $decrypted = Crypt::decryptString($_cookies);
+            if(!cookies_red::where('labels',$decrypted)->exists()){
+                $values = [
+                    'users_id' => ($user) ? $user->id : null,
+                    'labels' => $decrypted,
+                    'src' => $src,
+                    'ip' => $ip,
+                    'browser' => '',
+                    'country' => $g['iso_code']
+                 ];
+                cookies_red::insert($values);
+            }
         };
         return $next($request);
     }
