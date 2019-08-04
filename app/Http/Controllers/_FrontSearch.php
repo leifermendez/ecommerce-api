@@ -108,7 +108,7 @@ class _FrontSearch extends Controller
                     SELECT SUM(score) AS TotalItemsOrdered FROM comments WHERE shop_id = shops.id
                     ) as score_shop'),
                     DB::raw('(
-                    SELECT COUNT(*) AS TotalItemsOrdered FROM comments WHERE shop_id = 1) as score_count'),
+                    SELECT COUNT(*) AS TotalItemsOrdered FROM comments WHERE shop_id = shops.id) as score_count'),
                     DB::raw('(
                         SELECT attacheds.medium  
                         FROM product_attacheds 
