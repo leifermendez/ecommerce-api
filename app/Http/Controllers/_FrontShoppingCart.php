@@ -30,6 +30,7 @@ class _FrontShoppingCart extends Controller
                     'variation_products.price_regular',
                     'shopping_carts.shop_id',
                     'shops.name as shop_name',
+                    'shopping_carts.qty as shopping_carts_qty',
                     'products.id as product_id'
                 )
                 ->get();
@@ -52,12 +53,14 @@ class _FrontShoppingCart extends Controller
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
                 ->join('shops','shopping_carts.shop_id','=','shops.id')
                 ->select(
-                    DB::raw('sum(variation_products.price_normal) as price_normal'),
-                    DB::raw('sum(variation_products.price_regular) as price_regular'),
-                    'shopping_carts.shop_id','shops.name as shops_name'
+                    DB::raw('sum(variation_products.price_normal * shopping_carts.qty) as price_normal'),
+                    DB::raw('sum(variation_products.price_regular * shopping_carts.qty) as price_regular'),
+                    'shopping_carts.shop_id','shops.name as shops_name',
+                    'shopping_carts.qty as shopping_carts_qty'
                 )
                 ->groupBy('shopping_carts.shop_id')
                 ->get();
+
 
             $data_total->map(function($item) use ($_total_shipping){
                 $item->total_shipping =  $_total_shipping;
@@ -69,8 +72,8 @@ class _FrontShoppingCart extends Controller
                 ->join('products', 'shopping_carts.product_id', '=', 'products.id')
                 ->join('variation_products', 'variation_products.id', '=', 'shopping_carts.product_variation_id')
                 ->select(
-                    DB::raw('sum(variation_products.price_normal) as price_normal'),
-                    DB::raw('sum(variation_products.price_regular) as price_regular')
+                    DB::raw('sum(variation_products.price_normal * shopping_carts.qty) as price_normal'),
+                    DB::raw('sum(variation_products.price_regular * shopping_carts.qty) as price_regular')
                 )
                 ->groupBy('shopping_carts.user_id')
                 ->first();

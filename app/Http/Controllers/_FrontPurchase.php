@@ -119,12 +119,15 @@ class _FrontPurchase extends Controller
             $uuid = Str::random(40);
 
             foreach ($shoppingCart['list'] as $value) {
+
+                $tmp_total = floatval($value['price_normal'] * $value['shopping_carts_qty']);
+
                 purchase_detail::insert(
                     [
                         'purchase_uuid' => $uuid,
                         'product_id' => $value['product_id'],
-                        'product_qty' => 1,
-                        'product_amount' => $value['price_normal'],
+                        'product_qty' => $value['shopping_carts_qty'],
+                        'product_amount' => $tmp_total,
                         'shop_id' => $value['shop_id'],
                         'product_label' => $value['name']
                     ]
@@ -138,8 +141,8 @@ class _FrontPurchase extends Controller
                 }
 
                 $total_amount = (isset($lists[$value['shop_id']]['amount'])) ?
-                    floatval($lists[$value['shop_id']]['amount'] + $value['price_normal']) :
-                    floatval($value['price_normal']);
+                    floatval($lists[$value['shop_id']]['amount'] + $tmp_total) :
+                    floatval($tmp_total);
 
                 $feed_percentage = (new UseInternalController)->_getFeedAmount($total_amount);
                 $isFree = variation_product::where('id', $value['variation_product_id'])
@@ -176,15 +179,15 @@ class _FrontPurchase extends Controller
                 ->get();
 
             $data_list = purchase_detail::where('purchase_details.purchase_uuid', $uuid)
-                ->join('products','purchase_details.product_id','=','products.id')
-                ->select('purchase_details.*','products.name as products_name')
+                ->join('products', 'purchase_details.product_id', '=', 'products.id')
+                ->select('purchase_details.*', 'products.name as products_name')
                 ->get();
 
             $user->setAttribute(
-                'list',$data_list
+                'list', $data_list
             );
             $user->setAttribute(
-                'uuid',$uuid
+                'uuid', $uuid
             );
 
             $user->notify(new _UserPurchase($user));

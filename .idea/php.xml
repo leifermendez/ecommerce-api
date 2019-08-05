@@ -117,6 +117,17 @@
       <path value="$PROJECT_DIR$/vendor/genealabs/laravel-model-caching" />
       <path value="$PROJECT_DIR$/vendor/s-ichikawa/laravel-sendgrid-driver" />
       <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/twilio" />
+      <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
+      <path value="$PROJECT_DIR$/vendor/maxmind/web-service-common" />
+      <path value="$PROJECT_DIR$/vendor/torann/geoip" />
+      <path value="$PROJECT_DIR$/vendor/geoip2/geoip2" />
+      <path value="$PROJECT_DIR$/vendor/grpc/grpc" />
+      <path value="$PROJECT_DIR$/vendor/google/crc32" />
+      <path value="$PROJECT_DIR$/vendor/google/gax" />
+      <path value="$PROJECT_DIR$/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/vendor/google/common-protos" />
+      <path value="$PROJECT_DIR$/vendor/google/cloud-vision" />
+      <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

@@ -83,6 +83,7 @@ class UseInternalController extends Controller
                     'variation_products.id as variation_product_id',
                     'variation_products.delivery as variation_delivery',
                     'shopping_carts.shop_id',
+                    'shopping_carts.qty as shopping_carts_qty',
                     'products.id as product_id'
                 )
                 ->get();

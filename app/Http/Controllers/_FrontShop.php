@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\shipping_pickup_address;
 use App\User;
 use Illuminate\Http\Request;
 use App\shop;
@@ -122,6 +123,15 @@ class _FrontShop extends Controller
                 ->update(['role' => 'shop']);
             $id = Shop::insertGetId($fields);
             $data = Shop::find($id);
+            shipping_pickup_address::insert([
+                'shop_id' => $id,
+                'country' => '',
+                'state' => '',
+                'district' => '',
+                'address' => '',
+                'zip_code' => '',
+                'instructions' => ''
+            ]);
 
             Artisan::call("modelCache:clear", ['--model' => 'App\shop']);
             DB::commit();

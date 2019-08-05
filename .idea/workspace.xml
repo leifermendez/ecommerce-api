@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_05_30_092941_create_shopping_carts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_05_30_092941_create_shopping_carts_table.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,21 +28,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+            <state relative-caret-position="374">
+              <caret line="150" selection-start-line="150" selection-end-line="150" />
+              <folding>
+                <element signature="e#40#82#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="241" column="64" lean-forward="true" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
+            <state relative-caret-position="327">
+              <caret line="132" column="35" selection-start-line="132" selection-start-column="35" selection-end-line="132" selection-end-column="35" />
               <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
+                <element signature="e#40#72#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
+            <state relative-caret-position="140">
+              <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
               <folding>
                 <element signature="e#40#66#0#PHP" expanded="true" />
               </folding>
@@ -58,26 +66,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2499">
-              <caret line="151" column="46" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="46" />
+            <state relative-caret-position="293">
+              <caret line="75" column="86" selection-start-line="75" selection-start-column="86" selection-end-line="75" selection-end-column="86" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
+        <entry file="file://$PROJECT_DIR$/app/shipping_pickup_address.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/composer.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="72" column="10" lean-forward="true" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
+            <state relative-caret-position="170">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -86,10 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_UserWelcome</find>
-      <find>verifie</find>
-      <find>_UserVerified</find>
-      <find>_PayOrder</find>
       <find>header</find>
       <find>bold</find>
       <find>attribute</find>
@@ -116,6 +111,10 @@
       <find>_getSetting</find>
       <find>$user</find>
       <find>medium</find>
+      <find>shopping_carts</find>
+      <find>$tmp_total</find>
+      <find>total_shop</find>
+      <find>shipping_pickup_address</find>
     </findStrings>
     <replaceStrings>
       <replace>product_attached:</replace>
@@ -140,7 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/AttachedController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontBanners.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FronUserPayment.php" />
@@ -177,20 +175,21 @@
         <option value="$PROJECT_DIR$/config/services.php" />
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" />
         <option value="$PROJECT_DIR$/app/user_payment.php" />
         <option value="$PROJECT_DIR$/app/Notifications/_NewPurchaseSmsUser.php" />
         <option value="$PROJECT_DIR$/app/Notifications/_NewPurchaseSmsShop.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontDelivery.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/notifications/new_user.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" />
         <option value="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_05_30_092941_create_shopping_carts_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" />
       </list>
     </option>
   </component>
@@ -311,6 +310,17 @@
       <path value="$PROJECT_DIR$/vendor/genealabs/laravel-model-caching" />
       <path value="$PROJECT_DIR$/vendor/s-ichikawa/laravel-sendgrid-driver" />
       <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/twilio" />
+      <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
+      <path value="$PROJECT_DIR$/vendor/maxmind/web-service-common" />
+      <path value="$PROJECT_DIR$/vendor/torann/geoip" />
+      <path value="$PROJECT_DIR$/vendor/geoip2/geoip2" />
+      <path value="$PROJECT_DIR$/vendor/grpc/grpc" />
+      <path value="$PROJECT_DIR$/vendor/google/crc32" />
+      <path value="$PROJECT_DIR$/vendor/google/gax" />
+      <path value="$PROJECT_DIR$/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/vendor/google/common-protos" />
+      <path value="$PROJECT_DIR$/vendor/google/cloud-vision" />
+      <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -358,7 +368,7 @@
               <item name="e-commerce-v2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="database" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="seeds" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="migrations" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -471,7 +481,7 @@
       <workItem from="1564555982531" duration="8766000" />
       <workItem from="1564642109541" duration="10351000" />
       <workItem from="1564727843485" duration="16670000" />
-      <workItem from="1564986894610" duration="3349000" />
+      <workItem from="1564986894610" duration="9565000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -641,11 +651,18 @@
       <option name="project" value="LOCAL" />
       <updated>1564751062767</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="KIKI">
+      <created>1564995221893</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1564995221893</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="379166000" />
+    <option name="totallyTimeSpent" value="385382000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -658,13 +675,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.30810234" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.30810234" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.301179" />
+      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.301179" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.30653805" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.3290461" />
@@ -705,7 +721,8 @@
     <MESSAGE value="Antes de instalar notificacion de twilio" />
     <MESSAGE value="Ya envia SMS al comprador y vendedor" />
     <MESSAGE value="Setting auto envio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting auto envio" />
+    <MESSAGE value="KIKI" />
+    <option name="LAST_COMMIT_MESSAGE" value="KIKI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -722,7 +739,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php</url>
-          <line>18</line>
+          <line>19</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -772,30 +789,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php</url>
-          <line>90</line>
+          <line>93</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsAttributesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/categories.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding>
-            <element signature="e#23#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSeller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
@@ -1014,13 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Notifications/_PayOrder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1093,26 +1086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="43" column="42" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="42" />
-          <folding>
-            <element signature="e#40#53#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2975">
-          <caret line="188" selection-start-line="188" selection-end-line="188" />
-          <folding>
-            <element signature="e#40#82#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/SettingTableSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -1133,27 +1106,7 @@
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
-          <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="241" column="64" lean-forward="true" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
-          <folding>
-            <element signature="e#40#66#0#PHP" expanded="true" />
-          </folding>
+          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1164,13 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2499">
-          <caret line="151" column="46" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1178,10 +1124,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="72" column="10" lean-forward="true" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
+        <state relative-caret-position="424">
+          <caret line="81" column="9" lean-forward="true" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="241" column="66" selection-start-line="241" selection-start-column="66" selection-end-line="241" selection-end-column="66" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_30_092941_create_shopping_carts_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
+          <folding>
+            <element signature="e#40#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+          <folding>
+            <element signature="e#40#82#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="75" column="86" selection-start-line="75" selection-start-column="86" selection-end-line="75" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/shipping_pickup_address.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="132" column="35" selection-start-line="132" selection-start-column="35" selection-end-line="132" selection-end-column="35" />
+          <folding>
+            <element signature="e#40#72#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
