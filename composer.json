@@ -77,7 +77,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "@php artisan config:clear",
-            "chmod -R 755 bootstrap\/cache",            
+            "chmod -R 755 bootstrap/",
             "chmod -R 777 public/"
         ]
     }

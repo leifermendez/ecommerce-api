@@ -124,6 +124,7 @@ class _FrontSearch extends Controller
                             'price_regular', price_regular,
                             'quantity', quantity,
                             'label', label,
+                            'id', id,
                             'attached_id', attached_id,
                             'observation', observation,
                             'delivery', delivery,

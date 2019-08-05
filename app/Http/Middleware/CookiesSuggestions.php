@@ -16,8 +16,8 @@ class CookiesSuggestions
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
 
@@ -26,7 +26,7 @@ class CookiesSuggestions
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return false;
-            }else{
+            } else {
                 return $user;
             }
         } catch (TokenExpiredException $e) {
@@ -40,16 +40,16 @@ class CookiesSuggestions
 
     public function handle($request, Closure $next)
     {
-        $_cookies = ($request->header('COOKIES-REF')) ? $request->header('COOKIES-REF') : false;  
+        $_cookies = ($request->header('COOKIES-REF')) ? $request->header('COOKIES-REF') : false;
         $src = ($request->src) ? $request->src : null;
         $ip = geoip()->getClientIP();
         $g = geoip()->getLocation($ip);
-        $g=$g->toArray();
+        $g = $g->toArray();
         $user = $this->_getUser();
-                
-        if($_cookies){
+
+        if ($_cookies) {
             $decrypted = Crypt::decryptString($_cookies);
-            if(!cookies_red::where('labels',$decrypted)->exists()){
+            if (!cookies_red::where('labels', $decrypted)->where('ip', $ip)->exists()) {
                 $values = [
                     'users_id' => ($user) ? $user->id : null,
                     'labels' => $decrypted,
@@ -57,7 +57,7 @@ class CookiesSuggestions
                     'ip' => $ip,
                     'browser' => '',
                     'country' => $g['iso_code']
-                 ];
+                ];
                 cookies_red::insert($values);
             }
         };

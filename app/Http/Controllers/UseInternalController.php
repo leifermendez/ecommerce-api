@@ -373,7 +373,8 @@ class UseInternalController extends Controller
 
             $data = product_attached::where('product_attacheds.product_id', $id)
                 ->join('attacheds', 'product_attacheds.attached_id', '=', 'attacheds.id')
-                ->select('attacheds.*', 'product_attacheds.product_id as product_id')
+                ->select('attacheds.*', 'product_attacheds.product_id as product_id',
+                    'attacheds.large as big')
                 ->take(15)
                 ->get();
 

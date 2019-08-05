@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,55 +23,61 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/vendor/notifications/new_user.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state relative-caret-position="476">
+              <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="43" column="42" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="42" />
+            <state relative-caret-position="344">
+              <caret line="241" column="64" lean-forward="true" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
               <folding>
-                <element signature="e#40#53#0#PHP" expanded="true" />
+                <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2554">
-              <caret line="188" selection-start-line="188" selection-end-line="188" />
+            <state relative-caret-position="48">
+              <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
               <folding>
-                <element signature="e#40#82#0#PHP" expanded="true" />
+                <element signature="e#40#66#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2499">
+              <caret line="151" column="46" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php">
+        <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="159" column="13" lean-forward="true" selection-start-line="159" selection-start-column="13" selection-end-line="159" selection-end-column="13" />
-              <folding>
-                <element signature="e#40#82#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/SettingTableSeeder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="28" column="52" lean-forward="true" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+            <state relative-caret-position="271">
+              <caret line="72" column="10" lean-forward="true" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -79,7 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>registerNewUser</find>
       <find>_UserWelcome</find>
       <find>verifie</find>
       <find>_UserVerified</find>
@@ -109,6 +115,7 @@
       <find>disable(</find>
       <find>_getSetting</find>
       <find>$user</find>
+      <find>medium</find>
     </findStrings>
     <replaceStrings>
       <replace>product_attached:</replace>
@@ -133,8 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FronCache.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontCache.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AttachedController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontBanners.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" />
@@ -146,7 +151,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/BlogController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_16_122004_create_blogs_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontBlog.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontNewsletter.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSales.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSeller.php" />
@@ -163,7 +167,6 @@
         <option value="$PROJECT_DIR$/app/variation_product.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" />
         <option value="$PROJECT_DIR$/app/products.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/notifications/user_verified.blade.php" />
         <option value="$PROJECT_DIR$/app/purchase_order.php" />
         <option value="$PROJECT_DIR$/app/Notifications/_UserWelcome.php" />
@@ -179,11 +182,15 @@
         <option value="$PROJECT_DIR$/app/Notifications/_NewPurchaseSmsUser.php" />
         <option value="$PROJECT_DIR$/app/Notifications/_NewPurchaseSmsShop.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontDelivery.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/notifications/new_user.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" />
         <option value="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -317,7 +324,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -358,6 +364,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -463,7 +470,8 @@
       <workItem from="1564468967213" duration="8395000" />
       <workItem from="1564555982531" duration="8766000" />
       <workItem from="1564642109541" duration="10351000" />
-      <workItem from="1564727843485" duration="16657000" />
+      <workItem from="1564727843485" duration="16670000" />
+      <workItem from="1564986894610" duration="3349000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -626,11 +634,18 @@
       <option name="project" value="LOCAL" />
       <updated>1564750088795</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Setting auto envio">
+      <created>1564751062767</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1564751062767</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375804000" />
+    <option name="totallyTimeSpent" value="379166000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -643,12 +658,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.30490404" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.30810234" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.301179" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.301179" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.30653805" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.3290461" />
@@ -716,7 +732,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/routes/api.php</url>
-          <line>109</line>
+          <line>114</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -736,7 +752,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php</url>
-          <line>89</line>
+          <line>125</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -763,37 +779,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/purchase_detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontNewsletter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
-          <folding>
-            <element signature="e#40#59#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSales.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="203" column="21" selection-start-line="203" selection-start-column="21" selection-end-line="203" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontCif.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductsAttributesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1090,26 +1075,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="441" column="54" selection-start-line="441" selection-start-column="43" selection-end-line="441" selection-end-column="54" />
-          <folding>
-            <element signature="e#40#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="26" selection-start-line="26" selection-end-line="26" selection-end-column="78" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontDelivery.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -1121,23 +1086,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2588">
-          <caret line="177" column="47" selection-start-line="177" selection-start-column="47" selection-end-line="177" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/vendor/notifications/new_user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="646">
           <caret line="43" column="42" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="42" />
           <folding>
             <element signature="e#40#53#0#PHP" expanded="true" />
@@ -1147,7 +1105,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2554">
+        <state relative-caret-position="2975">
           <caret line="188" selection-start-line="188" selection-end-line="188" />
           <folding>
             <element signature="e#40#82#0#PHP" expanded="true" />
@@ -1158,17 +1116,72 @@
     <entry file="file://$PROJECT_DIR$/database/seeds/SettingTableSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="28" column="52" lean-forward="true" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
+          <caret line="28" column="52" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
-          <caret line="159" column="13" lean-forward="true" selection-start-line="159" selection-start-column="13" selection-end-line="159" selection-end-column="13" />
+          <caret line="159" column="13" selection-start-line="159" selection-start-column="13" selection-end-line="159" selection-end-column="13" />
           <folding>
             <element signature="e#40#82#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CookiesSuggestions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="56" column="32" lean-forward="true" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="241" column="64" lean-forward="true" selection-start-line="241" selection-start-column="64" selection-end-line="241" selection-end-column="64" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="430" column="20" selection-start-line="430" selection-start-column="20" selection-end-line="430" selection-end-column="20" />
+          <folding>
+            <element signature="e#40#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/shopping_cart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2499">
+          <caret line="151" column="46" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="126" column="36" selection-start-line="126" selection-start-column="36" selection-end-line="126" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="72" column="10" lean-forward="true" selection-start-line="72" selection-start-column="10" selection-end-line="72" selection-end-column="10" />
         </state>
       </provider>
     </entry>
