@@ -21,6 +21,8 @@ class CreateShippingPickupAddressesTable extends Migration
             $table->mediumText('district');
             $table->longText('address');
             $table->string('zip_code');
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->mediumText('instructions');
             $table->timestamps();
         });

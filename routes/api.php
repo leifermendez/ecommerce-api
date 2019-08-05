@@ -178,6 +178,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
         Route::resource('/product-media', '_FrontAttachedProducts');
 
         Route::resource('/attributes-category', '_FrontAttributesCategories');
+
+        Route::resource('/pickup-address', '_FrontPickupAddress');
     });
 
 
