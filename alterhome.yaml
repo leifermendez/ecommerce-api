@@ -1,15 +1,15 @@
 runtime: php72
-service: default
+service: alterhome
 env_variables:
   ## Put production environment variables here.
-  APP_KEY:
+  APP_KEY: base64:6ZHQyRhyyCyGF8U2mnujTzqzGCKAxqg1hFfwOYLntmk
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
-  SESSION_DRIVER:
-  DB_DATABASE:
-  DB_USERNAME:
-  DB_PASSWORD:
-  DB_SOCKET: ""
+  SESSION_DRIVER: cookie
+  DB_DATABASE: ecommerce
+  DB_USERNAME: root
+  DB_PASSWORD: rbsADL4fFiMCKpeP
+  DB_SOCKET: "/cloudsql/alterhome-ecommerce:europe-west1:alterhome-bd"
 
   MAIL_DRIVER: sendgrid
   MAIL_HOST: smtp.sendgrid.net
@@ -19,7 +19,7 @@ env_variables:
   MAIL_ENCRYPTION: tls
   SENDGRID_API_KEY: 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
   MAIL_FROM_ADDRESS: no-reply@apatxee.com
-  MAIL_FROM_NAME: Apatxee.com
+  MAIL_FROM_NAME: Alterhome.es
 
   JWT_SECRET: SEannlkXhUFJHWuVwvBHrj9SSs6zLqhPpNJGwaxt1EQR6OcsZgo9L5Qg4HGtUlKt
   PAACK_KEY: 88e316053355e5017c5df6372c310b287a4693e5
@@ -37,6 +37,6 @@ env_variables:
   STRIPE_PLATFORM_ID: ca_F6nmQpdvp91cXjh0WFLXOJ6pav2MFSLx
 
   FILESYSTEM_DRIVER: gcs
-  GOOGLE_CLOUD_PROJECT_ID: ecommerce-apatxee-v2
-  GOOGLE_CLOUD_STORAGE_BUCKET: ecommerce-apatxee-v2.appspot.com
-  GOOGLE_CLOUD_KEY_FILE: ecommerce-apatxee-v2-2588124b1aab.json
+  GOOGLE_CLOUD_PROJECT_ID: alterhome-ecommerce
+  GOOGLE_CLOUD_STORAGE_BUCKET: media-ecommerce-alterhome
+  GOOGLE_CLOUD_KEY_FILE: alterhome-ecommerce-ee8835bd4804.json

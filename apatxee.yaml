@@ -1,15 +1,15 @@
 runtime: php72
-service: default
+service: apatxee
 env_variables:
   ## Put production environment variables here.
-  APP_KEY:
+  APP_KEY: base64:6ZHQyRhyyCyGF8U2mnujTzqzGCKAxqg1hFfwOYLntmk
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
-  SESSION_DRIVER:
-  DB_DATABASE:
-  DB_USERNAME:
-  DB_PASSWORD:
-  DB_SOCKET: ""
+  SESSION_DRIVER: cookie
+  DB_DATABASE: ecommerce
+  DB_USERNAME: root
+  DB_PASSWORD: Gnieg8VSIpzH
+  DB_SOCKET: "/cloudsql/ecommerce-apatxee-v2:europe-west6:ecommerce-basic"
 
   MAIL_DRIVER: sendgrid
   MAIL_HOST: smtp.sendgrid.net

@@ -11,9 +11,9 @@
         <h1 style="text-align: center;font-size: 28px;">¡Pago exitoso!</h1>
         <br>
         <h2>¡Hola! {{$pay->name}}</h2>
-        <p>Tu pago se ha procesado de forma exitosa</p>
+        <p>Tu pago se ha procesado de forma exitosa, y tu compra fue enviada</p>
         <p>Referencia:</p>
-        <h1>{{$pay->purchase_uuid}}</h1>
+        <h1>{{$pay->uuid}}</h1>
         <div>
             <div>
                 @component('mail::button', ['url' => 'https://apatxee.com/purchases'])

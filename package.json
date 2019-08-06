@@ -10,7 +10,8 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "initialize": "php artisan key:generate && php artisan jwt:secret",
         "migrate": "php artisan migrate:refresh",
-        "google-dev": "gcloud app deploy  --project=ecommerce-apatxee-v2",
+        "google-apatxee-dev": "gcloud config set account inviertenavarra@gmail.com && gcloud app deploy  --project=ecommerce-apatxee-v2 apatxee.yaml",
+        "google-alterhome-dev": "gcloud config set account contacto@leangasoftware.es && gcloud app deploy  --project=alterhome-ecommerce alterhome.yaml",
         "google-prod": "",
         "seed": "php artisan db:seed --class=UsersTableSeeder && php artisan db:seed --class=ShopTableSeeder && php artisan db:seed --class=ProductsTableSeeder && php artisan db:seed --class=PurchaseTableSeeder && php artisan db:seed --class=OrderSeeder && php artisan db:seed --class=PurchaseDetailTableSeeder && php artisan db:seed --class=ZoneAvailableTableSeeder"
     },

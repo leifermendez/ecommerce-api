@@ -17,6 +17,7 @@ class CreateLabelsProductsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->longText('labels');
+            $table->integer('attacheds_id');
             $table->timestamps();
         });
     }

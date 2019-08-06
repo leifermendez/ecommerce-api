@@ -17,7 +17,7 @@
                 |        |          |   |
                 | ------------- |:-------------:| --------:|
                 @foreach ($purchase->list as $p)
-                    | {{$p->products_name}} ({{$p->product_qty}})     |  | {{$p->product_amount}}      |
+                    | {{$p->products_name}} ({{$p->product_qty}})     |  | {{$p->product_amount}} EUR      |
                 @endforeach
             @endcomponent
         </div>
