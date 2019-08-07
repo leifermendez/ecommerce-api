@@ -154,7 +154,7 @@ class _FrontAttached extends Controller
                     'status' => 'fail',
                     'msg' => 'Tipo de archivo no permitido'
                 );
-                return response()->json($status);
+                return response()->json($status, 500);
             }
 
             $responseSize = array();
