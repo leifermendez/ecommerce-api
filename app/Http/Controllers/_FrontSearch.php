@@ -23,15 +23,17 @@ class _FrontSearch extends Controller
             $attributes_filter = ($request->attributes_filter) ? explode("?", $request->attributes_filter) : [];
             $location = $request->_location;
             $measureShop = [];
-            $km = (new UseInternalController)->_getSetting('search_range_km');
-            $measureShop = (new UseInternalController)->_measureShop(
-                $request->header('LAT'),
-                $request->header('LNG'),
-                $km,
-                '<',
-                'distance_in_km,shop_id');
-
+            if ($request->_range_closed) {
+                $km = (new UseInternalController)->_getSetting('search_range_km');
+                $measureShop = (new UseInternalController)->_measureShop(
+                    $request->_lat,
+                    $request->_lng,
+                    $km,
+                    '<',
+                    'distance_in_km,shop_id');
+            }
             $measureShop = array_column($measureShop, 'shop_id');
+
             $src = $request->src;
             $data_attributes = [];
             $tmp_list = [];
@@ -42,12 +44,14 @@ class _FrontSearch extends Controller
             ];
             DB::statement('SET SESSION group_concat_max_len = 2000000');
             foreach ($sql as $value => $key) {
-                $sql[$key] = products::whereIn('shops.id', $measureShop)
+                $sql[$key] = products::where('products.status', 'available')
                     ->join('shops', 'products.shop_id', '=', 'shops.id')
                     ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->join('hours', 'shops.id', '=', 'hours.shop_id')
-                    ->where('products.status', 'available')
-                    ->where(function ($query) use ($filters, $request, $src) {
+                    ->where(function ($query) use ($filters, $request, $src, $measureShop) {
+                        if(count($measureShop)){
+                            $query->whereIn('shops.id', $measureShop);
+                        };
                         if($request->input('_check_session_label')
                         && ($request->input('_check_session_label_exists') === 'true')){
                             $_label =$request->input('_check_session_label');
