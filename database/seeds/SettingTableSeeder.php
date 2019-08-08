@@ -27,6 +27,7 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'discount_to_supplier', 'value' => '1'),
             array('meta' => 'auto_delivery', 'value' => '1'),
             array('meta' => 'auto_sms', 'value' => '1'),
+            array('meta' => 'range_closed', 'value' => '1'),
             array('meta' => 'google_vision', 'value' => '1')
         ));
     }

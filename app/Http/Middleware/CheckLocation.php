@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\UseInternalController;
 use Closure;
 
 class CheckLocation
@@ -9,20 +10,33 @@ class CheckLocation
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        try{
-            $location = ($request->header('LOCATION-ZIP')) ? $request->header('LOCATION-ZIP') : $request['_location_zip_code'];    
-            if(!$location){
-                throw new \Exception('ZIPCODE no valido');
+        try {
+            $range_closed = (new UseInternalController)->_getSetting('range_closed');
+            $location = ($request->header('LOCATION-ZIP')) ?
+                $request->header('LOCATION-ZIP') : $request['_location_zip_code'];
+
+            $lat = ($request->header('LAT')) ? $request->header('LAT') : $request['LAT'];
+            $lng = ($request->header('LNG')) ? $request->header('LNG') : $request['LNG'];
+
+            if($range_closed == 1){
+                if (!$lat || !$lng) {
+                    throw new \Exception('LAT LNG no valido');
+                }
+
+                $request->merge(['_location' => $location]);
+                $request->merge(['_lat' => $lat]);
+                $request->merge(['_lng' => $lng]);
+                $request->merge(['_range_closed' => true]);
             }
-            $request->merge(['_location' => $location]);
+
             return $next($request);
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
 
             $response = array(
                 'status' => 'fail',
@@ -32,6 +46,6 @@ class CheckLocation
 
             return response()->json($response, 403);
         }
-  
+
     }
 }

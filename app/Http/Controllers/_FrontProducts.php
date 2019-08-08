@@ -24,30 +24,36 @@ class _FrontProducts extends Controller
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
             $location = $request->_location;
-            $km = (new UseInternalController)->_getSetting('search_range_km');
             $categories = [];
             $attributes = [];
             $measureShop = [];
-            $measureShop = (new UseInternalController)->_measureShop(
-                $request->header('LAT'),
-                $request->header('LNG'),
-                $km,
-                '<',
-                'distance_in_km,shop_id');
+
+            if ($request->_range_closed) {
+                $km = (new UseInternalController)->_getSetting('search_range_km');
+                $measureShop = (new UseInternalController)->_measureShop(
+                    $request->_lat,
+                    $request->_lng,
+                    $km,
+                    '<',
+                    'distance_in_km,shop_id');
+            }
+
 
             $measureShop = array_column($measureShop, 'shop_id');
 
             $data = products::orderBy('products.id', 'DESC')
                 ->join('shops', 'products.shop_id', '=', 'shops.id')
                 ->join('users', 'users.id', '=', 'shops.users_id')
-                ->whereIn('shops.id', $measureShop)
                 ->where('users.confirmed', '1')
                 ->where('users.status', 'available')
                 ->where('shops.status', 'available')
-                ->where(function ($query) use ($filters, $request) {
-                    if($request->with_variations){
+                ->where(function ($query) use ($filters, $request, $measureShop) {
+                    if(count($measureShop)){
+                        $query->whereIn('shops.id', $measureShop);
+                    }
+                    if ($request->with_variations) {
                         $query->whereExists(function ($query) {
-                                $query->select(DB::raw(1))
+                            $query->select(DB::raw(1))
                                 ->from('variation_products')
                                 ->whereRaw('variation_products.product_id = products.id');
                         });
@@ -56,7 +62,7 @@ class _FrontProducts extends Controller
                         $tmp = explode(",", $value);
                         if (isset($tmp[0]) && isset($tmp[1]) && isset($tmp[2])) {
                             $subTmp = explode("|", $tmp[2]);
-                            if (count($subTmp)>1) {
+                            if (count($subTmp) > 1) {
                                 foreach ($subTmp as $k) {
                                     $query->orWhere($tmp[0], $tmp[1], $k);
                                 }
