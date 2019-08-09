@@ -111,7 +111,7 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
+            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {
@@ -246,7 +246,7 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location');
+            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {

@@ -99,7 +99,7 @@ class _FrontSales extends Controller
     {
 //        $fields = array();
 //        $lists = [];
-//        $request->request->remove('_location');
+//        $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
 //
 //        try {
 //            $user = JWTAuth::parseToken()->authenticate();

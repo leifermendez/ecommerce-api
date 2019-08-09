@@ -129,7 +129,7 @@ class _FrontShoppingCart extends Controller
     public function store(Request $request)
     {
         $fields = array();
-        $request->request->remove('_location');
+        $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
 
         foreach ($request->all() as $key => $value) {
             if ($key !== 'user_id') {
@@ -215,7 +215,7 @@ class _FrontShoppingCart extends Controller
     {
 
         try {
-            $request->request->remove('_location');
+            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
             $fields = array();
             $user = JWTAuth::parseToken()->authenticate();
 
