@@ -9,6 +9,7 @@ use Validator;
 use App\shop;
 use App\shipping_address;
 use App\delivery_order;
+use Carbon\Carbon;
 
 define("_api_delivery_", "https://api.paack.co/api");
 
@@ -18,6 +19,10 @@ class _FrontDelivery extends Controller
     public function _send($data = array())
     {
         $paack_key = env('PAACK_KEY', '');
+        $pickup_window = [
+            'start_time' => Carbon::now()->addMinutes(10),
+            'end_time' => Carbon::now()->addMinutes(60)
+        ];
         $response = Curl::to(_api_delivery_ . "/public/v2/orders")
             ->withHeaders([
                 "X-Authentication: $paack_key"
@@ -45,10 +50,7 @@ class _FrontDelivery extends Controller
                     'city' => $data['delivery_address_city'],
                     'instructions' => $data['delivery_address_instructions']
                 ],
-//                'delivery_window' => [
-//                    'start_time' => 1565347021,
-//                    'end_time' => 1565375762
-//                ]
+                'pickup_window' => $pickup_window
                 /*'packages' => [
                     'weight' => $request->weight,
                     'width' => $request->width,

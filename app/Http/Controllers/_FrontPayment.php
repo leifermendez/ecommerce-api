@@ -31,8 +31,8 @@ class _FrontPayment extends Controller
             ->select('payment_keys.*')
             ->first();
 
-        $this->stripe_pk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
-        $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
+        $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
+        $this->stripe_ap = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
         $this->stripe_api = ($stripeKeys->status === 'live' ? $stripeKeys->live_end_point : $stripeKeys->sandbox_end_point);
     }
 

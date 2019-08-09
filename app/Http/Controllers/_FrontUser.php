@@ -102,7 +102,7 @@ class _FrontUser extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $request->request->remove('_location');
+            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
             $fields = array();
             $user = JWTAuth::parseToken()->authenticate();
 
