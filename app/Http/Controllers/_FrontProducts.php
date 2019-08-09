@@ -48,9 +48,9 @@ class _FrontProducts extends Controller
                 ->where('users.status', 'available')
                 ->where('shops.status', 'available')
                 ->where(function ($query) use ($filters, $request, $measureShop) {
-                    if(count($measureShop)){
+                    if($request->_range_closed){
                         $query->whereIn('shops.id', $measureShop);
-                    }
+                    };
                     if ($request->with_variations) {
                         $query->whereExists(function ($query) {
                             $query->select(DB::raw(1))

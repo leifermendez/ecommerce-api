@@ -49,7 +49,7 @@ class _FrontSearch extends Controller
                     ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
                     ->join('hours', 'shops.id', '=', 'hours.shop_id')
                     ->where(function ($query) use ($filters, $request, $src, $measureShop) {
-                        if(count($measureShop)){
+                        if($request->_range_closed){
                             $query->whereIn('shops.id', $measureShop);
                         };
                         if($request->input('_check_session_label')
