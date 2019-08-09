@@ -19,6 +19,9 @@ class CreatePaymentKeysTable extends Migration
             $table->enum('status', ['test', 'live'])->default($value = 'test');
             $table->string('app_id');
             $table->string('app_secret');
+            $table->string('app_secret_sandbox');
+            $table->string('app_key');
+            $table->string('app_key_sandbox');
             $table->string('live_end_point');
             $table->string('sandbox_end_point');
             $table->timestamps();

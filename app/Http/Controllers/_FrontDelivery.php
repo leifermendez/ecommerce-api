@@ -10,7 +10,7 @@ use App\shop;
 use App\shipping_address;
 use App\delivery_order;
 
-define("_api_delivery_", "https://test.api.paack.co/api");
+define("_api_delivery_", "https://api.paack.co/api");
 
 class _FrontDelivery extends Controller
 {

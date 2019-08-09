@@ -6,7 +6,7 @@ use Ixudra\Curl\Facades\Curl;
 use Illuminate\Http\Request;
 use Validator;
 
-define("_api_","https://test.api.paack.co/api");
+define("_api_","https://api.paack.co/api");
 
 class ExternalDeliveryController extends Controller
 {

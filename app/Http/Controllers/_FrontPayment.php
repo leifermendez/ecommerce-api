@@ -5,28 +5,44 @@ namespace App\Http\Controllers;
 use App\Notifications\_NewPurchaseSmsShop;
 use App\Notifications\_NewPurchaseSmsUser;
 use App\Notifications\_PayOrder;
-use App\Notifications\_UserPurchase;
+use App\platform_payment;
 use App\shopping_cart;
 use Illuminate\Http\Request;
 use App\purchase_order;
 use App\purchase_detail;
 use App\user_payment;
-use App\shop;
 use Ixudra\Curl\Facades\Curl;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-define("_api_", "https://api.stripe.com");
 
 class _FrontPayment extends Controller
 {
+
+    private $stripe_pk;
+    private $stripe_sk;
+    private $stripe_api;
+
+    public function __construct()
+    {
+
+        $stripeKeys = platform_payment::where('platform_payments.name', 'stripe')
+            ->join('payment_keys', 'platform_payments.id', '=', 'payment_keys.platform_payment')
+            ->select('payment_keys.*')
+            ->first();
+
+        $this->stripe_pk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
+        $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
+        $this->stripe_api = ($stripeKeys->status === 'live' ? $stripeKeys->live_end_point : $stripeKeys->sandbox_end_point);
+    }
+
 
     public function _transfer($uuid = null, $amount = 0, $destination = null, $description = null)
     {
 
         $currency = (new UseInternalController)->_getSetting('currency');
-        $client_secret = env('STRIPE_SECRET', '');
-        $response = Curl::to(_api_ . '/v1/transfers')
+        $client_secret = $this->stripe_sk;
+        $response = Curl::to($this->stripe_api . '/v1/transfers')
             ->withContentType('application/x-www-form-urlencoded')
             ->withOption('USERPWD', "$client_secret:")
             ->withHeader('Accept: application/json')
@@ -51,8 +67,8 @@ class _FrontPayment extends Controller
     public function _charge($uuid = null, $amount = 0, $source = null)
     {
         $currency = (new UseInternalController)->_getSetting('currency');
-        $client_secret = env('STRIPE_SECRET', '');
-        $response = Curl::to(_api_ . '/v1/charges')
+        $client_secret = $this->stripe_sk;
+        $response = Curl::to($this->stripe_api . '/v1/charges')
             ->withContentType('application/x-www-form-urlencoded')
             ->withOption('USERPWD', "$client_secret:")
             ->withHeader('Accept: application/json')
