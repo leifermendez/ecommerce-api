@@ -22,7 +22,7 @@ class _FrontShop extends Controller
         try {
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-
+            $measureShop = [];
 
             $data = shop::orderBy('shops.id', 'DESC')
                 ->where('shops.status', 'available')
@@ -43,16 +43,18 @@ class _FrontShop extends Controller
                 )
                 ->where(function ($query) use ($filters, $request) {
                     if (!$request->outside) {
-                        $km = (new UseInternalController)->_getSetting('search_range_km');
-                        $measureShop = (new UseInternalController)->_measureShop(
-                            $request->header('LAT'),
-                            $request->header('LNG'),
-                            $km,
-                            '<',
-                            'distance_in_km,shop_id');
-
-                        $measureShop = array_column($measureShop, 'shop_id');
-                        $query->whereIn('shops.id',$measureShop);
+                        if ($request->_range_closed) {
+                            $km = (new UseInternalController)->_getSetting('search_range_km');
+                            $measureShop = (new UseInternalController)->_measureShop(
+                                $request->header('LAT'),
+                                $request->header('LNG'),
+                                $km,
+                                '<',
+                                'distance_in_km,shop_id');
+    
+                            $measureShop = array_column($measureShop, 'shop_id');
+                            $query->whereIn('shops.id',$measureShop);
+                        }
                     }
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
