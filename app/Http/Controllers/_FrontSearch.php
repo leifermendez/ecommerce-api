@@ -76,7 +76,7 @@ class _FrontSearch extends Controller
                                 }
                             }
                         }
-                    })->orderBy('products.id', 'DESC');
+                    });
 
 
                 if ($request->attributes_filter) {
@@ -96,7 +96,7 @@ class _FrontSearch extends Controller
                                     }
                                 }
                             }
-                        });
+                        })->orderBy('products.id', 'DESC');
                 }
             };
 
@@ -151,6 +151,10 @@ class _FrontSearch extends Controller
                         WHERE product_id = products.id  AND  variation_product_id is null) as gallery")
                 );
 
+            $data_products = ($request->order != 'rand') ?
+            $data_products->orderBy('products.id', 'DESC') : 
+            $data_products->inRandomOrder();
+            
             $data_products = (!$request->pagination) ?
                 $data_products->take($limit)->get() : $data_products->paginate($limit);
 

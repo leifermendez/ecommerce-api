@@ -122,6 +122,7 @@ class _FrontPayment extends Controller
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
+            $marketplace = (new UseInternalController)->_getSetting('marketplace');
             $auto_sms = (new UseInternalController)->_getSetting('auto_sms');
             $request->validate([
                 'source' => 'required',
@@ -153,17 +154,25 @@ class _FrontPayment extends Controller
                     $description .= "Order: $request->purchase_uuid, Feed: " . $data_feed['application_feed_amount'];
                     $amount_supplier = ($discount_to_supplier == 1) ?
                         $data_feed['amount_without_feed'] : $data_feed['amount_with_feed'];
-                    $r = $this->_transfer($request->purchase_uuid,
-                        $amount_supplier, $user_payment->iban, $description);
-                    if ($r) {
-                        purchase_order::where('uuid', $request->purchase_uuid)
-                            ->where('user_id', $user->id)
-                            ->update(['status' => 'success']);
-                        $user_payment->setAttribute('uuid', $request->purchase_uuid);
-                        if ($auto_sms == 1) {
-                            $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
+
+                    if($marketplace == 1){
+                            $r = $this->_transfer($request->purchase_uuid,
+                            $amount_supplier, $user_payment->iban, $description);
+                        if ($r) {
+                            purchase_order::where('uuid', $request->purchase_uuid)
+                                ->where('user_id', $user->id)
+                                ->update(['status' => 'success']);
+                            $user_payment->setAttribute('uuid', $request->purchase_uuid);
+                            if ($auto_sms == 1) {
+                                $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
+                            }
                         }
+                    }else{
+                        purchase_order::where('uuid', $request->purchase_uuid)
+                        ->where('user_id', $user->id)
+                        ->update(['status' => 'success']);
                     }
+  
                 }
             };
 

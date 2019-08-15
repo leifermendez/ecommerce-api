@@ -175,9 +175,11 @@ class UseInternalController extends Controller
             }
 
             $data = User::where('id', $id)->first();
-
-            if (!$data->confirmed) {
-                throw new \Exception('user_not_confirmed');
+            $only_user_confirmed = $this->_getSetting('only_user_confirmed');
+            if($only_user_confirmed == 1){
+                if (!$data->confirmed) {
+                    throw new \Exception('user_not_confirmed');
+                }
             }
 
             return ['data' => $data];
