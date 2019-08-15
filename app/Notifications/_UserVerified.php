@@ -40,6 +40,7 @@ class _UserVerified extends Notification
      */
     public function toMail($notifiable)
     {
+        $site = env('APP_SITE_MAIL', '');
         return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))

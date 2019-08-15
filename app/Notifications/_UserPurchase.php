@@ -42,9 +42,10 @@ class _UserPurchase extends Notification
      */
     public function toMail($notifiable)
     {
+        $site = env('APP_SITE_MAIL', '');
         return (new MailMessage)
             ->subject("¡Compra realizada!")
-            ->markdown('vendor.notifications.purchases', ['purchase' => $this->purchase]);
+            ->markdown("vendor.notifications.".$site.".purchases", ['purchase' => $this->purchase]);
     }
 
     /**

@@ -41,9 +41,10 @@ class _PayOrder extends Notification
      */
     public function toMail($notifiable)
     {
+        $site = env('APP_SITE_MAIL', '');
         return (new MailMessage)
             ->subject("¡Pago exitoso!")
-            ->markdown('vendor.notifications.pay', ['pay' => $this->pay]);
+            ->markdown("vendor.notifications.".$site.".pay", ['pay' => $this->pay]);
     }
 
     /**
