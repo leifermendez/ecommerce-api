@@ -5,6 +5,7 @@ env_variables:
   APP_KEY: base64:6ZHQyRhyyCyGF8U2mnujTzqzGCKAxqg1hFfwOYLntmk
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
+  APP_SITE_MAIL: alterhome
   SESSION_DRIVER: cookie
   DB_DATABASE: ecommerce
   DB_USERNAME: root
