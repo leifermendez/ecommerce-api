@@ -1,30 +1,26 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://apatxee.com/'])
+        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
             <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
                  height="40px" alt="">
         @endcomponent
     @endslot
 
     <div>
-        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a apatxee!</h1>
+        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a AlterhomeShop!</h1>
         <br>
         <h2>¡Hola! {{$user->name}}</h2>
-        <p>Ayudamos al pequeño comercio a competir con las grandes superficies con un transporte del producto con
-            recogida y entrega en un tiempo medio de 1 hora.</p>
+        <p>Si lo tuyo es viajar, esta es tu sección. En Alterhome Shop hemos diseñado una linea de productos pensados especialmente para los aventureros y amantes de los viajes.</p>
         <br>
-        <p>Fomentamos la economía local porque los productos se compran y se venden en tu misma ciudad fomentando la
-            economía local y el comercio de cercanía.</p>
+        <p>Desde la comodidad de tu apartamento solamente es un click, no cuesta nada. Elige los artículos que más molan para este viaje y los souvenirs más chulos.</p>
         <br>
-        <p>Transporte verde porque los productos se entregan a una distancia máxima de 10 Km y así colaboramos con la
-            reducción de contaminantes a la atmósfera.</p>
+        <p>Con cada reserva tienes a tu disposición ofertas increíbles en muchos de nuestros productos. No te líes comienza tu lista de compras y ahorra un montón</p>
         <br>
-        <p>Si compras en nuestra plataforma estas colaborando con la supervivencia de las pequeñas empresas entregando
-            el dinero a muchos pequeños comercios.</p>
+        <p>¡Qué sí, qué si! Que la compra es segura y no almacenamos tus tarjetas, tus conexiónes bancarias son encriptadas gracias al protocolo SSL.</p>
         <div>
             <div>
-                @component('mail::button', ['url' => 'https://apatxee.com/'])
+                @component('mail::button', ['url' => 'https://tienda.alterhome.es/'])
                     ¿Ver ofertas!
                 @endcomponent
             </div>

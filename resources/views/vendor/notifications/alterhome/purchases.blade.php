@@ -1,7 +1,7 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://apatxee.com/'])
+        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
             <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
                  height="40px" alt="">
         @endcomponent
@@ -22,7 +22,7 @@
             @endcomponent
         </div>
         <div>
-            @component('mail::button', ['url' => 'https://apatxee.com/purchases'])
+            @component('mail::button', ['url' => 'https://tienda.alterhome.es/purchases'])
                 Ver detalles
             @endcomponent
         </div>

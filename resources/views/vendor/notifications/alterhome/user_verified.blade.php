@@ -1,7 +1,7 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://apatxee.com/'])
+        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
             <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
                  height="40px" alt="">
         @endcomponent
@@ -14,7 +14,7 @@
         <p>Enhorabuena, tu cuenta se ha verificado con éxito. Ya puedes comenzar a comprar y vender</p>
         <div>
             <div>
-                @component('mail::button', ['url' => 'https://apatxee.com/'])
+                @component('mail::button', ['url' => 'https://tienda.alterhome.es/'])
                     ¿Ver ofertas!
                 @endcomponent
             </div>
