@@ -144,7 +144,7 @@ class _FrontPayment extends Controller
                     ->join('shops', 'user_payments.user_id', '=', 'shops.users_id')
                     ->join('users', 'user_payments.user_id', '=', 'users.id')
                     ->where('shops.id', $purchase->shop_id)
-                    ->select('user_payments.*', 'users.phone as phone_number')
+                    ->select('user_payments.*', 'users.phone as phone_number', 'users.email as shop_email')
                     ->first();
 
                 $data_feed = (new UseInternalController)->_getFeedAmount($purchase->product_amount);
@@ -183,6 +183,7 @@ class _FrontPayment extends Controller
             if ($auto_sms == 1) {
                 $user->notify(new _NewPurchaseSmsUser($user));
             }
+            $user->setAttribute('shop_email',$user_payment->shop_email);
             $user->notify(new _PayOrder($user));
 
             DB::commit();

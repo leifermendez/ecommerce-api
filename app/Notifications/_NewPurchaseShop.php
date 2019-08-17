@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class _PayOrder extends Notification
+class _NewPurchaseShop extends Notification
 {
     use Queueable;
     private $pay;
@@ -43,8 +43,7 @@ class _PayOrder extends Notification
     {
         $site = env('APP_SITE_MAIL', '');
         return (new MailMessage)
-            ->cc($this->pay->shop_email)
-            ->subject("¡Pago exitoso!")
+            ->subject("¡Nuevo Pago exitoso!")
             ->markdown("vendor.notifications.".$site.".pay", ['pay' => $this->pay]);
     }
 
