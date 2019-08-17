@@ -18,7 +18,7 @@ env_variables:
   MAIL_USERNAME: leangasoftware
   MAIL_PASSWORD: r3r0ToGW@v7Q
   MAIL_ENCRYPTION: tls
-  SENDGRID_API_KEY: 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
+  SENDGRID_API_KEY: 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
   MAIL_FROM_ADDRESS: no-reply@alterhome.es
   MAIL_FROM_NAME: Alterhome.es
 
