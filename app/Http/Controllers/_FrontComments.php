@@ -19,7 +19,6 @@ class _FrontComments extends Controller
     public function index(Request $request)
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
 
@@ -40,7 +39,9 @@ class _FrontComments extends Controller
                 }
             })
             ->join('users','comments.user_id','=','users.id')
-            ->select('comments.*','users.name as users_name','users.avatar as users_avatar')
+            ->join('attacheds','comments.attached_id','=','attacheds.id')
+            ->select('comments.*','users.name as users_name','users.avatar as users_avatar',
+            'attacheds.small as image_comment')
             ->paginate($limit);
 
             $response = array(

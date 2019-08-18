@@ -99,7 +99,10 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
                 'show'
             ]);
 
-        Route::get('example', 'ExternalCifController@searchCompany');
+            Route::resource('/comments', '_FrontComments')
+            ->only([
+                'index'
+            ]);
 
     });
 
@@ -141,7 +144,6 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
         Route::resource('/comments', '_FrontComments')
             ->only([
                 'store',
-                'index',
                 'show'
             ]);
 

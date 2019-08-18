@@ -240,7 +240,10 @@ class _FrontProducts extends Controller
                     DB::raw('(SELECT attacheds.large FROM attacheds 
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
                     DB::raw('(SELECT attacheds.large FROM attacheds 
-                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large'))
+                    WHERE attacheds.id = shops.image_header limit 1) as image_header_large'),
+                    DB::raw('(SELECT COUNT(*) 
+                    FROM comments
+                    WHERE product_id = products.id) as comments_count'))
                 ->first();
 
             if ($data) {
