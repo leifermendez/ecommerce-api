@@ -115,7 +115,7 @@ img {
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
-    text-shadow: 0 1px 0 white;
+    text-shadow: 0 0px 0 white;
 }
 
 /* Body */
@@ -160,6 +160,7 @@ img {
     margin: 0 auto;
     padding: 0;
     text-align: center;
+    background-color: #f9f9f9;
     width: 570px;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
@@ -223,11 +224,11 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #3490dc;
-    border-top: 10px solid #3490dc;
-    border-right: 18px solid #3490dc;
-    border-bottom: 10px solid #3490dc;
-    border-left: 18px solid #3490dc;
+    background-color: #6f3e50;
+    border-top: 10px solid #6f3e50;
+    border-right: 18px solid #6f3e50;
+    border-bottom: 10px solid #6f3e50;
+    border-left: 18px solid #6f3e50;
 }
 
 .button-green,

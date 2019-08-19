@@ -231,6 +231,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('attached', 'AttachedController');
     Route::resource('zoneAvailable', 'ZoneAvailableController');
     Route::resource('blog', 'BlogController');
+    Route::resource('mailMarketing', 'MailMarketing');
 
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');
