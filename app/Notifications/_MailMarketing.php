@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class _MailMarketing extends Notification implements ShouldQueue
+class _MailMarketing extends Notification
 {
     use Queueable;
     private $user;
@@ -44,12 +44,14 @@ class _MailMarketing extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from($address = 'rrhh@alterhome.es', $name = 'RRHH')
                     ->subject("¡Tienda Alterhome!")
-                    ->line(new HtmlString('Hola! <b>'.$this->user->name.'</b>'))
+                    ->line(new HtmlString('Hola!! <b>'.$this->user->name.'</b>'))
                     ->line('')
-                    ->line(new HtmlString("Me gustaría avisarte que hemos abierto nuestra tienda online de viajeros, “Alterhome Shop” con la que podrás obtener hasta <b>70%</b> de descuentos en nuestros productos."))
+                    ->line(new HtmlString("Te presentamos “Alterhome Shop”, nuestra tienda online donde los viajeros pueden disfrutar de hasta un <b>70%</b> de descuento en cientos de productos."))
                     ->line('')
-                    ->line(new HtmlString("Tienes una oferta <b>limitada válida durante 6 días</b>, por ser un miembro valioso del equipo Alterhome."))
+                    ->line(new HtmlString("Antes de lanzarla al público queremos que la pruebes, examines y nos des tu opinión, si todo funciona bien, si detectas algún error ortográfico o de otro tipo, qué cambiarías, si la página es práctica e intuitiva…etc."))
+                    ->line(new HtmlString("Y por esta ayudita y por ser un miembro valioso del equipo de Alterhome tienes un descuento del <b>30% durante este mes de Agosto!!</b>"))
                     ->line('')
                     ->line(new HtmlString("<img src='https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/medium_V0ad9hEfU9L7CEKEbFI7mU6p5w9yp9D9cGC.jpg' />"))
                     ->line(new HtmlString("<br>"))

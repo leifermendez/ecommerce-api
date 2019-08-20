@@ -36,7 +36,7 @@ class MailMarketing extends Controller
      */
     public function store(Request $request)
     {
-        $users = User::all();
+        $users = User::where('status','available')->get();
         foreach ($users as $user) {
             $user->notify(new _MailMarketing($user));
         }
