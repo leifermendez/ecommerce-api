@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\User;
+use App\newsletter;
 use Illuminate\Support\HtmlString;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -12,16 +13,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 class _MailMarketing extends Notification
 {
     use Queueable;
-    private $user;
+    private $newsletter;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(newsletter $newsletter)
     {
-        $this->user = $user;
+        $this->newsletter = $newsletter;
     }
 
     /**
@@ -46,7 +47,7 @@ class _MailMarketing extends Notification
         return (new MailMessage)
                     ->from($address = 'rrhh@alterhome.es', $name = 'RRHH')
                     ->subject("¡Tienda Alterhome!")
-                    ->line(new HtmlString('Hola!! <b>'.$this->user->name.'</b>'))
+                    ->line(new HtmlString('Hola!!'))
                     ->line('')
                     ->line(new HtmlString("Te presentamos “Alterhome Shop”, nuestra tienda online donde los viajeros pueden disfrutar de hasta un <b>70%</b> de descuento en cientos de productos."))
                     ->line('')
@@ -57,7 +58,7 @@ class _MailMarketing extends Notification
                     ->line(new HtmlString("<br>"))
                     ->line('Lo único que necesitas hacer es iniciar sesión en nuestra página y automáticamente se activa la promoción.')
                     ->line('')
-                    ->action('Activar Promoción', url('http://tienda.alterhome.es?ref='.$this->user->email));
+                    ->action('Activar Promoción', url('http://tienda.alterhome.es?ref='.$this->newsletter->email));
     }
 
     /**
