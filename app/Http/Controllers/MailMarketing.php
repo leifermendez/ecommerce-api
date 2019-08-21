@@ -41,6 +41,7 @@ class MailMarketing extends Controller
 
         foreach ($users as $user) {
             $user->notify(new _MailMarketing($user));
+            newsletter::where('id',$user->id)->update(['data'=>'send']);
             sleep(5);
         }
     }
