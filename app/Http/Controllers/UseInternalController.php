@@ -245,20 +245,15 @@ class UseInternalController extends Controller
                         'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
                         'exceptions' => $hours_exceptions
                     ]);
-                    $next_available = $openingHours->nextOpen(Carbon::now());
-                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
-                    $next_available = Carbon::parse($next_available)->toArray();
-                    $next_close = $openingHours->nextClose(Carbon::now());
-                    $next_close = Carbon::parse($next_close)->toArray();
-                    $shedule = $openingHours->isOpenAt(Carbon::now());
-
+                    
+                    $data_schedule = $this->_nextOpen($openingHours);
                 }
 
                 return [
-                    'isAvailable' => $shedule,
-                    'nextOpen' => $next_available,
-                    'nextClose' => $next_close,
-                    'minutes' => ($diff === 0) ? ($diff + 1) : $diff
+                    'isAvailable' => $data_schedule['shedule'],
+                    'nextOpen' => $data_schedule['next_available'],
+                    'nextClose' => $data_schedule['next_close'],
+                    'minutes' => ($data_schedule['diff'] === 0) ? ($data_schedule['diff']+ 1) : $data_schedule['diff']
                 ];
 
             };
@@ -266,6 +261,42 @@ class UseInternalController extends Controller
         } catch (\Execption $e) {
             return $e->getMessage();
         }
+    }
+
+    public function _nextOpen($openingHours)
+    {
+
+        $openWeek = false;
+        $list_schedule = $openingHours->forWeek();
+        foreach ($list_schedule as $key => $value) {
+            if(count($value)){
+                $openWeek = count($value);
+            }
+        }
+        if (!$openWeek) {
+            return [
+                'next_available' => false,
+                'diff' => false,
+                'next_close' => false,
+                'shedule' => 0
+            ];
+        }
+
+        $now = Carbon::now();
+        $next_available = $openingHours->nextOpen(Carbon::now());
+        $diff = Carbon::parse($next_available)->diffInMinutes($now);
+        $next_available = Carbon::parse($next_available)->toArray();
+        $next_close = $openingHours->nextClose(Carbon::now());
+        $next_close = Carbon::parse($next_close)->toArray();
+        $shedule = $openingHours->isOpenAt(Carbon::now());
+
+        return [
+            'next_available' => $next_available,
+            'diff' => $diff,
+            'next_close' => $next_close,
+            'shedule' => $shedule
+        ];
+
     }
 
     public function _v2_isAvailableProduct($schedule = null, $exceptions = null)
