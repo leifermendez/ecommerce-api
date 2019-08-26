@@ -192,8 +192,18 @@ class UseInternalController extends Controller
     public function _isAvailableProduct($id = null)
     {
         try {
+            $schedule_active = $this->_getSetting('schedule_active');
+            
             if (!$id) {
                 throw new \Exception('id null');
+            }
+
+            if($schedule_active == 0){
+                return [
+                    'isAvailable' => true,
+                    'nextOpen' => true,
+                    'nextClose' => true,
+                ];
             }
 
             if (!products::where('id', $id)
@@ -302,13 +312,21 @@ class UseInternalController extends Controller
     public function _v2_isAvailableProduct($schedule = null, $exceptions = null)
     {
         try {
-
+            $schedule_active = $this->_getSetting('schedule_active');
             $now = Carbon::now();
             $next_available = null;
             $next_close = null;
             $diff = 0;
             $shedule = array();
             $exceptions = array();
+
+            if($schedule_active == 0){
+                return [
+                    'isAvailable' => true,
+                    'nextOpen' => true,
+                    'nextClose' => true,
+                ];
+            }
 
             if (!$schedule) {
                 return [
@@ -317,7 +335,6 @@ class UseInternalController extends Controller
                     'nextClose' => false,
                 ];
             }
-
 
             if ($schedule) {
                 $hours_shedule_hours = ($schedule && json_decode($schedule)) ?
