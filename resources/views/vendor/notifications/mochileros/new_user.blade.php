@@ -8,7 +8,7 @@
     @endslot
 
     <div>
-        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a AlterhomeShop!</h1>
+        <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a Mochileros Shop!</h1>
         <br>
         <h2>¡Hola! {{$user->name}}</h2>
         <p>Si lo tuyo es viajar, esta es tu sección. En Alterhome Shop hemos diseñado una linea de productos pensados especialmente para los aventureros y amantes de los viajes.</p>

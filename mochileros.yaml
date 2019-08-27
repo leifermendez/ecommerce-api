@@ -10,7 +10,7 @@ env_variables:
   DB_DATABASE: ecommerce
   DB_USERNAME: root
   DB_PASSWORD: eCfGxJ34bAeNbyFs
-  DB_SOCKET: "/cloudsql/mochileros-ecommerce:us-central1:mochilerosdb"
+  DB_SOCKET: "/cloudsql/mochileros-ecommerce:us-west2:mochileros-db-west"
 
   MAIL_DRIVER: sendgrid
   MAIL_HOST: smtp.sendgrid.net
