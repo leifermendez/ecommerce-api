@@ -16,7 +16,7 @@
         "google-prod": "",
         "db-alterhome":"./cloud_sql_proxy -instances=alterhome-ecommerce:europe-west1:alterhome-bd=tcp:3307 -credential_file=./alterhome-ecommerce-ee8835bd4804.json ",
         "db-apatxee":"./cloud_sql_proxy -instances=ecommerce-apatxee-v2:europe-west6:ecommerce-basic=tcp:3307 -credential_file=./ecommerce-apatxee-v2-2588124b1aab.json ",
-        "db-mochileros":"./cloud_sql_proxy -instances=ecommerce-apatxee-v2:europe-west6:ecommerce-basic=tcp:3307 -credential_file=./ecommerce-apatxee-v2-2588124b1aab.json ",
+        "db-mochileros":"./cloud_sql_proxy -instances=mochileros-ecommerce:us-west2:mochileros-db-west=tcp:3307 -credential_file=./ecommerce-apatxee-v2-2588124b1aab.json ",
         "seed": "php artisan db:seed --class=UsersTableSeeder && php artisan db:seed --class=ShopTableSeeder && php artisan db:seed --class=ProductsTableSeeder && php artisan db:seed --class=PurchaseTableSeeder && php artisan db:seed --class=OrderSeeder && php artisan db:seed --class=PurchaseDetailTableSeeder && php artisan db:seed --class=ZoneAvailableTableSeeder"
     },
     "devDependencies": {
