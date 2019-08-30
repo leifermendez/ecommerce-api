@@ -1,8 +1,8 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
-            <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
+        @component('mail::header', ['url' => 'https://tienda.mochileros.com.mx/'])
+            <img src="https://media-mochileros.s3.us-east-2.amazonaws.com/upload/small_jR_SW1eGqCdQQsORSwdwv3m57W6SXrzB27Aeu9.png"
                  height="40px" alt="">
         @endcomponent
     @endslot
@@ -20,7 +20,7 @@
         <p>¡Qué sí, qué si! Que la compra es segura y no almacenamos tus tarjetas, tus conexiónes bancarias son encriptadas gracias al protocolo SSL.</p>
         <div>
             <div>
-                @component('mail::button', ['url' => 'https://tienda.alterhome.es/'])
+                @component('mail::button', ['url' => 'https://tienda.mochileros.com.mx/'])
                     ¿Ver ofertas!
                 @endcomponent
             </div>

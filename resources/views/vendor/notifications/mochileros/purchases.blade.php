@@ -1,8 +1,8 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
-            <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
+        @component('mail::header', ['url' => 'https://tienda.mochileros.com.mx/'])
+            <img src="https://media-mochileros.s3.us-east-2.amazonaws.com/upload/small_jR_SW1eGqCdQQsORSwdwv3m57W6SXrzB27Aeu9.png"
                  height="40px" alt="">
         @endcomponent
     @endslot
@@ -22,7 +22,7 @@
             @endcomponent
         </div>
         <div>
-            @component('mail::button', ['url' => 'https://tienda.alterhome.es/purchases'])
+            @component('mail::button', ['url' => 'https://tienda.mochileros.com.mx/purchases'])
                 Ver detalles
             @endcomponent
         </div>
