@@ -1,7 +1,10 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://tienda.mochileros.com.mx/'])
+        @component('mail::header', [
+            'url' => 'https://tienda.mochileros.com.mx/',
+            'img' => 'https://media-mochileros.s3.us-east-2.amazonaws.com/upload/small_jR_SW1eGqCdQQsORSwdwv3m57W6SXrzB27Aeu9.png'
+            ])
             <img src="https://media-mochileros.s3.us-east-2.amazonaws.com/upload/small_jR_SW1eGqCdQQsORSwdwv3m57W6SXrzB27Aeu9.png"
                  height="40px" alt="">
         @endcomponent
