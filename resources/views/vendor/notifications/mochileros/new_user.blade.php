@@ -11,11 +11,9 @@
         <h1 style="text-align: center;font-size: 28px;">¡Bienvenido a Mochileros Shop!</h1>
         <br>
         <h2>¡Hola! {{$user->name}}</h2>
-        <p>Si lo tuyo es viajar, esta es tu sección. En Alterhome Shop hemos diseñado una linea de productos pensados especialmente para los aventureros y amantes de los viajes.</p>
+        <p>Si lo tuyo es viajar, esta es tu sección. En Tienda Mochileros hemos diseñado una linea de productos pensados especialmente para los aventureros y amantes de los viajes.</p>
         <br>
-        <p>Desde la comodidad de tu apartamento solamente es un click, no cuesta nada. Elige los artículos que más molan para este viaje y los souvenirs más chulos.</p>
-        <br>
-        <p>Con cada reserva tienes a tu disposición ofertas increíbles en muchos de nuestros productos. No te líes comienza tu lista de compras y ahorra un montón</p>
+        <p>Con cada compra tienes a tu disposición ofertas increíbles en muchos de nuestros productos. No te compliques comienza tu lista de compras ahora.</p>
         <br>
         <p>¡Qué sí, qué si! Que la compra es segura y no almacenamos tus tarjetas, tus conexiónes bancarias son encriptadas gracias al protocolo SSL.</p>
         <div>
