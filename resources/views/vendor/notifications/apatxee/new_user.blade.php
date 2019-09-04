@@ -1,7 +1,9 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://apatxee.com/'])
+        @component('mail::header', [
+            'url' => 'https://apatxee.com/',
+            'img' => 'https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/assets/logo-mail-apatxee.png'])
             <img src="https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/assets/logo-mail-apatxee.png"
                  height="40px" alt="">
         @endcomponent

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\banners;
 use Carbon\Carbon;
+use DB;
 
 class _FrontBanners extends Controller
 {
@@ -25,7 +26,9 @@ class _FrontBanners extends Controller
                 ->where('banners.finish','>=',$now->toDateTimeString())
                 ->select('banners.*','attacheds.small as attached_small',
                 'attacheds.medium as attached_medium','attacheds.large as attached_large',
-                    'attacheds.video_url')
+                'attacheds.video_url',
+                DB::raw('(SELECT attacheds.medium FROM attacheds 
+                WHERE attacheds.id = banners.attached_responsive_id limit 1) as attached_responsive'))
                 ->paginate($limit);
 
             $response = array(
