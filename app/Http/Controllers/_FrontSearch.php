@@ -122,7 +122,7 @@ class _FrontSearch extends Controller
                     ),
                     DB::raw("(
                       SELECT 
-                        select group_concat(
+                        group_concat(
                           JSON_OBJECT(
                             'price_normal', price_normal,
                             'price_regular', price_regular,
@@ -131,12 +131,12 @@ class _FrontSearch extends Controller
                             'id', id,
                             'attached_id', attached_id,
                             'observation', observation,
-                            'delivery', delivery,
-                            'feed_percentage', (SELECT value FROM settings WHERE meta = 'feed_percentage' LIMIT 1),
+                               'feed_percentage', (SELECT value FROM settings WHERE meta = 'feed_percentage' LIMIT 1),
                             'feed_amount', (SELECT value FROM settings WHERE meta = 'feed_amount' LIMIT 1),
+                            'delivery', delivery,
                             'status', status
                           ) SEPARATOR '|'
-                        ) as _variations 
+                        ) as _variations
                          FROM variation_products WHERE product_id = products.id
                        ) as variations"),
                     DB::raw("(
