@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -263,7 +264,7 @@
       <workItem from="1565292452078" duration="647000" />
       <workItem from="1565334214160" duration="12960000" />
       <workItem from="1566550761036" duration="311000" />
-      <workItem from="1569484596780" duration="967000" />
+      <workItem from="1569484596780" duration="1263000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
