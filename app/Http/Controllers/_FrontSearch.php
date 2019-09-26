@@ -59,7 +59,7 @@ class _FrontSearch extends Controller
                             $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
                             $query
                             ->whereRaw("(products.label LIKE '%$decrypted%')");
-                       
+
                         }else{
                             $query->where('products.name', 'LIKE', "%{$src}%");
                         }
@@ -122,7 +122,7 @@ class _FrontSearch extends Controller
                     ),
                     DB::raw("(
                       SELECT 
-                        group_concat(
+                        select group_concat(
                           JSON_OBJECT(
                             'price_normal', price_normal,
                             'price_regular', price_regular,
@@ -132,9 +132,11 @@ class _FrontSearch extends Controller
                             'attached_id', attached_id,
                             'observation', observation,
                             'delivery', delivery,
+                            'feed_percentage', (SELECT value FROM settings WHERE meta = 'feed_percentage' LIMIT 1),
+                            'feed_amount', (SELECT value FROM settings WHERE meta = 'feed_amount' LIMIT 1),
                             'status', status
                           ) SEPARATOR '|'
-                        ) as _variations
+                        ) as _variations 
                          FROM variation_products WHERE product_id = products.id
                        ) as variations"),
                     DB::raw("(
@@ -152,9 +154,9 @@ class _FrontSearch extends Controller
                 );
 
             $data_products = ($request->order != 'rand') ?
-            $data_products->orderBy('products.id', 'DESC') : 
+            $data_products->orderBy('products.id', 'DESC') :
             $data_products->inRandomOrder();
-            
+
             $data_products = (!$request->pagination) ?
                 $data_products->take($limit)->get() : $data_products->paginate($limit);
 

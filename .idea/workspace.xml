@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontSearch.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,59 +16,6 @@
     <execution>
       <executable />
     </execution>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>_api_</find>
-      <find>disable(</find>
-      <find>_getSetting</find>
-      <find>$user</find>
-      <find>medium</find>
-      <find>shopping_carts</find>
-      <find>$tmp_total</find>
-      <find>total_shop</find>
-      <find>shipping_pickup_address</find>
-      <find>¡Compra realizada!</find>
-      <find>GOOGLE_API_VISION_KEY</find>
-      <find>$paypal_api</find>
-      <find>paypal_pk</find>
-      <find>$paypalKeys</find>
-      <find>_api</find>
-      <find>STRIPE_KEY</find>
-      <find>STRIPE_SECRET</find>
-      <find>_PayOrder</find>
-      <find>paack.co</find>
-      <find>env</find>
-      <find>ExternalDeliveryController</find>
-      <find>_internalSend</find>
-      <find>PAACK_KEY</find>
-      <find>_api_delivery_</find>
-      <find>retailer_order_number</find>
-      <find>$delivery_list</find>
-      <find>_send</find>
-      <find>store</find>
-      <find>pickup_address</find>
-      <find>_range_closed</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>product_attached:</replace>
-      <replace>zone_available:</replace>
-      <replace>product_attributes:</replace>
-      <replace>shipping_address:</replace>
-      <replace>shopping_cart:</replace>
-      <replace>$amount</replace>
-      <replace>:</replace>
-      <replace>provider_storage</replace>
-      <replace>product_categories:</replace>
-      <replace>user_not_confirmed</replace>
-      <replace>blogs::</replace>
-      <replace>if (count($subTmp)&gt;1)</replace>
-      <replace>$data_attributes</replace>
-      <replace>category_attributes:</replace>
-      <replace>$stripe_api</replace>
-      <replace>stripe_pk</replace>
-      <replace>$stripeKeys</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -316,6 +264,7 @@
       <workItem from="1565292452078" duration="647000" />
       <workItem from="1565334214160" duration="12960000" />
       <workItem from="1566550761036" duration="311000" />
+      <workItem from="1569484596780" duration="686000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -547,7 +496,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
