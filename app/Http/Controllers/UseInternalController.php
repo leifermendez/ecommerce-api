@@ -193,7 +193,7 @@ class UseInternalController extends Controller
     {
         try {
             $schedule_active = $this->_getSetting('schedule_active');
-            
+
             if (!$id) {
                 throw new \Exception('id null');
             }
@@ -255,7 +255,7 @@ class UseInternalController extends Controller
                         'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
                         'exceptions' => $hours_exceptions
                     ]);
-                    
+
                     $data_schedule = $this->_nextOpen($openingHours);
                 }
 
@@ -390,7 +390,7 @@ class UseInternalController extends Controller
                 ->join('labels_products', 'labels_products.attacheds_id', '=', 'attacheds.id')
                 ->select('labels_products.labels')
                 ->get();
-            
+
             if($data){
                 foreach ($data as $key => $value) {
                     $tmp[] = $value->labels;
@@ -412,7 +412,7 @@ class UseInternalController extends Controller
 
         } catch (\Execption $e) {
             return $e->getMessage();
-        }  
+        }
     }
 
     public function _getImages($id)
@@ -498,6 +498,9 @@ class UseInternalController extends Controller
                 ->join('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->select('variation_products.*',
                     'categories.id as categories_id',
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_percentage" limit 1) as feed_percentage'),
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_amount" limit 1) as feed_amount'),
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_limit_price" limit 1) as feed_limit_price'),
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
                     DB::raw('(SELECT attacheds.medium FROM attacheds 

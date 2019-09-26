@@ -241,9 +241,6 @@ class _FrontProducts extends Controller
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
                     DB::raw('(SELECT attacheds.large FROM attacheds 
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_large'),
-                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_percentage" limit 1) as feed_percentage'),
-                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_amount" limit 1) as feed_amount'),
-                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_limit_price" limit 1) as feed_limit_price'),
                     DB::raw('(SELECT COUNT(*) 
                     FROM comments
                     WHERE product_id = products.id) as comments_count'))
