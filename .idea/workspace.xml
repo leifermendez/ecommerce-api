@@ -4,7 +4,7 @@
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontProducts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -265,7 +265,12 @@
       <workItem from="1565292452078" duration="647000" />
       <workItem from="1565334214160" duration="12960000" />
       <workItem from="1566550761036" duration="311000" />
-      <workItem from="1569484596780" duration="2341000" />
+      <workItem from="1569484596780" duration="2828000" />
+      <workItem from="1570358226159" duration="629000" />
+      <workItem from="1570446624686" duration="668000" />
+      <workItem from="1570478072047" duration="299000" />
+      <workItem from="1570880906979" duration="211000" />
+      <workItem from="1571038306447" duration="1712000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>

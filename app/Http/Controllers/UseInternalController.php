@@ -54,6 +54,29 @@ class UseInternalController extends Controller
         }
     }
 
+    public function edgeTime($global, $minutes = 45)
+    {
+        try {
+            //16-30 20-00
+            foreach ($global as $gk => $gv) {
+                $global[$gk] = explode('-', $gv);
+                foreach ($global[$gk] as $k => $ti) {
+                    $global[$gk][$k] = Carbon::parse($ti)->addMinutes($minutes)->format('H:i');
+                }
+            }
+
+            foreach ($global as $gk => $gv) {
+                $global[$gk] = implode('-', $global[$gk]);
+
+            }
+
+            return $global;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function _getSettings()
     {
         try {
@@ -176,7 +199,7 @@ class UseInternalController extends Controller
 
             $data = User::where('id', $id)->first();
             $only_user_confirmed = $this->_getSetting('only_user_confirmed');
-            if($only_user_confirmed == 1){
+            if ($only_user_confirmed == 1) {
                 if (!$data->confirmed) {
                     throw new \Exception('user_not_confirmed');
                 }
@@ -198,7 +221,7 @@ class UseInternalController extends Controller
                 throw new \Exception('id null');
             }
 
-            if($schedule_active == 0){
+            if ($schedule_active == 0) {
                 return [
                     'isAvailable' => true,
                     'nextOpen' => true,
@@ -245,14 +268,22 @@ class UseInternalController extends Controller
                     json_decode($data->hours_exceptions) : null;
 
                 if ($hours_shedule_hours) {
+                    $edge_time = $this->_getSetting('edge_time');
                     $openingHours = OpeningHours::create([
-                        'monday' => (isset($hours_shedule_hours->monday)) ? $hours_shedule_hours->monday : [],
-                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ? $hours_shedule_hours->tuesday : [],
-                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ? $hours_shedule_hours->wednesday : [],
-                        'thursday' => (isset($hours_shedule_hours->thursday)) ? $hours_shedule_hours->thursday : [],
-                        'friday' => (isset($hours_shedule_hours->friday)) ? $hours_shedule_hours->friday : [],
-                        'saturday' => (isset($hours_shedule_hours->saturday)) ? $hours_shedule_hours->saturday : [],
-                        'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
+                        'monday' => (isset($hours_shedule_hours->monday)) ?
+                            $this->edgeTime($hours_shedule_hours->monday, $edge_time) : [],
+                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ?
+                            $this->edgeTime($hours_shedule_hours->tuesday, $edge_time) : [],
+                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ?
+                            $this->edgeTime($hours_shedule_hours->wednesday, $edge_time) : [],
+                        'thursday' => (isset($hours_shedule_hours->thursday)) ?
+                            $this->edgeTime($hours_shedule_hours->thursday, $edge_time) : [],
+                        'friday' => (isset($hours_shedule_hours->friday)) ?
+                            $this->edgeTime($hours_shedule_hours->friday, $edge_time) : [],
+                        'saturday' => (isset($hours_shedule_hours->saturday)) ?
+                            $this->edgeTime($hours_shedule_hours->saturday, $edge_time) : [],
+                        'sunday' => (isset($hours_shedule_hours->sunday)) ?
+                            $this->edgeTime($hours_shedule_hours->sunday, $edge_time) : [],
                         'exceptions' => $hours_exceptions
                     ]);
 
@@ -263,7 +294,7 @@ class UseInternalController extends Controller
                     'isAvailable' => $data_schedule['shedule'],
                     'nextOpen' => $data_schedule['next_available'],
                     'nextClose' => $data_schedule['next_close'],
-                    'minutes' => ($data_schedule['diff'] === 0) ? ($data_schedule['diff']+ 1) : $data_schedule['diff']
+                    'minutes' => ($data_schedule['diff'] === 0) ? ($data_schedule['diff'] + 1) : $data_schedule['diff']
                 ];
 
             };
@@ -279,7 +310,7 @@ class UseInternalController extends Controller
         $openWeek = false;
         $list_schedule = $openingHours->forWeek();
         foreach ($list_schedule as $key => $value) {
-            if(count($value)){
+            if (count($value)) {
                 $openWeek = count($value);
             }
         }
@@ -320,7 +351,7 @@ class UseInternalController extends Controller
             $shedule = array();
             $exceptions = array();
 
-            if($schedule_active == 0){
+            if ($schedule_active == 0) {
                 return [
                     'isAvailable' => true,
                     'nextOpen' => true,
@@ -391,17 +422,17 @@ class UseInternalController extends Controller
                 ->select('labels_products.labels')
                 ->get();
 
-            if($data){
+            if ($data) {
                 foreach ($data as $key => $value) {
                     $tmp[] = $value->labels;
                 }
-                $tmp = implode(',',$tmp);
-               $encrypted_label = Crypt::encryptString($tmp);
+                $tmp = implode(',', $tmp);
+                $encrypted_label = Crypt::encryptString($tmp);
             }
-            if(strlen($tmp)){
+            if (strlen($tmp)) {
                 $string_label = str_replace(",", "%' OR products.label LIKE '%", $tmp);
                 $exists = products::whereRaw("(products.label LIKE '%$string_label%')")
-                ->exists();
+                    ->exists();
             }
 
             return [
