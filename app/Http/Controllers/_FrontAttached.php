@@ -13,8 +13,6 @@ use Intervention\Image\Facades\Image;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Google\Cloud\Core\ServiceBuilder;
 
-use Maatwebsite\Excel\Excel;
-
 define("_api_google_vision","https://vision.googleapis.com/v1");
 
 class _FrontAttached extends Controller
@@ -202,16 +200,19 @@ class _FrontAttached extends Controller
                 $sizes = array(
                     'small' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(200, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'medium' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'large' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(1600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
