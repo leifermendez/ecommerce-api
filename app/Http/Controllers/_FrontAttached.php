@@ -143,16 +143,23 @@ class _FrontAttached extends Controller
             } else {
                 $file_validate = array('image' => $file);
                 $rules = array(
-                    'attached' => 'mimes:jpeg,bmp,png|max:20000'
+                    'attached' => 'mimes:jpeg,bmp,png|max:20000|dimensions:max_width=4000,max_height=4000'
                 );
             }
 
-            $validator = Validator::make($request->all(), $rules);
-//
+            $messages = [
+                'mimes'      => 'Tipo de archivo no permitido.',
+                'dimensions' => 'Las dimenciones de la imagen no deben ser mayor a 4000 x 4000.',
+                'max'        => 'La imagen no puede ser mayor a 20000.',
+            ];
+        
+            $validator = Validator::make($request->all(), $rules, $messages);
+            
             if ($validator->fails()) {
+                $errors = $validator->errors();
                 $status = array(
                     'status' => 'fail',
-                    'msg' => 'Tipo de archivo no permitido'
+                    'msg' => $errors->all()
                 );
                 return response()->json($status, 500);
             }
