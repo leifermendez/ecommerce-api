@@ -13,6 +13,8 @@ use Intervention\Image\Facades\Image;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Google\Cloud\Core\ServiceBuilder;
 
+use Maatwebsite\Excel\Excel;
+
 define("_api_google_vision","https://vision.googleapis.com/v1");
 
 class _FrontAttached extends Controller
@@ -192,7 +194,7 @@ class _FrontAttached extends Controller
                 $google_ai_ = (new UseInternalController)->_getSetting('google_vision');
                 if($google_ai_ == 1){
                     $get_label = $this->_getLabel($file);
-                    if(count($get_label)){
+                    if(is_array($get_label) && count($get_label)){
                         $labels = implode(",", $get_label);
                     }
                 }
