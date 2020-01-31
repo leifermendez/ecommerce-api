@@ -155,7 +155,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
         Route::resource('/user', '_FrontUser')
             ->only([
                 'show',
-                'update'
+                'update',
+                'destroy'
             ]);
 
         Route::resource('/validatePhone', '_FrontValidatePhone')

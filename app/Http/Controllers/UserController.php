@@ -223,12 +223,12 @@ class UserController extends Controller
                 ->update([
                     'status' => 'unavailable'
                 ]);
-
             $data = User::find($id);
+            $data->delete();
 
             $response = array(
                 'status' => 'success',
-                'msg' => 'Actualizado',
+                'msg' => 'Eliminado',
                 'data' => $data,
                 'code' => 0
             );
