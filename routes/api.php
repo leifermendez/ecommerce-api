@@ -24,6 +24,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
      */
 
     Route::resource('/auth', '_FrontAuth');
+    Route::get('/auth/reset_password/{email}', '_FrontAuth@password');
+    Route::post('/auth/reset_password', '_FrontAuth@resetPassword');
 
     Route::group(['prefix' => 'rest'], function () {
 
@@ -251,6 +253,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'AuthController@index');
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
+        Route::get('reset_password/{email}', 'AuthController@password');
+        Route::post('reset_password', 'AuthController@resetPassword');
     });
 });
 
