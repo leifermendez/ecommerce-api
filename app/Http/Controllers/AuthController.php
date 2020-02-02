@@ -8,6 +8,11 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\resetPassword;
+use Carbon\Carbon;
+use DB;
+
 
 class AuthController extends Controller
 {
@@ -186,6 +191,74 @@ class AuthController extends Controller
             );
             return response()->json($response, 401);
         }
+    }
 
+    public function password($email){
+        try {
+            $user = User::where('email', $email)->first();
+
+            if ($user) {
+                $token = Str::random(40);
+                DB::table('password_resets')->where('email',$email)->delete();
+                DB::table('password_resets')->insert([
+                    'email' => $email,
+                    'token' => $token,
+                    'created_at' => Carbon::now(),
+                ]);
+                $correo['name'] = $user->name;
+                $correo['url'] = $token;
+                Mail::to($email)->send(new resetPassword($correo));
+            }
+            $response = [
+                'status' => 'success',
+                'msg' => 'Email enviado',
+                'code' => 0
+            ];
+            return response()->json($response, 200);
+        } catch (Exception $e) {
+            $response =[
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            ];
+            return response()->json($response, 500);
+        }
+    }
+
+    public function resetPassword(Request $request){
+        try {
+            $data = DB::table('password_resets')
+            ->select('email')
+            ->where('token', $request->token)
+            ->first();
+
+            if ($data  == null) {
+                $response =[
+                'status' => 'fail',
+                'msg' => 'Token no existe o ya fue utilizado',
+                'code' => 1
+                ];
+                return response()->json($response, 401);
+            }
+            $user = User::where('email', $data->email)->first();
+            $user->password = bcrypt($request->password);
+            $user->save();
+            DB::table('password_resets')->where('email',$data->email)->delete();
+
+            $response = [
+                'status' => 'success',
+                'msg' => 'Password actualizado',
+                'code' => 0
+            ];
+            return response()->json($response, 200);
+            
+        } catch (Exception $e) {
+            $response =[
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            ];
+            return response()->json($response, 500);
+        }
     }
 }
