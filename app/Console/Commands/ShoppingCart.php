@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ShoppingCartReminder;
+use App\variation_product;
 use App\shopping_cart;
+use Carbon\CarbonImmutable;
 use Carbon\Carbon;
 use App\products;
 use App\User;
@@ -18,7 +20,7 @@ class ShoppingCart extends Command
      *
      * @var string
      */
-    protected $signature = 'notifications:shoppingcart';
+    protected $signature = 'notifications:shopping-cart';
 
     /**
      * The console command description.
@@ -49,27 +51,29 @@ class ShoppingCart extends Command
         foreach ($datos as $value) {
             $fecha = ($value->created_at);
             if (array_key_exists($value->user_id, $users)) {
-                $users[$value->user_id][$value->product_id] = $fecha;
+                $users[$value->user_id][$value->product_variation_id] = $fecha;
             }else{
-                $users[$value->user_id] = [$value->product_id => $fecha];
+                $users[$value->user_id] = [$value->product_variation_id => $fecha];
             }
         }
         foreach ($users as $key => $value) {
-            $fecha = max($value);
-            if ($this->validate($fecha, $fecha, $fecha)) {
+            $date = explode("-", (max($value))->format('d-m-Y'));
+            $fecha = CarbonImmutable::createFromDate($date['2'],$date['1'],$date['0']);
+            
+            if ($this->validate($fecha)) {
                 $user = User::find($key);
                 $correo['user'] = $user;
                 $correo['products'] = $this->getProducts($value);
                 Mail::to($user->email)->send(new ShoppingCartReminder($correo));
             }
         }
+        echo "Email enviados";
     }
-
-    public function validate($first, $second, $third){
+    public function validate($fecha){
         $today       = Carbon::now()->format('d-m-Y');
-        $firstEmail  = $first->addDays(2)->format('d-m-Y');
-        $secondEmail = $second->addDays(4)->format('d-m-Y');
-        $thirdEmail  = $third->addDays(6)->format('d-m-Y');
+        $firstEmail  = $fecha->addDays(2)->format('d-m-Y');
+        $secondEmail = $fecha->addDays(4)->format('d-m-Y');
+        $thirdEmail  = $fecha->addDays(6)->format('d-m-Y');
 
         if (($today == $firstEmail) || ($today == $secondEmail) ||  ($today == $thirdEmail)) {
             return true;
@@ -77,11 +81,13 @@ class ShoppingCart extends Command
         return false;
     }
 
-    public function getProducts($productos){
+    public function getProducts($variationProductos){
         $products = [];
-        foreach ($productos as $key => $value) {
-            $product = products::find($key);
-            array_push($products, $product);
+        foreach ($variationProductos as $key => $value) {
+            $vProduct = variation_product::find($key);
+            $product = products::find($vProduct->product_id);
+            $url =  env('APP_URL').'/api/1.0/rest/products-variations/'. $key;
+            array_push($products, ['name' => $product->name, 'price'=>$vProduct->price_normal, 'url' => $url ]);
         }
         return $products;
     }

@@ -11,7 +11,7 @@ class ShoppingCartReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = 'Recordatorio de compra';
+    public $subject = 'Completa tu compra';
     public $address = 'from@example.com';
     public $data;
 
