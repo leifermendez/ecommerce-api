@@ -22,7 +22,7 @@
                                 <div class="float-left">
                                     <h4>{{$shop->name}}</h4>
                                 </div>
-                                <div class="float-right">Reporte de ventas: del 01-01-2020  hasta 02-02-2020</div>
+                                <div class="float-right">Reporte de ventas: del {{$desde}}  hasta {{$hasta}}</div>
                                 <br><br>
 
                                 @if(count($shop->purchase_orders()->where('status','success')->whereBetween('updated_at', $range)->get()) > 0)
