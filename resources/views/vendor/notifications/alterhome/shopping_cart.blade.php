@@ -10,7 +10,7 @@
         <h1 style="text-align: center;font-size: 28px;">¡Completa tu compra!</h1>
         <br>
         <h2>¡Hola! {{ $user->name }}</h2>
-        <p>Recuerde que tienes productos seleccionados en tu carrido de compras.</p>
+        <p>Recuerda que tienes productos seleccionados en tu carrito de compras.</p>
         <div>
             @component('mail::table')
                 |        |          |   |

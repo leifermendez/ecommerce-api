@@ -10,8 +10,7 @@
         <h1 style="text-align: center;font-size: 28px;">¡Reporte de Ventas!</h1>
         <br>
         <h2>¡Hola!</h2>
-        <p>Este es un correo para informale el reporte de las ventas.
-        Resporte de vendas adjunto</p>
+        <p>Resporte de ventas adjunto</p>
 
     {{-- Footer --}}
     @slot('footer')
