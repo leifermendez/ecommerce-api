@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ShoppingCartReminder;
+use App\Notifications\_CartShopping;
 use App\variation_product;
 use App\shopping_cart;
 use Carbon\CarbonImmutable;
@@ -62,12 +61,12 @@ class ShoppingCart extends Command
             
             if ($this->validate($fecha)) {
                 $user = User::find($key);
-                $correo['user'] = $user;
-                $correo['products'] = $this->getProducts($value);
-                Mail::to($user->email)->send(new ShoppingCartReminder($correo));
+                $datos['user'] = $user;
+                $datos['products'] = $this->getProducts($value);
+                $user->notify(new _CartShopping($datos));
             }
         }
-        echo "Email enviados";
+        $this->info('Email enviados');
     }
     public function validate($fecha){
         $today       = Carbon::now()->format('d-m-Y');
