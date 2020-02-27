@@ -8,4 +8,6 @@ use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 class variation_product extends Model
 {
     use Cachable;
+    
+    protected $guarded = [];
 }
