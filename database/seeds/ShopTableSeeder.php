@@ -1,8 +1,10 @@
 <?php
 
+use App\shop;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 
 class ShopTableSeeder extends Seeder
 {
@@ -14,24 +16,25 @@ class ShopTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        for ($i = 1; $i < 5; $i++) {
-            DB::table('shops')->insert([
-                'users_id' => $i,
-                'name'=> $faker->company,
-                'address' => $faker->address,
-                'slug' => $faker->slug,
-                'zip_code' => ($i==1) ? '28039' : $faker->postcode,
-                'legal_id' => $faker->ean8,
-                'email_corporate' => $faker->companyEmail,
-                'image_cover' => $i,
-                'image_header' => $i,
-                'phone_mobil' => $faker->phoneNumber,
-                'phone_fixed' => $faker->phoneNumber,
-                'meta_key' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-                'terms_conditions' => $faker->text($maxNbChars = 190),
-                'polity_privacy' => $faker->text($maxNbChars = 190)
-            ]);
-        }
+        DB::table('shops')->truncate();
+        
+        DB::table('shops')->insert([
+            'users_id' => 2,
+            'name'=> $faker->company,
+            'address' => $faker->address,
+            'slug' => $faker->slug,
+            'zip_code' => '28039',
+            'legal_id' => $faker->ean8,
+            'email_corporate' => $faker->companyEmail,
+            'image_cover' => 1,
+            'image_header' => 1,
+            'phone_mobil' => $faker->phoneNumber,
+            'phone_fixed' => $faker->phoneNumber,
+            'meta_key' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+            'terms_conditions' => $faker->text($maxNbChars = 190),
+            'polity_privacy' => $faker->text($maxNbChars = 190)
+        ]);
+        
+        // factory(shop::class, 5)->create();
     }
 }

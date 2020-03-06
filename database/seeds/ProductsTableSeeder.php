@@ -1,5 +1,6 @@
 <?php
 
+use App\products;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,17 +15,17 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('products')->insert([
-                'name' => $faker->sentence(2),
-                'short_description' => $faker->sentence(8),
-                'featured' => ($i<3) ? 'premium' : 'regular',
-                'product_type' => ($i<5) ? 'digital':'physical',
-                'description' => $faker->sentence(20),
-                'shop_id' => ($i<5) ? ($i+1) : 1,
-                'status' => ($i<6) ? 'available':'unavailable',
-            ]);
-        }
+        DB::table('products')->truncate();
+        
+        DB::table('products')->insert([
+            'name' => 'Producto Prueba',
+            'short_description' => $faker->sentence(8),
+            'featured' => 'premium',
+            'product_type' =>'digital',
+            'description' => $faker->sentence(20),
+            'shop_id' => 1,
+            'status' => 'available',
+        ]);
+        factory(products::class, 4)->create();
     }
 }

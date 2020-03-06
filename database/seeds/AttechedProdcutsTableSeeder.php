@@ -2,6 +2,7 @@
 
 use Faker\Factory;
 use Illuminate\Database\Seeder;
+use App\attached_products;
 
 class AttechedProdcutsTableSeeder extends Seeder
 {
@@ -12,13 +13,7 @@ class AttechedProdcutsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('attached_products')->insert([
-                'attached_id' => $i+1,
-                'product_id' => ($i < 3) ? 1 : $i + 1
-            ]);
-        }
+        DB::table('attached_products')->truncate();
+        factory(attached_products::class, 3)->create();
     }
 }

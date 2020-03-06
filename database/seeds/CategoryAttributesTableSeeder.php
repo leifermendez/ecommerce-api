@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\category_attributes;
 class CategoryAttributesTableSeeder extends Seeder
 {
     /**
@@ -10,14 +10,8 @@ class CategoryAttributesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-           /* DB::table('category_attributes')->insert([
-                'category_id' => ($i<6) ? 1: $i+1,
-                'attributes_id' => ($i<6) ? 1: $i+1
-            ]);*/
-        }
+    {        
+        DB::table('category_attributes')->truncate();
+        factory(category_attributes::class, 10)->create();
     }
 }
