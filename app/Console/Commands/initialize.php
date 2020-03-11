@@ -48,21 +48,24 @@ class initialize extends Command
             $this->info('Base de Datos correcta');
             $this->info('Inicializando Variables de entorno');
             $this->configurationEnv();
-            $this->info('Precione Entrer para finalizar');
             Artisan::call('key:generate');
-            Artisan::call('jwt:secret');
             $this->info('Porfavor espere mientras se configura la base de datos');
-            Artisan::call('migrate:refresh');
+            $this->info('Comenzando migracion');
+            Artisan::call('migrate');
+            $this->info('Migracion Finalizada');
+            $this->info('Cargando datos basicos por favor espere');
             Artisan::call('db:seed');
+            $this->info('Precione ENTER para finalizar');
+            Artisan::call('jwt:secret');
             $this->info('Configuracion completada exitosamente');
-            
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e->getMessage());
         }
     }
 
     public function setEnvironmentValue(array $values){
         $envFile = app()->environmentFilePath();
+        $envFilePath = app()->environmentFilePath();
         $str = file_get_contents($envFile);
 
         if (count($values) > 0) {
@@ -112,7 +115,7 @@ class initialize extends Command
             $min = 10.2;
             $mensaje = 'La version minima de MariaDB debe ser 10.2';
         }else{
-            $min = 5.6;
+            $min = 5.7;
             $mensaje = 'La version minima de MySql debe ser 5.8';
         }
         $ver = explode(".", $version[0]);
@@ -133,6 +136,11 @@ class initialize extends Command
         $DB_DATABASE = $this->ask('Ingresa el nombre de la base de datos');
         $DB_USERNAME = $this->ask('Ingresa el usuario de la base de datos');
         $DB_PASSWORD = $this->secret('Ingresa el calve de la base de datos');
+        putenv("DB_HOST=$DB_HOST");
+        putenv("DB_PORT=$DB_PORT");
+        putenv("DB_DATABASE=$DB_DATABASE");
+        putenv("DB_USERNAME=$DB_USERNAME");
+        putenv("DB_PASSWORD=$DB_PASSWORD");
         $values =  [
             'DB_HOST' => $DB_HOST,
             'DB_PORT' => $DB_PORT,
