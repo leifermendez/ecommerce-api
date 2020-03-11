@@ -48,14 +48,11 @@ class initialize extends Command
             $this->info('Base de Datos correcta');
             $this->info('Inicializando Variables de entorno');
             $this->configurationEnv();
-            Artisan::call('key:generate');
-            $this->info('Porfavor espere mientras se configura la base de datos');
+            $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
             $this->info('Comenzando migracion');
-            Artisan::call('migrate');
+            shell_exec('php artisan migrate --force --seed');
             $this->info('Migracion Finalizada');
-            $this->info('Cargando datos basicos por favor espere');
-            Artisan::call('db:seed');
-            $this->info('Precione ENTER para finalizar');
+            Artisan::call('key:generate');
             Artisan::call('jwt:secret');
             $this->info('Configuracion completada exitosamente');
         } catch (Exception $e) {
