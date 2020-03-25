@@ -40,21 +40,24 @@ class initialize extends Command
     public function handle()
     {
         try {
-            $this->info('Validando la version de PHP');
-            $this->validatePhp();
-            $this->info('PHP correcto');
-            $this->info('Validando Base de Datos');
-            $this->validateBD();
-            $this->info('Base de Datos correcta');
-            $this->info('Inicializando Variables de entorno');
-            $this->configurationEnv();
-            $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
-            $this->info('Comenzando migracion');
-            shell_exec('php artisan migrate --force --seed');
-            $this->info('Migracion Finalizada');
-            Artisan::call('key:generate');
-            Artisan::call('jwt:secret');
+            // $this->info('Validando la version de PHP');
+            // $this->validatePhp();
+            // $this->info('PHP correcto');
+            // $this->info('Validando Base de Datos');
+            // $this->validateBD();
+            // $this->info('Base de Datos correcta');
+            // $this->info('Inicializando Variables de entorno');
+            // $this->configurationEnv();
+            // $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
+            // $this->info('Comenzando migracion');
+            // shell_exec('php artisan migrate --seed --force');
+            // $this->info('Migracion Finalizada');
+            // Artisan::call('key:generate');
+            // Artisan::call('jwt:secret');
+
+            shell_exec('"vendor/bin/phpunit"');
             $this->info('Configuracion completada exitosamente');
+
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
@@ -112,7 +115,7 @@ class initialize extends Command
             $min = 10.2;
             $mensaje = 'La version minima de MariaDB debe ser 10.2';
         }else{
-            $min = 5.7;
+            $min = 5.8;
             $mensaje = 'La version minima de MySql debe ser 5.8';
         }
         $ver = explode(".", $version[0]);

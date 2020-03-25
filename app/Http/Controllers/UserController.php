@@ -8,13 +8,38 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
 use App\Notifications\_UserWelcome;
 
+/**
+* @OA\Info(title="API Admin", version="1.0")
+*
+* @OA\Server(url="http://e-commerce-v2.test")
+*/
+
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/admin/user",
+    *     summary="Mostrar usuarios",
+    *     tags={"Usuarios"},
+    *     @OA\Parameter(
+    *          in="header",
+    *          name="token",
+    *          description="Token JWT",
+    *          @OA\Schema(
+    *              type="string",
+    *              required=true,
+    *          )
+    *      ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los usuarios."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error"
+    *     )
+    * )
+    */
     public function index(Request $request)
     {
         try {
@@ -82,7 +107,7 @@ class UserController extends Controller
 
             $data->setAttribute('token', JWTAuth::fromUser($data));
             
-            $data->notify(new _UserWelcome($data));
+            // $data->notify(new _UserWelcome($data));
 
             $response = array(
                 'status' => 'success',
