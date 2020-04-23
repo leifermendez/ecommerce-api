@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ZoneAvailableTableSeeder::class);
         $this->call(SettingTableSeeder::class);
         $this->call(PickUpShopTable::class);
+        $this->call(PlatformPymentsTable::class);
     }
 }

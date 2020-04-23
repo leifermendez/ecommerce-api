@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Artisan;
-
+use Illuminate\Support\Facades\Artisan;
 class initialize extends Command
 {
     /**
@@ -40,22 +39,25 @@ class initialize extends Command
     public function handle()
     {
         try {
-            // $this->info('Validando la version de PHP');
-            // $this->validatePhp();
-            // $this->info('PHP correcto');
-            // $this->info('Validando Base de Datos');
-            // $this->validateBD();
-            // $this->info('Base de Datos correcta');
-            // $this->info('Inicializando Variables de entorno');
-            // $this->configurationEnv();
-            // $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
-            // $this->info('Comenzando migracion');
-            // shell_exec('php artisan migrate --seed --force');
-            // $this->info('Migracion Finalizada');
-            // Artisan::call('key:generate');
-            // Artisan::call('jwt:secret');
+            $this->checkEnv();
+             $this->info('Validando la version de PHP');
+             $this->validatePhp();
+             $this->info('PHP correcto');
+             $this->info('Validando Base de Datos');
+//             $this->validateBD();
+             $this->info('Base de Datos correcta');
+             $this->info('Inicializando Variables de entorno');
+             $this->configurationEnv();
+             $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
+             $this->info('Comenzando migracion');
+             Artisan::call('migrate --force');
+             Artisan::call('db:seed --force');
+             Artisan::call('storage:link');
+             $this->info('Migracion Finalizada');
+             Artisan::call('key:generate');
+             Artisan::call('jwt:secret --force');
 
-            shell_exec('"vendor/bin/phpunit"');
+//            shell_exec('"vendor/bin/phpunit"');
             $this->info('Configuracion completada exitosamente');
 
         } catch (Exception $e) {
@@ -63,9 +65,15 @@ class initialize extends Command
         }
     }
 
+    private function checkEnv(){
+        $path = app_path().'/../.env';
+        if (!file_exists($path)) {
+            fopen($path, 'w') or die('Cannot open file:  '.$path);
+        }
+    }
+
     public function setEnvironmentValue(array $values){
         $envFile = app()->environmentFilePath();
-        $envFilePath = app()->environmentFilePath();
         $str = file_get_contents($envFile);
 
         if (count($values) > 0) {
@@ -127,45 +135,67 @@ class initialize extends Command
 
     public function configurationEnv(){
         $name = getenv('APP_NAME');
-        if ($name == null) {
-            shell_exec('cp .env.example .env');
-        }
         $this->info('Por favor ingresar los siguientes valores');
         $DB_HOST = $this->ask('Ingresa el ip del host de la base de datos');
-        $DB_PORT = $this->ask('Ingresa el puerto de base de datos');
+        $DB_PORT = $this->ask('Ingresa el puerto de base de datos (3306)');
         $DB_DATABASE = $this->ask('Ingresa el nombre de la base de datos');
         $DB_USERNAME = $this->ask('Ingresa el usuario de la base de datos');
-        $DB_PASSWORD = $this->secret('Ingresa el calve de la base de datos');
+        $DB_PASSWORD = $this->secret('Ingresa el clave de la base de datos');
+
+
+
+        $DB_STRIPE_KEY = $this->ask('Ingresa el STRIPE key PK');
+        $DB_STRIPE_SECRET = $this->ask('Ingresa tu keysecret de STRIPE SK');
+        $DB_PLATFORM_ID = $this->ask('Ingresa STRIPE id ');
+
+        $DB_STRIPE_KEY_SAMBOX = $this->ask('Ingresa el STRIPE key SAMBOX PK');
+        $DB_STRIPE_SECRET_SAMBOX = $this->ask('Ingresa tu keySecret de STRIPE SAMBOX SK');
+
+
+
+        putenv("APP_KEY=");
         putenv("DB_HOST=$DB_HOST");
         putenv("DB_PORT=$DB_PORT");
         putenv("DB_DATABASE=$DB_DATABASE");
         putenv("DB_USERNAME=$DB_USERNAME");
         putenv("DB_PASSWORD=$DB_PASSWORD");
+
+        putenv("STRIPE_KEY=$DB_STRIPE_KEY");
+        putenv("STRIPE_SECRET=$DB_STRIPE_SECRET");
+        putenv("STRIPE_PLATFORM_ID=$DB_PLATFORM_ID");
+
+        putenv("STRIPE_KEY_SAMBOX=$DB_STRIPE_KEY_SAMBOX");
+        putenv("STRIPE_SECRET_SAMBOX=$DB_STRIPE_SECRET_SAMBOX");
+
         $values =  [
             'DB_HOST' => $DB_HOST,
             'DB_PORT' => $DB_PORT,
             'DB_DATABASE' => $DB_DATABASE,
             'DB_USERNAME' => $DB_USERNAME,
             'DB_PASSWORD' => $DB_PASSWORD,
+            'APP_NAME'=>'TEST',
+            'APP_ENV'=>'local',
             'APP_DEBUG'=>'false',
-            'APP_SITE_MAIL'=>'alterhome',
+            'APP_SITE_MAIL'=>'default',
             'MAIL_ENCRYPTION'=>'tls',
             'MAIL_FROM_ADDRESS'=>'from@example.com',
             'MAIL_FROM_NAME'=>'Example',
-            'PAACK_KEY'=>'3c8244a87b97e6ba9904617951dc10dd340d0b6c',
-            'ELINFORMAR_CLIENT_ID'=>'2ctnq8nqiobu91kpwl0hzwfl3b28x6iwf1f08fyp.api.einforma.com',
-            'ELINFORMAR_CLIENT_SECRET'=>'wl9e1mPswyEMA5txFTY6NlqDndLOzbCleUJux57FE1o',
+            'PAACK_KEY'=>'',
+            'ELINFORMAR_CLIENT_ID'=>'.api.einforma.com',
+            'ELINFORMAR_CLIENT_SECRET'=>'',
             'TWILIO_SID'=>'ACefd4718af2b07d2aa6936d3a37458cb0',
             'TWILIO_TOKEN'=>'fb6e132e69e1152749032cdf5f5dc27a',
             'TWILIO_FROM'=>'+34955160684',
-            'TRUUST_PK'=>'pk_production_YXBhdHhlZS1vbi10aW1lLXMtbC0=',
-            'TRUUST_SK'=>'sk_production_VC7sKufCPudxH0Mh6eU51CHX',
-            'STRIPE_KEY'=>'pk_test_iOoJca2tObgjRwE7xbi0T3MM008BdX4xYU',
-            'STRIPE_SECRET'=>'sk_test_G9Qs20pym4a7Nr43SW3F3JDs00lEIQasj9',
+            'TRUUST_PK'=>'=',
+            'TRUUST_SK'=>'',
+            'STRIPE_KEY'=>$DB_STRIPE_KEY,
+            'STRIPE_SECRET'=>$DB_STRIPE_SECRET,
+            'STRIPE_KEY_SAMBOX'=>$DB_STRIPE_KEY_SAMBOX,
+            'STRIPE_SECRET_SAMBOX'=>$DB_STRIPE_SECRET_SAMBOX,
             'STRIPE_WEBHOOK_SECRET'=>'',
             'STRIPE_WEBHOOK_TOLERANCE'=>'',
-            'STRIPE_PLATFORM_ID'=>'',
-            'GOOGLE_API_VISION_KEY'=>'AIzaSyDAFzd-3P2Wri4m6jgZflzNNUwC5yxjrJ0',
+            'STRIPE_PLATFORM_ID'=>$DB_PLATFORM_ID,
+            'GOOGLE_API_VISION_KEY'=>'',
         ];
         $this->setEnvironmentValue($values);
     }

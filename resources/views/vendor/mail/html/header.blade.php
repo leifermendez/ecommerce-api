@@ -1,7 +1,7 @@
 <tr>
     <td class="header">
-        <a href="{{ $url }}">
-        <img src="{{$img}}"
+        <a href="{{ ($url) ? $url : '' }}">
+        <img src="{{($img) ? $img : ''}}"
                  height="40px" alt="">
         </a>
     </td>
