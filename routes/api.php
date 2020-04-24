@@ -139,6 +139,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
                 'destroy'
             ]);
 
+        Route::resource('/import', '_FrontProductsImport');
+
         Route::resource('/schedules', '_FrontShopSchedules');
 
         Route::resource('/products-variations', '_FrontProductVariations');
@@ -239,7 +241,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');
     Route::resource('delivery', 'ExternalDeliveryController');
-    Route::post('/products/csv', 'ProductVariationController@import');
     /**
      * Esta ruta debe pensarse creo que lo mejor es hacer un compoenent stripe por el lado del front
      * Success: http://localhost?scope=read_write&code={AUTHORIZATION_CODE}

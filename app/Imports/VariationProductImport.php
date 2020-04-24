@@ -30,7 +30,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
     */
     public function model(array $row)
     {
-        
+
         $product_id = $this->storeProduct($row);
         $resp = $this->validateVariation($row, $product_id);
         if (!$resp) {
@@ -38,7 +38,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
             return new variation_product([
                 'price_normal' => $row['price_normal'],
                 'price_regular' => $row['price_regular'],
-                'product_id' => $product_id, 
+                'product_id' => $product_id,
                 'quantity' => $row['quantity'],
                 'label' => $row['label_variation'],
                 'observation'  => $row['observation'],
@@ -64,6 +64,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
         return [
             'email_corporate' => function($attribute, $value, $onFailure) {
                 $user = JWTAuth::parseToken()->authenticate();
+
                 $shop = shop::where(['email_corporate' => $value, 'users_id' => $user->id])->first();
                 if ($shop == null) {
                     $onFailure('Correo no existe para una tienda');
@@ -71,7 +72,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
             },
             'product' => 'required|string',
             'short_description' => 'required|string',
-            'featured' => Rule::in(['premium', 'regular', 'not']), 
+            'featured' => Rule::in(['premium', 'regular', 'not']),
             'product_type' => Rule::in(['digital', 'physical']),
             'description' => 'required|string',
             'label_product' => 'required',
@@ -86,7 +87,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
             'length' => 'required|integer',
             'delivery' => Rule::in(['si', 'no']),
             'img' =>'url',
-            
+
         ];
     }
 
@@ -168,7 +169,7 @@ class VariationProductImport implements ToModel, WithHeadingRow, WithCustomCsvSe
     public function getImg($row, $product_id){
         $user = JWTAuth::parseToken()->authenticate();
         $responseSize = [];
-        $formato = substr($row['img'], -3);    
+        $formato = substr($row['img'], -3);
         if ( $formato == 'peg' || $formato == 'jpg' || $formato == 'bmp' || $formato == 'png') {
             $formato = ($formato == 'peg') ? 'jpeg' : $formato ;
             $file = file_get_contents($row['img']);//obtener imagen

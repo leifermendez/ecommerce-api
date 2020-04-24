@@ -532,11 +532,11 @@ class UseInternalController extends Controller
                     DB::raw('(SELECT value FROM settings WHERE meta = "feed_percentage" limit 1) as feed_percentage'),
                     DB::raw('(SELECT value FROM settings WHERE meta = "feed_amount" limit 1) as feed_amount'),
                     DB::raw('(SELECT value FROM settings WHERE meta = "feed_limit_price" limit 1) as feed_limit_price'),
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
-                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    DB::raw('(SELECT attacheds.large FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large')
                 )
                 ->orderBy('variation_products.price_normal', $sort);
@@ -746,7 +746,7 @@ class UseInternalController extends Controller
                 return [];
             }
 
-            $data = DB::select(
+            return DB::select(
                 DB::raw('SELECT ' . $select . ' FROM(
                 SELECT a.`name` as name_shop, a.id AS shop_id,
                 111.111 *
@@ -757,7 +757,6 @@ class UseInternalController extends Controller
                 * SIN(RADIANS(' . $lat . ')), 1.0))) AS distance_in_km
                 FROM shops as a) as b WHERE b.distance_in_km ' . $operation . ' ' . $km)
             );
-            return $data;
         } catch (\Execption $e) {
             return [];
         }
