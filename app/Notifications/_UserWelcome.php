@@ -42,9 +42,10 @@ class _UserWelcome extends Notification
      */
     public function toMail($notifiable)
     {
+        $site = env('APP_SITE_MAIL', '');
         return (new MailMessage)
             ->subject("Bienvenido a bordo")
-            ->markdown('vendor.notifications.new_user', ['user' => $this->user]);
+            ->markdown("vendor.notifications.".$site.".new_user", ['user' => $this->user]);
 
     }
 

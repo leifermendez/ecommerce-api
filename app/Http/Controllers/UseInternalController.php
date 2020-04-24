@@ -54,6 +54,29 @@ class UseInternalController extends Controller
         }
     }
 
+    public function edgeTime($global, $minutes = 45)
+    {
+        try {
+            //16-30 20-00
+            foreach ($global as $gk => $gv) {
+                $global[$gk] = explode('-', $gv);
+                foreach ($global[$gk] as $k => $ti) {
+                    $global[$gk][$k] = Carbon::parse($ti)->addMinutes($minutes)->format('H:i');
+                }
+            }
+
+            foreach ($global as $gk => $gv) {
+                $global[$gk] = implode('-', $global[$gk]);
+
+            }
+
+            return $global;
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function _getSettings()
     {
         try {
@@ -175,9 +198,11 @@ class UseInternalController extends Controller
             }
 
             $data = User::where('id', $id)->first();
-
-            if (!$data->confirmed) {
-                throw new \Exception('user_not_confirmed');
+            $only_user_confirmed = $this->_getSetting('only_user_confirmed');
+            if ($only_user_confirmed == 1) {
+                if (!$data->confirmed) {
+                    throw new \Exception('user_not_confirmed');
+                }
             }
 
             return ['data' => $data];
@@ -190,8 +215,18 @@ class UseInternalController extends Controller
     public function _isAvailableProduct($id = null)
     {
         try {
+            $schedule_active = $this->_getSetting('schedule_active');
+
             if (!$id) {
                 throw new \Exception('id null');
+            }
+
+            if ($schedule_active == 0) {
+                return [
+                    'isAvailable' => true,
+                    'nextOpen' => true,
+                    'nextClose' => true,
+                ];
             }
 
             if (!products::where('id', $id)
@@ -233,30 +268,33 @@ class UseInternalController extends Controller
                     json_decode($data->hours_exceptions) : null;
 
                 if ($hours_shedule_hours) {
+                    $edge_time = $this->_getSetting('edge_time');
                     $openingHours = OpeningHours::create([
-                        'monday' => (isset($hours_shedule_hours->monday)) ? $hours_shedule_hours->monday : [],
-                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ? $hours_shedule_hours->tuesday : [],
-                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ? $hours_shedule_hours->wednesday : [],
-                        'thursday' => (isset($hours_shedule_hours->thursday)) ? $hours_shedule_hours->thursday : [],
-                        'friday' => (isset($hours_shedule_hours->friday)) ? $hours_shedule_hours->friday : [],
-                        'saturday' => (isset($hours_shedule_hours->saturday)) ? $hours_shedule_hours->saturday : [],
-                        'sunday' => (isset($hours_shedule_hours->sunday)) ? $hours_shedule_hours->sunday : [],
+                        'monday' => (isset($hours_shedule_hours->monday)) ?
+                            $this->edgeTime($hours_shedule_hours->monday, $edge_time) : [],
+                        'tuesday' => (isset($hours_shedule_hours->tuesday)) ?
+                            $this->edgeTime($hours_shedule_hours->tuesday, $edge_time) : [],
+                        'wednesday' => (isset($hours_shedule_hours->wednesday)) ?
+                            $this->edgeTime($hours_shedule_hours->wednesday, $edge_time) : [],
+                        'thursday' => (isset($hours_shedule_hours->thursday)) ?
+                            $this->edgeTime($hours_shedule_hours->thursday, $edge_time) : [],
+                        'friday' => (isset($hours_shedule_hours->friday)) ?
+                            $this->edgeTime($hours_shedule_hours->friday, $edge_time) : [],
+                        'saturday' => (isset($hours_shedule_hours->saturday)) ?
+                            $this->edgeTime($hours_shedule_hours->saturday, $edge_time) : [],
+                        'sunday' => (isset($hours_shedule_hours->sunday)) ?
+                            $this->edgeTime($hours_shedule_hours->sunday, $edge_time) : [],
                         'exceptions' => $hours_exceptions
                     ]);
-                    $next_available = $openingHours->nextOpen(Carbon::now());
-                    $diff = Carbon::parse($next_available)->diffInMinutes($now);
-                    $next_available = Carbon::parse($next_available)->toArray();
-                    $next_close = $openingHours->nextClose(Carbon::now());
-                    $next_close = Carbon::parse($next_close)->toArray();
-                    $shedule = $openingHours->isOpenAt(Carbon::now());
 
+                    $data_schedule = $this->_nextOpen($openingHours);
                 }
 
                 return [
-                    'isAvailable' => $shedule,
-                    'nextOpen' => $next_available,
-                    'nextClose' => $next_close,
-                    'minutes' => ($diff === 0) ? ($diff + 1) : $diff
+                    'isAvailable' => $data_schedule['shedule'],
+                    'nextOpen' => $data_schedule['next_available'],
+                    'nextClose' => $data_schedule['next_close'],
+                    'minutes' => ($data_schedule['diff'] === 0) ? ($data_schedule['diff'] + 1) : $data_schedule['diff']
                 ];
 
             };
@@ -266,16 +304,60 @@ class UseInternalController extends Controller
         }
     }
 
+    public function _nextOpen($openingHours)
+    {
+
+        $openWeek = false;
+        $list_schedule = $openingHours->forWeek();
+        foreach ($list_schedule as $key => $value) {
+            if (count($value)) {
+                $openWeek = count($value);
+            }
+        }
+        if (!$openWeek) {
+            return [
+                'next_available' => false,
+                'diff' => false,
+                'next_close' => false,
+                'shedule' => 0
+            ];
+        }
+
+        $now = Carbon::now();
+        $next_available = $openingHours->nextOpen(Carbon::now());
+        $diff = Carbon::parse($next_available)->diffInMinutes($now);
+        $next_available = Carbon::parse($next_available)->toArray();
+        $next_close = $openingHours->nextClose(Carbon::now());
+        $next_close = Carbon::parse($next_close)->toArray();
+        $shedule = $openingHours->isOpenAt(Carbon::now());
+
+        return [
+            'next_available' => $next_available,
+            'diff' => $diff,
+            'next_close' => $next_close,
+            'shedule' => $shedule
+        ];
+
+    }
+
     public function _v2_isAvailableProduct($schedule = null, $exceptions = null)
     {
         try {
-
+            $schedule_active = $this->_getSetting('schedule_active');
             $now = Carbon::now();
             $next_available = null;
             $next_close = null;
             $diff = 0;
             $shedule = array();
             $exceptions = array();
+
+            if ($schedule_active == 0) {
+                return [
+                    'isAvailable' => true,
+                    'nextOpen' => true,
+                    'nextClose' => true,
+                ];
+            }
 
             if (!$schedule) {
                 return [
@@ -284,7 +366,6 @@ class UseInternalController extends Controller
                     'nextClose' => false,
                 ];
             }
-
 
             if ($schedule) {
                 $hours_shedule_hours = ($schedule && json_decode($schedule)) ?
@@ -340,18 +421,18 @@ class UseInternalController extends Controller
                 ->join('labels_products', 'labels_products.attacheds_id', '=', 'attacheds.id')
                 ->select('labels_products.labels')
                 ->get();
-            
-            if($data){
+
+            if ($data) {
                 foreach ($data as $key => $value) {
                     $tmp[] = $value->labels;
                 }
-                $tmp = implode(',',$tmp);
-               $encrypted_label = Crypt::encryptString($tmp);
+                $tmp = implode(',', $tmp);
+                $encrypted_label = Crypt::encryptString($tmp);
             }
-            if(strlen($tmp)){
+            if (strlen($tmp)) {
                 $string_label = str_replace(",", "%' OR products.label LIKE '%", $tmp);
                 $exists = products::whereRaw("(products.label LIKE '%$string_label%')")
-                ->exists();
+                    ->exists();
             }
 
             return [
@@ -362,7 +443,7 @@ class UseInternalController extends Controller
 
         } catch (\Execption $e) {
             return $e->getMessage();
-        }  
+        }
     }
 
     public function _getImages($id)
@@ -448,6 +529,9 @@ class UseInternalController extends Controller
                 ->join('categories', 'categories.id', '=', 'product_categories.category_id')
                 ->select('variation_products.*',
                     'categories.id as categories_id',
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_percentage" limit 1) as feed_percentage'),
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_amount" limit 1) as feed_amount'),
+                    DB::raw('(SELECT value FROM settings WHERE meta = "feed_limit_price" limit 1) as feed_limit_price'),
                     DB::raw('(SELECT attacheds.small FROM attacheds 
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small'),
                     DB::raw('(SELECT attacheds.medium FROM attacheds 

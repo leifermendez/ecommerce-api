@@ -22,23 +22,23 @@ class _FrontShop extends Controller
         try {
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-
+            $measureShop = [];
 
             $data = shop::orderBy('shops.id', 'DESC')
                 ->where('shops.status', 'available')
                 ->select(
                     'shops.*',
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
-                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    DB::raw('(SELECT attacheds.large FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
-                    DB::raw('(SELECT attacheds.large FROM attacheds 
+                    DB::raw('(SELECT attacheds.large FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_large')
                 )
                 ->where(function ($query) use ($filters, $request) {
@@ -111,7 +111,7 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
+            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {
@@ -172,17 +172,17 @@ class _FrontShop extends Controller
 
             $select = ['name',
                 'address', 'slug', 'legal_id', 'image_cover', 'image_header', 'meta_key', 'terms_conditions',
-                DB::raw('(SELECT attacheds.small FROM attacheds 
+                DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_small'),
-                DB::raw('(SELECT attacheds.small FROM attacheds 
+                DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_small'),
-                DB::raw('(SELECT attacheds.medium FROM attacheds 
+                DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_medium'),
-                DB::raw('(SELECT attacheds.medium FROM attacheds 
+                DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_medium'),
-                DB::raw('(SELECT attacheds.large FROM attacheds 
+                DB::raw('(SELECT attacheds.large FROM attacheds
                     WHERE attacheds.id = shops.image_cover limit 1) as image_cover_large'),
-                DB::raw('(SELECT attacheds.large FROM attacheds 
+                DB::raw('(SELECT attacheds.large FROM attacheds
                     WHERE attacheds.id = shops.image_header limit 1) as image_header_large')];
 
             if ($isMy) {
@@ -246,7 +246,7 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
+            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {

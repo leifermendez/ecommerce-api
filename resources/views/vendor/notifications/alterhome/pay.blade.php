@@ -1,8 +1,8 @@
 @component('mail::layout')
     {{-- Header --}}
     @slot('header')
-        @component('mail::header', ['url' => 'https://apatxee.com/'])
-            <img src="https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/assets/logo-mail-apatxee.png"
+        @component('mail::header', ['url' => 'https://tienda.alterhome.es/'])
+            <img src="https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/small_TpzlDnMkPheuvPzj7Qf6vsWwHX7gOd5oTET.jpg"
                  height="40px" alt="">
         @endcomponent
     @endslot
@@ -16,7 +16,7 @@
         <h1>{{$pay->uuid}}</h1>
         <div>
             <div>
-                @component('mail::button', ['url' => 'https://apatxee.com/purchases'])
+                @component('mail::button', ['url' => 'https://tienda.alterhome.es/purchases'])
                     Ver detalles
                 @endcomponent
             </div>

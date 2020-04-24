@@ -2,53 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\newsletter;
 use Illuminate\Http\Request;
-use App\banners;
-use Carbon\Carbon;
-use DB;
+use App\Notifications\_MailMarketing;
 
-class _FrontBanners extends Controller
+class MailMarketing extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        try {
-
-            $limit = ($request->limit) ? $request->limit : 15;
-            $now = Carbon::now();
-            $data = banners::inRandomOrder()
-                ->join('attacheds','attacheds.id','=','banners.attached_id')
-                ->where('banners.start','<=',$now->toDateTimeString())
-                ->where('banners.finish','>=',$now->toDateTimeString())
-                ->select('banners.*','attacheds.small as attached_small',
-                'attacheds.medium as attached_medium','attacheds.large as attached_large',
-                'attacheds.video_url',
-                DB::raw('(SELECT attacheds.medium FROM attacheds 
-                WHERE attacheds.id = banners.attached_responsive_id limit 1) as attached_responsive'))
-                ->paginate($limit);
-
-            $response = array(
-                'status' => 'success',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
-
-        } catch (\Exception $e) {
-
-            $response = array(
-                'status' => 'fail',
-                'msg' => $e->getMessage(),
-                'code' => 1
-            );
-
-            return response()->json($response, 500);
-
-        }
+        //
     }
 
     /**
@@ -69,7 +37,13 @@ class _FrontBanners extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = newsletter::all();
+
+        foreach ($users as $user) {
+            $user->notify(new _MailMarketing($user));
+            newsletter::where('id',$user->id)->update(['data'=>'send']);
+            sleep(5);
+        }
     }
 
     /**
@@ -114,6 +88,6 @@ class _FrontBanners extends Controller
      */
     public function destroy($id)
     {
-        //-
+        //
     }
 }

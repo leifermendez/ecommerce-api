@@ -59,7 +59,7 @@ class _FrontSearch extends Controller
                             $decrypted = str_replace(",", "%' OR products.label LIKE '%", $decrypted);
                             $query
                             ->whereRaw("(products.label LIKE '%$decrypted%')");
-                       
+
                         }else{
                             $query->where('products.name', 'LIKE', "%{$src}%");
                         }
@@ -76,7 +76,7 @@ class _FrontSearch extends Controller
                                 }
                             }
                         }
-                    })->orderBy('products.id', 'DESC');
+                    });
 
 
                 if ($request->attributes_filter) {
@@ -96,7 +96,7 @@ class _FrontSearch extends Controller
                                     }
                                 }
                             }
-                        });
+                        })->orderBy('products.id', 'DESC');
                 }
             };
 
@@ -131,6 +131,9 @@ class _FrontSearch extends Controller
                             'id', id,
                             'attached_id', attached_id,
                             'observation', observation,
+                            'feed_percentage', (SELECT value FROM settings WHERE meta = 'feed_percentage' LIMIT 1),
+                            'feed_amount', (SELECT value FROM settings WHERE meta = 'feed_amount' LIMIT 1),
+                            'feed_base', (SELECT value FROM settings WHERE meta = 'feed_limit_price' LIMIT 1),
                             'delivery', delivery,
                             'status', status
                           ) SEPARATOR '|'
@@ -150,6 +153,10 @@ class _FrontSearch extends Controller
                         attacheds.id = product_attacheds.attached_id
                         WHERE product_id = products.id  AND  variation_product_id is null) as gallery")
                 );
+
+            $data_products = ($request->order != 'rand') ?
+            $data_products->orderBy('products.id', 'DESC') :
+            $data_products->inRandomOrder();
 
             $data_products = (!$request->pagination) ?
                 $data_products->take($limit)->get() : $data_products->paginate($limit);

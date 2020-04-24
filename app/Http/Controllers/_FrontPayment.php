@@ -31,8 +31,8 @@ class _FrontPayment extends Controller
             ->select('payment_keys.*')
             ->first();
 
-        $this->stripe_pk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
-        $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
+        $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
+        $this->stripe_ap = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
         $this->stripe_api = ($stripeKeys->status === 'live' ? $stripeKeys->live_end_point : $stripeKeys->sandbox_end_point);
     }
 
@@ -122,6 +122,7 @@ class _FrontPayment extends Controller
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
             $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
+            $marketplace = (new UseInternalController)->_getSetting('marketplace');
             $auto_sms = (new UseInternalController)->_getSetting('auto_sms');
             $request->validate([
                 'source' => 'required',
@@ -143,7 +144,7 @@ class _FrontPayment extends Controller
                     ->join('shops', 'user_payments.user_id', '=', 'shops.users_id')
                     ->join('users', 'user_payments.user_id', '=', 'users.id')
                     ->where('shops.id', $purchase->shop_id)
-                    ->select('user_payments.*', 'users.phone as phone_number')
+                    ->select('user_payments.*', 'users.phone as phone_number', 'users.email as shop_email')
                     ->first();
 
                 $data_feed = (new UseInternalController)->_getFeedAmount($purchase->product_amount);
@@ -153,17 +154,25 @@ class _FrontPayment extends Controller
                     $description .= "Order: $request->purchase_uuid, Feed: " . $data_feed['application_feed_amount'];
                     $amount_supplier = ($discount_to_supplier == 1) ?
                         $data_feed['amount_without_feed'] : $data_feed['amount_with_feed'];
-                    $r = $this->_transfer($request->purchase_uuid,
-                        $amount_supplier, $user_payment->iban, $description);
-                    if ($r) {
-                        purchase_order::where('uuid', $request->purchase_uuid)
-                            ->where('user_id', $user->id)
-                            ->update(['status' => 'success']);
-                        $user_payment->setAttribute('uuid', $request->purchase_uuid);
-                        if ($auto_sms == 1) {
-                            $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
+
+                    if($marketplace == 1){
+                            $r = $this->_transfer($request->purchase_uuid,
+                            $amount_supplier, $user_payment->iban, $description);
+                        if ($r) {
+                            purchase_order::where('uuid', $request->purchase_uuid)
+                                ->where('user_id', $user->id)
+                                ->update(['status' => 'success']);
+                            $user_payment->setAttribute('uuid', $request->purchase_uuid);
+                            if ($auto_sms == 1) {
+                                $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
+                            }
                         }
+                    }else{
+                        purchase_order::where('uuid', $request->purchase_uuid)
+                        ->where('user_id', $user->id)
+                        ->update(['status' => 'success']);
                     }
+  
                 }
             };
 
@@ -174,6 +183,7 @@ class _FrontPayment extends Controller
             if ($auto_sms == 1) {
                 $user->notify(new _NewPurchaseSmsUser($user));
             }
+            $user->setAttribute('shop_email',$user_payment->shop_email);
             $user->notify(new _PayOrder($user));
 
             DB::commit();

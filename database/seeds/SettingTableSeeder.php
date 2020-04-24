@@ -28,7 +28,10 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'auto_delivery', 'value' => '1'),
             array('meta' => 'auto_sms', 'value' => '1'),
             array('meta' => 'range_closed', 'value' => '1'),
-            array('meta' => 'google_vision', 'value' => '1')
+            array('meta' => 'google_vision', 'value' => '1'),
+            array('meta' => 'only_user_confirmed', 'value' => '1'),
+            array('meta' => 'marketplace', 'value' => '1'),
+            array('meta' => 'schedule_active', 'value' => '1')
         ));
     }
 }

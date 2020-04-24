@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mochileros-ecommerce",
+  "private_key_id": "9edefe4749d0bea07a39305db8c3547d67e675bb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQClPIVxslq22KgW\nGFRWEwFI6ixA/4l03YhxI6nkpPCWheoPsSQJYCtB27WHR9zY1ehBYRORzOIfT29e\nfp7Vb+djK+b13p4TWoPzD52wmwYGbcoTA7SqPUs5x7UmICjUGl4efFdvas/5Yu4n\nHPWuxIlqjcsgeYbIDKqHpdaQmPUueZ5dB7BRhbfIlqMoF7ThKj212MrJ6lliOOrZ\nX2+XW2sQakYHHZl5f83DiBHH3XWCR5Af2sIQdqdIS3hYQLbPbjuHKRZ7iZYLolHu\nN3QuolEmxIcwsVbn/Ejmq+JRMnqv/0FMK9CfqAYYApkt35rVv5/J5FjolvvnQsv4\n7JcTZlMJAgMBAAECggEABdRuD94fUbqwqYDnvtayUaiDcbKiXqdvSDCeLqU8IM9u\nO+n/z73fINZ33+NC8TqQ1HewmVENfFXQ49hbUcP+ObNDlZKqaJvlsmZvZZr+miz2\n93dGwUfi1tHLPCJf1mXswq4X5qQx3MZnCSW+LFGeWI5Sp51qCjZaMOmCubzPz7kn\nwBQftGJM+xEa37qEsAhifDdcotE32cf/8OQfDf6IFmeAsKvYtslaGTcu9wHXViOS\nMqppWeIm5TyjjwCj5s0HtSqgypR7fhOWbibkPTyyT87znrWe0wjFbwL3A8NAmDeS\n7Nnkx9t5m2qsIh7VHiLDba8A6n9FHh07Pf5FfjjlNQKBgQDO0jmrSIMDMqs2oOkl\n0jVMz8hEI3QRRAQNyVBhpcsb7DU5C+fYVEa5clHk+pD7VmSjxvwjFcn7us2HBCGu\nssmTteUKIou8otY9M+JVbXlndo+j6s5Pg7dgGGfGUuz0cLhmGSooUO9Y/EQk1tyv\ng6fXBy844JhDVYs9MRsFc9KllQKBgQDMhup/UZVcqkgZQukYOm6WNlJq5XmOj23G\nIRMEvdKeQRDral0LD3XRr+yrDQlYmXLl5kSPR8lz5zjvStrCUBPlKMa5UPZQCJre\nF2FWprTEiwFGZnAhh+ih3JZP5Kq7wOCYclPgTSSgf7dOzYkGD9DPGtgLaRlOtgxT\nYop2v4CypQKBgG59mRmMj5FxzE5PAL+X4am7h73/Qs7Gi3PiDPNd43hzZKupVJ8Z\nxv7juCSgSDw+F133vFPyHApD7fEnn+b41P/4uPgFJKoORG5F/bCt36IKkQp9MuL/\n90N7RlWJj9W3Mow4/XC0bGoZuz4DG7sYlt4llHDKbA3s8YorZcgv7GVRAoGBAI1q\nU8WIoV+bFZLx4r2v2TrfgIkM9cmOfnZZ9A55OaHWl15PAtpc7Df6DggPUYEDSKCR\nYKI5Hp+XJpS+CxgDyl3OnekQg96+tGYPgGwrhB3Jhy4oMivdDwqrvPqsvyhmqmR9\n2GTksgiPhi1ki/O3B8fLZcot9yOnWEpnfhmxO8lJAoGBAKGtXD+TPH0YmwL6qRfh\nDzmeO261Zq+7rpjrpTp5nq14SS9Qg5QFoqYaYP0YDlpVcOXwH39TaLPSV1IZChxi\n6F5TG5k0UQCn4e/Bn5X/RysiS87sBISrF6S9wdrDkW/xMqPkfPo6w3MG5R0Gwnec\n11L808zbeKVwYImHNzdv19dV\n-----END PRIVATE KEY-----\n",
+  "client_email": "mochileros@mochileros-ecommerce.iam.gserviceaccount.com",
+  "client_id": "109845638715632790825",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mochileros%40mochileros-ecommerce.iam.gserviceaccount.com"
+}

@@ -63,7 +63,7 @@ class _FrontShipping extends Controller
      */
     public function store(Request $request)
     {
-        $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
+        $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
         $fields = array();
         foreach ($request->all() as $key => $value) {
             if ($key !== 'uuid' && $key !== 'user_id') {
@@ -160,7 +160,7 @@ class _FrontShipping extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
+            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
             $fields = array();
             $user = JWTAuth::parseToken()->authenticate();
 

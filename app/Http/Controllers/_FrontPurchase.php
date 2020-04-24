@@ -55,7 +55,7 @@ class _FrontPurchase extends Controller
                 ->join('shops', 'purchase_orders.shop_id', '=', 'shops.id')
                 ->select('purchase_orders.*', 'shops.name as shops_name',
                     'shops.phone_mobil as shops_mobil', 'shops.phone_fixed as shops_fixed',
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                 WHERE attacheds.id = shops.image_cover limit 1) as logo_brand')
                 )
                 ->paginate($limit)
@@ -106,7 +106,7 @@ class _FrontPurchase extends Controller
     {
         $fields = array();
         $lists = [];
-        $request->remove('_location'); $request->remove('_lat'); $request->remove('_lng');
+        $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
 
         try {
             DB::beginTransaction();

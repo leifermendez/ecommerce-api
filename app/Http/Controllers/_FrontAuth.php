@@ -137,7 +137,7 @@ class _FrontAuth extends Controller
                     'password' => $request->password,
                     'role' => ($role) ? 'shop' : 'user',
                     'avatar' => ($request->avatar) ? $request->avatar :
-                        'https://storage.googleapis.com/ecommerce-apatxee-v2.appspot.com/public/upload/products/small_GCPKzfLJ0jjvWPQLAAotooV9sMDQsQLL3qO.png',
+                        'https://storage.googleapis.com/media-ecommerce-alterhome/public/upload/products/large_6fCnjzn5xKXY2tWc0s5IAw0fKy7ecaoaaG6.jpg',
                     'referer_code' => $random_ref_code
                 ));
                 return $response;

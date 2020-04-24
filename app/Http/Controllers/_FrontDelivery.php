@@ -9,6 +9,7 @@ use Validator;
 use App\shop;
 use App\shipping_address;
 use App\delivery_order;
+use Carbon\Carbon;
 
 define("_api_delivery_", "https://api.paack.co/api");
 
@@ -18,6 +19,16 @@ class _FrontDelivery extends Controller
     public function _send($data = array())
     {
         $paack_key = env('PAACK_KEY', '');
+        $pickup_window = [
+            'start_time' => Carbon::now()->addMinutes(10)->timestamp,
+            'end_time' => Carbon::now()->addMinutes(60)->timestamp
+        ];
+
+        $delivery_window = [
+            'start_time' => Carbon::now()->addMinutes(90)->timestamp,
+            'end_time' => Carbon::now()->addMinutes(160)->timestamp  
+        ];
+
         $response = Curl::to(_api_delivery_ . "/public/v2/orders")
             ->withHeaders([
                 "X-Authentication: $paack_key"
@@ -45,10 +56,8 @@ class _FrontDelivery extends Controller
                     'city' => $data['delivery_address_city'],
                     'instructions' => $data['delivery_address_instructions']
                 ],
-//                'delivery_window' => [
-//                    'start_time' => 1565347021,
-//                    'end_time' => 1565375762
-//                ]
+                'pickup_window' => $pickup_window,
+                'delivery_window' => $delivery_window,
                 /*'packages' => [
                     'weight' => $request->weight,
                     'width' => $request->width,
@@ -92,7 +101,10 @@ class _FrontDelivery extends Controller
                     ->disableCache()
                     ->join('shipping_pickup_addresses', 'shops.id', '=', 'shipping_pickup_addresses.shop_id')
                     ->select('shops.*', 'shipping_pickup_addresses.country as pickup_country',
+                        'shipping_pickup_addresses.state as pickup_state',
                         'shipping_pickup_addresses.district as pickup_city',
+                        'shipping_pickup_addresses.address as pickup_address',
+                        'shipping_pickup_addresses.zip_code as pickup_zip_code',
                         'shipping_pickup_addresses.instructions as pickup_instructions')
                     ->first();
 
@@ -117,8 +129,8 @@ class _FrontDelivery extends Controller
                     'pickup_address_name' => $data_pickup->name,
                     'pickup_address_email' => $data_pickup->email_corporate,
                     'pickup_address_phone' => $data_pickup->phone_fixed,
-                    'pickup_address_address' => $data_pickup->address,
-                    'pickup_address_postal_code' => $data_pickup->zip_code,
+                    'pickup_address_address' => $data_pickup->pickup_address,
+                    'pickup_address_postal_code' => $data_pickup->pickup_zip_code,
                     'pickup_address_country' => $data_pickup->pickup_country,
                     'pickup_address_city' => $data_pickup->pickup_city,
                     'pickup_address_instructions' => $data_pickup->pickup_instructions,

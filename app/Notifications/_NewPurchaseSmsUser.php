@@ -34,6 +34,7 @@ class _NewPurchaseSmsUser extends Notification
 
     public function toTwilio($notifiable)
     {
+        $site = env('APP_SITE_MAIL', '');
         return (new TwilioSmsMessage())
             ->content("Hola {$notifiable->name}, 
             tienes una nueva compra en Apatxee. Ver más: https://apatxee.com/purchases/{$notifiable->uuid}");
