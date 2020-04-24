@@ -41,7 +41,7 @@ class UseInternalController extends Controller
             $data = settings::where('meta', $key);
 
             if (!$data->exists()) {
-                throw new \Exception('meta not found');
+                throw new \Exception('meta not found '.$key);
             }
 
             $data = $data->first();

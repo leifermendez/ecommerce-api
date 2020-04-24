@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,59 +17,6 @@
     <execution>
       <executable />
     </execution>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>_api_</find>
-      <find>disable(</find>
-      <find>_getSetting</find>
-      <find>$user</find>
-      <find>medium</find>
-      <find>shopping_carts</find>
-      <find>$tmp_total</find>
-      <find>total_shop</find>
-      <find>shipping_pickup_address</find>
-      <find>¡Compra realizada!</find>
-      <find>GOOGLE_API_VISION_KEY</find>
-      <find>$paypal_api</find>
-      <find>paypal_pk</find>
-      <find>$paypalKeys</find>
-      <find>_api</find>
-      <find>STRIPE_KEY</find>
-      <find>STRIPE_SECRET</find>
-      <find>_PayOrder</find>
-      <find>paack.co</find>
-      <find>env</find>
-      <find>ExternalDeliveryController</find>
-      <find>_internalSend</find>
-      <find>PAACK_KEY</find>
-      <find>_api_delivery_</find>
-      <find>retailer_order_number</find>
-      <find>$delivery_list</find>
-      <find>_send</find>
-      <find>store</find>
-      <find>pickup_address</find>
-      <find>_range_closed</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>product_attached:</replace>
-      <replace>zone_available:</replace>
-      <replace>product_attributes:</replace>
-      <replace>shipping_address:</replace>
-      <replace>shopping_cart:</replace>
-      <replace>$amount</replace>
-      <replace>:</replace>
-      <replace>provider_storage</replace>
-      <replace>product_categories:</replace>
-      <replace>user_not_confirmed</replace>
-      <replace>blogs::</replace>
-      <replace>if (count($subTmp)&gt;1)</replace>
-      <replace>$data_attributes</replace>
-      <replace>category_attributes:</replace>
-      <replace>$stripe_api</replace>
-      <replace>stripe_pk</replace>
-      <replace>$stripeKeys</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -201,24 +149,9 @@
       <path value="$PROJECT_DIR$/vendor/google/common-protos" />
       <path value="$PROJECT_DIR$/vendor/google/cloud-vision" />
       <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
-      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
-      <path value="$PROJECT_DIR$/vendor/swagger-api/swagger-ui" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
-      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
-      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
-      <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
-      <path value="$PROJECT_DIR$/vendor/darkaonline/l5-swagger" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="60" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
+  <component name="ProjectId" id="1PoqNi7xUeOB0K7wBGqBFuAJq9x" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -234,23 +167,23 @@
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -331,6 +264,13 @@
       <workItem from="1565264692748" duration="2040000" />
       <workItem from="1565292452078" duration="647000" />
       <workItem from="1565334214160" duration="12960000" />
+      <workItem from="1566550761036" duration="311000" />
+      <workItem from="1569484596780" duration="2828000" />
+      <workItem from="1570358226159" duration="629000" />
+      <workItem from="1570446624686" duration="668000" />
+      <workItem from="1570478072047" duration="299000" />
+      <workItem from="1570880906979" duration="211000" />
+      <workItem from="1571038306447" duration="1712000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -557,6 +497,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
@@ -582,26 +535,12 @@
     <MESSAGE value="Error 500 media" />
     <option name="LAST_COMMIT_MESSAGE" value="Error 500 media" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="184" y="123" key="MergeDialog" timestamp="1587737488777">
-      <screen x="0" y="30" width="1920" height="1050" />
-    </state>
-    <state x="184" y="123" key="MergeDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587737488777" />
-    <state x="672" y="272" key="MultipleFileMergeDialog" timestamp="1587737488783">
-      <screen x="0" y="30" width="1920" height="1050" />
-    </state>
-    <state x="672" y="272" key="MultipleFileMergeDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587737488783" />
-    <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1587737499732">
-      <screen x="0" y="30" width="1920" height="1050" />
-    </state>
-    <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587737499732" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/routes/api.php</url>
-          <line>29</line>
+          <line>27</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -616,12 +555,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontDelivery.php</url>
-          <line>210</line>
+          <line>198</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/routes/api.php</url>
-          <line>119</line>
+          <line>114</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -656,7 +595,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontPayment.php</url>
-          <line>157</line>
+          <line>156</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

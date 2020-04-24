@@ -31,7 +31,8 @@ class SettingTableSeeder extends Seeder
             array('meta' => 'google_vision', 'value' => '1'),
             array('meta' => 'only_user_confirmed', 'value' => '1'),
             array('meta' => 'marketplace', 'value' => '1'),
-            array('meta' => 'schedule_active', 'value' => '1')
+            array('meta' => 'schedule_active', 'value' => '1'),
+            array('meta' => 'edge_time', 'value' => '30')
         ));
     }
 }
