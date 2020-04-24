@@ -12,7 +12,9 @@ class initialize extends Command
      * @var string
      */
 
-    protected $signature = 'initialize';
+    protected $signature = 'initialize:send {--DB_HOST=} {--DB_PASS=} {--DB_USER=} {--DB_NAME=} {--STRIPE_ID=} {--STRIPE_SK=} {--STRIPE_PK=} {--STRIPE_SANDBOX_PK=} {--STRIPE_SANDBOX_SK=}';
+//    protected $signature = 'email:send {user} {--queue=}';
+
 
     /**
      * The console command description.
@@ -39,17 +41,14 @@ class initialize extends Command
     public function handle()
     {
         try {
-            $this->checkEnv();
-             $this->info('Validando la version de PHP');
+
+             $this->checkEnv();
              $this->validatePhp();
              $this->info('PHP correcto');
              $this->info('Validando Base de Datos');
 //             $this->validateBD();
              $this->info('Base de Datos correcta');
-             $this->info('Inicializando Variables de entorno');
              $this->configurationEnv();
-             $this->info('Porfavor espere mientras se configura la base de datos, esto puede tardar unos minutos');
-             $this->info('Comenzando migracion');
              Artisan::call('migrate --force');
              Artisan::call('db:seed --force');
              Artisan::call('storage:link');
@@ -58,7 +57,7 @@ class initialize extends Command
              Artisan::call('jwt:secret --force');
 
 //            shell_exec('"vendor/bin/phpunit"');
-            $this->info('Configuracion completada exitosamente');
+            $this->info('complete_success_system');
 
         } catch (Exception $e) {
             $this->error($e->getMessage());
@@ -134,24 +133,54 @@ class initialize extends Command
     }
 
     public function configurationEnv(){
+
+        $host = $this->option('DB_HOST');
+        $pass = $this->option('DB_PASS');
+        $user = $this->option('DB_USER');
+        $dbname = $this->option('DB_NAME');
+        $idstripe = $this->option('STRIPE_ID');
+        $stripesk = $this->option('STRIPE_SK');
+        $stripepk = $this->option('STRIPE_PK');
+        $stripe_sambox_pk = $this->option('STRIPE_SANDBOX_PK');
+        $stripe_sambox_sk = $this->option('STRIPE_SANDBOX_SK');
+
+        //host
+        $DB_HOST = $host;
+        $DB_PORT = 3306;
+        $DB_DATABASE = $dbname;
+        $DB_USERNAME = $user;
+        $DB_PASSWORD = $pass;
+
+        // stripe
+        $DB_STRIPE_KEY = $stripepk;
+        $DB_STRIPE_SECRET = $stripesk;
+        $DB_PLATFORM_ID = $idstripe;
+        $DB_STRIPE_KEY_SAMBOX = $stripe_sambox_pk;
+        $DB_STRIPE_SECRET_SAMBOX = $stripe_sambox_sk;
+
         $name = getenv('APP_NAME');
-        $this->info('Por favor ingresar los siguientes valores');
-        $DB_HOST = $this->ask('Ingresa el ip del host de la base de datos');
-        $DB_PORT = $this->ask('Ingresa el puerto de base de datos (3306)');
-        $DB_DATABASE = $this->ask('Ingresa el nombre de la base de datos');
-        $DB_USERNAME = $this->ask('Ingresa el usuario de la base de datos');
-        $DB_PASSWORD = $this->secret('Ingresa el clave de la base de datos');
+        $this->info('Por favor ingresar los siguientes valores TUS ARGUMENTOS');
+        $this->info('ID KEY'.$stripepk);
+        $this->info('ID SECRET'.$stripesk);
+        $this->info('ID STRIPE'.$DB_PLATFORM_ID);
+        $this->info('SAMBOX KEY'.$DB_STRIPE_KEY_SAMBOX);
+        $this->info('SAMBOX  SECRET'.$DB_STRIPE_SECRET_SAMBOX);
+        $this->info('SAMBOX  SECRET'.$DB_STRIPE_SECRET_SAMBOX);
+        $this->info('dbname'.$dbname);
+        $this->info('user'.$user);
 
-
-
-        $DB_STRIPE_KEY = $this->ask('Ingresa el STRIPE key PK');
-        $DB_STRIPE_SECRET = $this->ask('Ingresa tu keysecret de STRIPE SK');
-        $DB_PLATFORM_ID = $this->ask('Ingresa STRIPE id ');
-
-        $DB_STRIPE_KEY_SAMBOX = $this->ask('Ingresa el STRIPE key SAMBOX PK');
-        $DB_STRIPE_SECRET_SAMBOX = $this->ask('Ingresa tu keySecret de STRIPE SAMBOX SK');
-
-
+//        $DB_HOST = $this->ask('Ingresa el ip del host de la base de datos');
+//        $DB_PORT = $this->ask('Ingresa el puerto de base de datos (3306)');
+//        $DB_DATABASE = $this->ask('Ingresa el nombre de la base de datos');
+//        $DB_USERNAME = $this->ask('Ingresa el usuario de la base de datos');
+//        $DB_PASSWORD = $this->secret('Ingresa el clave de la base de datos');
+            // stripe
+//        $DB_STRIPE_KEY = $this->ask('Ingresa el STRIPE key PK');
+//        $DB_STRIPE_SECRET = $this->ask('Ingresa tu keysecret de STRIPE SK');
+//        $DB_PLATFORM_ID = $this->ask('Ingresa STRIPE id ');
+//
+//        $DB_STRIPE_KEY_SAMBOX = $this->ask('Ingresa el STRIPE key SAMBOX PK');
+//        $DB_STRIPE_SECRET_SAMBOX = $this->ask('Ingresa tu keySecret de STRIPE SAMBOX SK');
 
         putenv("APP_KEY=");
         putenv("DB_HOST=$DB_HOST");
