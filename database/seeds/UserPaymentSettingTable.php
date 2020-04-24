@@ -1,5 +1,6 @@
 <?php
 
+use App\user_payment;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,19 +14,7 @@ class UserPaymentSettingTable extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for ($i = 1; $i < 3; $i++) {
-            DB::table('user_payments')->insert([
-                'user_id' => $i,
-                'payment_option' => 'stripe',
-                'payment_email' => 'pagos@compnay.com',
-                'iban' => $faker->ean8,
-                'observation' => 'Alguna observacion',
-                'account_name' => $faker->name,
-                'account_lastname' => $faker->lastName,
-                'primary' => 1
-            ]);
-        }
+        DB::table('user_payments')->truncate();
+        factory(user_payment::class, 3)->create();
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 $path = str_replace('config', '', dirname(__FILE__));
-define('path_config', $path);
+// define('path_config', $path);
+if (!defined('path_config')) define('path_config', $path);
 
 return [
 

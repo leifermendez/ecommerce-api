@@ -3,6 +3,7 @@
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\purchase_detail;
 
 class PurchaseDetailTableSeeder extends Seeder
 {
@@ -13,17 +14,7 @@ class PurchaseDetailTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('purchase_details')->insert([
-                'purchase_uuid' => $faker->uuid,
-                'product_id' => ($i<3) ? ($i+1) : 1,
-                'product_qty' => $faker->numberBetween(1,5),
-                'product_label' => $faker->company,
-                'product_amount' => $faker->randomFloat(2,2,20),
-                'shop_id' => ($i<3) ? ($i+1) : 1
-            ]);
-        }
+        DB::table('purchase_details')->truncate();
+        factory(purchase_detail::class, 10)->create();
     }
 }

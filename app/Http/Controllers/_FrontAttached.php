@@ -143,16 +143,23 @@ class _FrontAttached extends Controller
             } else {
                 $file_validate = array('image' => $file);
                 $rules = array(
-                    'attached' => 'mimes:jpeg,bmp,png|max:20000'
+                    'attached' => 'mimes:jpeg,bmp,png|max:20000|dimensions:max_width=4000,max_height=4000'
                 );
             }
 
-            $validator = Validator::make($request->all(), $rules);
-//
+            $messages = [
+                'mimes'      => 'Tipo de archivo no permitido.',
+                'dimensions' => 'Las dimenciones de la imagen no deben ser mayor a 4000 x 4000.',
+                'max'        => 'La imagen no puede ser mayor a 20000.',
+            ];
+        
+            $validator = Validator::make($request->all(), $rules, $messages);
+            
             if ($validator->fails()) {
+                $errors = $validator->errors();
                 $status = array(
                     'status' => 'fail',
-                    'msg' => 'Tipo de archivo no permitido'
+                    'msg' => $errors->all()
                 );
                 return response()->json($status, 500);
             }
@@ -185,7 +192,7 @@ class _FrontAttached extends Controller
                 $google_ai_ = (new UseInternalController)->_getSetting('google_vision');
                 if($google_ai_ == 1){
                     $get_label = $this->_getLabel($file);
-                    if(count($get_label)){
+                    if(is_array($get_label) && count($get_label)){
                         $labels = implode(",", $get_label);
                     }
                 }
@@ -193,16 +200,19 @@ class _FrontAttached extends Controller
                 $sizes = array(
                     'small' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(200, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'medium' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),
                     'large' => Image::make($file)
                         ->encode($format, 100)
+                        ->orientate()
                         ->resize(1600, null, function ($constraint) {
                             $constraint->aspectRatio();
                         })->stream()->__toString(),

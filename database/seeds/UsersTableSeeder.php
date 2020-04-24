@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -14,19 +15,43 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('users')->insert([
-                'name' => $faker->name,
-                'email' => ($i === 0) ? 'admin@admin.com' : $faker->email,
-                'password' => bcrypt('secret'),
+        DB::table( 'users' )->truncate();
+        $users =[
+            [
+                'name' => 'Admin Test',
+                'email' => 'admin@mail.com',
+                'password' => bcrypt('123456'),
                 'phone' => $faker->phoneNumber,
-                'confirmed' => ($i<3) ? 0 : 1,
+                'confirmed' => 1,
                 'avatar' => 'http://lorempixel.com/640/480/',
                 'header' => 'http://lorempixel.com/1200/680/',
-                'role' => ($i === 0) ? 'admin' :'user',
+                'role' => 'admin',
                 'referer_code' => $faker->swiftBicNumber,
-            ]);
-        }
+            ],
+            [
+                'name' => 'Tienda Test',
+                'email' => 'shop@mail.com',
+                'password' => bcrypt('123456'),
+                'phone' => $faker->phoneNumber,
+                'confirmed' => 1,
+                'avatar' => 'http://lorempixel.com/640/480/',
+                'header' => 'http://lorempixel.com/1200/680/',
+                'role' => 'shop',
+                'referer_code' => $faker->swiftBicNumber,
+            ],
+            [
+                'name' => 'Cliente Test',
+                'email' => 'cliente@mail.com',
+                'password' => bcrypt('123456'),
+                'phone' => $faker->phoneNumber,
+                'confirmed' => 1,
+                'avatar' => 'http://lorempixel.com/640/480/',
+                'header' => 'http://lorempixel.com/1200/680/',
+                'role' => 'user',
+                'referer_code' => $faker->swiftBicNumber,
+            ],
+        ];
+        
+        DB::table('users')->insert($users);
     }
 }

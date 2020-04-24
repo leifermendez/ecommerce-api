@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\attributes;
 
 class AttributesTableSeeder extends Seeder
 {
@@ -11,14 +12,7 @@ class AttributesTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('attributes')->insert([
-                'name' => $faker->sentence(2),
-                'element_type' =>  ($i<5) ? 'number' : 'select',
-                'required' => ($i<6) ? 1: 0
-            ]);
-        }
+        DB::table('attributes')->truncate();
+        factory(attributes::class, 10)->create();
     }
 }

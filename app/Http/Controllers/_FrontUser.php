@@ -151,6 +151,27 @@ class _FrontUser extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            
+            $user = User::find($id);
+            $user->delete();
+            $response = [
+                'status' => 'success',
+                'msg' => 'Eliminado',
+                'data' => $user,
+                'code' => 0
+            ];
+            return response()->json($response);
+
+        } catch (Exception $e) {
+            $response = [
+                'status' => 'fail',
+                'msg' => $e->getMessage(),
+                'code' => 1
+            ];
+
+            return response()->json($response, 500);
+        }
+        
     }
 }

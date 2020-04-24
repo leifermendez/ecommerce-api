@@ -24,6 +24,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
      */
 
     Route::resource('/auth', '_FrontAuth');
+    Route::get('/auth/reset_password/{email}', '_FrontAuth@password');
+    Route::post('/auth/reset_password', '_FrontAuth@resetPassword');
 
     Route::group(['prefix' => 'rest'], function () {
 
@@ -155,7 +157,8 @@ Route::group(['prefix' => '1.0', 'middleware' => ['FrontWeb','CookiesSuggestions
         Route::resource('/user', '_FrontUser')
             ->only([
                 'show',
-                'update'
+                'update',
+                'destroy'
             ]);
 
         Route::resource('/validatePhone', '_FrontValidatePhone')
@@ -236,6 +239,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['PanelWeb']], function () {
     Route::resource('validateCif', 'ExternalCifController');
     Route::resource('validatePhone', 'ExternalSmsController');
     Route::resource('delivery', 'ExternalDeliveryController');
+    Route::post('/products/csv', 'ProductVariationController@import');
     /**
      * Esta ruta debe pensarse creo que lo mejor es hacer un compoenent stripe por el lado del front
      * Success: http://localhost?scope=read_write&code={AUTHORIZATION_CODE}
@@ -250,6 +254,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', 'AuthController@index');
         Route::post('login', 'AuthController@store');
         Route::post('register', 'AuthController@register');
+        Route::get('reset_password/{email}', 'AuthController@password');
+        Route::post('reset_password', 'AuthController@resetPassword');
     });
 });
 
