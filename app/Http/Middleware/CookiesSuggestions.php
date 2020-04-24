@@ -40,27 +40,31 @@ class CookiesSuggestions
 
     public function handle($request, Closure $next)
     {
-        $_cookies = ($request->header('COOKIES-REF')) ? $request->header('COOKIES-REF') : false;
-        $src = ($request->src) ? $request->src : null;
-        $ip = geoip()->getClientIP();
-        $g = geoip()->getLocation($ip);
-        $g = $g->toArray();
-        $user = $this->_getUser();
+        try {
+            $_cookies = ($request->header('COOKIES-REF')) ? $request->header('COOKIES-REF') : false;
+            $src = ($request->src) ? $request->src : null;
+            $ip = geoip()->getClientIP();
+            $g = geoip()->getLocation($ip);
+            $g = $g->toArray();
+            $user = $this->_getUser();
 
-        if ($_cookies) {
-            $decrypted = Crypt::decryptString($_cookies);
-            if (!cookies_red::where('labels', $decrypted)->where('ip', $ip)->exists()) {
-                $values = [
-                    'users_id' => ($user) ? $user->id : null,
-                    'labels' => $decrypted,
-                    'src' => $src,
-                    'ip' => $ip,
-                    'browser' => '',
-                    'country' => $g['iso_code']
-                ];
-                cookies_red::insert($values);
-            }
-        };
-        return $next($request);
+            if ($_cookies) {
+                $decrypted = Crypt::decryptString($_cookies);
+                if (!cookies_red::where('labels', $decrypted)->where('ip', $ip)->exists()) {
+                    $values = [
+                        'users_id' => ($user) ? $user->id : null,
+                        'labels' => $decrypted,
+                        'src' => $src,
+                        'ip' => $ip,
+                        'browser' => '',
+                        'country' => $g['iso_code']
+                    ];
+                    cookies_red::insert($values);
+                }
+            };
+            return $next($request);
+        } catch (\Exception $e) {
+            return $next($request);
+        }
     }
 }
