@@ -19,9 +19,23 @@ class InstallPackage
     protected $ALL_CHECK = array();
     protected $NOTICE = array();
 
+    public function checkOS()
+    {
+        $isWindows = false;
+        if (strcasecmp(substr(PHP_OS, 0, 3), 'WIN') == 0) {
+            $isWindows = true;
+        }
+        return $isWindows;
+    }
+
     public function getConnect()
     {
         return $this->DATABASE;
+    }
+
+    public function checkIfInstalled()
+    {
+        return file_exists($this->PATH . '/.env');
     }
 
     public function __construct()
@@ -80,6 +94,7 @@ class InstallPackage
         ];
 
         $this->runCheckSystem();
+
     }
 
     public function runCheckSystem()
@@ -131,7 +146,11 @@ class InstallPackage
             isset($_POST['sk_sambox']) ? $_POST['sk_sambox'] : ''
         ];
 
-        return implode('', $this->COMMAND);
+        $raw = implode('', $this->COMMAND);
+        if (!$this->checkOS()) {
+            $raw = str_replace('\\', '/', $raw);
+        }
+        return $raw;
     }
 
 }
@@ -156,336 +175,315 @@ class HandleDataBase extends InstallPackage
 
 }
 
+class Templates extends InstallPackage
+{
+    public function Main($extra = null)
+    {
+        $check = (count((array)$_POST) === 8) ? 2 : 1;
+        $check = (parent::checkIfInstalled()) ? 3 : $check;
 
+        switch ($check) {
+            case 1:
+                ?>
+                <div class="container">
+                    <div class="py-5 text-center">
+                        <img class="d-block mx-auto mb-4"
+                             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+                             height="72">
+                        <h2>INSTALACIÓN</h2>
+                        <p class="lead" style="font-weight: 400">Antes de continuar debemos verificar que tu sistema
+                            cumple con
+                            los
+                            requerimientos básicos de
+                            instalación</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 order-md-2 mb-4">
+                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">Requerimientos</span>
+                                <span
+                                    class="badge badge-secondary badge-pill"><?php echo count(parent::list()) ?></span>
+                            </h4>
+                            <ul class="list-group mb-3">
+                                <?php foreach (parent::list() as $key => $module) { ?>
+                                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                        <div>
+                                            <h6 class="my-0"><?php echo $key ?></h6>
+                                            <small class="text-muted"><?php echo $module['label'] ?></small>
+
+                                            <?php if ($module['pass']) {
+                                                ?>
+                                                <div class="mt-1">
+                                                    <span class="badge badge-success">Check</span>
+                                                </div>
+                                                <?php
+                                            } ?>
+
+
+                                            <?php if (!$module['pass']) {
+                                                ?>
+                                                <div class="mt-1">
+                                                    <span class="badge badge-danger">No check</span>
+                                                </div>
+                                                <?php
+                                            } ?>
+                                        </div>
+                                        <span class="text-muted"> </span>
+                                    </li>
+                                <?php } ?>
+
+                            </ul>
+
+                        </div>
+                        <div class="col-md-8 order-md-1">
+                            <h4 class="mb-3">Datos de Conexión</h4>
+                            <form name="formulario" method="POST" class="needs-validation" novalidate="">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="host">Database host <span
+                                                class="text-muted">127.0.0.1</span></label>
+                                        <input name="host"
+                                               type="text" class="form-control"
+                                               placeholder="" value="127.0.0.1" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="database">Database name</label>
+                                        <input name="dbname" type="text" class="form-control"
+                                               id="lastName" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="username">Username <span class="text-muted">root</span></label>
+                                        <input name="username" type="text" class="form-control"
+                                               placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label name="password" for="password">Password <span class="text-muted">(Vacio si no tienes clave)</span></label>
+                                        <input type="password" class="form-control"
+                                               placeholder="">
+                                    </div>
+                                </div>
+
+                                <hr class="mb-4">
+                                <h4 class="mb-3">Datos de pago (STRIPE)</h4>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="host">Id stripe <span class="text-muted"></span></label>
+                                        <input name="idstripe" type="text" class="form-control"
+                                               placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="database">Clave secreta <span
+                                                class="text-muted">SK_xxxxxxx</span></label>
+                                        <input name="sk" type="text" class="form-control"
+                                               id="lastName" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="database">Clave publica <span
+                                                class="text-muted">PK_xxxxxxx</span></label>
+                                        <input name="pk" type="text" class="form-control"
+                                               id="lastName" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <h4 class="mb-3">Datos de pago (STRIPE) Modo desarrollador</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="username">Clave secreta <span
+                                                class="text-muted">SAMBOX</span></label>
+                                        <input name="sk_sambox" type="text"
+                                               class="form-control" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="username">Clave publica <span
+                                                class="text-muted">SAMBOX</span></label>
+                                        <input name="pk_sambox" type="text"
+                                               class="form-control" placeholder="" value="" required="">
+                                        <div class="invalid-feedback">
+                                            Campos requeridos
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mb-4">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Continiar con la
+                                    instalación
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <footer class="my-5 pt-5 text-muted text-center text-small">
+                        <p class="mb-1">© <?php echo date("Y") ?> LeangaSoftware</p>
+                    </footer>
+                </div>
+                <?php
+                break;
+            case 2:
+                $exit_string = (!parent::checkIfInstalled()) ? shell_exec(parent::command()) : NULL;
+                ?>
+                <div class="container">
+                    <div class="py-5 text-center">
+                        <img class="d-block mx-auto mb-4"
+                             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+                             height="72">
+                        <h2>INSTALACIÓN</h2>
+                        <p class="lead" style="font-weight: 400">Antes de continuar debemos verificar que tu sistema
+                            cumple con
+                            los
+                            requerimientos básicos de
+                            instalación</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 order-md-1">
+                            <div>
+                                <code><?php echo parent::command() ?></code>
+                            </div>
+                            <div class="mt-4">
+                                <code><?php echo $exit_string ?></code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="my-5 pt-5 text-muted text-center text-small">
+                        <p class="mb-1">© <?php echo date("Y") ?> LeangaSoftware</p>
+                    </footer>
+                </div>
+                <?php
+                $_POST = array();
+                break;
+            case 3:
+                $_POST = array();
+                ?>
+                <div class="container">
+                    <div class="py-5 text-center">
+                        <img class="d-block mx-auto mb-4"
+                             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+                             height="72">
+                        <h2>INSTALACIÓN</h2>
+                        <p class="lead" style="font-weight: 400">Ups!</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 order-md-1">
+                            <?php if (!$extra) { ?>
+                                <div>
+                                    <div class="alert alert-danger">
+                                        Actualmente ya tienes una instalación corriendo, si quieres reinstalar
+                                        nuevamente,
+                                        deberás eliminar el archivo .env y borrar tu base de datos
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                break;
+        }
+    }
+
+    public function Header()
+    {
+        ?>
+        <html>
+        <head>
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+                  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+                  crossorigin="anonymous">
+        </head>
+        <body class="bg-light">
+        <?php
+    }
+
+    public function Footer()
+    {
+        ?>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+        <script src="../../assets/js/vendor/popper.min.js"></script>
+        <script src="../../dist/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/vendor/holder.min.js"></script>
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict';
+
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+        </body>
+        </html>
+        <?php
+    }
+}
+
+
+$template = new Templates();
 $class = new InstallPackage();
 
 /**
- * Execute commando
+ * END OF CLASSES
  */
-$exit_string = shell_exec($class->command());
 
 
 /**
  * Get output command
  */
 
-$install = strpos($exit_string, 'complete_success_system');
+//$install = strpos($exit_string, 'complete_success_system');
 
-?>
-<html>
-<head>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body class="bg-light">
-<?php
-if ($install) {
-    ?>
-    <div class="container">
-        <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
-                 alt="" width="72" height="72">
-            <h2>Instalación completada</h2>
-            <p class="lead">Tu tienda ya tiene su api instalada correctamente.</p>
-        </div>
-    </div>
-    <?php
-}
-?>
-<?php
-if (!$install) {
-    ?>
-    <div class="container">
-        <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4"
-                 src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
-                 height="72">
-            <h2>INSTALACIÓN</h2>
-            <p class="lead">Antes de continuar debemos verificar que tu sistema cumple con los requerimientos básicos de
-                instalación</p>
-        </div>
+/**
+ * Render HTML
+ */
+$template->Header();
 
-        <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Requerimientos</span>
-                    <span class="badge badge-secondary badge-pill"><?php echo count($class->list()) ?></span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <?php foreach ($class->list() as $key => $module) { ?>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0"><?php echo $key ?></h6>
-                                <small class="text-muted"><?php echo $module['label'] ?></small>
+$template->Main();
 
-                                <?php if ($module['pass']) {
-                                    ?>
-                                    <div class="mt-1">
-                                        <span class="badge badge-success">Check</span>
-                                    </div>
-                                    <?php
-                                } ?>
+$template->Footer();
 
-
-                                <?php if (!$module['pass']) {
-                                    ?>
-                                    <div class="mt-1">
-                                        <span class="badge badge-danger">No check</span>
-                                    </div>
-                                    <?php
-                                } ?>
-                            </div>
-                            <span class="text-muted"> </span>
-                        </li>
-                    <?php } ?>
-
-                </ul>
-
-            </div>
-            <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Datos de Conexión</h4>
-                <form name="formulario" method="POST" class="needs-validation" novalidate="">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="host">Database host <span class="text-muted">127.0.0.1</span></label>
-                            <input name="host"
-                                   type="text" class="form-control"
-                                   placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="database">Database name</label>
-                            <input name="dbname" type="text" class="form-control"
-                                   id="lastName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="username">Username <span class="text-muted">root</span></label>
-                            <input name="username" type="text" class="form-control"
-                                   placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label name="password" for="password">Password <span class="text-muted">(Vacio si no tienes clave)</span></label>
-                            <input type="password" class="form-control"
-                                   placeholder="">
-                        </div>
-                    </div>
-
-                    <hr class="mb-4">
-                    <h4 class="mb-3">Datos de pago (STRIPE)</h4>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="host">Id stripe <span class="text-muted"></span></label>
-                            <input name="idstripe" type="text" class="form-control"
-                                   placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="database">Clave secreta <span class="text-muted">SK_xxxxxxx</span></label>
-                            <input name="sk" type="text" class="form-control"
-                                   id="lastName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label for="database">Clave publica <span class="text-muted">PK_xxxxxxx</span></label>
-                            <input name="pk" type="text" class="form-control"
-                                   id="lastName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <h4 class="mb-3">Datos de pago (STRIPE) Modo desarrollador</h4>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="username">Clave secreta <span class="text-muted">SAMBOX</span></label>
-                            <input name="sk_sambox" type="text"
-                                   class="form-control" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="username">Clave publica <span class="text-muted">SAMBOX</span></label>
-                            <input name="pk_sambox" type="text"
-                                   class="form-control" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Campos requeridos
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continiar con la instalación
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">© <?php echo date("Y") ?> LeangaSoftware</p>
-        </footer>
-    </div>
-    <?php
-}
+/**
+ * End Render HTML
+ */
 ?>
 
-<?php //?>
-<!--<div class="container">-->
-<!--    <div class="py-5 text-center">-->
-<!--        <img class="d-block mx-auto mb-4"-->
-<!--             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"-->
-<!--             height="72">-->
-<!--        <h2>INSTALACIÓN</h2>-->
-<!--        <p class="lead">Antes de continuar debemos verificar que tu sistema cumple con los requerimientos básicos de-->
-<!--            instalación</p>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="row">-->
-<!--        <div class="col-md-12 order-md-1">-->
-<!--            <h4 class="mb-3">Datos de Conexión</h4>-->
-<!--            <form name="formulario" method="POST" class="needs-validation" novalidate="">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label for="host">Database host <span class="text-muted">127.0.0.1</span></label>-->
-<!--                        <input name="host"-->
-<!--                               type="text" class="form-control"-->
-<!--                               placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label for="database">Database name</label>-->
-<!--                        <input name="dbname" type="text" class="form-control"-->
-<!--                               id="lastName" placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label for="username">Username <span class="text-muted">root</span></label>-->
-<!--                        <input name="username" type="text" class="form-control"-->
-<!--                               placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label name="password" for="password">Password <span class="text-muted">(Vacio si no tienes clave)</span></label>-->
-<!--                        <input type="password" class="form-control"-->
-<!--                               placeholder="">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <hr class="mb-4">-->
-<!--                <h4 class="mb-3">Datos de pago (STRIPE)</h4>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12 mb-3">-->
-<!--                        <label for="host">Id stripe <span class="text-muted"></span></label>-->
-<!--                        <input name="idstripe" type="text" class="form-control"-->
-<!--                               placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12 mb-3">-->
-<!--                        <label for="database">Clave secreta <span class="text-muted">SK_xxxxxxx</span></label>-->
-<!--                        <input name="sk" type="text" class="form-control"-->
-<!--                               id="lastName" placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-12 mb-3">-->
-<!--                        <label for="database">Clave publica <span class="text-muted">PK_xxxxxxx</span></label>-->
-<!--                        <input name="pk" type="text" class="form-control"-->
-<!--                               id="lastName" placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <hr class="mb-4">-->
-<!--                <h4 class="mb-3">Datos de pago (STRIPE) Modo desarrollador</h4>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label for="username">Clave secreta <span class="text-muted">SAMBOX</span></label>-->
-<!--                        <input name="sk_sambox" type="text"-->
-<!--                               class="form-control" placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-md-6 mb-3">-->
-<!--                        <label for="username">Clave publica <span class="text-muted">SAMBOX</span></label>-->
-<!--                        <input name="pk_sambox" type="text"-->
-<!--                               class="form-control" placeholder="" value="" required="">-->
-<!--                        <div class="invalid-feedback">-->
-<!--                            Campos requeridos-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <hr class="mb-4">-->
-<!--                <button class="btn btn-primary btn-lg btn-block" type="submit">Continiar con la instalación-->
-<!--                </button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <footer class="my-5 pt-5 text-muted text-center text-small">-->
-<!--        <p class="mb-1">© --><?php //echo date("Y") ?><!-- LeangaSoftware</p>-->
-<!--    </footer>-->
-<!--</div>-->
-<?php //?>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<script src="../../assets/js/vendor/holder.min.js"></script>
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
 
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
-</body>
-</html>
