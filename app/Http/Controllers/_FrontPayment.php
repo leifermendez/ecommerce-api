@@ -32,12 +32,13 @@ class _FrontPayment extends Controller
             ->first();
 
         $this->stripe_sk = ($stripeKeys->status === 'live' ? $stripeKeys->app_secret : $stripeKeys->app_secret_sandbox);
-        $this->stripe_ap = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
+        $this->stripe_pk = ($stripeKeys->status === 'live' ? $stripeKeys->app_key : $stripeKeys->app_key_sandbox);
         $this->stripe_api = ($stripeKeys->status === 'live' ? $stripeKeys->live_end_point : $stripeKeys->sandbox_end_point);
     }
 
 
-    public function _transfer($uuid = null, $amount = 0, $destination = null, $description = null)
+    public function _transfer($uuid = null, $amount = 0, $destination = null, $description = null,
+                              $source_transaction = null)
     {
 
         $currency = (new UseInternalController)->_getSetting('currency');
@@ -51,7 +52,8 @@ class _FrontPayment extends Controller
                 'currency' => $currency,
                 'destination' => $destination,
                 'transfer_group' => $uuid,
-                'description' => $description
+                'description' => $description,
+                'source_transaction' => $source_transaction
             ))
             ->returnResponseObject()
             ->post();
@@ -60,8 +62,7 @@ class _FrontPayment extends Controller
             throw new \Exception($response->content);
         }
 
-        $data = json_decode($response->content);
-        return $data;
+        return json_decode($response->content);
     }
 
     public function _charge($uuid = null, $amount = 0, $source = null)
@@ -85,8 +86,7 @@ class _FrontPayment extends Controller
             throw new \Exception($response->content);
         }
 
-        $data = json_decode($response->content);
-        return $data;
+        return json_decode($response->content);
 
     }
 
@@ -114,7 +114,7 @@ class _FrontPayment extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -124,6 +124,7 @@ class _FrontPayment extends Controller
             $discount_to_supplier = (new UseInternalController)->_getSetting('discount_to_supplier');
             $marketplace = (new UseInternalController)->_getSetting('marketplace');
             $auto_sms = (new UseInternalController)->_getSetting('auto_sms');
+
             $request->validate([
                 'source' => 'required',
                 'purchase_uuid' => 'required'
@@ -136,7 +137,12 @@ class _FrontPayment extends Controller
             }
 
             $totalPurchase = (new UseInternalController)->_totalPurchase($request->purchase_uuid);
+
+            /**
+             * Realiza el cobro
+             */
             $charge = $this->_charge($request->purchase_uuid, $totalPurchase['total'], $request->source);
+
             $detail_purchase = purchase_detail::where('purchase_uuid', $request->purchase_uuid)->get();
 
             foreach ($detail_purchase as $purchase) {
@@ -155,9 +161,13 @@ class _FrontPayment extends Controller
                     $amount_supplier = ($discount_to_supplier == 1) ?
                         $data_feed['amount_without_feed'] : $data_feed['amount_with_feed'];
 
-                    if($marketplace == 1){
-                            $r = $this->_transfer($request->purchase_uuid,
-                            $amount_supplier, $user_payment->iban, $description);
+                    if ($marketplace == 1) {
+                        /**
+                         * Enviar dinero a tienda
+                         */
+                        $r = $this->_transfer($request->purchase_uuid,
+                            $amount_supplier, $user_payment->iban, $description,
+                            $charge->id);
                         if ($r) {
                             purchase_order::where('uuid', $request->purchase_uuid)
                                 ->where('user_id', $user->id)
@@ -167,12 +177,12 @@ class _FrontPayment extends Controller
                                 $user_payment->notify(new _NewPurchaseSmsShop($user_payment));
                             }
                         }
-                    }else{
+                    } else {
                         purchase_order::where('uuid', $request->purchase_uuid)
-                        ->where('user_id', $user->id)
-                        ->update(['status' => 'success']);
+                            ->where('user_id', $user->id)
+                            ->update(['status' => 'success']);
                     }
-  
+
                 }
             };
 
@@ -183,7 +193,7 @@ class _FrontPayment extends Controller
             if ($auto_sms == 1) {
                 $user->notify(new _NewPurchaseSmsUser($user));
             }
-            $user->setAttribute('shop_email',$user_payment->shop_email);
+            $user->setAttribute('shop_email', $user_payment->shop_email);
             $user->notify(new _PayOrder($user));
 
             DB::commit();
