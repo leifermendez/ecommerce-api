@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/initialize.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/initialize.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/install.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/install.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/BannersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/BannersTableSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +290,9 @@
       <workItem from="1587738136025" duration="8039000" />
       <workItem from="1587803682940" duration="23387000" />
       <workItem from="1587840448536" duration="100000" />
-      <workItem from="1587840661414" duration="159000" />
+      <workItem from="1587840661414" duration="1172000" />
+      <workItem from="1587910635253" duration="1545000" />
+      <workItem from="1587913604519" duration="1478000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
