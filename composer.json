@@ -15,6 +15,7 @@
         "barryvdh/laravel-dompdf": "^0.8.5",
         "darkaonline/l5-swagger": "5.8.*",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^1.0",
         "fzaninotto/faker": "^1.8",
         "genealabs/laravel-model-caching": "*",
         "geoip2/geoip2": "~2.1",
