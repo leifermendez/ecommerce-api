@@ -84,6 +84,7 @@
         "post-install-cmd": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "@php artisan storage:link",
             "@php artisan config:clear",
             "chmod -R 777 .env",
             "chmod -R 775 bootstrap\/cache",

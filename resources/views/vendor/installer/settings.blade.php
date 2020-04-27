@@ -13,7 +13,7 @@
     <div class="tabs tabs-full">
 
         <input id="tab1" type="radio" name="tabs" class="tab-input" checked/>
-        <label for="tab1" class="tab-label">
+        <label for="tab1" class="tab-label" style="display: none">
             <i class="fa fa-cog fa-2x fa-fw" aria-hidden="true"></i>
             <br/>
             {{ trans('installer_messages.settings.tab') }}
@@ -21,6 +21,19 @@
 
         <form method="post" action="{{ route('LaravelInstaller::settingsSaveWizard') }}" class="tabs-wrap">
             <div class="tab" id="tab1content">
+
+                <div class="alert alert-info">
+                    {{$engine['engine']}}: {{$engine['version']}} <br>
+                    @if($engine['pass'])
+                        <div style="color:green">
+                            <b>{{ trans('installer_messages.settings.form.app_database_pass') }}</b>
+                        </div>
+                    @else
+                        <div style="color:red">
+                            <b>{{ trans('installer_messages.settings.form.app_database_fail') }}</b>
+                        </div>
+                    @endif
+                </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group {{ $errors->has('app_limit_shopping') ? ' has-error ' : '' }}">

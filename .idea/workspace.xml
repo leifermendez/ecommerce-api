@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontValidatePhone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontValidatePhone.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/installer_messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/installer_messages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +300,7 @@
       <workItem from="1587913604519" duration="1591000" />
       <workItem from="1587916400916" duration="7240000" />
       <workItem from="1587973925836" duration="1968000" />
-      <workItem from="1587975993036" duration="9558000" />
+      <workItem from="1587975993036" duration="12966000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>

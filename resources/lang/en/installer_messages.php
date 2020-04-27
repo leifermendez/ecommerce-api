@@ -253,7 +253,9 @@ return [
             'app_schedule' => 'Schedule',
             'app_schedule_label' => '1',
             'app_edge_time' => 'Edge time',
-            'app_edge_time_label' => '30'
+            'app_edge_time_label' => '30',
+            'app_database_pass' => 'DB success',
+            'app_database_fail' => 'DB version not support (MariaDB >= 10.2) (MySQL >= 5.7.8)',
         ]
     ],
     /*
