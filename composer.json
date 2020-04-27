@@ -26,7 +26,7 @@
         "laravel-notification-channels/twilio": "^2.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "leifermendez/laravel-installer": "v1.1",
+        "leifermendez/laravel-installer": "^4.0",
         "maatwebsite/excel": "^3.1",
         "nesbot/carbon": "^2.17",
         "nunomaduro/collision": "^3.0",

@@ -68,6 +68,7 @@
                             <i class="step__icon fa fa-home" aria-hidden="true"></i>
                         @endif
                     </li>
+
                     <li class="step__divider"></li>
                 </ul>
                 <div class="main">

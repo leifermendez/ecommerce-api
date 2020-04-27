@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/BannersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/BannersTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/installer.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/installer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/installer/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/installer/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/environment-wizard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/environment-wizard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/finished.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/finished.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,16 +181,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\vendor\leifermendez\laravel-installer\src\Controllers" />
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
     </key>
   </component>
   <component name="RunManager">
@@ -292,7 +303,10 @@
       <workItem from="1587840448536" duration="100000" />
       <workItem from="1587840661414" duration="1172000" />
       <workItem from="1587910635253" duration="1545000" />
-      <workItem from="1587913604519" duration="1478000" />
+      <workItem from="1587913604519" duration="1591000" />
+      <workItem from="1587916400916" duration="7240000" />
+      <workItem from="1587973925836" duration="1968000" />
+      <workItem from="1587975993036" duration="566000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -566,17 +580,29 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587830937553" />
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587739292731">
-      <screen x="0" y="30" width="1920" height="1050" />
-    </state>
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587739292731" />
-    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1587837974061">
-      <screen x="0" y="30" width="1920" height="1050" />
-    </state>
-    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1587837974061" />
-    <state x="411" y="149" width="672" height="444" key="search.everywhere.popup" timestamp="1587765732000">
+    <state x="460" y="215" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587939785387">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587919431277" />
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587739292731" />
+    <state x="460" y="215" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.31.1280.689@0.31.1280.689" timestamp="1587939785387" />
+    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1587916933931">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587916933931" />
+    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1587920183084">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587920183084" />
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1587837974061" />
+    <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1587976003199">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
+    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup" timestamp="1587919059628">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587919059628" />
     <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1587741162972" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
