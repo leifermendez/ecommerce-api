@@ -33,13 +33,6 @@ class _FrontValidatePhone extends Controller
 
             $data->notify(new _UserVerified($data));
 
-            $response = array(
-                'status' => 'success',
-                'msg' => 'Validado',
-                'data' => $data,
-                'code' => 0
-            );
-            return response()->json($response);
         } else {
             throw new \Exception('Codigo no valido');
         }
@@ -185,7 +178,17 @@ class _FrontValidatePhone extends Controller
             } else {
                 User::where('id', $user->id)
                     ->update(['confirmed' => 1]);
+
+                $data = User::find($user->id);
             }
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Validado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
 
 
         } catch (\Exception $e) {
