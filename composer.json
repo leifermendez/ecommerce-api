@@ -85,6 +85,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "@php artisan config:clear",
+            "chmod -R 775 .env",
             "chmod -R 775 bootstrap\/cache",
             "chmod -R 775 storage",
             "chmod -R 777 public/"
