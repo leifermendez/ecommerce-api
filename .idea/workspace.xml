@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/installer.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/installer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/environment-wizard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/environment-wizard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/finished.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/finished.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/installer/settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +296,7 @@
       <workItem from="1587913604519" duration="1591000" />
       <workItem from="1587916400916" duration="7240000" />
       <workItem from="1587973925836" duration="1968000" />
-      <workItem from="1587975993036" duration="566000" />
+      <workItem from="1587975993036" duration="1072000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -572,9 +562,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Error 500 media" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587836980406">
+    <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587977062800">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
+    <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587977062800" />
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1587836980406" />
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587830937553">
       <screen x="0" y="30" width="1920" height="1050" />
