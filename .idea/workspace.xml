@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/cors.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +89,6 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-cors" />
       <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
@@ -158,6 +163,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer" />
+      <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PoqNi7xUeOB0K7wBGqBFuAJq9x" />
@@ -295,7 +301,7 @@
       <workItem from="1587913604519" duration="1591000" />
       <workItem from="1587916400916" duration="7240000" />
       <workItem from="1587973925836" duration="1968000" />
-      <workItem from="1587975993036" duration="4120000" />
+      <workItem from="1587975993036" duration="4892000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>

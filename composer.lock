@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b4c686eabe5b9783c9a67ca640755b1",
+    "content-hash": "218d412ee8103628b40bf5dc6146e86a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -57,68 +57,6 @@
                 "stack"
             ],
             "time": "2019-12-24T22:41:47+00:00"
-        },
-        {
-            "name": "barryvdh/laravel-cors",
-            "version": "v0.11.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fruitcake/laravel-cors.git",
-                "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
-                "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
-                "shasum": ""
-            },
-            "require": {
-                "asm89/stack-cors": "^1.2",
-                "illuminate/support": "^5.5|^6",
-                "php": ">=7",
-                "symfony/http-foundation": "^3.1|^4",
-                "symfony/http-kernel": "^3.1|^4"
-            },
-            "require-dev": {
-                "laravel/framework": "^5.5",
-                "orchestra/testbench": "3.3.x|3.4.x|3.5.x|3.6.x|3.7.x",
-                "phpunit/phpunit": "^4.8|^5.2|^7.0",
-                "squizlabs/php_codesniffer": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.11-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Barryvdh\\Cors\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\Cors\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application",
-            "keywords": [
-                "api",
-                "cors",
-                "crossdomain",
-                "laravel"
-            ],
-            "time": "2019-08-28T11:27:11+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",

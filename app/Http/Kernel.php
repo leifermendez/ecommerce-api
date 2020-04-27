@@ -49,8 +49,7 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             'throttle:60,1',
-            'bindings',
-            \Barryvdh\Cors\HandleCors::class,
+            'bindings'
         ],
     ];
 

@@ -6,7 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/asm89/stack-cors" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-cors" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/darkaonline/l5-swagger" />
