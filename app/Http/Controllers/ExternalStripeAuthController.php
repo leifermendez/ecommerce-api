@@ -119,7 +119,7 @@ class ExternalStripeAuthController extends Controller
             $check = $this->_countriesAvailables($response->content);
 
             if ($check['countries'] === false) {
-                throw new \Exception("Country_not_available " . json_encode($check));
+                throw new \Exception("Country_not_available ");
             }
             if ($response->status !== 200) {
                 throw new \Exception($response->content);

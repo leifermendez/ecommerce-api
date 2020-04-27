@@ -21,6 +21,30 @@ class _FrontValidatePhone extends Controller
         return $client;
     }
 
+
+    private function validatePhone($data, $user)
+    {
+        if ($data) {
+            phone_codes_validate::where('id', $data->id)
+                ->update(['status' => 'unavailable']);
+            User::where('id', $user->id)
+                ->update(['confirmed' => 1]);
+            $data = User::find($user->id);
+
+            $data->notify(new _UserVerified($data));
+
+            $response = array(
+                'status' => 'success',
+                'msg' => 'Validado',
+                'data' => $data,
+                'code' => 0
+            );
+            return response()->json($response);
+        } else {
+            throw new \Exception('Codigo no valido');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +92,7 @@ class _FrontValidatePhone extends Controller
 
 
             $sms = (new UseInternalController)->_getSetting('only_user_confirmed');
-            if($sms == 1){
+            if ($sms == 1) {
                 if ($validator->passes()) {
                     $client = $this->OAuth();
 
@@ -94,7 +118,7 @@ class _FrontValidatePhone extends Controller
                 } else {
                     throw new \Exception("Numero no valido");
                 }
-            }else{
+            } else {
                 $response = array(
                     'status' => 'success',
                     'msg' => 'Insertado',
@@ -154,25 +178,15 @@ class _FrontValidatePhone extends Controller
                 ->where('status', 'available')
                 ->first();
 
-            if ($data) {
-                phone_codes_validate::where('id', $data->id)
-                    ->update(['status' => 'unavailable']);
+
+            $sms = (new UseInternalController)->_getSetting('only_user_confirmed');
+            if ($sms == 1) {
+                $this->validatePhone($data, $user);
+            } else {
                 User::where('id', $user->id)
                     ->update(['confirmed' => 1]);
-                $data = User::find($user->id);
-
-                $data->notify(new _UserVerified($data));
-
-                $response = array(
-                    'status' => 'success',
-                    'msg' => 'Validado',
-                    'data' => $data,
-                    'code' => 0
-                );
-                return response()->json($response);
-            } else {
-                throw new \Exception('Codigo no valido');
             }
+
 
         } catch (\Exception $e) {
             $response = array(
