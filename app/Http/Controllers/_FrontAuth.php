@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\resetPassword;
 use DB;
 
-define("FACEBOOK_ID", "493119484360306");
+
 
 class _FrontAuth extends Controller
 {
     public function validTokenProvider($provider = 'facebook', $token = 'invalid')
     {
-        $urlFacebook = "https://graph.facebook.com/oauth/access_token_info?client_id=" . FACEBOOK_ID . "&access_token=$token";
+        $FB = env('FACEBOOK_ID');
+        $urlFacebook = "https://graph.facebook.com/oauth/access_token_info?client_id=" . $FB . "&access_token=$token";
         $urlGoogle = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=$token";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, ($provider === 'google') ? $urlGoogle : $urlFacebook);

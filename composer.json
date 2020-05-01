@@ -35,7 +35,8 @@
         "superbalist/laravel-google-cloud-storage": "^2.2",
         "torann/geoip": "^1.0",
         "twilio/sdk": "^5.32",
-        "tymon/jwt-auth": "1.0.*"
+        "tymon/jwt-auth": "1.0.*",
+        "ext-curl": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
