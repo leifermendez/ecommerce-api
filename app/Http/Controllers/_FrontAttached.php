@@ -221,7 +221,7 @@ class _FrontAttached extends Controller
                 );
 
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
+                    $name_bulk = 'upload/products/' . $key . '_' . $imageName . '.' . $format;
                     Storage::disk('public')->put($name_bulk, $value);
                     $responseSize[$key] = Storage::disk('public')->url($name_bulk);
 
