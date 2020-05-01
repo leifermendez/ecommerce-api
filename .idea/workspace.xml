@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAuth.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAuth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +298,7 @@
       <workItem from="1587973925836" duration="1968000" />
       <workItem from="1587975993036" duration="13220000" />
       <workItem from="1587998585639" duration="1853000" />
-      <workItem from="1588319490488" duration="680000" />
+      <workItem from="1588319490488" duration="1207000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -645,7 +644,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontAttached.php</url>
-          <line>125</line>
+          <line>126</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

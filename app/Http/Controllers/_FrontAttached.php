@@ -67,7 +67,8 @@ class _FrontAttached extends Controller
         Storage::disk('public')->put($name_bulk, $value, 'public');
 //        Storage::disk('s3')->put($name_bulk, $value, 'public');
 //        $public_url = Storage::disk('s3')->url($name_bulk);
-        $public_url = Storage::url($name_bulk);
+//        $public_url = Storage::url($name_bulk);
+        $public_url = Storage::disk('public')->url($name_bulk);
 
         return [
             'status' => 'success',
