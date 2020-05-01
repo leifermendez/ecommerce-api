@@ -81,7 +81,7 @@ class _FrontAuth extends Controller
         ];
 
         $data = $this->registerNewUser($fields);
-        $data->notify(new _UserWelcome($data));
+//        $data->notify(new _UserWelcome($data));
 
         $response = array(
             'status' => 'success',
