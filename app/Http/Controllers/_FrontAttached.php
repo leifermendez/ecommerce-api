@@ -37,8 +37,8 @@ class _FrontAttached extends Controller
             ]);
 
             $vision = $cloud->vision();
-            
-            $image = $vision->image(file_get_contents($image), 
+
+            $image = $vision->image(file_get_contents($image),
             ['LABEL_DETECTION']);
             $results = $vision->annotate($image);
             $list = [];
@@ -64,10 +64,11 @@ class _FrontAttached extends Controller
         $value = Image::make(file_get_contents($url))->resize(200, null, function ($constraint) {
             $constraint->aspectRatio();
         })->stream()->__toString();
-        Storage::disk()->put($name_bulk, $value, 'public');
+        Storage::disk('public')->put($name_bulk, $value, 'public');
 //        Storage::disk('s3')->put($name_bulk, $value, 'public');
 //        $public_url = Storage::disk('s3')->url($name_bulk);
-        $public_url = Storage::url($name_bulk);
+//        $public_url = Storage::url($name_bulk);
+        $public_url = Storage::disk('public')->url($name_bulk);
 
         return [
             'status' => 'success',
@@ -152,9 +153,9 @@ class _FrontAttached extends Controller
                 'dimensions' => 'Las dimenciones de la imagen no deben ser mayor a 4000 x 4000.',
                 'max'        => 'La imagen no puede ser mayor a 20000.',
             ];
-        
+
             $validator = Validator::make($request->all(), $rules, $messages);
-            
+
             if ($validator->fails()) {
                 $errors = $validator->errors();
                 $status = array(
@@ -167,8 +168,8 @@ class _FrontAttached extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk()->put($name_bulk, $file);
-                $a = Storage::disk()->files($name_bulk);
+                Storage::disk('public')->put($name_bulk, $file);
+                $a = Storage::disk('public')->files($name_bulk);
                 if (!(count($a))) {
                     throw new \Exception('not files array');
                 }
@@ -196,7 +197,7 @@ class _FrontAttached extends Controller
                         $labels = implode(",", $get_label);
                     }
                 }
-        
+
                 $sizes = array(
                     'small' => Image::make($file)
                         ->encode($format, 100)
@@ -220,9 +221,9 @@ class _FrontAttached extends Controller
                 );
 
                 foreach ($sizes as $key => $value) {
-                    $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
-                    Storage::disk()->put($name_bulk, $value);
-                    $responseSize[$key] = Storage::disk()->url($name_bulk);
+                    $name_bulk = 'upload/products/' . $key . '_' . $imageName . '.' . $format;
+                    Storage::disk('public')->put($name_bulk, $value);
+                    $responseSize[$key] = Storage::disk('public')->url($name_bulk);
 
                 }
 
@@ -262,7 +263,7 @@ class _FrontAttached extends Controller
                         'attacheds_id' => $data,
                         'labels' => $labels
                     ]);
-                    
+
                     $data = attached::find($data);
                 }
 
@@ -354,8 +355,8 @@ class _FrontAttached extends Controller
             $responseSize = array();
             if ($type_file === 'video') {
                 $name_bulk = 'public/upload/products/video_' . $imageName . '.' . $file->getClientOriginalExtension();
-                Storage::disk()->put($name_bulk, $file);
-                $a = Storage::disk()->files($name_bulk);
+                Storage::disk('public')->put($name_bulk, $file);
+                $a = Storage::disk('public')->files($name_bulk);
                 if (!(count($a))) {
                     throw new \Exception('not files array');
                 }
@@ -398,8 +399,8 @@ class _FrontAttached extends Controller
 
                 foreach ($sizes as $key => $value) {
                     $name_bulk = 'public/upload/products/' . $key . '_' . $imageName . '.' . $format;
-                    Storage::disk()->put($name_bulk, $value);
-                    $responseSize[$key] = Storage::disk()->url($name_bulk);
+                    Storage::disk('public')->put($name_bulk, $value);
+                    $responseSize[$key] = Storage::disk('public')->url($name_bulk);
 
                 }
 

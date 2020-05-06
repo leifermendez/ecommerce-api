@@ -208,30 +208,4 @@ class ProductVariationController extends Controller
         }
     }
 
-    public function import(Request $request){
-        try {
-            if ($request->file('file')) {
-                $file = $request->file('file');
-
-                Excel::import(new VariationProductImport, $file);
-                
-                $status = array(
-                'status' => 'success',
-                'data' => 'Productos Creados',
-                'code' => 0
-                );
-                return response()->json($status);
-            }            
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $errors = [];
-            $failures = $e->failures();
-            foreach ($failures as $failure) {
-                array_push($errors, ['liena'=>$failure->row(), 'campo' =>$failure->attribute(),'error' =>$failure->errors()]);
-            }
-            return response()->json($errors, 500);
-        }
-
-        
-        
-    }
 }

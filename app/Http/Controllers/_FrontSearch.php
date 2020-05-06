@@ -12,7 +12,7 @@ class _FrontSearch extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -114,14 +114,14 @@ class _FrontSearch extends Controller
                     DB::raw('(
                     SELECT COUNT(*) AS TotalItemsOrdered FROM comments WHERE shop_id = shops.id) as score_count'),
                     DB::raw('(
-                        SELECT attacheds.medium  
-                        FROM product_attacheds 
+                        SELECT attacheds.medium
+                        FROM product_attacheds
                         INNER JOIN attacheds ON attacheds.id = product_attacheds.attached_id
                         WHERE product_id = products.id ORDER BY product_attacheds.id ASC LIMIT 1
                     ) as product_image'
                     ),
                     DB::raw("(
-                      SELECT 
+                      SELECT
                         group_concat(
                           JSON_OBJECT(
                             'price_normal', price_normal,
@@ -141,14 +141,14 @@ class _FrontSearch extends Controller
                          FROM variation_products WHERE product_id = products.id
                        ) as variations"),
                     DB::raw("(
-                     SELECT 
+                     SELECT
                         group_concat(
                           JSON_OBJECT(
                             'medium', attacheds.medium,
                             'attached_id', attached_id
                           ) SEPARATOR '|'
                         ) as gallery
-                        FROM product_attacheds 
+                        FROM product_attacheds
                         INNER JOIN attacheds ON
                         attacheds.id = product_attacheds.attached_id
                         WHERE product_id = products.id  AND  variation_product_id is null) as gallery")
@@ -170,14 +170,6 @@ class _FrontSearch extends Controller
                     ->_parseVariation($item->variations);
                 $item->gallery = (new UseInternalController)
                     ->_parseVariation($item->gallery);
-
-
-//                $gallery = (new UseInternalController)->_getImages($item->id);
-
-//                $item->gallery = $gallery;
-
-
-
                 return $item;
             });
 

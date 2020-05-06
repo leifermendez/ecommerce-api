@@ -22,7 +22,6 @@ class _FrontShop extends Controller
         try {
             $limit = ($request->limit) ? $request->limit : 15;
             $filters = ($request->filters) ? explode("?", $request->filters) : [];
-            $measureShop = [];
 
             $data = shop::orderBy('shops.id', 'DESC')
                 ->where('shops.status', 'available')

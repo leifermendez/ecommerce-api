@@ -14,13 +14,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\resetPassword;
 use DB;
 
-define("FACEBOOK_ID", "493119484360306");
+
 
 class _FrontAuth extends Controller
 {
     public function validTokenProvider($provider = 'facebook', $token = 'invalid')
     {
-        $urlFacebook = "https://graph.facebook.com/oauth/access_token_info?client_id=" . FACEBOOK_ID . "&access_token=$token";
+        $FB = env('FACEBOOK_ID');
+        $urlFacebook = "https://graph.facebook.com/oauth/access_token_info?client_id=" . $FB . "&access_token=$token";
         $urlGoogle = "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=$token";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, ($provider === 'google') ? $urlGoogle : $urlFacebook);
@@ -80,7 +81,7 @@ class _FrontAuth extends Controller
         ];
 
         $data = $this->registerNewUser($fields);
-        $data->notify(new _UserWelcome($data));
+//        $data->notify(new _UserWelcome($data));
 
         $response = array(
             'status' => 'success',
@@ -222,13 +223,14 @@ class _FrontAuth extends Controller
         }
     }
 
-    public function password($email){
+    public function password($email)
+    {
         try {
             $user = User::where('email', $email)->first();
-            
+
             if ($user) {
                 $token = Str::random(40);
-                DB::table('password_resets')->where('email',$email)->delete();
+                DB::table('password_resets')->where('email', $email)->delete();
                 DB::table('password_resets')->insert([
                     'email' => $email,
                     'token' => $token,
@@ -246,7 +248,7 @@ class _FrontAuth extends Controller
             ];
             return response()->json($response, 200);
         } catch (Exception $e) {
-            $response =[
+            $response = [
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
                 'code' => 1
@@ -255,18 +257,19 @@ class _FrontAuth extends Controller
         }
     }
 
-    public function resetPassword(Request $request){
+    public function resetPassword(Request $request)
+    {
         try {
             $data = DB::table('password_resets')
-            ->select('email')
-            ->where('token', $request->token)
-            ->first();
+                ->select('email')
+                ->where('token', $request->token)
+                ->first();
 
-            if ($data  == null) {
-                $response =[
-                'status' => 'fail',
-                'msg' => 'Token no existe o ya fue utilizado',
-                'code' => 1
+            if ($data == null) {
+                $response = [
+                    'status' => 'fail',
+                    'msg' => 'Token no existe o ya fue utilizado',
+                    'code' => 1
                 ];
                 return response()->json($response, 401);
             }
@@ -274,7 +277,7 @@ class _FrontAuth extends Controller
             $user = User::where('email', $data->email)->first();
             $user->password = bcrypt($request->password);
             $user->save();
-            DB::table('password_resets')->where('email',$data->email)->delete();
+            DB::table('password_resets')->where('email', $data->email)->delete();
 
             $response = [
                 'status' => 'success',
@@ -282,9 +285,9 @@ class _FrontAuth extends Controller
                 'code' => 0
             ];
             return response()->json($response, 200);
-            
+
         } catch (Exception $e) {
-            $response =[
+            $response = [
                 'status' => 'fail',
                 'msg' => $e->getMessage(),
                 'code' => 1
