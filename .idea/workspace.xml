@@ -4,7 +4,6 @@
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,7 +302,7 @@
       <workItem from="1588666452320" duration="2000" />
       <workItem from="1588754817119" duration="2125000" />
       <workItem from="1588762670973" duration="18000" />
-      <workItem from="1588762818144" duration="5540000" />
+      <workItem from="1588762818144" duration="7413000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>

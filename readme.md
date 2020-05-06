@@ -4,6 +4,9 @@
 
 ![](https://i.imgur.com/FfEhmDv.png)
 
+> Puedes ver algunos de nuestros clientes
+![](https://i.imgur.com/1KYwHuo.png)
+
 # Requerimientos
 > - PHP 7.1 o superior
 > - MariaDB 10.2 o superior / MySQL 5.7.8 o superior
