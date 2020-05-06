@@ -1,4 +1,4 @@
-# E-commerce Marketplace
+# E-commerce Marketplace (API)
 > Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en línea, cobro de comisión por transición, envió de SMS, registro de tiendas entro otras características
 
 
@@ -69,7 +69,7 @@ Por defecto el sistema crea (3) usuarios
 
 
 ### Contacto
-Para dudas información, recomendaciones [codigoencasa.com](https://www.codigoencasa.com/)
+Para dudas información, recomendaciones [codigoencasa.com](https://www.codigoencasa.com/te-ayudamos-con-tu-codigo/)
 
 __Grupo de facebook:__ https://www.facebook.com/groups/163216871776185
 
