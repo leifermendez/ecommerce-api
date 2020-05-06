@@ -61,6 +61,12 @@
 - Y seguimos los pasos de __Servidor compartido (9)__ en adelante
 - 
 
+##### Usurios
+Por defecto el sistema crea (3) usuarios
+- Admin: `admin@mail.com` Contraseña: `123456`
+- Shop: `shop@mail.com` Contraseña: `123456`
+- Cliente: `cliente@mail.com` Contraseña: `123456`
+
 > Para dudas información, recomendaciones codigoencasa.com
 
 ### Apoyo
