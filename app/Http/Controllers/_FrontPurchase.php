@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Notifications\_NewPurchaseSmsShop;
-use App\Notifications\_NewPurchaseSmsUser;
 use App\Notifications\_UserPurchase;
-use App\Notifications\_UserVerified;
 use App\purchase_order;
 use App\purchase_detail;
 use App\shipping_address;
-use App\shop;
-use App\shopping_cart;
 use App\variation_product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -190,6 +185,7 @@ class _FrontPurchase extends Controller
             $user->setAttribute(
                 'uuid', $uuid
             );
+
 
             $user->notify(new _UserPurchase($user));
 

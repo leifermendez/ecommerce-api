@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.testing" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alterhome-ecommerce-ee8835bd4804.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alterhome.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apatxee.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecommerce-apatxee-v2-2588124b1aab.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochileros-ecommerce-9edefe4749d0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mochileros.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,7 +307,9 @@
       <workItem from="1587973925836" duration="1968000" />
       <workItem from="1587975993036" duration="13220000" />
       <workItem from="1587998585639" duration="1853000" />
-      <workItem from="1588319490488" duration="3721000" />
+      <workItem from="1588319490488" duration="4454000" />
+      <workItem from="1588666452320" duration="2000" />
+      <workItem from="1588754817119" duration="2125000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -569,10 +580,10 @@
     </state>
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587977062800" />
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1587836980406" />
-    <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587830937553">
+    <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588759345104">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1587830937553" />
+    <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1588759345104" />
     <state x="460" y="215" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587939785387">
       <screen x="0" y="31" width="1280" height="689" />
     </state>
@@ -592,11 +603,11 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
-    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup" timestamp="1587987936029">
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1588755296689">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587987936029" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1587741162972" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1588755296689" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
   <component name="XDebuggerManager">
