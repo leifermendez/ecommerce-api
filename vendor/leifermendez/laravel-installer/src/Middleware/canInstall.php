@@ -40,7 +40,8 @@ class canInstall
                 case '404':
                 case 'default':
                 default:
-                    abort(404);
+                    echo "<b>Instalación finalizada</b>";
+                    dd();
                     break;
             }
         }

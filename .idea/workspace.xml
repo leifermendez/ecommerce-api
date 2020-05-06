@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.testing" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alterhome-ecommerce-ee8835bd4804.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/alterhome.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apatxee.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontPurchase.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecommerce-apatxee-v2-2588124b1aab.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mochileros-ecommerce-9edefe4749d0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mochileros.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,12 +177,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\vendor\leifermendez\laravel-installer\src\Controllers" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -310,6 +302,8 @@
       <workItem from="1588319490488" duration="4454000" />
       <workItem from="1588666452320" duration="2000" />
       <workItem from="1588754817119" duration="2125000" />
+      <workItem from="1588762670973" duration="18000" />
+      <workItem from="1588762818144" duration="5540000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
