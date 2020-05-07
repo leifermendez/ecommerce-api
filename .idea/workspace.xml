@@ -2,8 +2,108 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Config/installer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/DatabaseController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/EnvironmentController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/FinalController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/PermissionsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/RequirementsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/SettingsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/UpdateController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/WelcomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Events/EnvironmentSaved.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Events/LaravelInstallerFinished.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/DatabaseManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/EnvironmentManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/FinalInstallManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/InstalledFileManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/MigrationsHelper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/PermissionsChecker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/RequirementsChecker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/functions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ar/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/de/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/en/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/es/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/et/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/fa/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/fr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/gr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/id/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/it/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/nl/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pl/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pt-br/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pt/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ro/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ru/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/th/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/tr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/zh-CN/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/zh-TW/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canUpdate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Providers/LaravelInstallerServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment-classic.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment-wizard.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/finished.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/layouts/master-update.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/layouts/master.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/permissions.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/requirements.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/settings.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/finished.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/overview.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/sass/_variables.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/sass/style.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_animated.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_bordered-pulled.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_core.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_fixed-width.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_icons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_larger.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_list.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_path.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_rotated-flipped.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_screen-reader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_stacked.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/font-awesome.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/style.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-96x96.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/pattern.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,144 +121,144 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
-      <path value="$PROJECT_DIR$/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
-      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
-      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
-      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
-      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
-      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
-      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
-      <path value="$PROJECT_DIR$/vendor/opis/closure" />
-      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/tymon/jwt-auth" />
-      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
-      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/vendor/spatie/opening-hours" />
-      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
-      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
-      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
-      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
-      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
-      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
-      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
-      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/vendor/gladcodes/keygen" />
-      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
-      <path value="$PROJECT_DIR$/vendor/ixudra/curl" />
-      <path value="$PROJECT_DIR$/vendor/hashids/hashids" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/superbalist/laravel-google-cloud-storage" />
-      <path value="$PROJECT_DIR$/vendor/superbalist/flysystem-google-storage" />
-      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
-      <path value="$PROJECT_DIR$/vendor/google/cloud-core" />
-      <path value="$PROJECT_DIR$/vendor/google/auth" />
-      <path value="$PROJECT_DIR$/vendor/google/cloud-storage" />
-      <path value="$PROJECT_DIR$/vendor/rize/uri-template" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem-cached-adapter" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/vendor/genealabs/laravel-pivot-events" />
-      <path value="$PROJECT_DIR$/vendor/genealabs/laravel-model-caching" />
-      <path value="$PROJECT_DIR$/vendor/s-ichikawa/laravel-sendgrid-driver" />
-      <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/twilio" />
-      <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
-      <path value="$PROJECT_DIR$/vendor/maxmind/web-service-common" />
-      <path value="$PROJECT_DIR$/vendor/torann/geoip" />
-      <path value="$PROJECT_DIR$/vendor/geoip2/geoip2" />
-      <path value="$PROJECT_DIR$/vendor/grpc/grpc" />
-      <path value="$PROJECT_DIR$/vendor/google/crc32" />
-      <path value="$PROJECT_DIR$/vendor/google/gax" />
       <path value="$PROJECT_DIR$/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
+      <path value="$PROJECT_DIR$/vendor/google/gax" />
+      <path value="$PROJECT_DIR$/vendor/google/crc32" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/google/common-protos" />
       <path value="$PROJECT_DIR$/vendor/google/cloud-vision" />
-      <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
-      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
       <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
-      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
-      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/google/cloud-storage" />
+      <path value="$PROJECT_DIR$/vendor/google/cloud-core" />
+      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
       <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
-      <path value="$PROJECT_DIR$/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/rize/uri-template" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/gladcodes/keygen" />
       <path value="$PROJECT_DIR$/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/maxmind/web-service-common" />
+      <path value="$PROJECT_DIR$/vendor/genealabs/laravel-pivot-events" />
+      <path value="$PROJECT_DIR$/vendor/genealabs/laravel-model-caching" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/grpc/grpc" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/maxmind-db/reader" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
-      <path value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/geoip2/geoip2" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/hashids/hashids" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/ixudra/curl" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/superbalist/flysystem-google-storage" />
+      <path value="$PROJECT_DIR$/vendor/superbalist/laravel-google-cloud-storage" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/vendor/s-ichikawa/laravel-sendgrid-driver" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer" />
+      <path value="$PROJECT_DIR$/vendor/spatie/opening-hours" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/twilio" />
+      <path value="$PROJECT_DIR$/vendor/torann/geoip" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PoqNi7xUeOB0K7wBGqBFuAJq9x" />
@@ -302,7 +402,11 @@
       <workItem from="1588666452320" duration="2000" />
       <workItem from="1588754817119" duration="2125000" />
       <workItem from="1588762670973" duration="18000" />
-      <workItem from="1588762818144" duration="9245000" />
+      <workItem from="1588762818144" duration="9855000" />
+      <workItem from="1588868160759" duration="3000" />
+      <workItem from="1588885440321" duration="163000" />
+      <workItem from="1588886492575" duration="154000" />
+      <workItem from="1588886922571" duration="1442000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
