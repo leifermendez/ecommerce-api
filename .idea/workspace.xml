@@ -1,7 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="" />
+    <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Config/installer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/DatabaseController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/EnvironmentController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/FinalController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/PermissionsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/RequirementsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/SettingsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/UpdateController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers/WelcomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Events/EnvironmentSaved.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Events/LaravelInstallerFinished.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/DatabaseManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/EnvironmentManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/FinalInstallManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/InstalledFileManager.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/MigrationsHelper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/PermissionsChecker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/RequirementsChecker.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Helpers/functions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ar/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/de/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/en/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/es/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/et/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/fa/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/fr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/gr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/id/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/it/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/nl/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pl/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pt-br/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/pt/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ro/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/ru/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/th/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/tr/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/zh-CN/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Lang/zh-TW/installer_messages.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canInstall.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Middleware/canUpdate.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Providers/LaravelInstallerServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Routes/web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment-classic.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment-wizard.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/environment.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/finished.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/layouts/master-update.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/layouts/master.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/permissions.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/requirements.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/settings.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/finished.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/overview.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/update/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Views/welcome.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/sass/_variables.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/sass/style.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_animated.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_bordered-pulled.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_core.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_fixed-width.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_icons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_larger.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_list.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_path.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_rotated-flipped.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_screen-reader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_stacked.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/_variables.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/font-awesome/font-awesome.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/scss/style.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/css/style.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/fonts/ionicons.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/favicon/favicon-96x96.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/assets/img/pattern.png" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -304,7 +407,6 @@
       <workItem from="1588885440321" duration="163000" />
       <workItem from="1588886492575" duration="154000" />
       <workItem from="1588886922571" duration="1442000" />
-      <workItem from="1588952056044" duration="774000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -594,11 +696,10 @@
     </state>
     <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587984112806" />
     <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1587837974061" />
-    <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1589021208540">
+    <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1587976003199">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
-    <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021208540" />
     <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1588755296689">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>

@@ -1,7 +1,7 @@
 {
-    "name": "e_commerce_api",
+    "name": "leifermendez/e-commerce",
     "type": "project",
-    "description": "API for e-commerce",
+    "description": "Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en línea, cobro de comisión por transición, envió de SMS, registro de tiendas entre otras características.",
     "keywords": [
         "framework",
         "laravel"
@@ -13,7 +13,7 @@
         "ext-json": "*",
         "ext-mysqli": "*",
         "barryvdh/laravel-dompdf": "^0.8.5",
-        "darkaonline/l5-swagger": "5.8.*",
+        "facade/ignition": "^2.0",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "fzaninotto/faker": "^1.8",
@@ -24,24 +24,26 @@
         "hashids/hashids": "^3.0",
         "intervention/image": "^2.5",
         "ixudra/curl": "^6.16",
+        "kylekatarnls/laravel-carbon-2": "^1.0.0",
         "laravel-notification-channels/twilio": "^2.0",
-        "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0",
+        "laravel/framework": "^7.0",
+        "laravel/tinker": "^2.0",
         "leifermendez/laravel-installer": "4.0.8",
         "maatwebsite/excel": "^3.1",
-        "nesbot/carbon": "^2.17",
-        "nunomaduro/collision": "^3.0",
+        "nesbot/carbon": "2.33.0 as 1.39.0",
+        "nunomaduro/collision": "^4.1",
         "s-ichikawa/laravel-sendgrid-driver": "^2.0",
         "spatie/opening-hours": "^2.2",
         "superbalist/laravel-google-cloud-storage": "^2.2",
         "torann/geoip": "^1.0",
         "twilio/sdk": "^5.32",
-        "tymon/jwt-auth": "1.0.*"
+        "tymon/jwt-auth": "1.0.*",
+        "zircote/swagger-php": "2.*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
         "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^7.5"
+        "phpunit/phpunit": "^8.5"
     },
     "config": {
         "optimize-autoloader": true,

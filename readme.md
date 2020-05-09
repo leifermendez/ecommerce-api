@@ -1,10 +1,14 @@
 # E-commerce Marketplace (API)
-> Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en línea, cobro de comisión por transición, envió de SMS, registro de tiendas entro otras características
+Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en línea, cobro de comisión por transición, envió de SMS, registro de tiendas entre otras características.
+
+> __¿Eres desarrollador?__ Si te gustaria ayudar a crecer el proyecto tenemos un grupo de [Slack](https://desarrolloah.slack.com/archives/C0133SK41EZ) en donde organizamos la tareas.
 
 
 ![](https://i.imgur.com/FfEhmDv.png)
 
 > Puedes ver algunos de nuestros clientes
+- [https://tienda.alterhome.es/](https://tienda.alterhome.es/)
+- [https://tienda.mochileros.com.mx/](https://tienda.mochileros.com.mx/)
 
 ![](https://i.imgur.com/1KYwHuo.png)
 
