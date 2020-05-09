@@ -27,7 +27,7 @@ class AdminPanel
             }
 
         }catch (\Exception $e){
-            return response()->json(['not_role'], 403);
+            return redirect('login');
         }
 
     }
