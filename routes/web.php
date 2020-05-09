@@ -17,4 +17,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')
     ->middleware(['AdminPanel','auth']);
 
-Route::get('/finish', 'HomeController@finish')->name('finish');
+//Route::get('/finish', 'HomeController@finish')->name('finish');
