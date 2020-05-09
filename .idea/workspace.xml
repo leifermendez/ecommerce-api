@@ -5,72 +5,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/install.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/install.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/sass/_variables.sass" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/sass/_variables.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/sass/style.sass" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/sass/style.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_animated.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_animated.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_bordered-pulled.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_bordered-pulled.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_core.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_core.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_fixed-width.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_fixed-width.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_icons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_larger.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_larger.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_list.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_path.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_path.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_rotated-flipped.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_rotated-flipped.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_screen-reader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_screen-reader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_stacked.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_stacked.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/font-awesome.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/font-awesome/font-awesome.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/scss/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/scss/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/css/style.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/style.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/FontAwesome.otf" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/FontAwesome.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/ionicons.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/ionicons.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/ionicons.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/ionicons.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/ionicons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/ionicons.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/fonts/ionicons.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/fonts/ionicons.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/img/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/img/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/img/favicon/favicon-16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/img/favicon/favicon-16x16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/img/favicon/favicon-32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/img/favicon/favicon-32x32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/img/favicon/favicon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/img/favicon/favicon-96x96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/installer/img/pattern.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/img/pattern.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/public/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/api-docs/api-docs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/debugbar/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/Helvetica-Bold.afm.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/Helvetica-Bold.afm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/Times-Bold.afm.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/Times-Bold.afm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/dompdf_font_family_cache.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/dompdf_font_family_cache.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ufm" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ufm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ufm.php" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/nunito-normal_176125b1b6dc4704cbf0390040859779.ufm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/finish.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/finish.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,6 +180,7 @@
       <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PoqNi7xUeOB0K7wBGqBFuAJq9x" />
