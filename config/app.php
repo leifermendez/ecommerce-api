@@ -177,8 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        \Fruitcake\Cors\CorsServiceProvider::class
-
+        \Fruitcake\Cors\CorsServiceProvider::class,
+        Madnest\Madzipper\MadzipperServiceProvider::class
     ],
 
     /*
@@ -234,6 +234,7 @@ return [
         'Keygen' => Keygen\Keygen::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Madzipper' => Madnest\Madzipper\Madzipper::class
     ],
 
 ];

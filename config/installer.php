@@ -144,6 +144,10 @@ return [
             'dump' => [
                 'data' => 'Dumping a not found message.',
             ],
+            'finish' => [
+                'name' => 'finishInstaller',
+                'data' => [],
+            ]
         ],
     ],
 

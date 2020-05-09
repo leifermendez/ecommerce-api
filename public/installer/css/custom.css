@@ -1,0 +1,34 @@
+/**
+Css aplicado al dashboard del instalador
+ */
+
+.dashboard-install .templates .block {
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #f9f9f9;
+    padding: .5rem;
+    border-radius: 10px;
+
+}
+.dashboard-install .templates .block img{
+    width: 100%;
+}
+.dashboard-install .templates .block:hover{
+    -webkit-transition: all 100ms ease-out;
+    -moz-transition: all 100ms ease-out;
+    -o-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
+    transform: scale(1.1);
+    z-index: 99;
+    box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
+}
+
+.content-card .title{
+    margin-top: .2rem;
+}
+
+.content-card{
+    text-align: center;
+}
