@@ -7,8 +7,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            Tu instalación se realizó con éxito, guarda los siguiente datos de conexión en un lugar
-                            seguro, no volverán a mostrarse
+                            Tu instalación se realizó con éxito, recuerda guardar en un lugar seguro los siguientes
+                            datos. Si tienes problemas o deseas soporte puedes contactarno <a
+                                href="https://www.codigoencasa.com/te-ayudamos-con-tu-codigo/"
+                                target="_blank"><b>aquí</b></a>
+                            <br>
+                            👉 Si deseas colabora con el código, o seguir más de cerca este desarrollo recuerda pasarte por
+                            nuestros repositorios <a href="https://github.com/leifermendez/ecommerce-api"
+                                                     target="_blank"><b>Visitar</b></a>
                         </div>
                         <div class="mt-4">
                             <b>API:</b> <code class="ml-2">{{$data['url']}}</code>
@@ -30,7 +36,7 @@
                         <!-- SECTION TEMPLATE -->
                         <div>
                             <div class="mb-4">
-                                Selecciona uno de los siguientes templates disponibles.
+                                Actualmente solo contamos con los siguientes templates.
                             </div>
                             <div class="row col-12 p-0 mr-0 ml-0 templates mt-2">
                                 <div class="col-3 block">
@@ -52,7 +58,7 @@
                             <form autocomplete="off" method="post"
                                   action="{{ route('LaravelUpdater::finishInstaller') }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="template" value="1">
+                                <input type="hidden" name="template" value="template-1.zip">
 
                                 <div class="form-group">
                                     <label for="apiSrc">API:</label>
