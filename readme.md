@@ -32,7 +32,7 @@ Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en lín
 1. Descargar repositorio `.zip`
 ![](https://i.imgur.com/8jswcoQ.png)
 2. Descomprimir `.zip` en tu computadora
-3. Ejecutar `composer install`
+3. Ejecutar `composer clearcache && composer install`
 4. ![](https://i.imgur.com/J3DJMCX.png)
 5. Volvemos a comprimir en `.zip` asegurandonos de contener la carpeta `vendor`
 6. ![](https://i.imgur.com/b78GtQ1.png)
