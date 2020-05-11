@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Class/InstallWizard.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/installer/welcome.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/master-update.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e-commerce-v2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,17 +193,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/installer" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views\layouts" />
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views\installer" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\vendor\leifermendez\laravel-installer\src\Controllers" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
     </key>
@@ -327,7 +336,7 @@
       <workItem from="1588886922571" duration="1442000" />
       <workItem from="1589138485479" duration="5713000" />
       <workItem from="1589192558547" duration="3000" />
-      <workItem from="1589197427414" duration="2803000" />
+      <workItem from="1589197427414" duration="9514000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -598,6 +607,10 @@
     </state>
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587977062800" />
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1587836980406" />
+    <state x="714" y="157" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589205378645">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="714" y="157" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589205378645" />
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588759345104">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -616,10 +629,10 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="672" y="272" key="MultipleFileMergeDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021543768" />
-    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589198225569">
+    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589206349705">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589198225569" />
+    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589206349705" />
     <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589047118589" />
     <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589202785050">
       <screen x="0" y="30" width="1920" height="1050" />
@@ -631,10 +644,10 @@
     </state>
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021537077" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589142653639">
+    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup" timestamp="1589210403887">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587987936029" />
+    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589210403887" />
     <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589142653639" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
@@ -705,6 +718,11 @@
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php</url>
           <line>93</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Installer/WelcomeController.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

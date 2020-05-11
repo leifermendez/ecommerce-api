@@ -11,10 +11,12 @@
 |
 */
 
+//
+//Auth::routes();
 
-Auth::routes();
+//Route::get('/ecommerce-panel/home', 'HomeController@index')->name('home');
+//
 
-Route::get('/home', 'HomeController@index')->name('home')
-    ->middleware(['AdminPanel','auth']);
-
-//Route::get('/finish', 'HomeController@finish')->name('finish');
+Route::prefix('ecommerce-panel')->group(function () {
+    Route::get('/', 'Installer\WelcomeController@test');
+});
