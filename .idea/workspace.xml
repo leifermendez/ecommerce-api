@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,12 +193,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\vendor\leifermendez\laravel-installer\src\Controllers" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -321,7 +325,9 @@
       <workItem from="1588885440321" duration="163000" />
       <workItem from="1588886492575" duration="154000" />
       <workItem from="1588886922571" duration="1442000" />
-      <workItem from="1589138485479" duration="5230000" />
+      <workItem from="1589138485479" duration="5713000" />
+      <workItem from="1589192558547" duration="3000" />
+      <workItem from="1589197427414" duration="2803000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -610,15 +616,15 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="672" y="272" key="MultipleFileMergeDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021543768" />
-    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589047118589">
+    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589198225569">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587916933931" />
+    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589198225569" />
     <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589047118589" />
-    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589141931170">
+    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589202785050">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587984112806" />
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589202785050" />
     <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589141931170" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1589021537077">
       <screen x="0" y="30" width="1920" height="1050" />
