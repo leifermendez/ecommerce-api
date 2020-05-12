@@ -14,9 +14,16 @@
 //
 Auth::routes();
 
+Route::get('/', function () {
+    View::addExtension('html', 'php');
+    return view('index');
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', 'Admin\DashboardController@index')
+        ->name('AdminHome');
+
+    Route::get('/home', 'Admin\DashboardController@index')
         ->name('AdminHome');
 
     Route::post('/mail', 'Admin\DashboardController@saveMail')
@@ -29,7 +36,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         ->name('AdminSaveStripe');
 });
 
-Route::prefix('install-2')->group(function () {
+Route::prefix('install')->group(function () {
 
     Route::get('/', 'Installer\WelcomeController@welcome')
         ->name('InstallerWelcome');
