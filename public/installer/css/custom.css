@@ -77,3 +77,6 @@ label {
     font-weight: 600 !important;
     font-size: .8rem !important;
 }
+section{
+    cursor: pointer;
+}

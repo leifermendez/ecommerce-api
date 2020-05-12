@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DashboardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/installer/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/installer/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -330,7 +336,8 @@
       <workItem from="1589192558547" duration="3000" />
       <workItem from="1589197427414" duration="9514000" />
       <workItem from="1589270641845" duration="18057000" />
-      <workItem from="1589300447533" duration="375000" />
+      <workItem from="1589300447533" duration="2597000" />
+      <workItem from="1589304551287" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -609,11 +616,11 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1588759345104" />
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589276766716">
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589301622056">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587919431277" />
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589276766716" />
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589301622056" />
     <state x="460" y="215" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.31.1280.689@0.31.1280.689" timestamp="1587939785387" />
     <state x="184" y="123" key="MergeDialog" timestamp="1589021543765">
       <screen x="0" y="30" width="1920" height="1050" />
@@ -642,11 +649,11 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="616" y="258" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589281994405" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589280075923">
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589301590408">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589210403887" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589280075923" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589301590408" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
   <component name="XDebuggerManager">

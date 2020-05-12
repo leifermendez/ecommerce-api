@@ -122,6 +122,23 @@ class DashboardController extends Controller
                     'type' => 'text',
                     'name' => 'STRIPE_SECRET'
                 ],
+            ],
+            'templates' => [
+                [
+                    'name' => 'Template 1',
+                    'url' => '',
+                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+                ],
+                [
+                    'name' => 'Template 2',
+                    'url' => '',
+                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+                ],
+                [
+                    'name' => 'Template 3',
+                    'url' => '',
+                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+                ]
             ]
         ];
         return view('home', ['options' => $options]);

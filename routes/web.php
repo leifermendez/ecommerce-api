@@ -14,11 +14,6 @@
 //
 Auth::routes();
 
-Route::get('/', function () {
-    View::addExtension('html', 'php');
-    return view('index');
-});
-
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/', 'Admin\DashboardController@index')
         ->name('AdminHome');
@@ -57,3 +52,10 @@ Route::prefix('install')->group(function () {
         ->name('InstallerOverview');
 
 });
+
+Route::get('/{any?}', function () {
+    View::addExtension('html', 'php');
+    return view('index');
+});
+
+
