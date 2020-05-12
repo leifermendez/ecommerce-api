@@ -12,11 +12,41 @@
 */
 
 //
-//Auth::routes();
+Auth::routes();
 
-//Route::get('/ecommerce-panel/home', 'HomeController@index')->name('home');
-//
 
-Route::prefix('ecommerce-panel')->group(function () {
-    Route::get('/', 'Installer\WelcomeController@test');
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', 'Admin\DashboardController@index')
+        ->name('AdminHome');
+
+    Route::post('/mail', 'Admin\DashboardController@saveMail')
+        ->name('AdminSaveMail');
+
+    Route::post('/sms', 'Admin\DashboardController@saveSMS')
+        ->name('AdminSaveSMS');
+
+    Route::post('/stripe', 'Admin\DashboardController@saveStripe')
+        ->name('AdminSaveStripe');
+});
+
+Route::prefix('install-2')->group(function () {
+
+    Route::get('/', 'Installer\WelcomeController@welcome')
+        ->name('InstallerWelcome');
+
+    Route::get('/account', 'Installer\WelcomeController@account')
+        ->name('InstallerWAccount');
+
+    Route::post('/account', 'Installer\EnvironmentInstaller@saveFileWizard')
+        ->name('InstallerSaveEnv');
+
+    Route::get('/migrations', 'Installer\MigrationsController@overview')
+        ->name('InstallerMigrations');
+
+    Route::post('/migrations', 'Installer\MigrationsController@database')
+        ->name('InstallerMigrationsSave');
+
+    Route::get('/overview', 'Installer\OverViewController@overview')
+        ->name('InstallerOverview');
+
 });

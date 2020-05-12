@@ -12,10 +12,12 @@ Css aplicado al dashboard del instalador
     border-radius: 10px;
 
 }
-.dashboard-install .templates .block img{
+
+.dashboard-install .templates .block img {
     width: 100%;
 }
-.dashboard-install .templates .block:hover{
+
+.dashboard-install .templates .block:hover {
     -webkit-transition: all 100ms ease-out;
     -moz-transition: all 100ms ease-out;
     -o-transition: all 100ms ease-out;
@@ -25,10 +27,53 @@ Css aplicado al dashboard del instalador
     box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
 }
 
-.content-card .title{
+.content-card .title {
     margin-top: .2rem;
 }
 
-.content-card{
+.content-card {
     text-align: center;
+}
+
+/*.over-system{*/
+/*    position: absolute;*/
+/*    background: rgba(255, 255, 255, 1);*/
+/*    width: 100%;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    height: 100%;*/
+/*    z-index: 99;*/
+/*}*/
+.over-system ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.over-system ul li {
+    padding: 0;
+    margin: 0
+}
+
+::-webkit-input-placeholder { /* Edge */
+    color: #b6b6b6 !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #b6b6b6 !important;
+}
+
+::placeholder {
+    color: #b6b6b6 !important;
+}
+
+.img-loading-db {
+    width: 100%;
+    height: 270px;
+    object-fit: contain;
+}
+
+label {
+    font-weight: 600 !important;
+    font-size: .8rem !important;
 }
