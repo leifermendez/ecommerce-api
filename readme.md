@@ -1,4 +1,7 @@
 # E-commerce Marketplace (API)
+![](https://img.shields.io/github/issues/leifermendez/ecommerce-api)
+![](https://img.shields.io/github/stars/leifermendez/ecommerce-api)
+
 Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en línea, cobro de comisión por transición, envió de SMS, registro de tiendas entre otras características.
 
 > __¿Eres desarrollador?__ Si te gustaria ayudar a crecer el proyecto tenemos un grupo de [Slack](https://desarrolloah.slack.com/archives/C0133SK41EZ) en donde organizamos la tareas.
@@ -24,6 +27,14 @@ Tienda en línea multiplataforma, la cual cuenta con un sistema de pagos en lín
 
 
 # Instalacion
+
+##### Nuevo instalador
+
+Tenemos un nuevo asistente de instalación el cual está en versión "beta" 
+pero funciona bien. Una vez cargado los archivos podemos dirigirnos a
+ la siguiente ruta `/install`
+ 
+![](https://i.imgur.com/SjAKRUs.gif)
 
 ##### Servidor compartido
 
