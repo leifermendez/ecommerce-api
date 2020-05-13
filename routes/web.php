@@ -11,10 +11,54 @@
 |
 */
 
-
+//
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')
-    ->middleware(['AdminPanel','auth']);
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/', 'Admin\DashboardController@index')
+        ->name('AdminHome');
 
-//Route::get('/finish', 'HomeController@finish')->name('finish');
+    Route::get('/home', 'Admin\DashboardController@index')
+        ->name('AdminHome');
+
+    Route::post('/mail', 'Admin\DashboardController@saveMail')
+        ->name('AdminSaveMail');
+
+    Route::post('/sms', 'Admin\DashboardController@saveSMS')
+        ->name('AdminSaveSMS');
+
+    Route::post('/stripe', 'Admin\DashboardController@saveStripe')
+        ->name('AdminSaveStripe');
+
+    Route::post('/template', 'Admin\DashboardController@saveTemplate')
+        ->name('AdminSaveTemplate');
+});
+
+Route::middleware(['Install'])->prefix('install')->group(function () {
+
+    Route::get('/', 'Installer\WelcomeController@welcome')
+        ->name('InstallerWelcome');
+
+    Route::get('/account', 'Installer\WelcomeController@account')
+        ->name('InstallerWAccount');
+
+    Route::post('/account', 'Installer\EnvironmentInstaller@saveFileWizard')
+        ->name('InstallerSaveEnv');
+
+    Route::get('/migrations', 'Installer\MigrationsController@overview')
+        ->name('InstallerMigrations');
+
+    Route::post('/migrations', 'Installer\MigrationsController@database')
+        ->name('InstallerMigrationsSave');
+
+    Route::get('/overview', 'Installer\OverViewController@overview')
+        ->name('InstallerOverview');
+
+});
+
+Route::get('/{any?}', function () {
+    View::addExtension('html', 'php');
+    return view('index');
+});
+
+

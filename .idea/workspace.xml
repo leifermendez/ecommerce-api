@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +118,6 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer" />
       <path value="$PROJECT_DIR$/vendor/kylekatarnls/laravel-carbon-2" />
       <path value="$PROJECT_DIR$/vendor/intervention/image" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
@@ -171,6 +172,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer" />
     </include_path>
   </component>
   <component name="ProjectId" id="1PoqNi7xUeOB0K7wBGqBFuAJq9x" />
@@ -183,17 +185,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendor/leifermendez/laravel-installer/src/Controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/installer" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views\installer" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\vendor\leifermendez\laravel-installer\src\Controllers" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views\layouts" />
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\resources\views" />
+      <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2" />
       <recent name="C:\Users\Leifer\PhpstormProjects\e-commerce-v2\storage\app\public" />
     </key>
   </component>
@@ -320,7 +326,13 @@
       <workItem from="1588885440321" duration="163000" />
       <workItem from="1588886492575" duration="154000" />
       <workItem from="1588886922571" duration="1442000" />
-      <workItem from="1589138485479" duration="4467000" />
+      <workItem from="1589138485479" duration="5713000" />
+      <workItem from="1589192558547" duration="3000" />
+      <workItem from="1589197427414" duration="9514000" />
+      <workItem from="1589270641845" duration="18057000" />
+      <workItem from="1589300447533" duration="2597000" />
+      <workItem from="1589304551287" duration="2094000" />
+      <workItem from="1589360288278" duration="8060000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -591,15 +603,19 @@
     </state>
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587977062800" />
     <state x="734" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1587836980406" />
+    <state x="714" y="157" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589205378645">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="714" y="157" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589205378645" />
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588759345104">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="690" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1588759345104" />
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589140279482">
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589301622056">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587919431277" />
-    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589140279482" />
+    <state x="690" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589301622056" />
     <state x="460" y="215" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.31.1280.689@0.31.1280.689" timestamp="1587939785387" />
     <state x="184" y="123" key="MergeDialog" timestamp="1589021543765">
       <screen x="0" y="30" width="1920" height="1050" />
@@ -609,26 +625,30 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="672" y="272" key="MultipleFileMergeDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021543768" />
-    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589047118589">
+    <state x="794" y="479" key="NewPhpFileDialog" timestamp="1589283116030">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587916933931" />
-    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589047118589" />
-    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589141931170">
+    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589206349705" />
+    <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589283116030" />
+    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589364561948">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587984112806" />
-    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589141931170" />
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589202785050" />
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589364561948" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1589021537077">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021537077" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589142653639">
+    <state x="616" y="258" key="run.anything.popup" timestamp="1589281994405">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587987936029" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589142653639" />
+    <state x="616" y="258" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589281994405" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589366051356">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589210403887" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589366051356" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
   <component name="XDebuggerManager">

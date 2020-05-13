@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8ecbed95cc3376d9655de0ed4ab2f84",
+    "content-hash": "2c8663fd1dae22bd345b039743f5ed88",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2787,16 +2787,16 @@
         },
         {
             "name": "leifermendez/laravel-installer",
-            "version": "4.0.9",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leifermendez/LaravelInstaller.git",
-                "reference": "bda66a90b3ef401cd06bb52b3d95ee548d37fc01"
+                "reference": "a9f2a794a37240e03d8ba5aae1ab9edb2bde3ac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leifermendez/LaravelInstaller/zipball/bda66a90b3ef401cd06bb52b3d95ee548d37fc01",
-                "reference": "bda66a90b3ef401cd06bb52b3d95ee548d37fc01",
+                "url": "https://api.github.com/repos/leifermendez/LaravelInstaller/zipball/a9f2a794a37240e03d8ba5aae1ab9edb2bde3ac2",
+                "reference": "a9f2a794a37240e03d8ba5aae1ab9edb2bde3ac2",
                 "shasum": ""
             },
             "require": {
@@ -2833,7 +2833,7 @@
                 }
             ],
             "description": "Laravel web installer",
-            "time": "2020-05-09T18:56:50+00:00"
+            "time": "2020-05-10T20:34:13+00:00"
         },
         {
             "name": "maatwebsite/excel",
