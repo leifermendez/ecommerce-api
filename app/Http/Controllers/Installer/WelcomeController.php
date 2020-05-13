@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Installer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller
 {
@@ -71,7 +72,12 @@ class WelcomeController extends Controller
 
     public function welcome()
     {
-        return view('installer.welcome', ['system' => $this->checkSystem()]);
+        try {
+            Session::flush();
+            return view('installer.welcome', ['system' => $this->checkSystem()]);
+        } catch (\Exception $e) {
+            Session::flush();
+        }
     }
 
     public function account()

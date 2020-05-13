@@ -131,7 +131,9 @@ class EnvironmentInstaller
             'STRIPE_SECRET=' . 'null' . "\n\n" .
             'PUSHER_APP_ID=' . '' . "\n" .
             'PUSHER_APP_KEY=' . '' . "\n" .
-            'PUSHER_APP_SECRET=' . '';
+            'PUSHER_APP_SECRET=' . '' . "\n" .
+            'FACEBOOK_ID=' . '' . "\n" .
+            'GOOGLE_ID=' . '';
 
         try {
             file_put_contents($this->envPath, $envFileData);

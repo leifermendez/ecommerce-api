@@ -31,7 +31,7 @@ class MigrationsController extends Controller
             ],
             'migrations' => $response
         ];
-
+        $this->create();
         return view('installer.overview', ['message' => $response]);
 
     }
@@ -56,5 +56,24 @@ class MigrationsController extends Controller
             ]
         ];
         return view('installer.migrations', ['form' => $form]);
+    }
+
+    public function create()
+    {
+        $installedLogFile = storage_path('installed');
+
+        $dateStamp = date('Y/m/d h:i:sa');
+
+        if (! file_exists($installedLogFile)) {
+            $message = 'install_create_'.$dateStamp."\n";
+
+            file_put_contents($installedLogFile, $message);
+        } else {
+            $message = 'install_update_'.$dateStamp;
+
+            file_put_contents($installedLogFile, $message.PHP_EOL, FILE_APPEND | LOCK_EX);
+        }
+
+        return $message;
     }
 }

@@ -13,31 +13,43 @@
                             </div>
                         @endif
 
-                        <section class="mb-4 cursor-pointer" data-toggle="collapse" data-target="#collapseTemplate"
-                                 aria-expanded="false" aria-controls="collapseTemplate">
+                        <section class="mb-4 cursor-pointer">
                             <div>
                                 <h5>Diseño</h5>
                                 <small class="text-muted">
-                                    A continuación puedes configurar la configuración de tus sms
+                                    A continuación puedes configurar el diseño de tu tienda.
                                 </small>
                             </div>
-                            <form autocomplete="off" method="post" class="collapse dashboard-install"
-                                  id="collapseTemplate"
-                                  action="{{route('AdminSaveMail')}}">
+                            <form autocomplete="off" method="post" class="dashboard-install"
+                                  action="{{route('AdminSaveTemplate')}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="row col-12 pl-0 pr-0 pb-1 m-0">
                                     <div class="col-12 p-0 templates d-flex mt-4">
                                         @foreach($options['templates'] as $key => $value)
                                             <div class="col-3 block">
-                                                <a href="#" target="_blank">
-                                                    <img src="{{$value['image']}}" alt="">
-                                                    <div class="content-card">
-                                                        <b class="title">{{$value['name']}}</b>
-                                                    </div>
-                                                </a>
+                                                <input type="radio" name="template" required value="{{$value['url']}}">
+                                                <b>{{$value['name']}}</b>
+                                                <br>
+                                                <img src="{{$value['image']}}" alt="">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-12 p-0 ">
+                                        @foreach($options['general'] as $key => $value)
+                                            <div class="form-group">
+                                                <label for="form-{{$key}}">{{$value['name']}}</label>
+                                                <input type="{{$value['type']}}"
+                                                       name="{{$key}}"
+                                                       {{($value['readonly']) ? 'readonly' : ''}}
+                                                       value="{{$value['value']}}"
+                                                       class="form-control  form-control-sm" id="form-{{$key}}"
+                                                       placeholder="{{$value['example']}}">
                                             </div>
                                         @endforeach
 
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">Continuar</button>
                                     </div>
                                 </div>
                             </form>
@@ -45,12 +57,12 @@
                             <hr>
                         </section>
 
-                        <section class="mb-4 cursor-pointer" data-toggle="collapse" data-target="#collapseMail"
-                                 aria-expanded="false" aria-controls="collapseMail">
-                            <div>
+                        <section class="mb-4 cursor-pointer">
+                            <div  data-toggle="collapse" data-target="#collapseMail"
+                                  aria-expanded="false" aria-controls="collapseMail">
                                 <h5>Servidor de correo</h5>
                                 <small class="text-muted">
-                                    A continuación puedes configurar la configuración de tus sms
+                                    A continuación puedes configurar los ajustes de tu servidor mail
                                 </small>
                             </div>
                             <form autocomplete="off" method="post" class="collapse" id="collapseMail"
@@ -84,9 +96,9 @@
                             <hr>
                         </section>
 
-                        <section class="mb-4" data-toggle="collapse" data-target="#collapseSMS"
+                        <section class="mb-4">
+                            <div data-toggle="collapse" data-target="#collapseSMS"
                                  aria-expanded="false" aria-controls="collapseSMS">
-                            <div>
                                 <h5>Servicio de SMS</h5>
                                 <small class="text-muted">Recuerda configurar tu servicio de SMS para tener habilitada
                                     esta funcionalidad</small>
@@ -121,9 +133,9 @@
                             <hr>
                         </section>
 
-                        <section class="mb-4" data-toggle="collapse" data-target="#collapseStripe"
-                                 aria-expanded="false" aria-controls="collapseStripe">
-                            <div>
+                        <section class="mb-4">
+                            <div  data-toggle="collapse" data-target="#collapseStripe"
+                                  aria-expanded="false" aria-controls="collapseStripe">
                                 <h5>Plataforma de pago</h5>
                                 <small class="text-muted">Nuestra principal plataforma de pago se basa en Stripe</small>
                             </div>

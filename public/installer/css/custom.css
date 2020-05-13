@@ -22,7 +22,7 @@ Css aplicado al dashboard del instalador
     -moz-transition: all 100ms ease-out;
     -o-transition: all 100ms ease-out;
     transition: all 100ms ease-out;
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
     z-index: 99;
     box-shadow: 0 0 13px rgba(0, 0, 0, 0.1);
 }

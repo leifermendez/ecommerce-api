@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminPanel;
+use App\Http\Middleware\Install;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\CheckLocation;
 use App\Http\Middleware\FrontWeb;
@@ -76,7 +77,8 @@ class Kernel extends HttpKernel
         'AuthJWT' => AuthJWT::class,
         'PanelWeb' => PanelWeb::class,
         'CookiesSuggestions' => CookiesSuggestions::class,
-        'AdminPanel' => AdminPanel::class
+        'AdminPanel' => AdminPanel::class,
+        'Install' => Install::class,
     ];
 
     /**

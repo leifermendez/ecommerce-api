@@ -36,6 +36,7 @@ class DatabaseManagerInstaller
     {
         try {
             Artisan::call('migrate', ['--force' => true], $outputLog);
+            Artisan::call('jwt:secret', ['--force' => true], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }

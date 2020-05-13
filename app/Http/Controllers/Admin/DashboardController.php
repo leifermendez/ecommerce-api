@@ -126,18 +126,48 @@ class DashboardController extends Controller
             'templates' => [
                 [
                     'name' => 'Template 1',
-                    'url' => '',
-                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+                    'url' => 'https://media-mochileros.s3.us-east-2.amazonaws.com/template-1.zip',
+                    'image' => 'https://i.imgur.com/bvSdPSK.png'
                 ],
-                [
-                    'name' => 'Template 2',
-                    'url' => '',
-                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+//                [
+//                    'name' => 'Template 2',
+//                    'url' => 'http://lol.com/zip2.zip',
+//                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+//                ],
+//                [
+//                    'name' => 'Template 3',
+//                    'url' => 'http://lol.com/zip3.zip',
+//                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+//                ]
+            ],
+            'general' => [
+                'ENV_ENDPOINT' => [
+                    'name' => 'API',
+                    'value' => env('APP_URL', '').'/api/1.0',
+                    'type' => 'url',
+                    'readonly' => false,
+                    'example' => ''
                 ],
-                [
-                    'name' => 'Template 3',
-                    'url' => '',
-                    'image' => 'https://i.imgur.com/BjgmZLQ.png'
+                'ENV_STRIPE_PK' => [
+                    'name' => 'Stripe (pk_)',
+                    'value' => env('STRIPE_KEY', ''),
+                    'type' => 'text',
+                    'readonly' => true,
+                    'example' => ''
+                ],
+                'ENV_GOOGLE_ID' => [
+                    'name' => 'Google ID',
+                    'value' => env('GOOGLE_ID', ''),
+                    'type' => 'text',
+                    'readonly' => false,
+                    'example' => ''
+                ],
+                'ENV_FACEBOOK_ID' => [
+                    'name' => 'Facebook ID',
+                    'value' => env('FACEBOOK_ID', ''),
+                    'type' => 'text',
+                    'readonly' => false,
+                    'example' => ''
                 ]
             ]
         ];
@@ -196,5 +226,121 @@ class DashboardController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
+    }
+
+    public function saveTemplate(Request $request)
+    {
+        try {
+
+
+            $values = [
+                'ENV_ENDPOINT' => $request->input('ENV_ENDPOINT'),
+                'ENV_STRIPE_PK' => $request->input('ENV_STRIPE_PK'),
+                'ENV_GOOGLE_ID' => $request->input('ENV_GOOGLE_ID'),
+                'ENV_FACEBOOK_ID' => $request->input('ENV_FACEBOOK_ID')
+            ];
+            $this->setEnvironmentValue($values);
+            $env = [
+                'ENV_ENDPOINT' => $request->input('ENV_ENDPOINT'),
+                'ENV_STRIPE_PK' => $request->input('ENV_STRIPE_PK'),
+                'ENV_GOOGLE_ID' => $request->input('ENV_GOOGLE_ID'),
+                'ENV_FACEBOOK_ID' => $request->input('ENV_FACEBOOK_ID')
+            ];
+            $template = $request->input('template');
+            $pathUnzip = $this->downloadTemplate($template);
+            $files = scandir(public_path(), 1);
+            foreach ($files as $file) {
+                if (strpos($file, '.js') !== false) {
+                    $this->findAndReplace($pathUnzip . '/' . $file, $env);
+                }
+            }
+//            $this->makeZip();
+//            $values = [
+//                'STRIPE_PLATFORM_ID' => $request->input('STRIPE_PLATFORM_ID'),
+//                'STRIPE_SECRET' => $request->input('STRIPE_SECRET'),
+//                'STRIPE_KEY' => $request->input('STRIPE_KEY')
+//            ];
+//            $this->setEnvironmentValue($values);
+//
+            return redirect()->route('AdminHome');
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    /**
+     * Descargar template ZIP desde fuente
+     */
+    private function downloadTemplate($filename = '')
+    {
+        try {
+            $zipper = new \Madnest\Madzipper\Madzipper;
+            $url = $filename;
+            $filename = basename($url);
+            if (file_put_contents($filename, file_get_contents($url))) {
+                $pathZip = public_path() . '/' . $filename;
+                $zipper->make($pathZip)->folder('dist')->extractTo(public_path());
+                return public_path();
+            } else {
+                return null;
+            }
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Creamos ZIP del template ya con las variables
+     */
+    private function makeZip()
+    {
+        try {
+            $pathRawTemplate = public_path() . '/template-raw';
+            $zipper = new \Madnest\Madzipper\Madzipper;
+            $files = glob($pathRawTemplate);
+            $zipper->make('awesome-website.zip')->add($files)->close();
+            $this->deleteDir($pathRawTemplate);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Buscar y remplazar las variables
+     */
+    private function findAndReplace($file, $env = [])
+    {
+        try {
+            $str = file_get_contents($file);
+            foreach ($env as $key => $value) {
+                $str = str_replace($key, $value, $str);
+            }
+            file_put_contents($file, $str);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public static function deleteDir($dirPath)
+    {
+        if (!is_dir($dirPath)) {
+            throw new InvalidArgumentException("$dirPath must be a directory");
+        }
+        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+            $dirPath .= '/';
+        }
+        $files = glob($dirPath . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::deleteDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dirPath);
     }
 }

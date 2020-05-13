@@ -29,9 +29,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::post('/stripe', 'Admin\DashboardController@saveStripe')
         ->name('AdminSaveStripe');
+
+    Route::post('/template', 'Admin\DashboardController@saveTemplate')
+        ->name('AdminSaveTemplate');
 });
 
-Route::prefix('install')->group(function () {
+Route::middleware(['Install'])->prefix('install')->group(function () {
 
     Route::get('/', 'Installer\WelcomeController@welcome')
         ->name('InstallerWelcome');
