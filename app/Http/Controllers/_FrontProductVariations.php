@@ -50,9 +50,9 @@ class _FrontProductVariations extends Controller
                         'attributes_id', attributes_id,
                         'value', value
                       ) SEPARATOR '|'
-                    ) 
+                    )
                     as _name FROM product_attributes WHERE variation_products_id = variation_products.id
-                    AND variation_products.product_id = variation_products.product_id 
+                    AND variation_products.product_id = variation_products.product_id
                     GROUP BY variation_products_id) as attributes_values")
                 )
                 ->paginate($limit);
@@ -137,11 +137,11 @@ class _FrontProductVariations extends Controller
 //            $data = variation_product::find($data);
             $data = variation_product::where('id', $data)
                 ->select('variation_products.*',
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small')
                 )
                 ->first();
@@ -232,7 +232,7 @@ class _FrontProductVariations extends Controller
             if (!$isMy) {
                 throw new \Exception('not permissions');
             }
-            if (count($request->attributes_values_tmp) > 0) {
+            if (isset($request->attributes_values_tmp) && count($request->attributes_values_tmp) > 0) {
                 $tmp_attr = [];
                 foreach ($request->attributes_values_tmp as $key => $value) {
                     $k = explode("_", $key);
@@ -253,11 +253,11 @@ class _FrontProductVariations extends Controller
 
             $data = variation_product::where('id', $id)
                 ->select('variation_products.*',
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_large'),
-                    DB::raw('(SELECT attacheds.small FROM attacheds 
+                    DB::raw('(SELECT attacheds.small FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_medium'),
-                    DB::raw('(SELECT attacheds.medium FROM attacheds 
+                    DB::raw('(SELECT attacheds.medium FROM attacheds
                     WHERE attacheds.id = variation_products.attached_id limit 1) as attacheds_small')
                 )
                 ->first();

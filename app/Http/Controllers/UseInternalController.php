@@ -41,7 +41,7 @@ class UseInternalController extends Controller
             $data = settings::where('meta', $key);
 
             if (!$data->exists()) {
-                throw new \Exception('meta not found '.$key);
+                throw new \Exception('meta not found ' . $key);
             }
 
             $data = $data->first();
@@ -679,7 +679,8 @@ class UseInternalController extends Controller
                 ->join('user_payments', 'user_payments.user_id', '=', 'shops.users_id')
                 ->where('user_payments.primary', 1);
 
-            return $data->exists();
+            $mode = $this->_getSetting('mode_catalogue');
+            return ($mode == 0) ? 1 : $data->exists();
         }
     }
 

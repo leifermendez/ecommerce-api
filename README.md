@@ -86,6 +86,10 @@ Por defecto el sistema crea (3) usuarios
 - Cliente: `cliente@mail.com` Contraseña: `123456`
 
 
+### Anotación
+- Es importante ingresar el horario de disponibilidad para el buen funcionamiento
+- Recuerda agregarle cantidad de inventario
+
 ### Contacto
 Para dudas información, recomendaciones [codigoencasa.com](https://www.codigoencasa.com/te-ayudamos-con-tu-codigo/)
 
