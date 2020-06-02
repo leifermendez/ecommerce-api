@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\shipping_pickup_address;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use App\shop;
 use DB;
@@ -51,7 +52,7 @@ class _FrontShop extends Controller
                             'distance_in_km,shop_id');
 
                         $measureShop = array_column($measureShop, 'shop_id');
-                        $query->whereIn('shops.id',$measureShop);
+                        $query->whereIn('shops.id', $measureShop);
                     }
                     foreach ($filters as $value) {
                         $tmp = explode(",", $value);
@@ -110,12 +111,20 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
+            $request->request->remove('_location');
+            $request->request->remove('_lat');
+            $request->request->remove('_lng');
+            $request->request->remove('_range_closed');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {
                     $fields[$key] = $value;
                 };
+            }
+
+            $marketplace = (new UseInternalController)->_getSetting('marketplace');
+            if ($marketplace !== 1) {
+                throw new Exception('Marketplace disabled');
             }
             $fields['users_id'] = $user->id;
             User::where('id', $user->id)
@@ -245,7 +254,10 @@ class _FrontShop extends Controller
         try {
             DB::beginTransaction();
             $user = JWTAuth::parseToken()->authenticate();
-            $request->request->remove('_location'); $request->request->remove('_lat'); $request->request->remove('_lng'); $request->request->remove('_range_closed');
+            $request->request->remove('_location');
+            $request->request->remove('_lat');
+            $request->request->remove('_lng');
+            $request->request->remove('_range_closed');
             $fields = array();
             foreach ($request->all() as $key => $value) {
                 if ($key !== 'id' && $key !== 'users_id') {

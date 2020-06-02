@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41f741d-15c1-4a13-a14f-9b55ee3e1c34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UseInternalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontProductVariations.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SettingTableSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -332,7 +335,11 @@
       <workItem from="1589270641845" duration="18057000" />
       <workItem from="1589300447533" duration="2597000" />
       <workItem from="1589304551287" duration="2094000" />
-      <workItem from="1589360288278" duration="8392000" />
+      <workItem from="1589360288278" duration="9248000" />
+      <workItem from="1589445536937" duration="3000" />
+      <workItem from="1589632638280" duration="1000" />
+      <workItem from="1590415467038" duration="110000" />
+      <workItem from="1591081033743" duration="3417000" />
     </task>
     <task id="LOCAL-00001" summary="Atributos">
       <created>1559039490432</created>
@@ -630,25 +637,25 @@
     </state>
     <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589206349705" />
     <state x="794" y="479" key="NewPhpFileDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589283116030" />
-    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1589364561948">
+    <state x="591" y="252" width="737" height="606" key="find.popup" timestamp="1590415499315">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589202785050" />
-    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589364561948" />
+    <state x="591" y="252" width="737" height="606" key="find.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1590415499315" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog" timestamp="1589021537077">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1587976003199" />
     <state x="654" y="347" key="git4idea.merge.GitPullDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1589021537077" />
-    <state x="616" y="258" key="run.anything.popup" timestamp="1589281994405">
+    <state x="616" y="258" width="672" height="677" key="run.anything.popup" timestamp="1591082033521">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="616" y="258" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589281994405" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1589366051356">
+    <state x="616" y="258" width="672" height="677" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1591082033521" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup" timestamp="1591084349845">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="617" y="210" width="1008" height="677" key="search.everywhere.popup/0.30.1920.1050/240.-1080.1280.689@0.30.1920.1050" timestamp="1589210403887" />
-    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1589366051356" />
+    <state x="616" y="208" width="672" height="676" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1591084349845" />
     <state x="411" y="149" width="672" height="444" key="search.everywhere.popup/0.31.1280.689@0.31.1280.689" timestamp="1587765732000" />
   </component>
   <component name="XDebuggerManager">
@@ -666,7 +673,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php</url>
-          <line>19</line>
+          <line>20</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -718,6 +725,11 @@
           <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShoppingCart.php</url>
           <line>93</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/_FrontShop.php</url>
+          <line>129</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
