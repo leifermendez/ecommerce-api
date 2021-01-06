@@ -20,7 +20,7 @@
         "seed": "php artisan db:seed --class=UsersTableSeeder && php artisan db:seed --class=ShopTableSeeder && php artisan db:seed --class=ProductsTableSeeder && php artisan db:seed --class=PurchaseTableSeeder && php artisan db:seed --class=OrderSeeder && php artisan db:seed --class=PurchaseDetailTableSeeder && php artisan db:seed --class=ZoneAvailableTableSeeder"
     },
     "devDependencies": {
-        "axios": "^0.18",
+        "axios": "^0.21",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
